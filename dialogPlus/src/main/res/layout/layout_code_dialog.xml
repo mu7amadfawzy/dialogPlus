@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.dialog.plus.ui.DialogUiModel" />
+
+        <import type="android.view.View" />
+
+
+    </data>
+
+    <carbon.widget.LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="@{model.code_dialog||model.validation_dialog?View.VISIBLE:View.GONE}"
+        bind:carbon_cornerRadius="@dimen/_8sdp"
+        tools:visibility="visible">
+
+        <carbon.widget.RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@{model.headerColorRes}"
+            android:padding="@dimen/_16sdp"
+            tools:background="@color/carbon_black">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@{model.title}"
+                android:textColor="@color/carbon_white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </carbon.widget.RelativeLayout>
+
+        <me.grantland.widget.AutofitTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{model.content}"
+            android:textColor="@color/carbon_black"
+            android:textStyle="bold" />
+
+        <com.dialog.plus.ui.PinEntryEditText
+            android:id="@+id/txt_pin_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_8sdp"
+            android:cursorVisible="false"
+            android:digits="1234567890"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textColor="@color/colorPrimary"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/_16ssp"
+            bind:textColorRes="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:text="@={``+model.timeLeft}"
+            android:textColor="@color/colorAccent"
+            bind:visibility="@{model.timeLeft>0}" />
+
+        <carbon.widget.Button
+            android:id="@+id/send_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:background="@{model.positiveColorRes}"
+            android:text="@{model.confirm_code_text}"
+            android:textAllCaps="false"
+            android:textColor="@color/carbon_white"
+            android:visibility="@{model.code_dialog?View.VISIBLE:View.GONE}"
+            bind:carbon_cornerRadius="@dimen/_8sdp" />
+
+
+        <TextView
+            android:id="@+id/resend_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:text="@{model.resend_code_text}"
+            android:textColor="@color/colorPrimary"
+            android:visibility="@{model.withResend?View.VISIBLE:View.GONE}"
+            bind:underline="@{true}" />
+
+    </carbon.widget.LinearLayout>
+</layout>

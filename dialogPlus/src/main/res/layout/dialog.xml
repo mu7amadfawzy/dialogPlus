@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.dialog.plus.ui.DialogUiModel" />
+
+        <import type="android.view.View" />
+
+
+    </data>
+
+    <carbon.widget.RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@color/carbon_white"
+        bind:carbon_cornerRadius="@dimen/_8sdp">
+
+        <include
+            android:id="@+id/code_dialog"
+            layout="@layout/layout_code_dialog"
+            bind:model="@{model}" />
+
+
+        <include
+            android:id="@+id/confirmation_dialog"
+            layout="@layout/layout_confirmation_dialog"
+            bind:model="@{model}" />
+
+        <include
+            android:id="@+id/error_dialog"
+            layout="@layout/layout_error_dialog"
+            bind:model="@{model}" />
+
+        <include
+            android:id="@+id/success_dialog"
+            layout="@layout/layout_success_dialog"
+            bind:model="@{model}" />
+
+    </carbon.widget.RelativeLayout>
+</layout>

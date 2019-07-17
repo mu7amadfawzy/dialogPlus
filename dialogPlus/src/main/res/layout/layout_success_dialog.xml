@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.dialog.plus.ui.DialogUiModel" />
+
+        <import type="android.view.View" />
+
+
+    </data>
+
+    <carbon.widget.LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@color/carbon_white"
+        android:minWidth="@dimen/_200sdp"
+        android:orientation="vertical"
+        android:padding="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:visibility="@{model.success_dialog?View.VISIBLE:View.GONE}"
+        bind:carbon_cornerRadius="@dimen/_8sdp"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/success_img"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/checked" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="@{model.content}"
+            android:textAlignment="center"
+            android:textColor="@color/carbon_black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            tools:text="message \n message \n message"
+            tools:visibility="visible" />
+
+        <carbon.widget.Button
+            android:id="@+id/success_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/carbon_green_500"
+            android:text="Ok"
+            android:textAllCaps="false"
+            android:textColor="@color/carbon_white"
+            bind:carbon_cornerRadius="@dimen/_8sdp" />
+
+    </carbon.widget.LinearLayout>
+</layout>

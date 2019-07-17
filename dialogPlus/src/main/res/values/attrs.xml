@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PinEntryEditText">
+        <!-- Our Custom variable, optionally we can specify that it is of integer type -->
+        <attr name="textColorRes" format="color" />
+        ...
+        <!-- as many as you want -->
+    </declare-styleable>
+</resources>

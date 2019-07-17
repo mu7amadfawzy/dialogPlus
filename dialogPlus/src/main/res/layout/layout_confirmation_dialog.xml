@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.dialog.plus.ui.DialogUiModel" />
+
+        <import type="android.view.View" />
+
+
+    </data>
+
+    <carbon.widget.LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@color/carbon_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/_3sdp"
+        android:visibility="@{model.confirmation_dialog?View.VISIBLE:View.GONE}"
+        bind:carbon_cornerRadius="@dimen/_8sdp"
+        tools:visibility="visible">
+
+        <carbon.widget.RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@{model.headerColorRes}"
+            android:padding="@dimen/_16sdp">
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@{model.title}"
+                android:textColor="@color/carbon_white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                tools:text="Title"
+                tools:visibility="visible" />
+        </carbon.widget.RelativeLayout>
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/content_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="@{model.content}"
+            android:textAlignment="center"
+            android:textColor="@color/carbon_black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            tools:text="message \n message \n message"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <carbon.widget.Button
+                android:id="@+id/confirm_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_weight="1"
+                android:background="@{model.positiveColorRes}"
+                android:text="Ok"
+                android:textAllCaps="false"
+                android:textColor="@color/carbon_white"
+                bind:carbon_cornerRadius="@dimen/_8sdp" />
+
+            <carbon.widget.Button
+                android:id="@+id/cancel_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_weight="1"
+                android:background="@{model.negativeColorRes}"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/carbon_white"
+                bind:carbon_cornerRadius="@dimen/_8sdp"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+    </carbon.widget.LinearLayout>
+</layout>
