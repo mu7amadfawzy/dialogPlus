@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickedConfirmCode(View view) {
-        new DialogPlus().showConfirmCodeDialog(5, "title", "content", null, null, new DialogPlus.OnCodeTyped() {
+        new DialogPlus().showConfirmCodeDialog(5, "Code Dialog", "code dialog message content", null, R.color.colorPrimary, new DialogPlus.OnCodeTyped() {
             @Override
             public void onCodeTyped(String typedCode) {
                 Toast.makeText(MainActivity.this, "onCodeTyped: " + typedCode, Toast.LENGTH_SHORT).show();
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickedValidation(View view) {
-        new DialogPlus().showValidateCodeDialog(5, "title", "content", "12345", false, null, null, new DialogPlus.OnValidateCode() {
+        new DialogPlus().showValidateCodeDialog(5, "Validation Dialog", "validation dialog content...", "12345", false, null, R.color.colorPrimary, new DialogPlus.OnValidateCode() {
             @Override
             public void onSuccess() {
                 Toast.makeText(MainActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickedValidationConfrmation(View view) {
-        new DialogPlus().showConfirmationDialog("title", "content", null, null, null, new DialogPlus.OnDialogActionClicked() {
+        new DialogPlus().showConfirmationDialog("Confirmation Dialog", "confirmation dialog message content ...", null, null, R.color.colorPrimary, new DialogPlus.OnDialogActionClicked() {
             @Override
             public void onPositiveClicked() {
                 Toast.makeText(MainActivity.this, "onPositiveClicked", Toast.LENGTH_SHORT).show();
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickedErrorDialog(View view) {
 
-        new DialogPlus().showErrorDialog("content", new DialogPlus.OnDialogActionClicked() {
+        new DialogPlus().showErrorDialog("error dialog content message", new DialogPlus.OnDialogActionClicked() {
             @Override
             public void onPositiveClicked() {
                 Toast.makeText(MainActivity.this, "onPositiveClicked", Toast.LENGTH_SHORT).show();
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickedSuccessDialog(View view) {
-        new DialogPlus().showSuccessDialog("content", new DialogPlus.OnDialogActionClicked() {
+        new DialogPlus().showSuccessDialog("Success message content..", new DialogPlus.OnDialogActionClicked() {
             @Override
             public void onPositiveClicked() {
                 Toast.makeText(MainActivity.this, "onPositiveClicked", Toast.LENGTH_SHORT).show();
