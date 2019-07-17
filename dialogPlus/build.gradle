@@ -1,5 +1,38 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
+    }
+}
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
+ext {
+    bintrayRepo = 'DialogPlus'          //the repo name in Bintray dashboard
+    bintrayName = 'com.dialog.plus'//the package name in Bintray repo
+    libraryName = 'dialogPlus'           // the module name in the android studio project
+    //library name will be like -> publishedGroupId:artifact:libraryVersion
+    publishedGroupId = 'com.dialog'             //the ID you want to add in the 'implementation line'
+    artifact = 'plus'               //the artifact you want to add in the 'implementation line'
+    libraryVersion = '1.0.0'
+    libraryDescription = 'An Android library that lets you show Dialog in a custom simple and fast way.'
+
+    siteUrl = 'https://github.com/ma7madfawzy/DialogPlus'
+    gitUrl = 'https://github.com/ma7madfawzy/DialogPlus.git'
+
+
+    developerId = 'ma7madfawzy'
+    developerName = 'Mahmad fawzy'
+    developerEmail = 'ma7madfawzy@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 1.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-1.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -9,7 +42,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -45,4 +78,89 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.+'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation "me.grantland:autofittextview:0.+"
+}
+group = publishedGroupId
+version = libraryVersion
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging 'aar'
+            groupId publishedGroupId
+            artifactId artifact
+
+            name libraryName
+            description libraryDescription
+            url siteUrl
+
+            licenses {
+                license {
+                    name licenseName
+                    url licenseUrl
+                }
+            }
+            developers {
+                developer {
+                    id developerId
+                    name developerName
+                    email developerEmail
+                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        dryRun = false
+        publish = true
+        override = false
+        publicDownloadNumbers = true
+        version {
+            desc = libraryDescription
+        }
+    }
+}
+//this line makes it easier to make uploading to Bintray
+if(project.rootProject.file('local.properities').exists()){
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 }

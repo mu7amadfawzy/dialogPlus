@@ -21,18 +21,18 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.DialogBinding;
 import com.dialog.plus.utils.AnimationUtils;
 import com.dialog.plus.utils.KeyboardUtil;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 
 /**
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
-public class MultiDialog extends DialogFragment implements View.OnClickListener {
+public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private DialogUiModel model;
     private DialogBinding binding;
     private int dialog_type;
@@ -53,7 +53,7 @@ public class MultiDialog extends DialogFragment implements View.OnClickListener 
     public static final int CONFIRMATION = 0, CONFIRM_CODE = 1, VALIDATE_CODE = 2, ERROR_DIALOG = 3, SUCCESS_DIALOG = 4;
     private CountDownTimer countDownTimer;
 
-    public MultiDialog showConfirmCodeDialog(float codeLength, String title, String content, String confirm_code_text, String resend_code_text, Integer positiveColorRes, Integer headerColorRes, OnCodeTyped onCodeTyped) {
+    public DialogPlus showConfirmCodeDialog(float codeLength, String title, String content, String confirm_code_text, String resend_code_text, Integer positiveColorRes, Integer headerColorRes, OnCodeTyped onCodeTyped) {
         this.dialog_type = CONFIRM_CODE;
         this.codeLength = codeLength;
         this.title = title;
@@ -66,7 +66,7 @@ public class MultiDialog extends DialogFragment implements View.OnClickListener 
         return this;
     }
 
-    public MultiDialog showConfirmCodeDialog(float codeLength, String title, String content, Integer positiveColorRes, Integer headerColorRes, OnCodeTyped onCodeTyped) {
+    public DialogPlus showConfirmCodeDialog(float codeLength, String title, String content, Integer positiveColorRes, Integer headerColorRes, OnCodeTyped onCodeTyped) {
         this.dialog_type = CONFIRM_CODE;
         this.codeLength = codeLength;
         this.title = title;
@@ -77,7 +77,7 @@ public class MultiDialog extends DialogFragment implements View.OnClickListener 
         return this;
     }
 
-    public MultiDialog showValidateCodeDialog(float codeLength, String title, String content, String correct_code, boolean withResend, Integer positiveColorRes, Integer headerColorRes, OnValidateCode onValidateCode) {
+    public DialogPlus showValidateCodeDialog(float codeLength, String title, String content, String correct_code, boolean withResend, Integer positiveColorRes, Integer headerColorRes, OnValidateCode onValidateCode) {
         this.dialog_type = VALIDATE_CODE;
         this.codeLength = codeLength;
         this.title = title;
@@ -90,7 +90,7 @@ public class MultiDialog extends DialogFragment implements View.OnClickListener 
         return this;
     }
 
-    public MultiDialog showConfirmationDialog(String title, String content, Integer positiveColorRes, Integer negativeColorRes, Integer headerColorRes, OnDialogActionClicked onDialogActionClicked) {
+    public DialogPlus showConfirmationDialog(String title, String content, Integer positiveColorRes, Integer negativeColorRes, Integer headerColorRes, OnDialogActionClicked onDialogActionClicked) {
         this.dialog_type = CONFIRMATION;
         this.title = title;
         this.content = content;
@@ -101,14 +101,14 @@ public class MultiDialog extends DialogFragment implements View.OnClickListener 
         return this;
     }
 
-    public MultiDialog showErrorDialog(String content, OnDialogActionClicked onDialogActionClicked) {
+    public DialogPlus showErrorDialog(String content, OnDialogActionClicked onDialogActionClicked) {
         this.dialog_type = ERROR_DIALOG;
         this.content = content;
         this.onDialogActionClicked = onDialogActionClicked;
         return this;
     }
 
-    public MultiDialog showSuccessDialog(String content, OnDialogActionClicked onDialogActionClicked) {
+    public DialogPlus showSuccessDialog(String content, OnDialogActionClicked onDialogActionClicked) {
         this.dialog_type = SUCCESS_DIALOG;
         this.content = content;
         this.onDialogActionClicked = onDialogActionClicked;
@@ -231,7 +231,7 @@ public class MultiDialog extends DialogFragment implements View.OnClickListener 
 
     private void onWrong() {
         setErrorTextColor();
-        onValidateCode.onError(MultiDialog.this);
+        onValidateCode.onError(DialogPlus.this);
         animateField(getActivity(), binding.codeDialog.txtPinEntry);
     }
 
@@ -322,7 +322,7 @@ public class MultiDialog extends DialogFragment implements View.OnClickListener 
         binding.codeDialog.txtPinEntry.setEnabled(false);
         KeyboardUtil.getInstance().hideKeyboard(binding.getRoot());
         binding.codeDialog.sendCode.setBackgroundColor(binding.codeDialog.sendCode.getContext().getResources().getColor(R.color.carbon_grey_300));
-        onCodeTyped.onTimeUp(MultiDialog.this);
+        onCodeTyped.onTimeUp(DialogPlus.this);
     }
 
     @Override
@@ -367,7 +367,7 @@ public class MultiDialog extends DialogFragment implements View.OnClickListener 
     public static interface OnCodeTyped {
         void onCodeTyped(String typedCode);
 
-        void onTimeUp(MultiDialog multiDialog);
+        void onTimeUp(DialogPlus dialogPlus);
 
         void onResend();
     }
@@ -386,7 +386,7 @@ public class MultiDialog extends DialogFragment implements View.OnClickListener 
     public static interface OnValidateCode {
         void onSuccess();
 
-        void onError(MultiDialog multiDialog);
+        void onError(DialogPlus dialogPlus);
 
         void onResend();
     }
