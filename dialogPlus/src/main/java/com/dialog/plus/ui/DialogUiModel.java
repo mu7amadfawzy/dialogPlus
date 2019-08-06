@@ -30,29 +30,32 @@ public class DialogUiModel extends BaseObservable {
     }
 
     @Bindable
-    public Integer getHeaderBackground() {
+    public @ColorRes
+    int getHeaderBackground() {
         return headerBackground;
     }
 
-    public void setHeaderBackground(Integer headerBackground) {
+    public void setHeaderBackground(@ColorRes int headerBackground) {
         this.headerBackground = headerBackground;
     }
 
     @Bindable
-    public Integer getNegativeColorRes() {
+    public @ColorRes
+    int getNegativeColorRes() {
         return negativeColorRes;
     }
 
-    public void setNegativeColorRes(Integer negativeColorRes) {
+    public void setNegativeColorRes(@ColorRes int negativeColorRes) {
         this.negativeColorRes = negativeColorRes;
     }
 
     @Bindable
-    public Integer getPositiveBackground() {
+    public @ColorRes
+    int getPositiveBackground() {
         return positiveBackground;
     }
 
-    public void setPositiveBackground(Integer positiveBackground) {
+    public void setPositiveBackground(@ColorRes int positiveBackground) {
         this.positiveBackground = positiveBackground;
     }
 

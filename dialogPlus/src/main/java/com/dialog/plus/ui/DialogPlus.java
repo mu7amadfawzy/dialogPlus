@@ -135,7 +135,6 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         this.title = title;
         this.content = content;
         this.onDialogActionClicked = onDialogActionClicked;
-        this.positiveBackground = positiveBackground;
         return this;
     }
 

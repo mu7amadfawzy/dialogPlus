@@ -30,7 +30,7 @@
         <carbon.widget.RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@{model.headerBackground}"
+            app:background_color="@{model.headerBackground}"
             android:padding="@dimen/_16sdp">
 
             <TextView
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:layout_weight="1"
-                android:background="@{model.positiveBackground}"
+                app:background_color="@{model.positiveBackground}"
                 android:text="Ok"
                 android:textAllCaps="false"
                 android:textColor="@color/carbon_white"
@@ -94,7 +94,7 @@
                 android:layout_marginStart="@dimen/_4sdp"
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:layout_weight="1"
-                android:background="@{model.negativeColorRes}"
+                app:background_color="@{model.negativeColorRes}"
                 android:text="Cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/carbon_white"

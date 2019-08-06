@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
 /**
@@ -17,6 +19,12 @@ public class BindingAdapterUtils {
     public static void visibility(View view, boolean visible) {
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
+
+    @BindingAdapter("background_color")
+    public static void background_color(View view, @ColorRes int colorRes) {
+        view.setBackgroundColor(ContextCompat.getColor(view.getContext(), colorRes));
+    }
+
     @BindingAdapter("underline")
     public static void underline(View view, boolean doUnderline) {
         if (view instanceof TextView) {
