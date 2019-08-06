@@ -139,12 +139,24 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         return this;
     }
 
-    public DialogPlus showConfirmationDialog(String title, String content, @ColorRes int positiveBackground, OnDialogActionClicked onDialogActionClicked) {
+    public DialogPlus showConfirmationDialog(String title, String content, @ColorRes int colorPrimary, @ColorRes int colorAccent, OnDialogActionClicked onDialogActionClicked) {
         this.dialog_type = CONFIRMATION;
         this.title = title;
         this.content = content;
         this.onDialogActionClicked = onDialogActionClicked;
-        this.positiveBackground = positiveBackground;
+        this.positiveBackground = colorPrimary;
+        this.headerBackground = colorPrimary;
+        this.negativeColorRes = colorAccent;
+        return this;
+    }
+
+    public DialogPlus showConfirmationDialog(String title, String content, @ColorRes int colorPrimary, OnDialogActionClicked onDialogActionClicked) {
+        this.dialog_type = CONFIRMATION;
+        this.title = title;
+        this.content = content;
+        this.onDialogActionClicked = onDialogActionClicked;
+        this.positiveBackground = colorPrimary;
+        this.headerBackground = colorPrimary;
         return this;
     }
 
