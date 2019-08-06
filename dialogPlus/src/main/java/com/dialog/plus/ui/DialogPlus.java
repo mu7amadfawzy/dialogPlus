@@ -388,7 +388,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
             onDialogActionClicked.onError(this);
             getDialog().dismiss();
         } else if (view.getId() == R.id.success_button) {
-            onDialogActionClicked.onSuccess(this);
+            onCodeTyped.onSuccess(this);
             getDialog().dismiss();
         }
     }
@@ -420,6 +420,8 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
             dialogPlus.dismiss();
         }
 
+        public abstract void onSuccess(DialogPlus dialogPlus);
+
         public abstract void onResend(DialogPlus dialogPlus);
     }
 
@@ -433,8 +435,6 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         public void onError(DialogPlus dialogPlus) {
             dialogPlus.dismiss();
         }
-
-        public abstract void onSuccess(DialogPlus dialogPlus);
 
     }
 

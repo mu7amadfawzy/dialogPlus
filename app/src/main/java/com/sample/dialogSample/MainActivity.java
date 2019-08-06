@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
+                    public void onSuccess(DialogPlus dialogPlus) {
+                        Toast.makeText(MainActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
                     public void onResend(DialogPlus dialogPlus) {
                         Toast.makeText(MainActivity.this, "onResend", Toast.LENGTH_SHORT).show();
                     }
@@ -78,10 +83,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "onError", Toast.LENGTH_SHORT).show();
                     }
 
-                    @Override
-                    public void onSuccess(DialogPlus dialogPlus) {
-
-                    }
                 }).show(this.getSupportFragmentManager(), "dialog");
     }
 
@@ -94,10 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 dialogPlus.dismiss();
             }
 
-            @Override
-            public void onSuccess(DialogPlus dialogPlus) {
-
-            }
 
             @Override
             public void onNegative(DialogPlus dialogPlus) {
@@ -122,10 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "onPositive", Toast.LENGTH_SHORT).show();
             }
 
-            @Override
-            public void onSuccess(DialogPlus dialogPlus) {
-
-            }
 
             @Override
             public void onNegative(DialogPlus dialogPlus) {
