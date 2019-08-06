@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.Toast;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -44,7 +45,8 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private OnDialogActionClicked onDialogActionClicked;
     private String title, content, confirm_code_text, resend_code_text, correct_code;
     private int counterSeconds = 60;
-    private Integer positiveColorRes, negativeColorRes, headerColorRes;
+    private @ColorRes
+    int positiveBackground = R.color.colorPrimary, negativeColorRes = R.color.colorAccent, headerBackground = R.color.colorPrimary;
     private boolean withResend;
 
     /**
@@ -53,7 +55,9 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     public static final int CONFIRMATION = 0, CONFIRM_CODE = 1, VALIDATE_CODE = 2, ERROR_DIALOG = 3, SUCCESS_DIALOG = 4;
     private CountDownTimer countDownTimer;
 
-    public DialogPlus showConfirmCodeDialog(float codeLength, String title, String content, String confirm_code_text, String resend_code_text, Integer positiveColorRes, Integer headerColorRes, OnCodeTyped onCodeTyped) {
+    public DialogPlus showConfirmCodeDialog(float codeLength, String title, String content
+            , String confirm_code_text, String resend_code_text, @ColorRes int positiveBackground
+            , @ColorRes int headerBackground, OnCodeTyped onCodeTyped) {
         this.dialog_type = CONFIRM_CODE;
         this.codeLength = codeLength;
         this.title = title;
@@ -61,23 +65,35 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         this.content = content;
         this.onCodeTyped = onCodeTyped;
         this.confirm_code_text = confirm_code_text;
-        this.positiveColorRes = positiveColorRes;
-        this.headerColorRes = headerColorRes;
+        this.positiveBackground = positiveBackground;
+        this.headerBackground = headerBackground;
         return this;
     }
 
-    public DialogPlus showConfirmCodeDialog(float codeLength, String title, String content, Integer positiveColorRes, Integer headerColorRes, OnCodeTyped onCodeTyped) {
+    public DialogPlus showConfirmCodeDialog(float codeLength, String title, String content, OnCodeTyped onCodeTyped) {
         this.dialog_type = CONFIRM_CODE;
         this.codeLength = codeLength;
         this.title = title;
         this.content = content;
         this.onCodeTyped = onCodeTyped;
-        this.positiveColorRes = positiveColorRes;
-        this.headerColorRes = headerColorRes;
         return this;
     }
 
-    public DialogPlus showValidateCodeDialog(float codeLength, String title, String content, String correct_code, boolean withResend, Integer positiveColorRes, Integer headerColorRes, OnValidateCode onValidateCode) {
+    public DialogPlus showConfirmCodeDialog(float codeLength, String title, String content,
+                                            @ColorRes int positiveBackground, @ColorRes int headerBackground, OnCodeTyped onCodeTyped) {
+        this.dialog_type = CONFIRM_CODE;
+        this.codeLength = codeLength;
+        this.title = title;
+        this.content = content;
+        this.onCodeTyped = onCodeTyped;
+        this.positiveBackground = positiveBackground;
+        this.headerBackground = headerBackground;
+        return this;
+    }
+
+    public DialogPlus showValidateCodeDialog(float codeLength, String title, String content, String correct_code
+            , boolean withResend
+            , @ColorRes int positiveBackground, @ColorRes int headerBackground, OnValidateCode onValidateCode) {
         this.dialog_type = VALIDATE_CODE;
         this.codeLength = codeLength;
         this.title = title;
@@ -85,19 +101,42 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         this.content = content;
         this.withResend = withResend;
         this.onValidateCode = onValidateCode;
-        this.positiveColorRes = positiveColorRes;
-        this.headerColorRes = headerColorRes;
+        this.positiveBackground = positiveBackground;
+        this.headerBackground = headerBackground;
         return this;
     }
 
-    public DialogPlus showConfirmationDialog(String title, String content, Integer positiveColorRes, Integer negativeColorRes, Integer headerColorRes, OnDialogActionClicked onDialogActionClicked) {
+    public DialogPlus showValidateCodeDialog(float codeLength, String title, String content, String correct_code
+            , boolean withResend, OnValidateCode onValidateCode) {
+        this.dialog_type = VALIDATE_CODE;
+        this.codeLength = codeLength;
+        this.title = title;
+        this.correct_code = correct_code;
+        this.content = content;
+        this.withResend = withResend;
+        this.onValidateCode = onValidateCode;
+        return this;
+    }
+
+    public DialogPlus showConfirmationDialog(String title, String content, @ColorRes int positiveBackground
+            , @ColorRes int negativeColorRes, @ColorRes int headerBackground, OnDialogActionClicked onDialogActionClicked) {
         this.dialog_type = CONFIRMATION;
         this.title = title;
         this.content = content;
         this.onDialogActionClicked = onDialogActionClicked;
-        this.positiveColorRes = positiveColorRes;
-        this.headerColorRes = headerColorRes;
+        this.positiveBackground = positiveBackground;
+        this.headerBackground = headerBackground;
         this.negativeColorRes = negativeColorRes;
+        return this;
+    }
+
+    public DialogPlus showConfirmationDialog(String title, String content, @ColorRes int positiveBackground
+            , OnDialogActionClicked onDialogActionClicked) {
+        this.dialog_type = CONFIRMATION;
+        this.title = title;
+        this.content = content;
+        this.onDialogActionClicked = onDialogActionClicked;
+        this.positiveBackground = positiveBackground;
         return this;
     }
 
@@ -149,9 +188,9 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         model.setConfirm_code_text(confirm_code_text);
         model.setTimeLeft(counterSeconds);
         model.setResend_code_text(resend_code_text);
-        model.setPositiveColorRes(positiveColorRes != null ? positiveColorRes : getResources().getColor(R.color.carbon_green_600));
-        model.setNegativeColorRes(negativeColorRes != null ? negativeColorRes : getResources().getColor(R.color.carbon_grey_500));
-        model.setHeaderColorRes(headerColorRes != null ? headerColorRes : getResources().getColor(R.color.carbon_red_600));
+        model.setPositiveBackground(positiveBackground);
+        model.setNegativeColorRes(negativeColorRes);
+        model.setHeaderBackground(headerBackground);
         model.setWithResend(withResend);
     }
 
@@ -332,24 +371,24 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         else if (view.getId() == R.id.resend_code)
             handleResendCode();
         else if (view.getId() == R.id.confirm_button) {
-            onDialogActionClicked.onPositiveClicked();
+            onDialogActionClicked.onPositive(this);
             getDialog().dismiss();
         } else if (view.getId() == R.id.cancel_button) {
-            onDialogActionClicked.onNegativeClicked();
+            onDialogActionClicked.onNegative(this);
             getDialog().dismiss();
         } else if (view.getId() == R.id.error_button) {
-            onDialogActionClicked.onErrorClicked();
+            onDialogActionClicked.onError(this);
             getDialog().dismiss();
         } else if (view.getId() == R.id.success_button) {
-            onDialogActionClicked.onSuccessClicked();
+            onDialogActionClicked.onSuccess(this);
             getDialog().dismiss();
         }
     }
 
     private void handleResendCode() {
         if (dialog_type == CONFIRM_CODE)
-            onCodeTyped.onResend();
-        else onValidateCode.onResend();
+            onCodeTyped.onResend(this);
+        else onValidateCode.onResend(this);
         if (countDownTimer != null) countDownTimer.cancel();
         getDialog().dismiss();
     }
@@ -364,30 +403,40 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
 
     }
 
-    public static interface OnCodeTyped {
-        void onCodeTyped(String typedCode);
+    public abstract static class OnCodeTyped {
+        public void onCodeTyped(String typedCode) {
 
-        void onTimeUp(DialogPlus dialogPlus);
+        }
 
-        void onResend();
+        public void onTimeUp(DialogPlus dialogPlus) {
+            dialogPlus.dismiss();
+        }
+
+        public abstract void onResend(DialogPlus dialogPlus);
     }
 
-    public static interface OnDialogActionClicked {
-        void onPositiveClicked();
+    public abstract static class OnDialogActionClicked {
+        public abstract void onPositive(DialogPlus dialogPlus);
 
-        void onNegativeClicked();
+        public void onNegative(DialogPlus dialogPlus) {
+            dialogPlus.dismiss();
+        }
 
-        void onErrorClicked();
+        public void onError(DialogPlus dialogPlus) {
+            dialogPlus.dismiss();
+        }
 
-        void onSuccessClicked();
+        public abstract void onSuccess(DialogPlus dialogPlus);
 
     }
 
-    public static interface OnValidateCode {
-        void onSuccess();
+    public abstract static class OnValidateCode {
+        public abstract void onSuccess();
 
-        void onError(DialogPlus dialogPlus);
+        public void onError(DialogPlus dialogPlus) {
+            dialogPlus.dismiss();
+        }
 
-        void onResend();
+        public abstract void onResend(DialogPlus dialogPlus);
     }
 }

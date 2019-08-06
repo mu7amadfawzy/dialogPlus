@@ -30,7 +30,7 @@
         <carbon.widget.RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@{model.headerColorRes}"
+            android:background="@{model.headerBackground}"
             android:padding="@dimen/_16sdp">
 
             <TextView
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:layout_weight="1"
-                android:background="@{model.positiveColorRes}"
+                android:background="@{model.positiveBackground}"
                 android:text="Ok"
                 android:textAllCaps="false"
                 android:textColor="@color/carbon_white"

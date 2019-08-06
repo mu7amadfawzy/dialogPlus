@@ -1,5 +1,6 @@
 package com.dialog.plus.ui;
 
+import androidx.annotation.ColorRes;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
@@ -13,7 +14,8 @@ public class DialogUiModel extends BaseObservable {
     private boolean code_dialog, success_dialog, error_dialog, confirmation_dialog, validation_dialog, withResend;
     private String title, content, confirm_code_text, typed_code, resend_code_text;
     private int timeLeft;
-    private Integer positiveColorRes, negativeColorRes, headerColorRes;
+    private @ColorRes
+    int positiveBackground, negativeColorRes, headerBackground;
 
     public DialogUiModel() {
     }
@@ -28,12 +30,12 @@ public class DialogUiModel extends BaseObservable {
     }
 
     @Bindable
-    public Integer getHeaderColorRes() {
-        return headerColorRes;
+    public Integer getHeaderBackground() {
+        return headerBackground;
     }
 
-    public void setHeaderColorRes(Integer headerColorRes) {
-        this.headerColorRes = headerColorRes;
+    public void setHeaderBackground(Integer headerBackground) {
+        this.headerBackground = headerBackground;
     }
 
     @Bindable
@@ -46,12 +48,12 @@ public class DialogUiModel extends BaseObservable {
     }
 
     @Bindable
-    public Integer getPositiveColorRes() {
-        return positiveColorRes;
+    public Integer getPositiveBackground() {
+        return positiveBackground;
     }
 
-    public void setPositiveColorRes(Integer positiveColorRes) {
-        this.positiveColorRes = positiveColorRes;
+    public void setPositiveBackground(Integer positiveBackground) {
+        this.positiveBackground = positiveBackground;
     }
 
     @Bindable

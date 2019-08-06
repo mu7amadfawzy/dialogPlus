@@ -17,88 +17,99 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickedConfirmCode(View view) {
-        new DialogPlus().showConfirmCodeDialog(5, "Code Dialog", "code dialog message content", null, R.color.colorPrimary, new DialogPlus.OnCodeTyped() {
-            @Override
-            public void onCodeTyped(String typedCode) {
-                Toast.makeText(MainActivity.this, "onCodeTyped: " + typedCode, Toast.LENGTH_SHORT).show();
-            }
+        new DialogPlus().showConfirmCodeDialog(5, "Code Dialog", "code dialog message content"
+                , R.color.colorPrimary, R.color.colorPrimary, new DialogPlus.OnCodeTyped() {
+                    @Override
+                    public void onCodeTyped(String typedCode) {
+                        Toast.makeText(MainActivity.this, "onCodeTyped: " + typedCode, Toast.LENGTH_SHORT).show();
+                    }
 
-            @Override
-            public void onTimeUp(DialogPlus dialog) {
-                Toast.makeText(MainActivity.this, "onTimeUp", Toast.LENGTH_SHORT).show();
-            }
+                    @Override
+                    public void onTimeUp(DialogPlus dialog) {
+                        Toast.makeText(MainActivity.this, "onTimeUp", Toast.LENGTH_SHORT).show();
+                    }
 
-            @Override
-            public void onResend() {
-                Toast.makeText(MainActivity.this, "onResend", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onResend(DialogPlus dialogPlus) {
+                        Toast.makeText(MainActivity.this, "onResend", Toast.LENGTH_SHORT).show();
+                    }
 
-            }
-        }).show(this.getSupportFragmentManager(), "dialog");
+                }).show(this.getSupportFragmentManager(), "dialog");
     }
 
     public void onClickedValidation(View view) {
-        new DialogPlus().showValidateCodeDialog(5, "Validation Dialog", "validation dialog content...", "12345", false, null, R.color.colorPrimary, new DialogPlus.OnValidateCode() {
-            @Override
-            public void onSuccess() {
-                Toast.makeText(MainActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
-            }
+        new DialogPlus().showValidateCodeDialog(5, "Validation Dialog"
+                , "validation dialog content...", "12345", false, new DialogPlus.OnValidateCode() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(MainActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
+                    }
 
-            @Override
-            public void onError(DialogPlus dialog) {
-                Toast.makeText(MainActivity.this, "onError", Toast.LENGTH_SHORT).show();
-            }
+                    @Override
+                    public void onError(DialogPlus dialog) {
+                        Toast.makeText(MainActivity.this, "onError", Toast.LENGTH_SHORT).show();
+                    }
 
-            @Override
-            public void onResend() {
-                Toast.makeText(MainActivity.this, "onResend", Toast.LENGTH_SHORT).show();
-            }
-        }).show(this.getSupportFragmentManager(), "dialog");
+                    @Override
+                    public void onResend(DialogPlus dialogPlus) {
+                        Toast.makeText(MainActivity.this, "onResend", Toast.LENGTH_SHORT).show();
+                    }
+                }).show(this.getSupportFragmentManager(), "dialog");
     }
 
     public void onClickedValidationConfrmation(View view) {
-        new DialogPlus().showConfirmationDialog("Confirmation Dialog", "confirmation dialog message content ...", null, null, R.color.colorPrimary, new DialogPlus.OnDialogActionClicked() {
-            @Override
-            public void onPositiveClicked() {
-                Toast.makeText(MainActivity.this, "onPositiveClicked", Toast.LENGTH_SHORT).show();
-            }
+        new DialogPlus().showConfirmationDialog("Confirmation Dialog", "confirmation dialog message content ..."
+                , R.color.colorPrimary, new DialogPlus.OnDialogActionClicked() {
+                    @Override
+                    public void onPositive(DialogPlus dialogPlus) {
+                        Toast.makeText(MainActivity.this, "onPositive", Toast.LENGTH_SHORT).show();
+                        dialogPlus.dismiss();
+                    }
 
-            @Override
-            public void onNegativeClicked() {
-                Toast.makeText(MainActivity.this, "onNegativeClicked", Toast.LENGTH_SHORT).show();
-            }
+                    @Override
+                    public void onNegative(DialogPlus dialogPlus) {
+                        super.onNegative(dialogPlus);
+                        Toast.makeText(MainActivity.this, "onNegative", Toast.LENGTH_SHORT).show();
+                    }
 
-            @Override
-            public void onErrorClicked() {
-                Toast.makeText(MainActivity.this, "onErrorClicked", Toast.LENGTH_SHORT).show();
-            }
+                    @Override
+                    public void onError(DialogPlus dialogPlus) {
+                        super.onError(dialogPlus);
+                        Toast.makeText(MainActivity.this, "onError", Toast.LENGTH_SHORT).show();
+                    }
 
-            @Override
-            public void onSuccessClicked() {
+                    @Override
+                    public void onSuccess(DialogPlus dialogPlus) {
 
-            }
-        }).show(this.getSupportFragmentManager(), "dialog");
+                    }
+                }).show(this.getSupportFragmentManager(), "dialog");
     }
 
     public void onClickedErrorDialog(View view) {
 
         new DialogPlus().showErrorDialog("error dialog content message", new DialogPlus.OnDialogActionClicked() {
             @Override
-            public void onPositiveClicked() {
-                Toast.makeText(MainActivity.this, "onPositiveClicked", Toast.LENGTH_SHORT).show();
+            public void onPositive(DialogPlus dialogPlus) {
+                Toast.makeText(MainActivity.this, "onPositive", Toast.LENGTH_SHORT).show();
+                dialogPlus.dismiss();
             }
 
             @Override
-            public void onNegativeClicked() {
-                Toast.makeText(MainActivity.this, "onNegativeClicked", Toast.LENGTH_SHORT).show();
+            public void onSuccess(DialogPlus dialogPlus) {
+
             }
 
             @Override
-            public void onErrorClicked() {
-                Toast.makeText(MainActivity.this, "onErrorClicked", Toast.LENGTH_SHORT).show();
+            public void onNegative(DialogPlus dialogPlus) {
+                super.onNegative(dialogPlus);
+                Toast.makeText(MainActivity.this, "onNegative", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
-            public void onSuccessClicked() {
+            public void onError(DialogPlus dialogPlus) {
+                super.onError(dialogPlus);
+                Toast.makeText(MainActivity.this, "onError", Toast.LENGTH_SHORT).show();
 
             }
         }).show(this.getSupportFragmentManager(), "dialog");
@@ -107,22 +118,26 @@ public class MainActivity extends AppCompatActivity {
     public void onClickedSuccessDialog(View view) {
         new DialogPlus().showSuccessDialog("Success message content..", new DialogPlus.OnDialogActionClicked() {
             @Override
-            public void onPositiveClicked() {
-                Toast.makeText(MainActivity.this, "onPositiveClicked", Toast.LENGTH_SHORT).show();
+            public void onPositive(DialogPlus dialogPlus) {
+                Toast.makeText(MainActivity.this, "onPositive", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onNegativeClicked() {
-                Toast.makeText(MainActivity.this, "onNegativeClicked", Toast.LENGTH_SHORT).show();
+            public void onSuccess(DialogPlus dialogPlus) {
+
             }
 
             @Override
-            public void onErrorClicked() {
-                Toast.makeText(MainActivity.this, "onErrorClicked", Toast.LENGTH_SHORT).show();
+            public void onNegative(DialogPlus dialogPlus) {
+                super.onNegative(dialogPlus);
+                Toast.makeText(MainActivity.this, "onNegative", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
-            public void onSuccessClicked() {
+            public void onError(DialogPlus dialogPlus) {
+                super.onError(dialogPlus);
+                Toast.makeText(MainActivity.this, "onError", Toast.LENGTH_SHORT).show();
 
             }
         }).show(this.getSupportFragmentManager(), "dialog");
