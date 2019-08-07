@@ -9,22 +9,19 @@
             name="model"
             type="com.dialog.plus.ui.DialogUiModel" />
 
-        <import type="android.view.View" />
-
+        =
 
     </data>
 
     <carbon.widget.LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:minWidth="@dimen/_200sdp"
         android:background="@color/carbon_white"
         android:orientation="vertical"
         android:padding="@dimen/_8sdp"
         android:paddingBottom="@dimen/_3sdp"
-        android:visibility="@{model.error_dialog?View.VISIBLE:View.GONE}"
         bind:carbon_cornerRadius="@dimen/_8sdp"
         tools:visibility="visible">
 
@@ -36,7 +33,7 @@
             android:src="@drawable/cross" />
 
         <me.grantland.widget.AutofitTextView
-            android:id="@+id/error_text"
+            android:id="@+id/errorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -54,13 +51,13 @@
             tools:visibility="visible" />
 
         <carbon.widget.Button
-            android:id="@+id/error_button"
+            android:id="@+id/errorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@color/carbon_red_600"
-            android:text="Ok"
+            android:text="@string/ok"
             android:textAllCaps="false"
             android:textColor="@color/carbon_white"
             bind:carbon_cornerRadius="@dimen/_8sdp" />

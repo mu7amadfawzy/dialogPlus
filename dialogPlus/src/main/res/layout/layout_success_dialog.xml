@@ -17,26 +17,24 @@
     <carbon.widget.LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:background="@color/carbon_white"
         android:minWidth="@dimen/_200sdp"
         android:orientation="vertical"
         android:padding="@dimen/_8sdp"
         android:paddingBottom="@dimen/_3sdp"
-        android:visibility="@{model.success_dialog?View.VISIBLE:View.GONE}"
         bind:carbon_cornerRadius="@dimen/_8sdp"
         tools:visibility="visible">
 
         <ImageView
-            android:id="@+id/success_img"
+            android:id="@+id/successImg"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
             android:layout_gravity="center"
             android:src="@drawable/checked" />
 
         <me.grantland.widget.AutofitTextView
-            android:id="@+id/error_text"
+            android:id="@+id/errorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -54,13 +52,13 @@
             tools:visibility="visible" />
 
         <carbon.widget.Button
-            android:id="@+id/success_button"
+            android:id="@+id/successButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@color/carbon_green_500"
-            android:text="Ok"
+            android:text="@string/ok"
             android:textAllCaps="false"
             android:textColor="@color/carbon_white"
             bind:carbon_cornerRadius="@dimen/_8sdp" />

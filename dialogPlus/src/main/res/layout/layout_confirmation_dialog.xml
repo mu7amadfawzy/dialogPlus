@@ -17,24 +17,24 @@
     <carbon.widget.LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:background="@color/carbon_white"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="@dimen/_3sdp"
-        android:visibility="@{model.confirmation_dialog?View.VISIBLE:View.GONE}"
         bind:carbon_cornerRadius="@dimen/_8sdp"
         tools:visibility="visible">
 
         <carbon.widget.RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:background_color="@{model.headerBackground}"
-            android:padding="@dimen/_16sdp">
+            android:layout_height="@dimen/dialog_header_height"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/_8sdp"
+            bind:background_color="@{model.headerBackground}"
+            bind:background_drawable="@{model.headerBgDrawable}">
 
             <TextView
-                android:id="@+id/title_text"
+                android:id="@+id/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -43,12 +43,13 @@
                 android:textColor="@color/carbon_white"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
+                bind:text_color="@{model.headerTextColor}"
                 tools:text="Title"
                 tools:visibility="visible" />
         </carbon.widget.RelativeLayout>
 
         <me.grantland.widget.AutofitTextView
-            android:id="@+id/content_text"
+            android:id="@+id/contentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -71,35 +72,41 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <carbon.widget.Button
-                android:id="@+id/confirm_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:layout_weight="1"
-                app:background_color="@{model.positiveBackground}"
-                android:text="Ok"
-                android:textAllCaps="false"
-                android:textColor="@color/carbon_white"
-                bind:carbon_cornerRadius="@dimen/_8sdp" />
-
-            <carbon.widget.Button
-                android:id="@+id/cancel_button"
+                android:id="@+id/cancelButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_4sdp"
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:layout_weight="1"
-                app:background_color="@{model.negativeColorRes}"
-                android:text="Cancel"
+                android:layout_marginBottom="1dp"
+                android:text="@string/cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/carbon_white"
-                bind:carbon_cornerRadius="@dimen/_8sdp"
+                bind:background_color="@{model.negativeColorRes}"
+                bind:background_drawable="@{model.negativeBgDrawable}"
+                bind:carbon_cornerRadius="@dimen/_12sdp"
+                bind:text_color="@{model.negativeTextColor}"
                 tools:visibility="visible" />
+
+            <carbon.widget.Button
+                android:id="@+id/confirmButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:text="@string/ok"
+                android:textAllCaps="false"
+                android:textColor="@color/carbon_white"
+                bind:background_color="@{model.positiveBackground}"
+                bind:background_drawable="@{model.positiveBgDrawable}"
+                bind:carbon_cornerRadius="@dimen/_12sdp"
+                bind:text_color="@{model.positiveTextColor}" />
 
         </LinearLayout>
     </carbon.widget.LinearLayout>

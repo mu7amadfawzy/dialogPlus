@@ -1,6 +1,7 @@
 package com.dialog.plus.ui;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
@@ -11,11 +12,15 @@ import com.dialog.plus.BR;
  * muhammadnoamany@gmail.com
  */
 public class DialogUiModel extends BaseObservable {
-    private boolean code_dialog, success_dialog, error_dialog, confirmation_dialog, validation_dialog, withResend;
-    private String title, content, confirm_code_text, typed_code, resend_code_text;
+    private boolean withSend, withResend;
+    private String title, correctCode, codeEntry, content, confirm_code_text, typed_code, resend_code_text;
     private int timeLeft;
     private @ColorRes
     int positiveBackground, negativeColorRes, headerBackground;
+    private @DrawableRes
+    int positiveBgDrawable, negativeBgDrawable, headerBgDrawable;
+    private @ColorRes
+    int positiveTextColor, negativeTextColor, headerTextColor;
 
     public DialogUiModel() {
     }
@@ -45,7 +50,7 @@ public class DialogUiModel extends BaseObservable {
         return negativeColorRes;
     }
 
-    public void setNegativeColorRes(@ColorRes int negativeColorRes) {
+    public void setNegativeBackground(@ColorRes int negativeColorRes) {
         this.negativeColorRes = negativeColorRes;
     }
 
@@ -60,15 +65,6 @@ public class DialogUiModel extends BaseObservable {
     }
 
     @Bindable
-    public boolean isValidation_dialog() {
-        return validation_dialog;
-    }
-
-    public void setValidation_dialog(boolean validation_dialog) {
-        this.validation_dialog = validation_dialog;
-    }
-
-    @Bindable
     public int getTimeLeft() {
         return timeLeft;
     }
@@ -80,7 +76,7 @@ public class DialogUiModel extends BaseObservable {
 
     @Bindable
     public String getResend_code_text() {
-        return resend_code_text != null ? resend_code_text : "Resend";
+        return resend_code_text;
     }
 
     public void setResend_code_text(String resend_code_text) {
@@ -98,7 +94,7 @@ public class DialogUiModel extends BaseObservable {
 
     @Bindable
     public String getConfirm_code_text() {
-        return confirm_code_text != null ? confirm_code_text : "Send";
+        return confirm_code_text;
     }
 
     public void setConfirm_code_text(String confirm_code_text) {
@@ -124,38 +120,88 @@ public class DialogUiModel extends BaseObservable {
     }
 
     @Bindable
-    public boolean isCode_dialog() {
-        return code_dialog;
+    public int getPositiveBgDrawable() {
+        return positiveBgDrawable;
     }
 
-    public void setCode_dialog(boolean code_dialog) {
-        this.code_dialog = code_dialog;
-    }
-
-    @Bindable
-    public boolean isSuccess_dialog() {
-        return success_dialog;
-    }
-
-    public void setSuccess_dialog(boolean success_dialog) {
-        this.success_dialog = success_dialog;
+    public void setPositiveBgDrawable(int positiveBgDrawable) {
+        this.positiveBgDrawable = positiveBgDrawable;
     }
 
     @Bindable
-    public boolean isError_dialog() {
-        return error_dialog;
+    public int getNegativeBgDrawable() {
+        return negativeBgDrawable;
     }
 
-    public void setError_dialog(boolean error_dialog) {
-        this.error_dialog = error_dialog;
+    public void setNegativeBgDrawable(int negativeBgDrawable) {
+        this.negativeBgDrawable = negativeBgDrawable;
     }
 
     @Bindable
-    public boolean isConfirmation_dialog() {
-        return confirmation_dialog;
+    public int getHeaderBgDrawable() {
+        return headerBgDrawable;
     }
 
-    public void setConfirmation_dialog(boolean confirmation_dialog) {
-        this.confirmation_dialog = confirmation_dialog;
+    public void setHeaderBgDrawable(int headerBgDrawable) {
+        this.headerBgDrawable = headerBgDrawable;
+    }
+
+    @Bindable
+    public int getPositiveTextColor() {
+        return positiveTextColor;
+    }
+
+    public void setPositiveTextColor(int positiveTextColor) {
+        this.positiveTextColor = positiveTextColor;
+    }
+
+    @Bindable
+    public int getNegativeTextColor() {
+        return negativeTextColor;
+    }
+
+    public void setNegativeTextColor(int negativeTextColor) {
+        this.negativeTextColor = negativeTextColor;
+    }
+
+    @Bindable
+    public int getHeaderTextColor() {
+        return headerTextColor;
+    }
+
+    public void setHeaderTextColor(int headerTextColor) {
+        this.headerTextColor = headerTextColor;
+    }
+
+    @Bindable
+    public String getCodeEntry() {
+        return codeEntry;
+    }
+
+    public void setCodeEntry(String codeEntry) {
+        this.codeEntry = codeEntry;
+        notifyPropertyChanged(BR.codeEntry);
+    }
+
+    @Bindable
+    public String getCorrectCode() {
+        return correctCode;
+    }
+
+    public void setCorrectCode(String correctCode) {
+        this.correctCode = correctCode;
+    }
+
+    public void setNegativeColorRes(int negativeColorRes) {
+        this.negativeColorRes = negativeColorRes;
+    }
+
+    @Bindable
+    public boolean isWithSend() {
+        return withSend;
+    }
+
+    public void setWithSend(boolean withSend) {
+        this.withSend = withSend;
     }
 }

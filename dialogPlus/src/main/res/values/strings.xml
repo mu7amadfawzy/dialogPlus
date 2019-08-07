@@ -6,4 +6,8 @@
     <string name="resend_code">Resend confirmation code</string>
     <string name="confirm_sms_code">Proceed</string>
     <string name="dages" translatable="false">------------------------------------------------------------------------------------------------</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="confirm">Confirm</string>
+    <string name="resend">Resend</string>
 </resources>

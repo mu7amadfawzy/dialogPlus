@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:background="@color/carbon_white"
         android:gravity="center"
-        bind:visibility="@{!hidden}">
+        bind:visible="@{!hidden}">
 
         <carbon.widget.TextView
             android:layout_width="match_parent"
