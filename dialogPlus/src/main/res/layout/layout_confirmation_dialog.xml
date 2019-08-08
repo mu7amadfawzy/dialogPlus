@@ -9,105 +9,82 @@
             name="model"
             type="com.dialog.plus.ui.DialogUiModel" />
 
-        <import type="android.view.View" />
-
-
     </data>
 
     <carbon.widget.LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/carbon_white"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="@dimen/_3sdp"
-        bind:carbon_cornerRadius="@dimen/_8sdp"
+        bind:carbon_cornerRadius="@dimen/dialog_corner_radius"
+        bind:dialog_width_percent="@{@integer/dialog_width_percent}"
         tools:visibility="visible">
 
-        <carbon.widget.RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dialog_header_height"
-            android:background="@color/colorPrimary"
-            android:padding="@dimen/_8sdp"
-            bind:background_color="@{model.headerBackground}"
-            bind:background_drawable="@{model.headerBgDrawable}">
-
-            <TextView
-                android:id="@+id/titleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="@{model.title}"
-                android:textColor="@color/carbon_white"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                bind:text_color="@{model.headerTextColor}"
-                tools:text="Title"
-                tools:visibility="visible" />
-        </carbon.widget.RelativeLayout>
+        <include
+            android:id="@+id/headerLayout"
+            layout="@layout/layout_dialog_header"
+            bind:model="@{model}" />
 
         <me.grantland.widget.AutofitTextView
             android:id="@+id/contentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_margin="@dimen/dialog_content_margin"
             android:gravity="center"
             android:maxLines="3"
             android:text="@{model.content}"
             android:textAlignment="center"
-            android:textColor="@color/carbon_black"
-            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/dialogContentTextColor"
+            android:textSize="@dimen/dialog_content_message_text_size"
             android:textStyle="bold"
             tools:text="message \n message \n message"
             tools:visibility="visible" />
 
-        <LinearLayout
+        <carbon.widget.LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dialog_action_buttons_height"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_12sdp"
+            android:layout_margin="@dimen/dialog_action_buttons_margin"
+            android:background="@color/dialogNegativeBgColor"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            bind:background_color="@{model.negativeColorRes}"
+            bind:background_drawable="@{model.negativeBgDrawable}"
+            bind:carbon_cornerRadius="@dimen/action_button_corner"
+            bind:carbon_elevation="1dp"
+            bind:carbon_stroke="@color/dialogActionButtonsStrokeColor"
+            bind:carbon_strokeWidth="1dp">
 
             <carbon.widget.Button
                 android:id="@+id/cancelButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:layout_weight="1"
-                android:layout_marginBottom="1dp"
-                android:text="@string/cancel"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:background="@color/dialogNegativeBgColor"
+                android:text="@string/dialog_cancel"
                 android:textAllCaps="false"
-                android:textColor="@color/carbon_white"
-                bind:background_color="@{model.negativeColorRes}"
-                bind:background_drawable="@{model.negativeBgDrawable}"
-                bind:carbon_cornerRadius="@dimen/_12sdp"
+                android:textColor="@color/dialogNegativeTextColor"
                 bind:text_color="@{model.negativeTextColor}"
+                bind:visible="@{!model.typeMessage}"
                 tools:visibility="visible" />
 
             <carbon.widget.Button
                 android:id="@+id/confirmButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:layout_marginBottom="1dp"
-                android:layout_weight="1"
-                android:text="@string/ok"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:background="@color/dialogPositiveBgColor"
+                android:text="@{model.typeMessage?@string/dialog_ok:@string/dialog_confirm}"
                 android:textAllCaps="false"
-                android:textColor="@color/carbon_white"
+                android:textColor="@color/dialogPositiveTextColor"
                 bind:background_color="@{model.positiveBackground}"
                 bind:background_drawable="@{model.positiveBgDrawable}"
-                bind:carbon_cornerRadius="@dimen/_12sdp"
+                bind:carbon_cornerRadius="@dimen/action_button_corner"
                 bind:text_color="@{model.positiveTextColor}" />
 
-        </LinearLayout>
+        </carbon.widget.LinearLayout>
     </carbon.widget.LinearLayout>
 </layout>

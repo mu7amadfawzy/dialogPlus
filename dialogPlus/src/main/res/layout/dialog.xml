@@ -14,35 +14,13 @@
     </data>
 
     <carbon.widget.RelativeLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
+        android:id="@+id/dialogContainer"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/_16sdp"
+        android:layout_margin="@dimen/dialog_margin"
         android:background="#00000000"
-        bind:carbon_cornerRadius="@dimen/_8sdp"
+        bind:carbon_cornerRadius="@dimen/dialog_corner_radius"
+        bind:dialog_width_percent="@{@integer/dialog_width_percent}"
         bind:includeLayout="@{dialogLayoutRes}"
-        bind:model="@{model}">
-
-        <!--<include-->
-        <!--android:id="@+id/code_dialog"-->
-        <!--layout="@layout/layout_code_dialog"-->
-        <!--bind:model="@{model}" />-->
-
-
-        <!--<include-->
-        <!--android:id="@+id/confirmation_dialog"-->
-        <!--layout="@layout/layout_confirmation_dialog"-->
-        <!--bind:model="@{model}" />-->
-
-        <!--<include-->
-        <!--android:id="@+id/error_dialog"-->
-        <!--layout="@layout/layout_error_dialog"-->
-        <!--bind:model="@{model}" />-->
-
-        <!--<include-->
-        <!--android:id="@+id/success_dialog"-->
-        <!--layout="@layout/layout_success_dialog"-->
-        <!--bind:model="@{model}" />-->
-
-    </carbon.widget.RelativeLayout>
+        bind:model="@{model}" />
 </layout>

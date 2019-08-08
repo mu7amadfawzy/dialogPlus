@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.dialog.plus.ui.DialogUiModel" />
+
+
+    </data>
+
+    <carbon.widget.RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_header_height"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            bind:background_color="@{model.headerBgColor}"
+            bind:background_drawable="@{model.headerBgDrawable}" />
+
+        <ImageView
+            android:id="@+id/closeIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/dialog_header_padding"
+            android:src="@drawable/ic_dialog_close"
+            android:tint="@color/dialogPositiveTextColor" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@{model.title}"
+            android:textColor="@color/titleTextColor"
+            android:textSize="@dimen/dialog_header_text_size"
+            android:textStyle="bold"
+            bind:text_color="@{model.headerTextColor}"
+            tools:text="Title"
+            tools:visibility="visible" />
+    </carbon.widget.RelativeLayout>
+</layout>

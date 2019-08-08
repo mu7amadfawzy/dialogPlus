@@ -9,43 +9,56 @@
             name="model"
             type="com.dialog.plus.ui.DialogUiModel" />
 
-        =
-
     </data>
 
     <carbon.widget.LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:minWidth="@dimen/_200sdp"
         android:background="@color/carbon_white"
+        android:minWidth="@dimen/_200sdp"
         android:orientation="vertical"
-        android:padding="@dimen/_8sdp"
+        android:padding="@dimen/dialog_header_padding"
         android:paddingBottom="@dimen/_3sdp"
-        bind:carbon_cornerRadius="@dimen/_8sdp"
+        bind:carbon_cornerRadius="@dimen/dialog_corner_radius"
         tools:visibility="visible">
 
-        <ImageView
-            android:id="@+id/error_img"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_gravity="center"
-            android:src="@drawable/cross" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/closeIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_dialog_close"
+                android:tint="@color/colorPrimary"
+                bind:tint_color="@{model.headerBgColor}" />
+
+            <ImageView
+                android:id="@+id/error_img"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:src="@drawable/cross" />
+        </RelativeLayout>
+
 
         <me.grantland.widget.AutofitTextView
             android:id="@+id/errorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_margin="@dimen/dialog_content_margin"
             android:gravity="center"
             android:maxLines="3"
             android:text="@{model.content}"
             android:textAlignment="center"
-            android:textColor="@color/carbon_black"
-            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/dialogContentTextColor"
+            android:textSize="@dimen/dialog_content_message_text_size"
             android:textStyle="bold"
             tools:text="message \n message \n message"
             tools:visibility="visible" />
@@ -55,12 +68,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_8sdp"
             android:background="@color/carbon_red_600"
-            android:text="@string/ok"
+            android:text="@string/dialog_ok"
             android:textAllCaps="false"
             android:textColor="@color/carbon_white"
-            bind:carbon_cornerRadius="@dimen/_8sdp" />
+            bind:carbon_cornerRadius="@dimen/dialog_corner_radius" />
 
     </carbon.widget.LinearLayout>
 </layout>

@@ -1,5 +1,6 @@
 package com.sample.dialogSample;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -16,26 +17,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onClickedConfirmCode(View view) {
-        new DialogPlus("Code Dialog", "code dialog with send, resend and counter")
+    public void onClickedMessageCode(View view) {
+        new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setConfirmCodeDialog("12345", true, true, 10, null)
+                .setHeaderBgDrawable(R.drawable.bg_header)
+                .setMessageDialog(new DialogListener())
+                .show(this.getSupportFragmentManager(), "dialog");
+    }
+
+    public void onClickedConfirmCode(View view) {
+        new DialogPlus("Code Dialog", "code dialog sample with send enabled, resend enabled and counter 10 seconds")
+                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                .setConfirmCodeDialog("12345", true, true, 10, Color.BLACK, null)
                 .setOnDialogActionClicked(new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog");
     }
 
     public void onClickedValidation(View view) {
-        new DialogPlus("Validation Dialog", "code dialog with send and zero counter.")
-                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setConfirmCodeDialog("123", true, false, 0, null)
+        new DialogPlus("Code Dialog", "code dialog sample with send enabled and zero seconds counter.")
+                .setBackgroundColors(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimary)
+                .setHeaderBgDrawable(R.drawable.bg_header)
+                .setConfirmCodeDialog("123", false, true, 0, Color.BLUE, null)
                 .setOnDialogActionClicked(new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog");
     }
 
     public void onClickedValidationConfirmation(View view) {
         new DialogPlus("Confirmation Dialog", "confirmation dialog message content ...")
-                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setPrimaryBgColor(R.color.colorPrimary)
+                .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
+                .setSecondaryTextColor(R.color.colorPrimary)
                 .setOnDialogActionClicked(new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog");
     }

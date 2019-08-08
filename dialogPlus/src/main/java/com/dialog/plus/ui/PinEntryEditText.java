@@ -123,7 +123,6 @@ public class PinEntryEditText extends EditText {
         });
     }
 
-
     @Override
     public void setOnClickListener(View.OnClickListener l) {
         mClickListener = l;

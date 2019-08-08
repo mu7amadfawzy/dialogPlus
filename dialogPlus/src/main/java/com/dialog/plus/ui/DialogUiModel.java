@@ -12,11 +12,11 @@ import com.dialog.plus.BR;
  * muhammadnoamany@gmail.com
  */
 public class DialogUiModel extends BaseObservable {
-    private boolean withSend, withResend;
-    private String title, correctCode, codeEntry, content, confirm_code_text, typed_code, resend_code_text;
+    private boolean withSend, withResend, withCounter, typeMessage;
+    private String title, correctCode, codeEntry, content, typed_code;
     private int timeLeft;
     private @ColorRes
-    int positiveBackground, negativeColorRes, headerBackground;
+    int positiveBackground, negativeColorRes, headerBgColor;
     private @DrawableRes
     int positiveBgDrawable, negativeBgDrawable, headerBgDrawable;
     private @ColorRes
@@ -36,12 +36,12 @@ public class DialogUiModel extends BaseObservable {
 
     @Bindable
     public @ColorRes
-    int getHeaderBackground() {
-        return headerBackground;
+    int getHeaderBgColor() {
+        return headerBgColor;
     }
 
-    public void setHeaderBackground(@ColorRes int headerBackground) {
-        this.headerBackground = headerBackground;
+    public void setHeaderBgColor(@ColorRes int headerBgColor) {
+        this.headerBgColor = headerBgColor;
     }
 
     @Bindable
@@ -75,30 +75,12 @@ public class DialogUiModel extends BaseObservable {
     }
 
     @Bindable
-    public String getResend_code_text() {
-        return resend_code_text;
-    }
-
-    public void setResend_code_text(String resend_code_text) {
-        this.resend_code_text = resend_code_text;
-    }
-
-    @Bindable
     public String getTyped_code() {
         return typed_code;
     }
 
     public void setTyped_code(String typed_code) {
         this.typed_code = typed_code;
-    }
-
-    @Bindable
-    public String getConfirm_code_text() {
-        return confirm_code_text;
-    }
-
-    public void setConfirm_code_text(String confirm_code_text) {
-        this.confirm_code_text = confirm_code_text;
     }
 
     @Bindable
@@ -203,5 +185,27 @@ public class DialogUiModel extends BaseObservable {
 
     public void setWithSend(boolean withSend) {
         this.withSend = withSend;
+    }
+
+    @Bindable
+    public boolean isWithCounter() {
+        return withCounter;
+    }
+
+    public void setWithCounter(boolean withCounter) {
+        this.withCounter = withCounter;
+    }
+
+    @Bindable
+    public boolean isTypeMessage() {
+        return typeMessage;
+    }
+
+    public void setTypeMessage(boolean typeMessage) {
+        this.typeMessage = typeMessage;
+    }
+
+    public boolean isCorrectCode() {
+        return getCodeEntry().equals(getCorrectCode());
     }
 }

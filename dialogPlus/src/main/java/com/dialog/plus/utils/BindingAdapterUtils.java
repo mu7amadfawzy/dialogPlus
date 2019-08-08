@@ -1,11 +1,15 @@
 package com.dialog.plus.utils;
 
+import android.content.Context;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -49,6 +53,12 @@ public class BindingAdapterUtils {
             view.setTextColor(ContextCompat.getColor(view.getContext(), colorRes));
     }
 
+    @BindingAdapter("tint_color")
+    public static void tint_color(ImageView view, @ColorRes int colorRes) {
+        if (colorRes != -1 && colorRes != 0)
+            view.setColorFilter(ContextCompat.getColor(view.getContext(), colorRes));
+    }
+
     @BindingAdapter("setText")
     public static void setText(TextView textView, String text) {
         if (text != null && !text.isEmpty())
@@ -58,6 +68,23 @@ public class BindingAdapterUtils {
     @BindingAdapter("charsNumber")
     public static void charsNumber(PinEntryEditText textView, int charsNumber) {
         textView.setNumOfChars(charsNumber);
+    }
+
+    @BindingAdapter("dialog_width_percent")
+    public static void setLayoutWidthPercent(View view, int percent) {
+        float approxWidth = getScreenWidth(view.getContext()) * (percent / 100f);
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        if (params == null)
+            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.width = Math.round(approxWidth);
+        view.setLayoutParams(params);
+    }
+
+    private static int getScreenWidth(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
     }
 
     @BindingAdapter({"bind:includeLayout", "model"})
