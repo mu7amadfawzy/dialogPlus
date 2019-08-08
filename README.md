@@ -98,13 +98,15 @@ new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
                 
                 // @ColorInt int colorInt
                 .setCodeTextColor(Color.BLACK)
-                ```
+                
+````
 ### 4 Listeners:
 
-#### ```setDialogActionListener(DialogPlus.DialogActionListener)```  Used with MESSAGE ,CONFIRMATION SUCCESS and ERROR dialogs
+ ```setDialogActionListener(DialogPlus.DialogActionListener)```  
+#### Used with MESSAGE ,CONFIRMATION SUCCESS and ERROR dialogs
 
-##### ```You can only implement onPositive()
-````
+##### You can only implement onPositive()
+```
 .setDialogActionListener(new DialogPlus.DialogActionListener() {
                     @Override
                     public void onPositive(DialogPlus dialogPlus) {
@@ -115,7 +117,7 @@ new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
 ````
 ##### ```You can also Override other methods onNegative(),onWrongCode()
 ````
-.setDialogActionListener(new DialogPlus.DialogActionListener() {
+setDialogActionListener(new DialogPlus.DialogActionListener() {
                     @Override
                     public void onPositive(DialogPlus dialogPlus) {
 
@@ -132,11 +134,11 @@ new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
                 })
 });
 ````
-#### ```setCodeTypeListener(DialogPlus.CodeTypeListener)```  Used only with CODE dialog
+#### setCodeTypeListener(DialogPlus.CodeTypeListener)```  Used only with CODE dialog
 
-##### ```You Override other methods onNegative(),onWrongCode()
+##### You can Override other methods onNegative(),onWrongCode()
 ````
-.setCodeTypeListener(new DialogPlus.CodeTypeListener() {
+setCodeTypeListener(new DialogPlus.CodeTypeListener() {
                     @Override
                     public void onSuccess(DialogPlus dialogPlus) {
 
