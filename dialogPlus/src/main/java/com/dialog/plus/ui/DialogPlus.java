@@ -49,8 +49,8 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private AnimationSet mModalInAnim, mModalOutAnim;
     private View mDialogView;
     private CodeTypeListener codeTypeListener;
-    private OnDialogActionClicked onDialogActionClicked;
-    private String title, content, confirm_code_text, resend_code_text, correct_code;
+    private DialogActionListener dialogActionListener;
+    private String title, content, correct_code;
     private int counterSeconds;
     @ColorRes
     private int positiveBgColor, negativeBgColor, headerBgColor;
@@ -83,35 +83,35 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
      * Sets a code confirmation dialog interface
      */
     public DialogPlus setConfirmCodeDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, CodeTypeListener codeTypeListener) {
-        return setDialog_type(TYPE.CONFIRM_CODE).setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener);
+        return setDialog_type(TYPE.CODE).setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener);
     }
 
     /**
      * Sets a confirmation dialog interface(with positive and negative actions)
      */
-    public DialogPlus setConfirmationDialog(OnDialogActionClicked actionClicked) {
-        return setDialog_type(TYPE.CONFIRMATION).setOnDialogActionClicked(actionClicked);
+    public DialogPlus setConfirmationDialog(DialogActionListener actionClicked) {
+        return setDialog_type(TYPE.CONFIRMATION).setDialogActionListener(actionClicked);
     }
 
     /**
      * Sets a message dialog interface
      */
-    public DialogPlus setMessageDialog(OnDialogActionClicked actionClicked) {
-        return setMessageDialog().setOnDialogActionClicked(actionClicked);
+    public DialogPlus setMessageDialog(DialogActionListener actionClicked) {
+        return setMessageDialog().setDialogActionListener(actionClicked);
     }
 
     /**
      * Sets an Error dialog interface
      */
-    public DialogPlus setErrorDialog(OnDialogActionClicked onDialogActionClicked) {
-        return setDialog_type(TYPE.ERROR_DIALOG).setOnDialogActionClicked(onDialogActionClicked);
+    public DialogPlus setErrorDialog(DialogActionListener dialogActionListener) {
+        return setDialog_type(TYPE.ERROR_DIALOG).setDialogActionListener(dialogActionListener);
     }
 
     /**
      * Sets an Success dialog interface
      */
-    public DialogPlus setSuccessDialog(OnDialogActionClicked onDialogActionClicked) {
-        return setDialog_type(TYPE.SUCCESS_DIALOG).setOnDialogActionClicked(onDialogActionClicked);
+    public DialogPlus setSuccessDialog(DialogActionListener dialogActionListener) {
+        return setDialog_type(TYPE.SUCCESS_DIALOG).setDialogActionListener(dialogActionListener);
     }
 
     @Nullable
@@ -137,7 +137,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private @LayoutRes
     int getDialogLayoutRes() {
         switch (dialog_type) {
-            case TYPE.CONFIRM_CODE:
+            case TYPE.CODE:
                 return R.layout.layout_code_dialog;
             case TYPE.ERROR_DIALOG:
                 return R.layout.layout_error_dialog;
@@ -163,7 +163,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
 
     private void setDialogType() {
         switch (dialog_type) {
-            case TYPE.CONFIRM_CODE:
+            case TYPE.CODE:
                 setOnTextListener();
                 break;
             case TYPE.ERROR_DIALOG:
@@ -222,7 +222,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private void onCorrect() {
         if (codeTypeListener != null)
             codeTypeListener.onSuccess(this);
-        dismiss();
+        dismiss(true);
     }
 
     private void onWrong() {
@@ -240,10 +240,10 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         setCodeTextColor(dialogCodeTextColor);
     }
 
-    public void setCodeTextColor(@ColorInt int colorRes) {
-        if (dialog_type == TYPE.CONFIRM_CODE) {
-            ((PinEntryEditText) getView(R.id.txtPinEntry)).setTextColor(colorRes);
-            ((PinEntryEditText) getView(R.id.txtPinEntry)).getPaint().setColor(colorRes);
+    public void setCodeTextColor(@ColorInt int colorInt) {
+        if (dialog_type == TYPE.CODE) {
+            ((PinEntryEditText) getView(R.id.txtPinEntry)).setTextColor(colorInt);
+            ((PinEntryEditText) getView(R.id.txtPinEntry)).getPaint().setColor(colorInt);
         }
     }
 
@@ -287,9 +287,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
             @Override
             public void onAnimationEnd(Animation animation) {
                 mDialogView.setVisibility(View.GONE);
-                mDialogView.post(() -> {
-                    dismiss();
-                });
+                mDialogView.post(() -> dismiss());
             }
 
             @Override
@@ -297,6 +295,13 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
 
             }
         });
+    }
+
+
+    public void dismiss(boolean animate) {
+        if (animate)
+            mDialogView.startAnimation(mModalOutAnim);
+        else dismiss(true);
     }
 
     private void setCounter() {
@@ -317,7 +322,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     private void setListeners() {
-        if (dialog_type == TYPE.CONFIRM_CODE) {
+        if (dialog_type == TYPE.CODE) {
             getView(R.id.sendCode).setOnClickListener(this);
             getView(R.id.resendCode).setOnClickListener(this);
             getHeaderChildView(R.id.closeIV).setOnClickListener(this);
@@ -359,14 +364,13 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
             onErrorClicked();
         else if (view.getId() == R.id.successButton)
             onSuccessClicked();
-        dismiss();
     }
 
     private void sendCode() {
         if (model.getCodeEntry() != null && model.getCodeEntry().length() == correct_code.length()) {
             if (validateCode()) {
                 cancelTimer();
-                dismiss();
+                dismiss(true);
             }
         } else
             Toast.makeText(getActivity(), getString(R.string.dialog_incomplete_code_msg), Toast.LENGTH_SHORT).show();
@@ -378,18 +382,18 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     private void onErrorClicked() {
-        if (onDialogActionClicked != null)
-            onDialogActionClicked.onWrongCode(this);
+        if (dialogActionListener != null)
+            dialogActionListener.onWrongCode(this);
     }
 
     private void onNegativeClicked() {
-        if (onDialogActionClicked != null)
-            onDialogActionClicked.onNegative(this);
+        if (dialogActionListener != null)
+            dialogActionListener.onNegative(this);
     }
 
     private void onConfirmClicked() {
-        if (onDialogActionClicked != null)
-            onDialogActionClicked.onPositive(this);
+        if (dialogActionListener != null)
+            dialogActionListener.onPositive(this);
     }
 
     private void handleResendCode() {
@@ -552,20 +556,10 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         return setBackgrounds(positiveBackground, negativeBackground, 0);
     }
 
-    public DialogPlus setBackgrounds(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground, @DrawableRes int headerBgColor) {
+    public DialogPlus setBackgrounds(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground, @DrawableRes int headerBackground) {
         this.positiveBgDrawable = positiveBackground;
-        this.headerBgDrawable = headerBgColor;
+        this.headerBgDrawable = headerBackground;
         this.negativeBgDrawable = negativeBackground;
-        return this;
-    }
-
-    public DialogPlus setConfirm_code_text(String confirm_code_text) {
-        this.confirm_code_text = confirm_code_text;
-        return this;
-    }
-
-    public DialogPlus setResend_code_text(String resend_code_text) {
-        this.resend_code_text = resend_code_text;
         return this;
     }
 
@@ -604,8 +598,8 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         return this;
     }
 
-    public DialogPlus setOnDialogActionClicked(OnDialogActionClicked onDialogActionClicked) {
-        this.onDialogActionClicked = onDialogActionClicked;
+    public DialogPlus setDialogActionListener(DialogActionListener dialogActionListener) {
+        this.dialogActionListener = dialogActionListener;
         return this;
     }
 
@@ -630,7 +624,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     @Retention(RetentionPolicy.SOURCE)
     public @interface TYPE {
         int CONFIRMATION = 0;
-        int CONFIRM_CODE = 1;
+        int CODE = 1;
         int MESSAGE = 2;
         int ERROR_DIALOG = 3;
         int SUCCESS_DIALOG = 4;
@@ -641,7 +635,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
      */
     public abstract static class CodeTypeListener {
         public void onTimeUp(DialogPlus dialogPlus) {
-            dialogPlus.dismiss();
+            dialogPlus.dismiss(true);
         }
 
         public abstract void onSuccess(DialogPlus dialogPlus);
@@ -651,15 +645,15 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         public abstract void onWrongCode(DialogPlus dialogPlus);
     }
 
-    public abstract static class OnDialogActionClicked {
+    public abstract static class DialogActionListener {
         public abstract void onPositive(DialogPlus dialogPlus);
 
         public void onNegative(DialogPlus dialogPlus) {
-            dialogPlus.dismiss();
+            dialogPlus.dismiss(true);
         }
 
         public void onWrongCode(DialogPlus dialogPlus) {
-            dialogPlus.dismiss();
+            dialogPlus.dismiss(true);
         }
 
     }

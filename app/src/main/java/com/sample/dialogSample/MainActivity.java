@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickedMessageCode(View view) {
         new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
+                //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setHeaderBgDrawable(R.drawable.bg_header)
                 .setMessageDialog(new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog");
     }
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         new DialogPlus("Code Dialog", "code dialog sample with send enabled, resend enabled and counter 10 seconds")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .setConfirmCodeDialog("12345", true, true, 10, Color.BLACK, null)
-                .setOnDialogActionClicked(new DialogListener())
+                .setDialogActionListener(new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog");
     }
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 .setBackgroundColors(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimary)
                 .setHeaderBgDrawable(R.drawable.bg_header)
                 .setConfirmCodeDialog("123", false, true, 0, Color.BLUE, null)
-                .setOnDialogActionClicked(new DialogListener())
+                .setDialogActionListener(new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog");
     }
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         new DialogPlus("Confirmation Dialog", "confirmation dialog message content ...")
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .setSecondaryTextColor(R.color.colorPrimary)
-                .setOnDialogActionClicked(new DialogListener())
+                .setDialogActionListener(new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog");
     }
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 .show(this.getSupportFragmentManager(), "dialog");
     }
 
-    private class DialogListener extends DialogPlus.OnDialogActionClicked {
+    private class DialogListener extends DialogPlus.DialogActionListener {
         @Override
         public void onPositive(DialogPlus dialogPlus) {
             Toast.makeText(MainActivity.this, "onPositive", Toast.LENGTH_SHORT).show();
