@@ -115,7 +115,7 @@ new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
                 })
 });
 ````
-##### ```You can also Override other methods onNegative(),onWrongCode()
+##### You can also Override other methods onNegative(),onWrongCode()
 ````
 setDialogActionListener(new DialogPlus.DialogActionListener() {
                     @Override
