@@ -1,9 +1,9 @@
-# ExpandableLayout
-[ ![Download](https://api.bintray.com/packages/ma7madfawzy/expandableLayout/com.widget.expandableLayout/images/download.svg) ](https://bintray.com/ma7madfawzy/expandableLayout/com.widget.expandableLayout/_latestVersion)
+# DialogPlus
+[ ![Download](https://api.bintray.com/packages/ma7madfawzy/DialogPlus/com.dialog.plus/images/download.svg) ](https://bintray.com/ma7madfawzy/DialogPlus/com.dialog.plus/_latestVersion)
 
-An Android library that lets you create an expandable layout in a simple and easy way in which you can use the default header and content OR pass your custom layout and just expand and collapse magic is all ready.
+An Android library that lets you create a sweet interface dialog layout in a simple and easy way ,with different types which you can use easily without any boilerbate code and with a great flexibilty to fit your desired user interface.
 
-![sample](images/Demo2.gif)r
+![sample](images/Demo2.gif)
 
 ## Quick Setup
 
@@ -12,139 +12,152 @@ An Android library that lets you create an expandable layout in a simple and eas
 #### Using Gradle
 ```
 dependencies {
-implementation  'com.widget:expandableLayout:3+'
+implementation  'com.dialog:plus:2+'
 }
 ```
 #### Using Maven
 ```
 <dependency>
-  <groupId>com.widget</groupId>
-  <artifactId>expandableLayout</artifactId>
-  <version>3+</version>
+  <groupId>com.dialog</groupId>
+  <artifactId>plus</artifactId>
+  <version>2+</version>
   <type>pom</type>
 </dependency>
 
 ```
 ## 2- Usage
 
-### 2.1 XML Layout:
+### 2.1 MESSAGE Dialog:
 
  ```
-<widget.com.expandablelayout.ExpandableLayout
- android:layout_width="match_parent"
- android:layout_height="wrap_content"
- <!--expand/collabse duration ,default 300-->
- app:duration="400"
- <!--default false-->
- app:hideArrow="true"
- app:arrow_icon="@drawable/arrow_down"
- app:header_padding="16dp"
- app:content_padding="10dp"
- <!--default false-->
- app:startExpanded="true"
-  <!--default 0-->
- app:pinnedLineHeight="15dp"
- <!--use your own custom layout-->
- app:content_layout="@layout/custom_content"
- app:header_layout="@layout/layout_expandable_header"
- <!--Or use default layout which is a TextView-->
- app:exp_title="Header default Text sample"
- app:exp_content="Content Text Sample"
- <!--fonts is the folder name in Assets-->
- app:header_font="fonts/fontName.ttf"
- app:content_font="fonts/fontName.ttf"'
- app:header_color="@color/colorAccentDark"
- app:content_color="@color/colorAccent"
- app:header_padding="10dp"
- app:content_padding="14dp"
- app:header_text_style="italic"
- app:content_style="bold"/> 
-
+new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
+                .setMessageDialog(new DialogPlus.OnDialogActionClicked()  {// implement methods})
+                .show(this.getSupportFragmentManager(), "dialog");
 ```
-#### You can use the default HeaderTV and ContentTV:
+### 2.2 CONFIRMATION Dialog:
 
-##### ````exp_title```` sets the text of the headerTV .
-##### ````header_color```` sets the textColor of the headerTV.
-##### ````arrow_icon```` sets the resource of the arrowBtn (which is visible with using the default headerTV). 
+ ```
+ new DialogPlus("Confirmation Dialog", "confirmation dialog message content ...")
+                .setOnDialogActionClicked(new DialogPlus.OnDialogActionClicked()  {// implement methods})
+                .show(this.getSupportFragmentManager(), "dialog");
+```
+### 2.3 SUCCESS Dialog:
 
-##### ````content````   sets the text of the contentTV.
-##### ````content_color```` sets the textColor of the contentTV.
+ ```
+ new DialogPlus("Success message content..")
+                .setSuccessDialog(new DialogPlus.OnDialogActionClicked()  {// implement methods})
+                .show(this.getSupportFragmentManager(), "dialog");
+```
+### 2.4 ERROR Dialog:
 
-##### ````duration```` sets the duration of the collabse and expand animation.
+ ```
+ new DialogPlus("error dialog content message")
+                .setErrorDialog(new DialogPlus.OnDialogActionClicked()  {// implement methods})
+                .show(this.getSupportFragmentManager(), "dialog");
+```
+### 2.5 CODE Dialog:
 
-#### Or you can use set a custom header or a custom content:
+ ```
+ new DialogPlus("Code Dialog", "code dialog sample with send enabled, resend enabled and counter 10 seconds")
+                /**(String correct_code, boolean withSend, boolean withResend, int counterSeconds
+                   , @ColorInt int codeTextColor,CodeTypeListener codeTypeListener)**/
+                .setConfirmCodeDialog("12345", true, true, 10, Color.BLACK, new DialogPlus.CodeTypeListener() {})
+                .show(this.getSupportFragmentManager(), "dialog");
+```
+### 3 Customizing:
+```
+ new DialogPlus("Dialog Title", "dialog content ...")
+                //(@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor)
+                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                
+             //(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground, @DrawableRes int headerBackground)
+                .setBackgrounds(R.drawable.cross, R.drawable.bg_header, R.drawable.checked)
+                
+                //(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor, @ColorRes int headerTextColor)
+                .setTextColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                
+                //(@ColorRes int primaryColor)--> sets the positiveBgColor and the headerBgColor
+                .setPrimaryBgColor(R.color.colorPrimary)
+                //(@ColorRes int primaryColor)--> sets the negativeBgColor
+                .setSecondaryBgColor(R.color.colorAccent)
+                
+                //(@ColorRes int primaryColor)--> sets the positiveTextColor 
+                .setPrimaryTextColor(R.color.colorPrimary)
+                //(@ColorRes int secondaryColor)--> sets the negativeTextColor
+                .setSecondaryBgColor(R.color.colorAccent)
 
-##### ````header_layout````   sets the declared layout resource as the header layout.
-##### ````content_layout```` sets the declared layout resource as the content layout.
+                //(@ColorRes int primaryColor)--> sets the positiveBgDrawable and the headerBgDrawable
+                .setPrimaryDrawable(R.drawable.bg_header)
+                //(@ColorRes int secondaryDrawable)--> sets the negativeTextDrawable
+                .setSecondaryBgDrawable(R.drawable.bg_header)
+                
+                //(@ColorRes int headerBgColor)
+                .setHeaderBgColor(R.color.colorAccent)
+                //(@DrawableRes int headerBgDrawable)
+                .setHeaderBgDrawable(R.drawable.bg_header)
+                
+                // @ColorInt int colorInt
+                .setCodeTextColor(Color.BLACK)
+                ```
+### 4 Listeners:
 
-##### ````pinnedLineHeight```` define collapsed content minimum height.
+#### ```setDialogActionListener(DialogPlus.DialogActionListener)```  Used with MESSAGE ,CONFIRMATION SUCCESS and ERROR dialogs
 
-#### Use ```toggle()``` to reverse the state, and use isExpanded() to check if it was expanded or not.
-
-#### Use ```refresh()``` to remain the state(in case expanded while custom content includes RecyclerView whose data were updated         then trigging refresh() will help the expandable sets the expand height well).
-
-#### ```setOnExpandedListener``` that can be used to listen to state change:
+##### ```You can only implement onPositive()
 ````
-expandableLayout.setOnExpandedListener(new OnExpandedListener() {
-    @Override
-    public void onExpandChanged(View view, boolean isExpanded) {
-        //TODO handle onExpandChanged
-    }
+.setDialogActionListener(new DialogPlus.DialogActionListener() {
+                    @Override
+                    public void onPositive(DialogPlus dialogPlus) {
+
+                    }
+                })
 });
 ````
+##### ```You can also Override other methods onNegative(),onWrongCode()
+````
+.setDialogActionListener(new DialogPlus.DialogActionListener() {
+                    @Override
+                    public void onPositive(DialogPlus dialogPlus) {
 
-### 2.2 Dynamically:
+                    }
+                    @Override
+                    public void onNegative(DialogPlus dialogPlus) {
+                        super.onNegative(dialogPlus);
+                    }
 
-#### In Java:
+                    @Override
+                    public void onWrongCode(DialogPlus dialogPlus) {
+                        super.onWrongCode(dialogPlus);
+                    }
+                })
+});
+````
+#### ```setCodeTypeListener(DialogPlus.CodeTypeListener)```  Used only with CODE dialog
 
-##### Default HeaderTV and ContentTV
+##### ```You Override other methods onNegative(),onWrongCode()
 ````
- ExpandableLayout expandableLayout = new ExpandableLayout(context)
-                .setHeaderTitle("Added By Java", Color.BLACK)
-                .setDefaultContent("Content xxx", Color.BLUE)
-                .setArrowDrawable(ContextCompat.getDrawable(this, R.drawable.arrow_down));
-````
+.setCodeTypeListener(new DialogPlus.CodeTypeListener() {
+                    @Override
+                    public void onSuccess(DialogPlus dialogPlus) {
 
-##### Custom HeaderTV OR ContentTV
-````
-expandableLayout.setHeaderLayout(R.layout.custom_header);
-                .setContentLayout(R.layout.custom_content);
-````
-#### In Kotlin:
+                    }
 
-##### Default HeaderTV and ContentTV
-````
-var expandableLayout = ExpandableLayout(context)
-                 .setDefaultHeaderTitle("Added Through Kotlin")
-                 .setDefaultContentTitle("Content xxx")
-                 .setArrowDrawable(R.drawable.arrow_ic)
-````
+                    @Override
+                    public void onResend(DialogPlus dialogPlus) {
 
-##### Custom HeaderTV OR ContentTV
-````
-expandableLayout.setHeaderLayout(R.layout.custom_header)
-                .setContentLayout(R.layout.custom_content)
-````
-##### Adding the layout to container view
-````
-container.addView(expandableLayout)
-````
-##### Then you can trigger your custom layouts using:
-###### For DataBinding lovers 
-````
-expandable.getHeaderLayoutBinding();//returns ViewDataBinding which can be cast to your layout binding Impl class
-expandable.getContentLayoutBinding();
-````
-###### Or just a simple view
-````
-expandable.getHeaderLayoutView();
-expandable.getContentLayoutView();
-````
-### 2.3 In RecyclerView:
-#### In order to setup using in RecyclerView call ```ExpandableLayout.onAttachedToRecycler()``` before binding items of the Adapter.
-##### In order to enable one expanded per time in recyclerViewAdaper.onBind() call ``` setRecyclerItem(linearLayoutManager,itemPosition)``` with the RecyclerView's layoutManger(weather ```GridLayoutManager``` or ```LinearLayoutManager```)
-````
-expandable.setRecyclerItem(linearLayoutManager, getAdapterPosition());
+                    }
+
+                    @Override
+                    public void onWrongCode(DialogPlus dialogPlus) {
+
+                    }
+
+                   /**you may override timeUp if there's a specific scenario you want to handle*/
+                    @Override
+                    public void onTimeUp(DialogPlus dialogPlus) {
+                        super.onTimeUp(dialogPlus);
+                    }
+                });
 ````
 
 ### Happy Coding
