@@ -64,43 +64,8 @@ new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
                 .setConfirmCodeDialog("12345", true, true, 10, Color.BLACK, new DialogPlus.CodeTypeListener() {})
                 .show(this.getSupportFragmentManager(), "dialog");
 ```
-### 3 Customizing:
-```
- new DialogPlus("Dialog Title", "dialog content ...")
-                //(@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor)
-                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                
-             //(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground, @DrawableRes int headerBackground)
-                .setBackgrounds(R.drawable.cross, R.drawable.bg_header, R.drawable.checked)
-                
-                //(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor, @ColorRes int headerTextColor)
-                .setTextColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                
-                //(@ColorRes int primaryColor)--> sets the positiveBgColor and the headerBgColor
-                .setPrimaryBgColor(R.color.colorPrimary)
-                //(@ColorRes int primaryColor)--> sets the negativeBgColor
-                .setSecondaryBgColor(R.color.colorAccent)
-                
-                //(@ColorRes int primaryColor)--> sets the positiveTextColor 
-                .setPrimaryTextColor(R.color.colorPrimary)
-                //(@ColorRes int secondaryColor)--> sets the negativeTextColor
-                .setSecondaryBgColor(R.color.colorAccent)
 
-                //(@ColorRes int primaryColor)--> sets the positiveBgDrawable and the headerBgDrawable
-                .setPrimaryDrawable(R.drawable.bg_header)
-                //(@ColorRes int secondaryDrawable)--> sets the negativeTextDrawable
-                .setSecondaryBgDrawable(R.drawable.bg_header)
-                
-                //(@ColorRes int headerBgColor)
-                .setHeaderBgColor(R.color.colorAccent)
-                //(@DrawableRes int headerBgDrawable)
-                .setHeaderBgDrawable(R.drawable.bg_header)
-                
-                // @ColorInt int colorInt
-                .setCodeTextColor(Color.BLACK)
-                
-````
-### 4 Listeners:
+### 3 Listeners:
 
  ```setDialogActionListener(DialogPlus.DialogActionListener)```  
 #### Used with MESSAGE ,CONFIRMATION SUCCESS and ERROR dialogs
@@ -161,6 +126,89 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
                     }
                 });
 ````
+### 4 Customizing:
+### 4.1 per use
+```
+ new DialogPlus("Dialog Title", "dialog content ...")
+                //(@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor)
+                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                
+             //(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground, @DrawableRes int headerBackground)
+                .setBackgrounds(R.drawable.cross, R.drawable.bg_header, R.drawable.checked)
+                
+                //(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor, @ColorRes int headerTextColor)
+                .setTextColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                
+                //(@ColorRes int primaryColor)--> sets the positiveBgColor and the headerBgColor
+                .setPrimaryBgColor(R.color.colorPrimary)
+                //(@ColorRes int primaryColor)--> sets the negativeBgColor
+                .setSecondaryBgColor(R.color.colorAccent)
+                
+                //(@ColorRes int primaryColor)--> sets the positiveTextColor 
+                .setPrimaryTextColor(R.color.colorPrimary)
+                //(@ColorRes int secondaryColor)--> sets the negativeTextColor
+                .setSecondaryBgColor(R.color.colorAccent)
+
+                //(@ColorRes int primaryColor)--> sets the positiveBgDrawable and the headerBgDrawable
+                .setPrimaryDrawable(R.drawable.bg_header)
+                //(@ColorRes int secondaryDrawable)--> sets the negativeTextDrawable
+                .setSecondaryBgDrawable(R.drawable.bg_header)
+                
+                //(@ColorRes int headerBgColor)
+                .setHeaderBgColor(R.color.colorAccent)
+                //(@DrawableRes int headerBgDrawable)
+                .setHeaderBgDrawable(R.drawable.bg_header)
+                
+                // @ColorInt int colorInt
+                .setCodeTextColor(Color.BLACK)
+                
+````
+### 4.2 Override any of these resources to set the dialog attributes for whole project
+#### Dimensions
+````
+    <dimen name="dialog_header_height">@dimen/_40sdp</dimen>
+    <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
+    <dimen name="action_button_corner">@dimen/_20sdp</dimen>
+    <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
+    <dimen name="dialog_margin">@dimen/_30sdp</dimen>
+    <dimen name="dialog_content_margin">@dimen/_25sdp</dimen>
+    <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
+    <dimen name="dialog_corner_radius">@dimen/_8sdp</dimen>
+    <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
+    <dimen name="dialog_action_buttons_margin">@dimen/_15sdp</dimen>
+    <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
+    <integer name="dialog_width_percent">90</integer>
+   
+````
+#### Colors
+````
+    <color name="titleTextColor">@color/dialogPositiveTextColor</color>
+    <color name="dialogContentTextColor">@color/colorAccent</color>
+
+    <color name="dialogNegativeBgColor">#00000000</color>
+    <color name="dialogPositiveBgColor">@color/colorPrimary</color>
+
+    <color name="dialogNegativeTextColor">@color/carbon_red_800</color>
+    <color name="dialogPositiveTextColor">@color/carbon_white</color>
+
+    <color name="dialogTimeUpTextColor">@color/dialogNegativeTextColor</color>
+
+    <color name="dialogActionButtonsStrokeColor">@color/colorAccent</color>
+    <color name="dialog_send_background">@color/colorPrimary</color>
+    <color name="dialog_resend_text_color">@color/colorPrimary</color>
+   
+````
+
+#### Strings
+````
+   <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_ok">Ok</string>
+    <string name="dialog_confirm">Confirm</string>
+    <string name="dialog_resend">Resend</string>
+    <string name="dialog_time_up">Time up</string>
+    <string name="dialog_incomplete_code_msg">Please enter complete code</string>
+   
+```
 
 ### Happy Coding
 
