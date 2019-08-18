@@ -18,50 +18,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickedMessageCode(View view) {
-        new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
+        new DialogPlus("Message Dialog", "message dialog_plus sample\n Welcome Back")
                 //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .setMessageDialog(new DialogListener())
-                .show(this.getSupportFragmentManager(), "dialog");
+                .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedConfirmCode(View view) {
-        new DialogPlus("Code Dialog", "code dialog sample with send enabled, resend enabled and counter 10 seconds")
+        new DialogPlus("Code Dialog", "code dialog_plus sample with send enabled, resend enabled and counter 10 seconds")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .setConfirmCodeDialog("12345", true, true, 10, Color.BLACK, null)
                 .setDialogActionListener(new DialogListener())
-                .show(this.getSupportFragmentManager(), "dialog");
+                .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedValidation(View view) {
-        new DialogPlus("Code Dialog", "code dialog sample with send enabled and zero seconds counter.")
+        new DialogPlus("Code Dialog", "code dialog_plus sample with send enabled and zero seconds counter.")
                 .setBackgroundColors(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimary)
                 .setHeaderBgDrawable(R.drawable.bg_header)
                 .setConfirmCodeDialog("123", false, true, 0, Color.BLUE, null)
                 .setDialogActionListener(new DialogListener())
-                .show(this.getSupportFragmentManager(), "dialog");
+                .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedValidationConfirmation(View view) {
-        new DialogPlus("Confirmation Dialog", "confirmation dialog message content ...")
+        new DialogPlus("Confirmation Dialog", "confirmation dialog_plus message content ...")
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .setSecondaryTextColor(R.color.colorPrimary)
                 .setDialogActionListener(new DialogListener())
-                .show(this.getSupportFragmentManager(), "dialog");
+                .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedErrorDialog(View view) {
-        new DialogPlus("error dialog content message")
+        new DialogPlus("error dialog_plus content message")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .setErrorDialog(new DialogListener())
-                .show(this.getSupportFragmentManager(), "dialog");
+                .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedSuccessDialog(View view) {
         new DialogPlus("Success message content..")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .setSuccessDialog(new DialogListener())
-                .show(this.getSupportFragmentManager(), "dialog");
+                .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     private class DialogListener extends DialogPlus.DialogActionListener {

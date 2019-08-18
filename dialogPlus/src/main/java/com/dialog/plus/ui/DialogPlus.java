@@ -30,7 +30,7 @@ import androidx.fragment.app.DialogFragment;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
-import com.dialog.plus.databinding.DialogBinding;
+import com.dialog.plus.databinding.DialogPlusBinding;
 import com.dialog.plus.utils.AnimationUtils;
 import com.dialog.plus.utils.KeyboardUtil;
 
@@ -43,7 +43,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private DialogUiModel model;
-    private DialogBinding binding;
+    private DialogPlusBinding binding;
     @TYPE
     private int dialog_type;
     private AnimationSet mModalInAnim, mModalOutAnim;
@@ -76,39 +76,39 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     /**
-     * Helper Methods--> helps to set your specific dialog based on parameters
+     * Helper Methods--> helps to set your specific dialog_plus based on parameters
      */
 
     /**
-     * Sets a code confirmation dialog interface
+     * Sets a code confirmation dialog_plus interface
      */
     public DialogPlus setConfirmCodeDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, CodeTypeListener codeTypeListener) {
         return setDialog_type(TYPE.CODE).setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener);
     }
 
     /**
-     * Sets a confirmation dialog interface(with positive and negative actions)
+     * Sets a confirmation dialog_plus interface(with positive and negative actions)
      */
     public DialogPlus setConfirmationDialog(DialogActionListener actionClicked) {
         return setDialog_type(TYPE.CONFIRMATION).setDialogActionListener(actionClicked);
     }
 
     /**
-     * Sets a message dialog interface
+     * Sets a message dialog_plus interface
      */
     public DialogPlus setMessageDialog(DialogActionListener actionClicked) {
         return setMessageDialog().setDialogActionListener(actionClicked);
     }
 
     /**
-     * Sets an Error dialog interface
+     * Sets an Error dialog_plus interface
      */
     public DialogPlus setErrorDialog(DialogActionListener dialogActionListener) {
         return setDialog_type(TYPE.ERROR_DIALOG).setDialogActionListener(dialogActionListener);
     }
 
     /**
-     * Sets an Success dialog interface
+     * Sets an Success dialog_plus interface
      */
     public DialogPlus setSuccessDialog(DialogActionListener dialogActionListener) {
         return setDialog_type(TYPE.SUCCESS_DIALOG).setDialogActionListener(dialogActionListener);
@@ -128,7 +128,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
 
 
     private void renderView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.dialog, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.dialog_plus, container, false);
         binding.setDialogLayoutRes(getDialogLayoutRes());
         binding.setModel(model);
         binding.executePendingBindings();
@@ -619,7 +619,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     /**
-     * dialog type will be indicated by one of the bellow integers
+     * dialog_plus type will be indicated by one of the bellow integers
      */
     @Retention(RetentionPolicy.SOURCE)
     public @interface TYPE {
