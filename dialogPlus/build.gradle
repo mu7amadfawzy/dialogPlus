@@ -13,10 +13,10 @@ apply plugin: 'com.jfrog.bintray'
 
 ext {
     bintrayRepo = 'DialogPlus'          //the repo name in Bintray dashboard
-    bintrayName = 'com.dialog_plus.plus'//the package name in Bintray repo
+    bintrayName = 'com.dialog.plus'//the package name in Bintray repo
     libraryName = 'dialogPlus'           // the module name in the android studio project
     //library name will be like -> publishedGroupId:artifact:libraryVersion
-    publishedGroupId = 'com.dialog_plus'             //the ID you want to add in the 'implementation line'
+    publishedGroupId = 'com.dialog'             //the ID you want to add in the 'implementation line'
     artifact = 'plus'               //the artifact you want to add in the 'implementation line'
     libraryVersion = '2.1.3'
     libraryDescription = 'An Android library that lets you show Dialog in a custom simple and fast way.'
