@@ -1,6 +1,7 @@
 package com.dialog.plus.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.DisplayMetrics;
@@ -37,25 +38,29 @@ public class BindingAdapterUtils {
 
     @BindingAdapter("background_color")
     public static void background_color(View view, @ColorRes int colorRes) {
-        if (colorRes != -1 && colorRes != 0)
+        if (colorRes != 0 && colorRes != 0) {
+            view.setBackground(null);
             view.setBackgroundColor(ContextCompat.getColor(view.getContext(), colorRes));
+        }
     }
 
     @BindingAdapter("background_drawable")
     public static void background_drawable(View view, @DrawableRes int drawable) {
-        if (drawable != -1 && drawable != 0)
+        if (drawable != 0 && drawable != 0) {
+            view.setBackgroundColor(Color.TRANSPARENT);
             view.setBackground(ContextCompat.getDrawable(view.getContext(), drawable));
+        }
     }
 
     @BindingAdapter("text_color")
     public static void text_color(TextView view, @ColorRes int colorRes) {
-        if (colorRes != -1 && colorRes != 0)
+        if (colorRes != 0 && colorRes != 0)
             view.setTextColor(ContextCompat.getColor(view.getContext(), colorRes));
     }
 
     @BindingAdapter("tint_color")
     public static void tint_color(ImageView view, @ColorRes int colorRes) {
-        if (colorRes != -1 && colorRes != 0)
+        if (colorRes != 0 && colorRes != 0)
             view.setColorFilter(ContextCompat.getColor(view.getContext(), colorRes));
     }
 

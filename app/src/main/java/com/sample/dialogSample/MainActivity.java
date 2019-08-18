@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
     public void onClickedMessageCode(View view) {
         new DialogPlus("Message Dialog", "message dialog_plus sample\n Welcome Back")
                 //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
-                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setMessageDialog(new DialogListener())
+                .setBackgrounds(R.color.colorPrimary,R.color.colorAccent)
+                .setMessageDialog("accept", new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
@@ -42,25 +42,25 @@ public class MainActivity extends AppCompatActivity {
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
-    public void onClickedValidationConfirmation(View view) {
+    public void onClickedConfirmation(View view) {
         new DialogPlus("Confirmation Dialog", "confirmation dialog_plus message content ...")
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .setSecondaryTextColor(R.color.colorPrimary)
-                .setDialogActionListener(new DialogListener())
+                .setConfirmationDialog("confirrm","cancel",new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedErrorDialog(View view) {
         new DialogPlus("error dialog_plus content message")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setErrorDialog(new DialogListener())
+                .setErrorDialog("Peace",new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedSuccessDialog(View view) {
         new DialogPlus("Success message content..")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setSuccessDialog(new DialogListener())
+                .setSuccessDialog("Cool",new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
@@ -76,13 +76,6 @@ public class MainActivity extends AppCompatActivity {
             super.onNegative(dialogPlus);
             Toast.makeText(MainActivity.this, "onNegative", Toast.LENGTH_SHORT).show();
         }
-
-        @Override
-        public void onWrongCode(DialogPlus dialogPlus) {
-            super.onWrongCode(dialogPlus);
-            Toast.makeText(MainActivity.this, "onWrongCode", Toast.LENGTH_SHORT).show();
-        }
-
     }
 }
 

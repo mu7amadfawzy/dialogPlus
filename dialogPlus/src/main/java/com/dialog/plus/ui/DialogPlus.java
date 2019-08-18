@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
@@ -50,14 +51,14 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private View mDialogView;
     private CodeTypeListener codeTypeListener;
     private DialogActionListener dialogActionListener;
-    private String title, content, correct_code;
+    private String title, content, correct_code, positiveText, negativeText;
     private int counterSeconds;
     @ColorRes
     private int positiveBgColor, negativeBgColor, headerBgColor;
     @ColorRes
     private int positiveTextColor, negativeTextColor, headerTextColor;
     @DrawableRes
-    private int positiveBgDrawable = -1, negativeBgDrawable = -1, headerBgDrawable = -1;
+    private int positiveBgDrawable, negativeBgDrawable, headerBgDrawable;
     private boolean withResend, withSend, withCounter, typeMessage;
     private CountDownTimer countDownTimer;
     @ColorInt
@@ -83,35 +84,51 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
      * Sets a code confirmation dialog_plus interface
      */
     public DialogPlus setConfirmCodeDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, CodeTypeListener codeTypeListener) {
-        return setDialog_type(TYPE.CODE).setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener);
+        return setDialog_type(TYPE.CODE).setTexts(positiveText).setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener);
     }
 
     /**
      * Sets a confirmation dialog_plus interface(with positive and negative actions)
      */
     public DialogPlus setConfirmationDialog(DialogActionListener actionClicked) {
-        return setDialog_type(TYPE.CONFIRMATION).setDialogActionListener(actionClicked);
+        return setConfirmationDialog(null, null, actionClicked);
+    }
+
+    public DialogPlus setConfirmationDialog(String positiveText, String negativeText, DialogActionListener actionClicked) {
+        return setDialog_type(TYPE.CONFIRMATION).setTexts(positiveText, negativeText).setDialogActionListener(actionClicked);
     }
 
     /**
      * Sets a message dialog_plus interface
      */
     public DialogPlus setMessageDialog(DialogActionListener actionClicked) {
-        return setMessageDialog().setDialogActionListener(actionClicked);
+        return setMessageDialog(getString(R.string.dialog_ok), actionClicked);
+    }
+
+    public DialogPlus setMessageDialog(String positiveText, DialogActionListener actionClicked) {
+        return setMessageDialog(positiveText).setDialogActionListener(actionClicked);
     }
 
     /**
      * Sets an Error dialog_plus interface
      */
     public DialogPlus setErrorDialog(DialogActionListener dialogActionListener) {
-        return setDialog_type(TYPE.ERROR_DIALOG).setDialogActionListener(dialogActionListener);
+        return setErrorDialog(null, dialogActionListener);
+    }
+
+    public DialogPlus setErrorDialog(String positiveText, DialogActionListener dialogActionListener) {
+        return setDialog_type(TYPE.ERROR_DIALOG).setTexts(positiveText).setDialogActionListener(dialogActionListener);
     }
 
     /**
      * Sets an Success dialog_plus interface
      */
     public DialogPlus setSuccessDialog(DialogActionListener dialogActionListener) {
-        return setDialog_type(TYPE.SUCCESS_DIALOG).setDialogActionListener(dialogActionListener);
+        return setSuccessDialog(null, dialogActionListener);
+    }
+
+    public DialogPlus setSuccessDialog(String positiveText, DialogActionListener dialogActionListener) {
+        return setDialog_type(TYPE.SUCCESS_DIALOG).setTexts(positiveText).setDialogActionListener(dialogActionListener);
     }
 
     @Nullable
@@ -163,32 +180,53 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
 
     private void setDialogType() {
         switch (dialog_type) {
+            case TYPE.MESSAGE:
+            case TYPE.CONFIRMATION:
+                checkTexts();
+                break;
             case TYPE.CODE:
                 setOnTextListener();
                 break;
             case TYPE.ERROR_DIALOG:
                 setErrorAnimation();
+                checkTexts();
                 break;
             case TYPE.SUCCESS_DIALOG:
                 setSuccessAnimation();
+                checkTexts();
                 break;
         }
+    }
+
+    private void checkTexts() {
+        changePositiveText();
+        if (dialog_type == TYPE.CONFIRMATION)
+            changeNegativeText();
+    }
+
+    private void changePositiveText() {
+        if (positiveText != null)
+            ((TextView) getDialogAddedView(R.id.confirmButton)).setText(positiveText);
+    }
+
+    private void changeNegativeText() {
+        ((TextView) getDialogAddedView(R.id.cancelButton)).setText(negativeText);
     }
 
     private void setErrorAnimation() {
         YoYo.with(Techniques.BounceIn)
                 .duration(700)
-                .playOn(getView(R.id.error_img));
+                .playOn(getDialogAddedView(R.id.error_img));
     }
 
     private void setSuccessAnimation() {
         YoYo.with(Techniques.FadeIn)
                 .duration(700)
-                .playOn(getView(R.id.successImg));
+                .playOn(getDialogAddedView(R.id.successImg));
     }
 
     private void setOnTextListener() {
-        ((EditText) getView(R.id.txtPinEntry)).addTextChangedListener(new TextWatcher() {
+        ((EditText) getDialogAddedView(R.id.txtPinEntry)).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 setNormalTextColor();
@@ -229,7 +267,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         setErrorTextColor();
         if (codeTypeListener != null)
             codeTypeListener.onWrongCode(this);
-        animateField(getActivity(), (EditText) getView(R.id.txtPinEntry));
+        animateField(getActivity(), (EditText) getDialogAddedView(R.id.txtPinEntry));
     }
 
     private void setErrorTextColor() {
@@ -242,8 +280,8 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
 
     public void setCodeTextColor(@ColorInt int colorInt) {
         if (dialog_type == TYPE.CODE) {
-            ((PinEntryEditText) getView(R.id.txtPinEntry)).setTextColor(colorInt);
-            ((PinEntryEditText) getView(R.id.txtPinEntry)).getPaint().setColor(colorInt);
+            ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).setTextColor(colorInt);
+            ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).getPaint().setColor(colorInt);
         }
     }
 
@@ -322,30 +360,30 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     private void setListeners() {
-        if (dialog_type == TYPE.CODE) {
-            getView(R.id.sendCode).setOnClickListener(this);
-            getView(R.id.resendCode).setOnClickListener(this);
+        if (dialog_type == TYPE.SUCCESS_DIALOG || dialog_type == TYPE.ERROR_DIALOG) {
+            getDialogAddedView(R.id.closeIV).setOnClickListener(this);
+            getDialogAddedView(R.id.confirmButton).setOnClickListener(this);
+        } else {
             getHeaderChildView(R.id.closeIV).setOnClickListener(this);
-        } else if (dialog_type == TYPE.ERROR_DIALOG) {
-            getView(R.id.errorButton).setOnClickListener(this);
-            getView(R.id.closeIV).setOnClickListener(this);
-        } else if (dialog_type == TYPE.SUCCESS_DIALOG) {
-            getView(R.id.successButton).setOnClickListener(this);
-            getView(R.id.closeIV).setOnClickListener(this);
-        } else {//CONFIRMATION Dialog or Message Dialog
-            getView(R.id.cancelButton).setOnClickListener(this);
-            getView(R.id.confirmButton).setOnClickListener(this);
-            getHeaderChildView(R.id.closeIV).setOnClickListener(this);
+            if (dialog_type == TYPE.CODE) {
+                getDialogAddedView(R.id.sendCode).setOnClickListener(this);
+                getDialogAddedView(R.id.resendCode).setOnClickListener(this);
+            } else {
+                getDialogAddedView(R.id.confirmButton).setOnClickListener(this);
+                if (dialog_type == TYPE.CONFIRMATION)
+                    getDialogAddedView(R.id.cancelButton).setOnClickListener(this);
+            }
+
         }
     }
 
     private void timeUp() {
         model.setTimeLeft(0);
-        getView(R.id.sendCode).setClickable(false);
-        getView(R.id.txtPinEntry).setEnabled(false);
+        getDialogAddedView(R.id.sendCode).setClickable(false);
+        getDialogAddedView(R.id.txtPinEntry).setEnabled(false);
         KeyboardUtil.getInstance().hideKeyboard(binding.getRoot());
         if (getContext() != null)
-            getView(R.id.sendCode).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.carbon_grey_300));
+            getDialogAddedView(R.id.sendCode).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.carbon_grey_300));
         if (codeTypeListener != null)
             codeTypeListener.onTimeUp(DialogPlus.this);
     }
@@ -357,13 +395,17 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         else if (view.getId() == R.id.resendCode)
             handleResendCode();
         else if (view.getId() == R.id.confirmButton)
-            onConfirmClicked();
+            onPositiveClicked();
         else if (view.getId() == R.id.cancelButton || view.getId() == R.id.closeIV)
             onNegativeClicked();
-        else if (view.getId() == R.id.errorButton)
-            onErrorClicked();
-        else if (view.getId() == R.id.successButton)
-            onSuccessClicked();
+    }
+
+    private void onPositiveClicked() {
+        if (dialog_type == TYPE.CONFIRMATION)
+            onConfirmClicked();
+        else {//case SUCCESS_DIALOG OR ERROR_DIALOG
+            dismiss(true);
+        }
     }
 
     private void sendCode() {
@@ -376,15 +418,6 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
             Toast.makeText(getActivity(), getString(R.string.dialog_incomplete_code_msg), Toast.LENGTH_SHORT).show();
     }
 
-    private void onSuccessClicked() {
-        if (codeTypeListener != null)
-            codeTypeListener.onSuccess(this);
-    }
-
-    private void onErrorClicked() {
-        if (dialogActionListener != null)
-            dialogActionListener.onWrongCode(this);
-    }
 
     private void onNegativeClicked() {
         if (dialogActionListener != null)
@@ -406,12 +439,12 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         if (countDownTimer != null) countDownTimer.cancel();
     }
 
-    private View getView(@IdRes int viewId) {
+    private View getDialogAddedView(@IdRes int viewId) {
         return binding.dialogContainer.getChildAt(0).findViewById(viewId);
     }
 
     private View getHeaderChildView(int idRes) {
-        return getView(R.id.headerLayout).findViewById(idRes);
+        return getDialogAddedView(R.id.headerLayout).findViewById(idRes);
     }
 
     /**
@@ -536,10 +569,23 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     /**
-     * sets the text color to the header background and positive andnegative
+     * sets the text color to the header background and positive and negative
      */
     public DialogPlus setTextColors(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor) {
         return setTextColors(positiveTextColor, negativeTextColor, 0);
+    }
+
+    /**
+     * sets the text to the positiveBtn and negativeBtn
+     */
+    public DialogPlus setTexts(String positiveText) {
+        return setTexts(positiveText, null);
+    }
+
+    public DialogPlus setTexts(String positiveText, String negativeText) {
+        this.positiveText = positiveText;
+        this.negativeText = negativeText;
+        return this;
     }
 
     public DialogPlus setTextColors(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor, @ColorRes int headerTextColor) {
@@ -613,8 +659,9 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         return this;
     }
 
-    private DialogPlus setMessageDialog() {
+    private DialogPlus setMessageDialog(String positiveText) {
         this.typeMessage = true;
+        this.positiveText = positiveText;
         return setDialog_type(TYPE.CONFIRMATION);
     }
 
@@ -651,10 +698,5 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         public void onNegative(DialogPlus dialogPlus) {
             dialogPlus.dismiss(true);
         }
-
-        public void onWrongCode(DialogPlus dialogPlus) {
-            dialogPlus.dismiss(true);
-        }
-
     }
 }
