@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     public void onClickedConfirmation(View view) {
         new DialogPlus("Confirmation Dialog", "confirmation dialog_plus message content ...")
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
-                .setSecondaryTextColor(R.color.colorPrimary)
                 .setConfirmationDialog("confirrm", "cancel", new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
