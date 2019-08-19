@@ -59,7 +59,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private int positiveTextColor, negativeTextColor, headerTextColor;
     @DrawableRes
     private int positiveBgDrawable, negativeBgDrawable, headerBgDrawable;
-    private boolean withResend, withSend, withCounter, typeMessage;
+    private boolean withResend, withSend, withCounter, typeMessage, separateActionButtons;
     private CountDownTimer countDownTimer;
     @ColorInt
     private int dialogCodeTextColor = Color.BLACK;
@@ -95,14 +95,18 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     public DialogPlus setConfirmationDialog(String positiveText, String negativeText, DialogActionListener actionClicked) {
-        return setDialog_type(TYPE.CONFIRMATION).setTexts(positiveText, negativeText).setDialogActionListener(actionClicked);
+        return setConfirmationDialog(positiveText, negativeText, false, actionClicked);
+    }
+
+    public DialogPlus setConfirmationDialog(String positiveText, String negativeText, boolean separateActionButtons, DialogActionListener actionClicked) {
+        return setDialog_type(TYPE.CONFIRMATION).setTexts(positiveText, negativeText).setSeparateActionButtons(separateActionButtons).setDialogActionListener(actionClicked);
     }
 
     /**
      * Sets a message dialog_plus interface
      */
     public DialogPlus setMessageDialog(DialogActionListener actionClicked) {
-        return setMessageDialog(getString(R.string.dialog_ok), actionClicked);
+        return setMessageDialog(getString(R.string.dialog_ok_text), actionClicked);
     }
 
     public DialogPlus setMessageDialog(String positiveText, DialogActionListener actionClicked) {
@@ -459,8 +463,8 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         this.dialog_type = dialog_type;
         this.title = title;
         this.content = content;
-        setBackgroundColors(R.color.colorPrimary, R.color.colorPrimary, R.color.colorAccent);
-        setTextColors(R.color.carbon_white, R.color.carbon_red_600, R.color.carbon_white);
+        setBackgroundColors(R.color.dialogPositiveBgColor, R.color.dialogNegativeBgColor, R.color.dialogPositiveBgColor);
+        setTextColors(R.color.dialogPositiveTextColor, R.color.dialogNegativeTextColor, R.color.dialogPositiveTextColor);
         return this;
     }
 
@@ -483,10 +487,11 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         model.setPositiveBgDrawable(positiveBgDrawable);
         model.setNegativeBgDrawable(negativeBgDrawable);
         model.setHeaderBgDrawable(headerBgDrawable);
+        model.setSeparateActionButtons(separateActionButtons);
     }
 
     private void updateModelBackgroundColor() {
-        model.setPositiveBackground(positiveBgColor);
+        model.setPositiveBgColor(positiveBgColor);
         model.setNegativeBackground(negativeBgColor);
         model.setHeaderBgColor(headerBgColor);
     }
@@ -656,6 +661,11 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
 
     public DialogPlus setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    private DialogPlus setSeparateActionButtons(boolean separateActionButtons) {
+        this.separateActionButtons = separateActionButtons;
         return this;
     }
 

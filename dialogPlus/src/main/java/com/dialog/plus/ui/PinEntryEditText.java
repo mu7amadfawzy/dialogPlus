@@ -90,7 +90,7 @@ public class PinEntryEditText extends EditText {
             final int colorHighlight = outValue.data;
             mColors[2] = colorHighlight;
         }
-        setBackgroundResource(R.color.carbon_white);
+        setBackgroundResource(R.color.dialog_white);
 
         mSpace = multi * mSpace; //convert to pixels for our density
         mLineSpacing = multi * mLineSpacing; //convert to pixels for our density

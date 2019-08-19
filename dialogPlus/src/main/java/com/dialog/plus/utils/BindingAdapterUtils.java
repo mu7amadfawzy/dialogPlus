@@ -1,18 +1,22 @@
 package com.dialog.plus.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
@@ -24,6 +28,7 @@ import com.dialog.plus.ui.DialogUiModel;
 import com.dialog.plus.ui.PinEntryEditText;
 
 import carbon.BR;
+import carbon.widget.Button;
 
 /**
  * Created by Muhammad Noamany
@@ -36,32 +41,153 @@ public class BindingAdapterUtils {
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
-    @BindingAdapter("background_color")
-    public static void background_color(View view, @ColorRes int colorRes) {
-        if (colorRes != 0 && colorRes != 0) {
+    @BindingAdapter("backgroundColor")
+    public static void backgroundColor(View view, @ColorRes int colorRes) {
+        if (!resourceExist(colorRes))
+            return;
+        int color = getColor(colorRes, view.getContext());
+        if (resourceExist(color)) {
             view.setBackground(null);
-            view.setBackgroundColor(ContextCompat.getColor(view.getContext(), colorRes));
+            view.setBackgroundColor(color);
+        } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
+    }
+
+    @BindingAdapter("strokeColor")
+    public static void strokeColor(carbon.view.View view, @ColorInt int colorRes) {
+        view.setStroke(colorRes);
+    }
+
+    @BindingAdapter("strokeWidth")
+    public static void strokeWidth(carbon.view.View view, float width) {
+        view.setStrokeWidth(width);
+    }
+
+    @BindingAdapter("setSelected")
+    public static void setSelected(View view, boolean selected) {
+        view.setSelected(selected);
+    }
+
+    @BindingAdapter("strokeColor")
+    public static void strokeColor(carbon.widget.LinearLayout view, @ColorRes int colorRes) {
+        view.setStroke(colorRes);
+    }
+
+    private static int getColor(@ColorRes int colorRes, Context context) {
+        try {
+            return ContextCompat.getColor(context, colorRes);
+        } catch (Resources.NotFoundException e) {
+            return -1;
         }
     }
 
-    @BindingAdapter("background_drawable")
-    public static void background_drawable(View view, @DrawableRes int drawable) {
-        if (drawable != 0 && drawable != 0) {
+    @BindingAdapter("cornerRadius")
+    public static void cornerRadius(carbon.view.View view, float corner) {
+        view.setCornerRadius(corner);
+    }
+
+    @BindingAdapter("cornerRadius")
+    public static void cornerRadius(Button view, float corner) {
+        view.setCornerRadius(corner);
+    }
+
+    @BindingAdapter("cornerRadius")
+    public static void cornerRadius(carbon.widget.LinearLayout view, float corner) {
+        view.setCornerRadius(corner);
+    }
+
+    @BindingAdapter("marginTop")
+    public static void marginTop(carbon.view.View view, float margin) {
+        if (view.getLayoutParams() instanceof carbon.widget.LinearLayout.LayoutParams) {
+            carbon.widget.LinearLayout.LayoutParams params = (carbon.widget.LinearLayout.LayoutParams) view.getLayoutParams();
+            params.topMargin = Math.round(margin);
+            view.setLayoutParams(params);
+        }
+    }
+
+    @BindingAdapter("marginTop")
+    public static void marginTop(View view, float margin) {
+        if (view.getLayoutParams() instanceof LinearLayout.LayoutParams) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+            params.topMargin = Math.round(margin);
+            view.setLayoutParams(params);
+        }
+    }
+
+    @BindingAdapter("marginBottom")
+    public static void marginBottom(carbon.view.View view, float margin) {
+        if (view.getLayoutParams() instanceof carbon.widget.LinearLayout.LayoutParams) {
+            carbon.widget.LinearLayout.LayoutParams params = (carbon.widget.LinearLayout.LayoutParams) view.getLayoutParams();
+            params.bottomMargin = Math.round(margin);
+            view.setLayoutParams(params);
+        }
+    }
+
+    @BindingAdapter("marginBottom")
+    public static void marginBottom(View view, float margin) {
+        if (view.getLayoutParams() instanceof LinearLayout.LayoutParams) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+            params.bottomMargin = Math.round(margin);
+            view.setLayoutParams(params);
+        }
+    }
+
+    @BindingAdapter("elevation")
+    public static void elevation(carbon.view.View view, float elevation) {
+        view.setElevation(elevation);
+    }
+
+    private static boolean resourceExist(int res) {
+        return res != 0 && res != -1;
+    }
+
+    @BindingAdapter("layout_weight")
+    public static void layout_weight(View view, float weight) {
+        if (view.getLayoutParams() instanceof LinearLayout.LayoutParams) {
+            LinearLayout.LayoutParams param = (LinearLayout.LayoutParams) view.getLayoutParams();
+            param.weight = weight;
+            view.setLayoutParams(param);
+        }
+    }
+
+
+    @BindingAdapter("backgroundDrawable")
+    public static void backgroundDrawable(View view, @DrawableRes int drawableRes) {
+        if (!resourceExist(drawableRes))
+            return;
+        Drawable drawable = getDrawable(view, drawableRes);
+
+        if (drawable != null) {
             view.setBackgroundColor(Color.TRANSPARENT);
-            view.setBackground(ContextCompat.getDrawable(view.getContext(), drawable));
+            view.setBackground(drawable);
+        } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to backgroundDrawable");
+    }
+
+    private static Drawable getDrawable(View view, @DrawableRes int drawableRes) {
+        try {
+            return ContextCompat.getDrawable(view.getContext(), drawableRes);
+        } catch (Exception e) {
+            return null;
         }
     }
 
     @BindingAdapter("text_color")
     public static void text_color(TextView view, @ColorRes int colorRes) {
-        if (colorRes != 0 && colorRes != 0)
-            view.setTextColor(ContextCompat.getColor(view.getContext(), colorRes));
+        if (!resourceExist(colorRes))
+            return;
+        int color = getColor(colorRes, view.getContext());
+        if (resourceExist(color))
+            view.setTextColor(color);
+        else Log.e("DialogPlus !!!", "ResourcesNotFoundException to text_color");
     }
 
     @BindingAdapter("tint_color")
     public static void tint_color(ImageView view, @ColorRes int colorRes) {
-        if (colorRes != 0 && colorRes != 0)
-            view.setColorFilter(ContextCompat.getColor(view.getContext(), colorRes));
+        if (!resourceExist(colorRes))
+            return;
+        int color = getColor(colorRes, view.getContext());
+        if (resourceExist(color))
+            view.setColorFilter(color);
+        else Log.e("DialogPlus !!!", "ResourcesNotFoundException to tint_color");
     }
 
     @BindingAdapter("setText")
@@ -100,21 +226,11 @@ public class BindingAdapterUtils {
     }
 
     @BindingAdapter("underline")
-    public static void underline(View view, boolean doUnderline) {
-        if (view instanceof TextView) {
-            TextView textView = (TextView) view;
-            if (doUnderline) {
-                SpannableString content = new SpannableString(textView.getText().toString());
-                content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-                textView.setText(content);
-            }
-        } else if (view instanceof CheckBox) {
-            CheckBox checkBox = (CheckBox) view;
-            if (doUnderline) {
-                SpannableString content = new SpannableString(checkBox.getText().toString());
-                content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-                checkBox.setText(content);
-            }
+    public static void underline(TextView textView, boolean doUnderline) {
+        if (doUnderline) {
+            SpannableString content = new SpannableString(textView.getText().toString());
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            textView.setText(content);
         }
     }
 }

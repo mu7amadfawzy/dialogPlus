@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">MultiDialog</string>
+    <string name="app_name">DialogPlusSample</string>
     <!-- code dialogPlus strings -->
     <string name="dages" translatable="false">------------------------------------------------------------------------------------------------</string>
 
-    <string name="dialog_cancel">Cancel</string>
-    <string name="dialog_ok">Ok</string>
-    <string name="dialog_confirm">Confirm</string>
+    <string name="dialog_negative_text">Cancel</string>
+    <string name="dialog_ok_text">Ok</string>
+    <string name="dialog_positive_text">Confirm</string>
     <string name="dialog_resend">Resend</string>
     <string name="dialog_time_up">Time up</string>
     <string name="dialog_incomplete_code_msg">Please enter complete code</string>

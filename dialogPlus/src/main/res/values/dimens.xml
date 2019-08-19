@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dialog_corner_radius">15dp</dimen>
+    <dimen name="dialog_margin">@dimen/_30sdp</dimen>
+    <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
+
     <dimen name="dialog_header_height">@dimen/_40sdp</dimen>
     <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
-    <dimen name="action_button_corner">@dimen/_20sdp</dimen>
-    <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
-    <dimen name="dialog_margin">@dimen/_30sdp</dimen>
-    <dimen name="dialog_content_margin">@dimen/_25sdp</dimen>
-    <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
-    <dimen name="dialog_corner_radius">@dimen/_8sdp</dimen>
-    <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
-    <dimen name="dialog_action_buttons_margin">@dimen/_15sdp</dimen>
     <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
-    <integer name="dialog_width_percent">90</integer>
+
+    <dimen name="dialog_content_margin">@dimen/_25sdp</dimen>
+    <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
+
+    <dimen name="dialog_action_buttons_margin">@dimen/_15sdp</dimen>
+    <dimen name="dialog_action_button_corner">50dp</dimen>
+    <dimen name="dialog_action_buttons_height">@dimen/_30sdp</dimen>
+
+    <dimen name="dialog_action_button_textSize">@dimen/_12ssp</dimen>
+
+    <dimen name="dialog_positive_button_elevation">1dp</dimen>
+
+    <dimen name="dialog_negative_button_stroke">1dp</dimen>
+    <dimen name="dialog_negative_button_elevation">0dp</dimen>
+
+    <dimen name="dialog_close_icon_radius">@dimen/_16sdp</dimen>
+    <dimen name="dialog_zero">0dp</dimen>
 </resources>

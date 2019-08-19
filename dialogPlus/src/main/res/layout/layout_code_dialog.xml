@@ -15,7 +15,7 @@
     <carbon.widget.LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/carbon_white"
+        android:background="@color/dialog_white"
         android:orientation="vertical"
         bind:carbon_cornerRadius="@dimen/dialog_corner_radius"
         bind:dialog_width_percent="@{@integer/dialog_width_percent}"
@@ -27,17 +27,15 @@
             bind:model="@{model}" />
 
         <me.grantland.widget.AutofitTextView
+            android:id="@+id/contentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/dialog_content_margin"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/dialog_content_margin"
+            android:layout_margin="@dimen/dialog_content_margin"
             android:gravity="center"
-            android:maxLines="3"
+            android:textAppearance="@style/dialog_content_message_style"
             android:text="@{model.content}"
-            android:textColor="@color/dialogContentTextColor"
-            android:textStyle="bold" />
+            tools:text="message \n message \n message"
+            tools:visibility="visible" />
 
         <com.dialog.plus.ui.PinEntryEditText
             android:id="@+id/txtPinEntry"
@@ -74,11 +72,11 @@
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_16sdp"
             android:background="@color/dialog_send_background"
-            android:text="@string/dialog_confirm"
+            android:text="@string/dialog_positive_text"
             android:textAllCaps="false"
-            android:textColor="@color/carbon_white"
-            bind:background_color="@{model.positiveBackground}"
-            bind:background_drawable="@{model.positiveBgDrawable}"
+            android:textColor="@color/dialog_white"
+            bind:backgroundColor="@{model.positiveBgColor}"
+            bind:backgroundDrawable="@{model.positiveBgDrawable}"
             bind:carbon_cornerRadius="@dimen/dialog_corner_radius"
             bind:visible="@{model.withSend &amp; model.codeEntry.length==model.correctCode.length}" />
 
@@ -90,7 +88,7 @@
             android:layout_marginBottom="@dimen/_16sdp"
             android:text="@string/dialog_resend"
             android:textColor="@color/dialog_resend_text_color"
-            bind:text_color="@{model.positiveBackground}"
+            bind:text_color="@{model.positiveBgColor}"
             bind:underline="@{true}"
             bind:visible="@{!model.withCounter || (model.withResend &amp; model.timeLeft==0)}" />
 

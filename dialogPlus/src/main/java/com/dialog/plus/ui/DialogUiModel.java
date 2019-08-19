@@ -6,17 +6,18 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.dialog.plus.BR;
+import com.dialog.plus.R;
 
 /**
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
 public class DialogUiModel extends BaseObservable {
-    private boolean withSend, withResend, withCounter, typeMessage;
+    private boolean withSend, withResend, withCounter, typeMessage, separateActionButtons;
     private String title, correctCode, codeEntry, content, typed_code;
     private int timeLeft;
     private @ColorRes
-    int positiveBackground, negativeColorRes, headerBgColor;
+    int positiveBgColor, negativeBgColor, headerBgColor;
     private @DrawableRes
     int positiveBgDrawable, negativeBgDrawable, headerBgDrawable;
     private @ColorRes
@@ -46,22 +47,22 @@ public class DialogUiModel extends BaseObservable {
 
     @Bindable
     public @ColorRes
-    int getNegativeColorRes() {
-        return negativeColorRes;
+    int getNegativeBgColor() {
+        return negativeBgColor;
+    }
+
+    public void setNegativeBgColor(int negativeBgColor) {
+        this.negativeBgColor = negativeBgColor;
     }
 
     public void setNegativeBackground(@ColorRes int negativeColorRes) {
-        this.negativeColorRes = negativeColorRes;
+        this.negativeBgColor = negativeColorRes;
     }
 
     @Bindable
     public @ColorRes
-    int getPositiveBackground() {
-        return positiveBackground;
-    }
-
-    public void setPositiveBackground(@ColorRes int positiveBackground) {
-        this.positiveBackground = positiveBackground;
+    int getPositiveBgColor() {
+        return positiveBgColor;
     }
 
     @Bindable
@@ -174,8 +175,8 @@ public class DialogUiModel extends BaseObservable {
         this.correctCode = correctCode;
     }
 
-    public void setNegativeColorRes(int negativeColorRes) {
-        this.negativeColorRes = negativeColorRes;
+    public void setPositiveBgColor(@ColorRes int positiveBgColor) {
+        this.positiveBgColor = positiveBgColor;
     }
 
     @Bindable
@@ -208,4 +209,23 @@ public class DialogUiModel extends BaseObservable {
     public boolean isCorrectCode() {
         return getCodeEntry().equals(getCorrectCode());
     }
+
+    public boolean isSeparateActionButtons() {
+        return separateActionButtons;
+    }
+
+    public void setSeparateActionButtons(boolean separateActionButtons) {
+        this.separateActionButtons = separateActionButtons;
+    }
+
+    @Bindable
+    public int getDialogWhite() {
+        return R.color.dialog_white;
+    }
+
+    @Bindable
+    public int getNoDrawable() {
+        return -1;
+    }
+
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="dialog_header_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/dialog_header_text_size</item>
+        <item name="android:textColor">@color/titleTextColor</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="dialog_content_message_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/dialog_content_message_text_size</item>
+        <item name="android:textColor">@color/dialogContentTextColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+    <style name="dialog_positive_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_positive_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textColor">@color/dialogPositiveTextColor</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="dialog_negative_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_negative_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textColor">@color/dialogContentTextColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:maxLines">@integer/dialog_content_maxLines</item>
+    </style>
+
+    <style name="dialog_error_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_ok_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/dialog_white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="dialog_success_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_ok_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/dialog_white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+</resources>

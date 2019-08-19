@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="dialog_content_maxLines">4</integer>
+    <integer name="dialog_width_percent">90</integer>
+</resources>

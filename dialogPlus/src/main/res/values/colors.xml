@@ -2,20 +2,28 @@
 <resources>
     <color name="colorPrimary">#0698B5</color>
     <color name="colorPrimaryDark">#0694B3</color>
-    <color name="colorAccent">#3EB873</color>
+    <color name="colorAccent">@color/carbon_grey_400</color>
 
     <color name="titleTextColor">@color/dialogPositiveTextColor</color>
     <color name="dialogContentTextColor">@color/colorAccent</color>
 
-    <color name="dialogNegativeBgColor">#00000000</color>
-    <color name="dialogPositiveBgColor">@color/colorPrimary</color>
+    <color name="dialogTransparent">#00000000</color>
 
+    <color name="dialogNegativeBgColor">@color/dialogTransparent</color>
     <color name="dialogNegativeTextColor">@color/carbon_red_800</color>
-    <color name="dialogPositiveTextColor">@color/carbon_white</color>
+
+    <color name="dialogPositiveBgColor">@color/colorPrimary</color>
+    <color name="dialogPositiveTextColor">@color/dialog_white</color>
 
     <color name="dialogTimeUpTextColor">@color/dialogNegativeTextColor</color>
 
     <color name="dialogActionButtonsStrokeColor">@color/colorAccent</color>
+
     <color name="dialog_send_background">@color/colorPrimary</color>
     <color name="dialog_resend_text_color">@color/colorPrimary</color>
+
+    <color name="dialog_white">#ffffff</color>
+
+    <color name="dialog_error_button_background">@color/carbon_red_600</color>
+    <color name="dialog_success_button_background">@color/carbon_green_500</color>
 </resources>

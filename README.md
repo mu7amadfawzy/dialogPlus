@@ -99,9 +99,9 @@ setDialogActionListener(new DialogPlus.DialogActionListener() {
                 })
 });
 ````
-#### setCodeTypeListener(DialogPlus.CodeTypeListener)```  Used only with CODE dialog
+#### ```setCodeTypeListener(DialogPlus.CodeTypeListener)```  Used only with CODE dialog
 
-##### You can Override other methods onNegative(),onWrongCode()
+##### You can Override other methods ```onNegative()```
 ````
 setCodeTypeListener(new DialogPlus.CodeTypeListener() {
                     @Override
@@ -160,54 +160,129 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
                 .setHeaderBgDrawable(R.drawable.bg_header)
                 
                 // @ColorInt int colorInt
-                .setCodeTextColor(Color.BLACK)
-                
+                .setCodeTextColor(Color.BLACK)       
 ````
 ### 4.2 Override any of these resources to set the dialog attributes for whole project
 #### Dimensions
 ````
+    <dimen name="dialog_corner_radius">15dp</dimen>
+    <dimen name="dialog_margin">@dimen/_30sdp</dimen>
+    <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
+
     <dimen name="dialog_header_height">@dimen/_40sdp</dimen>
     <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
-    <dimen name="action_button_corner">@dimen/_20sdp</dimen>
-    <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
-    <dimen name="dialog_margin">@dimen/_30sdp</dimen>
-    <dimen name="dialog_content_margin">@dimen/_25sdp</dimen>
-    <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
-    <dimen name="dialog_corner_radius">@dimen/_8sdp</dimen>
-    <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
-    <dimen name="dialog_action_buttons_margin">@dimen/_15sdp</dimen>
     <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
+
+    <dimen name="dialog_content_margin">@dimen/_25sdp</dimen>
+    <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
+
+    <dimen name="dialog_action_buttons_margin">@dimen/_15sdp</dimen>
+    <dimen name="dialog_action_button_corner">50dp</dimen>
+    <dimen name="dialog_action_buttons_height">@dimen/_30sdp</dimen>
+
+    <dimen name="dialog_action_button_textSize">@dimen/_12ssp</dimen>
+
+    <dimen name="dialog_positive_button_elevation">1dp</dimen>
+
+    <dimen name="dialog_negative_button_stroke">1dp</dimen>
+    <dimen name="dialog_negative_button_elevation">0dp</dimen>
+
+    <dimen name="dialog_close_icon_radius">@dimen/_16sdp</dimen>
+    <dimen name="dialog_zero">0dp</dimen> 
+````
+#### Integers
+````
+    <integer name="dialog_content_maxLines">4</integer>
     <integer name="dialog_width_percent">90</integer>
-   
 ````
 #### Colors
 ````
+   <color name="colorPrimary">#0698B5</color>
+    <color name="colorPrimaryDark">#0694B3</color>
+    <color name="colorAccent">@color/carbon_grey_400</color>
+
     <color name="titleTextColor">@color/dialogPositiveTextColor</color>
     <color name="dialogContentTextColor">@color/colorAccent</color>
 
-    <color name="dialogNegativeBgColor">#00000000</color>
-    <color name="dialogPositiveBgColor">@color/colorPrimary</color>
+    <color name="dialogTransparent">#00000000</color>
 
+    <color name="dialogNegativeBgColor">@color/dialogTransparent</color>
     <color name="dialogNegativeTextColor">@color/carbon_red_800</color>
-    <color name="dialogPositiveTextColor">@color/carbon_white</color>
+
+    <color name="dialogPositiveBgColor">@color/colorPrimary</color>
+    <color name="dialogPositiveTextColor">@color/dialog_white</color>
 
     <color name="dialogTimeUpTextColor">@color/dialogNegativeTextColor</color>
 
     <color name="dialogActionButtonsStrokeColor">@color/colorAccent</color>
+
     <color name="dialog_send_background">@color/colorPrimary</color>
     <color name="dialog_resend_text_color">@color/colorPrimary</color>
-   
+
+    <color name="dialog_white">#ffffff</color>
+
+    <color name="dialog_error_button_background">@color/carbon_red_600</color>
+    <color name="dialog_success_button_background">@color/carbon_green_500</color>
 ````
 
 #### Strings
 ````
-   <string name="dialog_cancel">Cancel</string>
-    <string name="dialog_ok">Ok</string>
-    <string name="dialog_confirm">Confirm</string>
+    <string name="dialog_negative_text">Cancel</string>
+    <string name="dialog_ok_text">Ok</string>
+    <string name="dialog_positive_text">Confirm</string>
     <string name="dialog_resend">Resend</string>
     <string name="dialog_time_up">Time up</string>
-    <string name="dialog_incomplete_code_msg">Please enter complete code</string>
-   
+    <string name="dialog_incomplete_code_msg">Please enter complete code</string>  
+````
+
+#### Styles
+````
+   <style name="dialog_header_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/dialog_header_text_size</item>
+        <item name="android:textColor">@color/titleTextColor</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="dialog_content_message_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/dialog_content_message_text_size</item>
+        <item name="android:textColor">@color/dialogContentTextColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+    <style name="dialog_positive_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_positive_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textColor">@color/dialogPositiveTextColor</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="dialog_negative_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_negative_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textColor">@color/dialogContentTextColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:maxLines">@integer/dialog_content_maxLines</item>
+    </style>
+
+    <style name="dialog_error_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_ok_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/dialog_white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="dialog_success_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_ok_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/dialog_white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 ````
 
 ### Happy Coding

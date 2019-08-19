@@ -14,7 +14,7 @@
     <carbon.widget.LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/carbon_white"
+        android:background="@color/dialog_white"
         android:gravity="center"
         bind:visible="@{!hidden}">
 

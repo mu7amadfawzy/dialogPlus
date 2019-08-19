@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickedMessageCode(View view) {
         new DialogPlus("Message Dialog", "message dialog_plus sample\n Welcome Back")
                 //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
-                .setBackgrounds(R.color.colorPrimary,R.color.colorAccent)
+                .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
                 .setMessageDialog("accept", new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
@@ -46,21 +46,29 @@ public class MainActivity extends AppCompatActivity {
         new DialogPlus("Confirmation Dialog", "confirmation dialog_plus message content ...")
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .setSecondaryTextColor(R.color.colorPrimary)
-                .setConfirmationDialog("confirrm","cancel",new DialogListener())
+                .setConfirmationDialog("confirrm", "cancel", new DialogListener())
+                .show(this.getSupportFragmentManager(), "dialog_plus");
+    }
+
+    public void onClickedConfirmation2(View view) {
+        new DialogPlus("Confirmation Dialog option 2hvvkvvvkvgvhvgghcgfcfxfdxfdxdx", "Confirmation Dialog with separated action buttons ...")
+                .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
+                .setSecondaryTextColor(R.color.colorPrimary)
+                .setConfirmationDialog("confirrm", "cancel", true, new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedErrorDialog(View view) {
         new DialogPlus("error dialog_plus content message")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setErrorDialog("Peace",new DialogListener())
+                .setErrorDialog("Peace", new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedSuccessDialog(View view) {
         new DialogPlus("Success message content..")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setSuccessDialog("Cool",new DialogListener())
+                .setSuccessDialog("Cool", new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 

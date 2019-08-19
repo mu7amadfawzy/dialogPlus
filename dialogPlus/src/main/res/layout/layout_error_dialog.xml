@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/carbon_white"
+        android:background="@color/dialog_white"
         android:minWidth="@dimen/_200sdp"
         android:orientation="vertical"
         android:padding="@dimen/dialog_header_padding"
@@ -34,7 +34,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_dialog_close"
-                android:tint="@color/colorPrimary"
+                android:tint="@color/carbon_red_600"
                 bind:tint_color="@{model.headerBgColor}" />
 
             <ImageView
@@ -48,18 +48,13 @@
 
 
         <me.grantland.widget.AutofitTextView
-            android:id="@+id/errorText"
-            android:layout_width="wrap_content"
+            android:id="@+id/contentText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_margin="@dimen/dialog_content_margin"
             android:gravity="center"
-            android:maxLines="3"
+            android:textAppearance="@style/dialog_content_message_style"
             android:text="@{model.content}"
-            android:textAlignment="center"
-            android:textColor="@color/dialogContentTextColor"
-            android:textSize="@dimen/dialog_content_message_text_size"
-            android:textStyle="bold"
             tools:text="message \n message \n message"
             tools:visibility="visible" />
 
@@ -68,11 +63,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/carbon_red_600"
-            android:text="@string/dialog_ok"
-            android:textAllCaps="false"
-            android:textColor="@color/carbon_white"
-            bind:carbon_cornerRadius="@dimen/dialog_corner_radius" />
+            android:background="@color/dialog_error_button_background"
+            android:paddingStart="@dimen/dialog_action_buttons_margin"
+            android:paddingEnd="@dimen/dialog_action_buttons_margin"
+            android:textAppearance="@style/dialog_error_button_style"
+            bind:carbon_cornerRadius="@dimen/dialog_action_button_corner" />
 
     </carbon.widget.LinearLayout>
 </layout>
