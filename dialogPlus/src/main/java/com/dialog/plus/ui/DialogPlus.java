@@ -461,7 +461,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     private DialogPlus set(int dialog_type, String title, String content) {
-        this.dialog_type = dialog_type;
+        setDialog_type(dialog_type);
         this.title = title;
         this.content = content;
         setBackgroundColors(R.color.dialogPositiveBgColor, R.color.dialogNegativeBgColor, R.color.dialogPositiveBgColor);
@@ -617,6 +617,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
 
     private DialogPlus setDialog_type(@TYPE int dialog_type) {
         this.dialog_type = dialog_type;
+        typeMessage = dialog_type == TYPE.MESSAGE;
         return this;
     }
 
@@ -671,9 +672,8 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     private DialogPlus setMessageDialog(String positiveText) {
-        this.typeMessage = true;
         this.positiveText = positiveText;
-        return setDialog_type(TYPE.CONFIRMATION);
+        return setDialog_type(TYPE.MESSAGE);
     }
 
     /**
