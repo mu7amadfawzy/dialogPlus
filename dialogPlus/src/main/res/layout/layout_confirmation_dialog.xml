@@ -33,8 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dialog_content_margin"
             android:gravity="center"
-            android:textAppearance="@style/dialog_content_message_style"
             android:text="@{model.content}"
+            android:textAppearance="@style/dialog_content_message_style"
             tools:text="message \n message \n message"
             tools:visibility="visible" />
 
@@ -59,7 +59,9 @@
                 android:id="@+id/cancelButton"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dialog_action_buttons_height"
+                android:layout_weight=".9"
                 android:background="@{model.separateActionButtons?@color/dialogNegativeBgColor:@color/dialogTransparent}"
+                android:text="@string/dialog_negative_text"
                 android:textAppearance="@style/dialog_negative_button_style"
                 bind:backgroundColor="@{model.separateActionButtons?model.negativeBgColor:model.dialogWhite}"
                 bind:backgroundDrawable="@{model.separateActionButtons?model.negativeBgDrawable:model.noDrawable}"
@@ -83,6 +85,7 @@
                 android:id="@+id/confirmButton"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dialog_action_buttons_height"
+                android:layout_weight="1.1"
                 android:text="@{model.typeMessage?@string/dialog_ok_text:@string/dialog_positive_text}"
                 android:textAppearance="@style/dialog_positive_button_style"
                 bind:backgroundColor="@{model.positiveBgColor}"

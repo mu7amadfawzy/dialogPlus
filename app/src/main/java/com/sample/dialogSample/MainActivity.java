@@ -45,15 +45,15 @@ public class MainActivity extends AppCompatActivity {
     public void onClickedConfirmation(View view) {
         new DialogPlus("Confirmation Dialog", "confirmation dialog_plus message content ...")
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
-                .setConfirmationDialog("confirrm", "cancel", new DialogListener())
+                .setConfirmationDialog("confirm", "cancel", new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedConfirmation2(View view) {
-        new DialogPlus("Confirmation Dialog option 2hvvkvvvkvgvhvgghcgfcfxfdxfdxdx", "Confirmation Dialog with separated action buttons ...")
+        new DialogPlus("Confirmation Dialog option two interface", "Confirmation Dialog with separated action buttons ...")
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .setSecondaryTextColor(R.color.colorPrimary)
-                .setConfirmationDialog("confirrm", "cancel", true, new DialogListener())
+                .setConfirmationDialog("confirm", "cancel", true, new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 

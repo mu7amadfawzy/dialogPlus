@@ -106,7 +106,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
      * Sets a message dialog_plus interface
      */
     public DialogPlus setMessageDialog(DialogActionListener actionClicked) {
-        return setMessageDialog(getString(R.string.dialog_ok_text), actionClicked);
+        return setMessageDialog(null, actionClicked);
     }
 
     public DialogPlus setMessageDialog(String positiveText, DialogActionListener actionClicked) {
@@ -214,7 +214,8 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     private void changeNegativeText() {
-        ((TextView) getDialogAddedView(R.id.cancelButton)).setText(negativeText);
+        if (negativeText != null)
+            ((TextView) getDialogAddedView(R.id.cancelButton)).setText(negativeText);
     }
 
     private void setErrorAnimation() {
