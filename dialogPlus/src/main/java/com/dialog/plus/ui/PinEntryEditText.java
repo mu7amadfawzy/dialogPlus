@@ -15,15 +15,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.dialog.plus.R;
+import androidx.appcompat.widget.AppCompatEditText;
 
-import carbon.widget.EditText;
+import com.dialog.plus.R;
 
 /**
  * Created by Muhammad Noamany on 24,March,2019
  */
 
-public class PinEntryEditText extends EditText {
+public class PinEntryEditText extends AppCompatEditText {
     public static final String XML_NAMESPACE_ANDROID = "http://schemas.android.com/apk/res/android";
     int[][] mStates = new int[][]{
             new int[]{android.R.attr.state_selected}, // selected
@@ -63,7 +63,7 @@ public class PinEntryEditText extends EditText {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public PinEntryEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(context);
         init(context, attrs);
     }
 
