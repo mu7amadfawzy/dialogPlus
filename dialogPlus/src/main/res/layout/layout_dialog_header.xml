@@ -33,6 +33,7 @@
             android:ellipsize="marquee"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
+            android:maxLines="@integer/dialog_header_maxLines"
             android:paddingStart="@dimen/dialog_close_icon_radius"
             android:paddingEnd="@dimen/dialog_close_icon_radius"
             android:singleLine="true"

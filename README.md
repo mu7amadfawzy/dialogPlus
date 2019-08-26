@@ -199,6 +199,7 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 ````
     <integer name="dialog_content_maxLines">4</integer>
     <integer name="dialog_width_percent">90</integer>
+    <integer name="dialog_header_maxLines">1</integer>
 ````
 #### Colors
 ````
