@@ -8,12 +8,14 @@
     <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
     <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
 
-    <dimen name="dialog_content_margin">@dimen/_25sdp</dimen>
+    <dimen name="dialog_content_margin">@dimen/_15sdp</dimen>
     <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
 
-    <dimen name="dialog_action_buttons_margin">@dimen/_15sdp</dimen>
+    <dimen name="dialog_action_buttons_margin">@dimen/_10sdp</dimen>
     <dimen name="dialog_action_button_corner">50dp</dimen>
-    <dimen name="dialog_action_buttons_height">@dimen/_30sdp</dimen>
+    <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
+    <!--    space for showing elevation-->
+    <dimen name="dialog_action_buttons_bottom_margin">2dp</dimen>
 
     <dimen name="dialog_action_button_textSize">@dimen/_12ssp</dimen>
 
@@ -24,4 +26,5 @@
 
     <dimen name="dialog_close_icon_radius">@dimen/_16sdp</dimen>
     <dimen name="dialog_zero">0dp</dimen>
+    <dimen name="dialog_code_entry_margin">@dimen/_8sdp</dimen>
 </resources>

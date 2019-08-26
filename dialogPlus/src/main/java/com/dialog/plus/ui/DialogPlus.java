@@ -255,17 +255,8 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         });
     }
 
-    private void hideKeyboard() {
-        KeyboardUtil.getInstance().hideKeyboard(getDialogAddedView(R.id.txtPinEntry));
-    }
-
     private boolean validateCode() {
-        if (model.isCorrectCode()) {
-            onCorrect();
-            return true;
-        } else
-            onWrong();
-        return false;
+        return model.isCorrectCode();
     }
 
     private void onCorrect() {
@@ -412,19 +403,36 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     private void onPositiveClicked() {
-        onConfirmClicked();
+        if (dialogActionListener != null)
+            dialogActionListener.onPositive(this);
+        else dismiss(true);
     }
 
     private void sendCode() {
         if (model.getCodeEntry() != null && model.getCodeEntry().length() == correct_code.length()) {
-            if (validateCode()) {
-                cancelTimer();
-                dismiss(true);
-            }
+            onCompleteCodeTyped();
         } else
             Toast.makeText(getActivity(), getString(R.string.dialog_incomplete_code_msg), Toast.LENGTH_SHORT).show();
     }
 
+    private void onCompleteCodeTyped() {
+        if (validateCode()) {
+            onCorrect();
+            cancelTimer();
+            dismiss(true);
+        } else {
+            onWrong();
+            showKeyboard();
+        }
+    }
+
+    private void hideKeyboard() {
+        KeyboardUtil.getInstance().hideKeyboard(getDialogAddedView(R.id.txtPinEntry));
+    }
+
+    private void showKeyboard() {
+        KeyboardUtil.getInstance().showKeyboard(getDialogAddedView(R.id.txtPinEntry));
+    }
 
     private void onNegativeClicked() {
         if (dialogActionListener != null)
@@ -432,11 +440,6 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         else dismiss(true);
     }
 
-    private void onConfirmClicked() {
-        if (dialogActionListener != null)
-            dialogActionListener.onPositive(this);
-        else dismiss(true);
-    }
 
     private void handleResendCode() {
         if (codeTypeListener != null)

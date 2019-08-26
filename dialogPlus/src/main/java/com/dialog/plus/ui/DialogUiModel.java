@@ -220,7 +220,7 @@ public class DialogUiModel extends BaseObservable {
 
     @Bindable
     public int getDialogWhite() {
-        return R.color.dialog_white;
+        return R.color.dialogTransparent;
     }
 
     @Bindable

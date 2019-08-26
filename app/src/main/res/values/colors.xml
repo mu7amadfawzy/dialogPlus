@@ -7,5 +7,4 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
-    <dimen name="dialog_content_margin">10dp</dimen>
 </resources>
