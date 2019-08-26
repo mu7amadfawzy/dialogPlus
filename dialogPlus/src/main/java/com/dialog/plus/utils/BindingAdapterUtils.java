@@ -46,9 +46,19 @@ public class BindingAdapterUtils {
         if (!resourceExist(colorRes))
             return;
         int color = getColor(colorRes, view.getContext());
-        if (resourceExist(color)) {
+        if (color != 99) {//if color exists
             view.setBackground(null);
             view.setBackgroundColor(color);
+        } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
+    }
+
+    @BindingAdapter("tintColor")
+    public static void tintColor(ImageView view, @ColorRes int tintColor) {
+        if (!resourceExist(tintColor))
+            return;
+        int color = getColor(tintColor, view.getContext());
+        if (color != 99) {//if color exists
+            view.setColorFilter(color);
         } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
     }
 
@@ -76,7 +86,7 @@ public class BindingAdapterUtils {
         try {
             return ContextCompat.getColor(context, colorRes);
         } catch (Resources.NotFoundException e) {
-            return -1;
+            return -99;
         }
     }
 
@@ -137,7 +147,7 @@ public class BindingAdapterUtils {
     }
 
     private static boolean resourceExist(int res) {
-        return res != 0 && res != -1;
+        return res != -1;
     }
 
     @BindingAdapter("layout_weight")

@@ -54,11 +54,11 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private String title, content, correct_code, positiveText, negativeText;
     private int counterSeconds;
     @ColorRes
-    private int positiveBgColor, negativeBgColor, headerBgColor;
+    private int positiveBgColor = -1, negativeBgColor = -1, headerBgColor = -1;
     @ColorRes
-    private int positiveTextColor, negativeTextColor, headerTextColor;
+    private int positiveTextColor = -1, negativeTextColor = -1, headerTextColor = -1;
     @DrawableRes
-    private int positiveBgDrawable, negativeBgDrawable, headerBgDrawable;
+    private int positiveBgDrawable = -1, negativeBgDrawable = -1, headerBgDrawable = -1;
     private boolean withResend, withSend, withCounter, typeMessage, separateActionButtons;
     private CountDownTimer countDownTimer;
     @ColorInt
@@ -621,7 +621,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         return this;
     }
 
-    public DialogPlus setHeaderBgColor(@DrawableRes int headerBgColor) {
+    public DialogPlus setHeaderBgColor(@ColorRes int headerBgColor) {
         this.headerBgColor = headerBgColor;
         return this;
     }
@@ -633,6 +633,11 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
 
     public DialogPlus setNegativeTextColor(@ColorRes int negativeTextColor) {
         this.negativeTextColor = negativeTextColor;
+        return this;
+    }
+
+    public DialogPlus setHeaderTextColor(@ColorRes int headerTextColor) {
+        this.headerTextColor = headerTextColor;
         return this;
     }
 

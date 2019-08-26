@@ -13,7 +13,8 @@
 
     <carbon.widget.RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_header_height">
+        android:layout_height="@dimen/dialog_header_height"
+        bind:visible="@{model.title!=null}">
 
         <ImageView
             android:layout_width="match_parent"
@@ -48,6 +49,7 @@
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/dialog_header_padding"
             android:src="@drawable/ic_dialog_close"
-            android:tint="@color/dialogPositiveTextColor" />
+            android:tint="@color/dialogPositiveTextColor"
+            bind:tintColor="@{model.headerTextColor}" />
     </carbon.widget.RelativeLayout>
 </layout>

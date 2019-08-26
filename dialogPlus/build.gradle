@@ -18,7 +18,7 @@ ext {
     //library name will be like -> publishedGroupId:artifact:libraryVersion
     publishedGroupId = 'com.dialog'             //the ID you want to add in the 'implementation line'
     artifact = 'plus'               //the artifact you want to add in the 'implementation line'
-    libraryVersion = '3.1.1'
+    libraryVersion = '3.1.2'
     libraryDescription = 'An Android library that lets you show Dialog in a custom simple and fast way.'
 
     siteUrl = 'https://github.com/ma7madfawzy/DialogPlus'
@@ -42,7 +42,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "3.1.1"
+        versionName "3.1.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

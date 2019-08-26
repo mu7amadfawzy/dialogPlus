@@ -130,6 +130,8 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 ### 4.1 per use
 ```
  new DialogPlus("Dialog Title", "dialog content ...")
+                 .setTitle(null)//will hide the header view
+                 .setContent(null)//will hide the content view
                 //(@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor)
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 
