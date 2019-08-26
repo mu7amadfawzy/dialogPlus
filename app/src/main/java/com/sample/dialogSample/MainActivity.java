@@ -21,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
         new DialogPlus("Message Dialog", "message dialog_plus sample\n Welcome Back")
                 //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
                 .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
-                .setMessageDialog("accept", new DialogListener())
+                .setMessageDialog("alright", new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedConfirmCode(View view) {
         new DialogPlus("Code Dialog", "code dialog_plus sample with send enabled, resend enabled and counter 10 seconds")
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
-                .setConfirmCodeDialog("12345", true, true, 10, Color.BLACK, null)
+                .setConfirmCodeDialog("12345", true, true, 60, Color.BLACK, null)
                 .setDialogActionListener(new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }

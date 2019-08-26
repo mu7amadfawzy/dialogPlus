@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dialog_content_margin"
             android:gravity="center"
-            android:textAppearance="@style/dialog_content_message_style"
             android:text="@{model.content}"
+            android:textAppearance="@style/dialog_content_message_style"
             tools:text="message \n message \n message"
             tools:visibility="visible" />
 

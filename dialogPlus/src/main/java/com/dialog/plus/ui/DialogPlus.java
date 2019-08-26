@@ -242,15 +242,21 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
                 if (charSequence == null || charSequence.toString().isEmpty() || charSequence.toString().length() < correct_code.length())
                     return;
                 /////////// required length reached
-                KeyboardUtil.getInstance().hideKeyboard(binding.getRoot());
+                hideKeyboard();
                 if (!withSend)
                     sendCode();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if (editable.toString().length() == correct_code.length())
+                    hideKeyboard();
             }
         });
+    }
+
+    private void hideKeyboard() {
+        KeyboardUtil.getInstance().hideKeyboard(getDialogAddedView(R.id.txtPinEntry));
     }
 
     private boolean validateCode() {
@@ -406,11 +412,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     private void onPositiveClicked() {
-        if (dialog_type == TYPE.CONFIRMATION)
-            onConfirmClicked();
-        else {//case SUCCESS_DIALOG OR ERROR_DIALOG
-            dismiss(true);
-        }
+        onConfirmClicked();
     }
 
     private void sendCode() {
@@ -427,11 +429,13 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private void onNegativeClicked() {
         if (dialogActionListener != null)
             dialogActionListener.onNegative(this);
+        else dismiss(true);
     }
 
     private void onConfirmClicked() {
         if (dialogActionListener != null)
             dialogActionListener.onPositive(this);
+        else dismiss(true);
     }
 
     private void handleResendCode() {
