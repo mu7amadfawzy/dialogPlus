@@ -20,6 +20,7 @@
         android:layout_margin="@dimen/dialog_margin"
         android:background="#00000000"
         bind:carbon_cornerRadius="@dimen/dialog_corner_radius"
+        bind:carbon_elevation="@dimen/dialog_elevation"
         bind:dialog_width_percent="@{@integer/dialog_width_percent}"
         bind:includeLayout="@{dialogLayoutRes}"
         bind:model="@{model}" />

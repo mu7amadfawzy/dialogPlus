@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="hidden"
+            type="Boolean" />
+
+        <variable
+            name="text"
+            type="String" />
+
+    </data>
+
+    <Button
+        android:id="@+id/actionBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dialog_option_background"
+        android:gravity="center"
+        android:text="@{text}"
+        android:textAppearance="@style/dialog_option_button_style"
+        android:textColor="@color/dialog_option_text_color" />
+</layout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#0698B5</color>
-    <color name="colorPrimaryDark">#0694B3</color>
+    <color name="colorPrimaryDark">#05839C</color>
     <color name="colorAccent">@color/carbon_grey_400</color>
 
     <color name="titleTextColor">@color/dialogPositiveTextColor</color>
@@ -26,4 +26,10 @@
 
     <color name="dialog_error_button_background">@color/carbon_red_600</color>
     <color name="dialog_success_button_background">@color/carbon_green_500</color>
+
+    <color name="dialog_option_background">@color/carbon_grey_200</color>
+    <color name="dialog_option_text_color">@color/colorPrimary</color>
+    <color name="dialog_option_close_text_color">@color/colorPrimaryDark</color>
+    <color name="dialog_option_title_text_color">#000000</color>
+    <color name="dialog_action_seperator">@color/carbon_grey_400</color>
 </resources>

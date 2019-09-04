@@ -2,17 +2,11 @@ package com.dialog.plus.ui;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,16 +17,12 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.DialogFragment;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.DialogPlusBinding;
-import com.dialog.plus.utils.AnimationUtils;
 import com.dialog.plus.utils.KeyboardUtil;
 
 import java.lang.annotation.Retention;
@@ -42,13 +32,10 @@ import java.lang.annotation.RetentionPolicy;
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
-public class DialogPlus extends DialogFragment implements View.OnClickListener {
-    private DialogUiModel model;
-    private DialogPlusBinding binding;
+public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements View.OnClickListener {
+    private DialogUiModel model = new DialogUiModel();
     @TYPE
     private int dialog_type;
-    private AnimationSet mModalInAnim, mModalOutAnim;
-    private View mDialogView;
     private CodeTypeListener codeTypeListener;
     private DialogActionListener dialogActionListener;
     private String title, content, correct_code, positiveText, negativeText;
@@ -125,7 +112,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     }
 
     /**
-     * Sets an Success dialog_plus interface
+     * Sets a Success dialog_plus interface
      */
     public DialogPlus setSuccessDialog(DialogActionListener dialogActionListener) {
         return setSuccessDialog(null, dialogActionListener);
@@ -135,23 +122,25 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         return setDialog_type(TYPE.SUCCESS_DIALOG).setTexts(positiveText).setDialogActionListener(dialogActionListener);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setUiModelData();
-        renderView(inflater, container);
+        renderView();
         initViews();
-        initAnimations();
         setCounter();
         setListeners();
-        return binding.getRoot();
     }
 
+    private void setUiModelData() {
+        updateModelTexts();
+        updateModelBackground();
+        updateModelBackgroundColor();
+        updateModelTextColors();
+    }
 
-    private void renderView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.dialog_plus, container, false);
+    private void renderView() {
         binding.setDialogLayoutRes(getDialogLayoutRes());
-        binding.setModel(model);
         binding.executePendingBindings();
     }
 
@@ -168,16 +157,7 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
         return R.layout.layout_confirmation_dialog;
     }
 
-    private void setUiModelData() {
-        model = new DialogUiModel();
-        updateModelTexts();
-        updateModelBackground();
-        updateModelBackgroundColor();
-        updateModelTextColors();
-    }
-
     private void initViews() {
-        mDialogView = getDialog().getWindow().getDecorView().findViewById(android.R.id.content);
         getDialog().setCanceledOnTouchOutside(false);
         setDialogType();
     }
@@ -294,54 +274,6 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
                     editText.setText(null);
                 })
                 .playOn(editText);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mDialogView.startAnimation(mModalInAnim);
-        setDialog();
-    }
-
-    private void setDialog() {
-        android.app.Dialog dialog = getDialog();
-        if (dialog != null) {
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.getWindow().setGravity(Gravity.CENTER);
-        }
-    }
-
-    private void initAnimations() {
-        mModalInAnim = (AnimationSet) AnimationUtils.loadAnimation(getContext(), R.anim.modal_in);
-        mModalOutAnim = (AnimationSet) AnimationUtils.loadAnimation(getContext(), R.anim.modal_out);
-        setAnimationListener();
-    }
-
-    private void setAnimationListener() {
-        mModalOutAnim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mDialogView.setVisibility(View.GONE);
-                mDialogView.post(() -> dismiss());
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-    }
-
-
-    public void dismiss(boolean animate) {
-        if (animate)
-            mDialogView.startAnimation(mModalOutAnim);
-        else dismiss(true);
     }
 
     private void setCounter() {
@@ -686,6 +618,21 @@ public class DialogPlus extends DialogFragment implements View.OnClickListener {
     private DialogPlus setMessageDialog(String positiveText) {
         this.positiveText = positiveText;
         return setDialog_type(TYPE.MESSAGE);
+    }
+
+    @Override
+    protected Object getVariableValue() {
+        return model;
+    }
+
+    @Override
+    public int getBindingVariable() {
+        return com.dialog.plus.BR.model;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.dialog_plus;
     }
 
     /**

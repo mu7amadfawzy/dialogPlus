@@ -24,8 +24,13 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import com.dialog.plus.R;
+import com.dialog.plus.databinding.LayoutDialogOptionBinding;
 import com.dialog.plus.ui.DialogUiModel;
+import com.dialog.plus.ui.MultiOptionsDialog;
 import com.dialog.plus.ui.PinEntryEditText;
+
+import java.util.List;
 
 import carbon.BR;
 import carbon.widget.Button;
@@ -228,11 +233,21 @@ public class BindingAdapterUtils {
         return dm.widthPixels;
     }
 
-    @BindingAdapter({"bind:includeLayout", "model"})
+    @BindingAdapter({"includeLayout", "model"})
     public static void includeLayout(ViewGroup view, int viewRes, DialogUiModel model) {
         ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(view.getContext()), viewRes, view, true);
         binding.setVariable(BR.model, model);
         binding.executePendingBindings();
+    }
+
+    @BindingAdapter({"addOptions", "callback"})
+    public static void addOptions(ViewGroup view, List options, MultiOptionsDialog.ActionListener callback) {
+        for (Object text : options) {
+            LayoutDialogOptionBinding binding = DataBindingUtil.inflate(LayoutInflater.from(view.getContext()), R.layout.layout_dialog_option, view, true);
+            binding.setText((String) text);
+            binding.actionBtn.setOnClickListener(v -> callback.onActionClicked(binding.actionBtn.getText().toString()));
+            binding.executePendingBindings();
+        }
     }
 
     @BindingAdapter("underline")

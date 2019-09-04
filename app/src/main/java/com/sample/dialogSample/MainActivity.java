@@ -8,6 +8,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dialog.plus.ui.DialogPlus;
+import com.dialog.plus.ui.MultiOptionsDialog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +20,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void onMultiOptionsDialogClicked(View view) {
+        new MultiOptionsDialog("Multi Options Dialog Sample Title", getOptions()
+                , new MultiOptionsDialog.ActionListener() {
+            @Override
+            public void onActionClicked(String clickedOption) {
+                Toast.makeText(MainActivity.this, clickedOption, Toast.LENGTH_SHORT).show();
+            }
+        }).show(this.getSupportFragmentManager(), "dialog_plus");
+    }
+
+    private List<String> getOptions() {
+        String[] titles = {"Option 1", "Option 2", "Option 3", "Option 4"};
+        return new ArrayList<>(Arrays.asList(titles));
     }
 
     public void onClickedMessageCode(View view) {

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="optionsTitle"
+            type="java.util.List" />
+
+        <variable
+            name="callback"
+            type="com.dialog.plus.ui.MultiOptionsDialog.ActionListener" />
+    </data>
+
+    <carbon.widget.LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dialog_margin"
+        android:background="@color/dialog_option_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        bind:carbon_cornerRadius="@dimen/dialog_corner_radius"
+        bind:carbon_elevation="@dimen/dialog_elevation">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/dialog_options_header_padding"
+            android:layout_marginEnd="2dp"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:padding="@dimen/dialog_options_header_padding"
+            android:paddingStart="@dimen/dialog_close_icon_radius"
+            android:paddingEnd="@dimen/dialog_close_icon_radius"
+            android:text="@{title}"
+            android:textAppearance="@style/dialog_header_style"
+            android:textColor="@color/dialog_option_title_text_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dialog_action_buttons_margin"
+            android:gravity="center"
+            android:orientation="vertical"
+            bind:addOptions="@{optionsTitle}"
+            bind:callback="@{callback}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dialog_action_seperator" />
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dialog_option_background"
+            android:gravity="center"
+            android:text="@string/dialog_options_close"
+            android:textAppearance="@style/dialog_option_button_style"
+            android:textColor="@color/dialog_option_close_text_color" />
+
+    </carbon.widget.LinearLayout>
+
+</layout>

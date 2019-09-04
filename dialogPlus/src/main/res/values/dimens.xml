@@ -27,4 +27,7 @@
     <dimen name="dialog_close_icon_radius">@dimen/_16sdp</dimen>
     <dimen name="dialog_zero">0dp</dimen>
     <dimen name="dialog_code_entry_margin">@dimen/_8sdp</dimen>
+    <dimen name="dialog_elevation">1dp</dimen>
+
+    <dimen name="dialog_options_header_padding">@dimen/_7sdp</dimen>
 </resources>

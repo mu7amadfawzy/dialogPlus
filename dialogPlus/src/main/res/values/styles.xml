@@ -24,6 +24,13 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="dialog_option_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_positive_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textColor">@color/dialogPositiveTextColor</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+    </style>
     <style name="dialog_negative_button_style" parent="@android:style/TextAppearance">
         <item name="android:text">@string/dialog_negative_text</item>
         <item name="android:textSize">@dimen/dialog_action_button_textSize</item>

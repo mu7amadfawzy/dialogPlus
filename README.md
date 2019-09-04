@@ -64,6 +64,17 @@ new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
                 .setConfirmCodeDialog("12345", true, true, 10, Color.BLACK, new DialogPlus.CodeTypeListener() {})
                 .show(this.getSupportFragmentManager(), "dialog");
 ```
+### 2.6 Multi Options Dialog:
+
+ ```
+  new MultiOptionsDialog("Multi Options Dialog Sample Title", titlesList
+                , new MultiOptionsDialog.ActionListener() {
+            @Override
+            public void onActionClicked(String clickedOption) {
+                Toast.makeText(MainActivity.this, clickedOption, Toast.LENGTH_SHORT).show();
+            }
+        }).show(this.getSupportFragmentManager(), "option_dialog_plus");
+```
 
 ### 3 Listeners:
 
@@ -194,6 +205,8 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
     <dimen name="dialog_close_icon_radius">@dimen/_16sdp</dimen>
     <dimen name="dialog_zero">0dp</dimen>
     <dimen name="dialog_code_entry_margin">@dimen/_8sdp</dimen>
+    
+    <dimen name="dialog_options_header_padding">@dimen/_7sdp</dimen>
 ````
 #### Integers
 ````
@@ -229,6 +242,12 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 
     <color name="dialog_error_button_background">@color/carbon_red_600</color>
     <color name="dialog_success_button_background">@color/carbon_green_500</color>
+    
+    <color name="dialog_option_background">@color/carbon_grey_200</color>
+    <color name="dialog_option_text_color">@color/colorPrimary</color>
+    <color name="dialog_option_close_text_color">@color/colorPrimaryDark</color>
+    <color name="dialog_option_title_text_color">#000000</color>
+    <color name="dialog_action_seperator">@color/carbon_grey_400</color>
 ````
 
 #### Strings
@@ -239,6 +258,7 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
     <string name="dialog_resend">Resend</string>
     <string name="dialog_time_up">Time up</string>
     <string name="dialog_incomplete_code_msg">Please enter complete code</string>  
+    <string name="dialog_options_close">Close</string>
 ````
 
 #### Styles
@@ -287,6 +307,14 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
         <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/dialog_white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    
+     <style name="dialog_option_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_positive_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textColor">@color/dialogPositiveTextColor</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:textStyle">normal</item>
     </style>
 ````
