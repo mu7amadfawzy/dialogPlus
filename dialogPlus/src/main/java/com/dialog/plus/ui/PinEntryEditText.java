@@ -171,24 +171,16 @@ public class PinEntryEditText extends AppCompatEditText {
         }
     }
 
-
-    private int getColorForState(int... states) {
-        return mColorStates.getColorForState(states, Color.GRAY);
-    }
-
     /**
      * @param next Is the current char the next character to be input?
      */
     private void updateColorForLines(boolean next) {
         if (isFocused()) {
             mLinesPaint.setStrokeWidth(mLineStrokeSelected);
-            mLinesPaint.setColor(getColorForState(android.R.attr.state_focused));
+            mLinesPaint.setColor(Color.GRAY);
             if (next) {
-                mLinesPaint.setColor(getColorForState(android.R.attr.state_selected));
+                mLinesPaint.setColor(getResources().getColor(R.color.colorPrimary));
             }
-        } else {
-            mLinesPaint.setStrokeWidth(mLineStroke);
-            mLinesPaint.setColor(getColorForState(-android.R.attr.state_focused));
         }
     }
 
