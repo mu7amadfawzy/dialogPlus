@@ -178,35 +178,42 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 ### 4.2 Override any of these resources to set the dialog attributes for whole project
 #### Dimensions
 ````
-    <dimen name="dialog_corner_radius">15dp</dimen>
-    <dimen name="dialog_margin">@dimen/_30sdp</dimen>
-    <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
+   <dimen name="dialog_corner_radius">15dp</dimen>
+       <dimen name="dialog_margin">@dimen/_30sdp</dimen>
+       <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
 
-    <dimen name="dialog_header_height">@dimen/_40sdp</dimen>
-    <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
-    <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
+       <dimen name="dialog_header_height">@dimen/_40sdp</dimen>
+       <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
+       <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
 
-    <dimen name="dialog_content_margin">@dimen/_15sdp</dimen>
-    <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
+       <dimen name="dialog_content_margin">@dimen/_15sdp</dimen>
+       <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
 
-    <dimen name="dialog_action_buttons_margin">@dimen/_10sdp</dimen>
-    <dimen name="dialog_action_button_corner">50dp</dimen>
-    <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
-    <!--    space for showing elevation-->
-    <dimen name="dialog_action_buttons_bottom_margin">2dp</dimen>
+       <dimen name="dialog_list_item_text_size">@dimen/_12ssp</dimen>
 
-    <dimen name="dialog_action_button_textSize">@dimen/_12ssp</dimen>
+       <dimen name="dialog_action_buttons_margin">@dimen/_10sdp</dimen>
+       <dimen name="dialog_action_button_corner">50dp</dimen>
+       <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
+       <!--    space for showing elevation-->
+       <dimen name="dialog_action_buttons_bottom_margin">2dp</dimen>
 
-    <dimen name="dialog_positive_button_elevation">1dp</dimen>
+       <dimen name="dialog_action_button_textSize">@dimen/_12ssp</dimen>
 
-    <dimen name="dialog_negative_button_stroke">1dp</dimen>
-    <dimen name="dialog_negative_button_elevation">0dp</dimen>
+       <dimen name="dialog_positive_button_elevation">1dp</dimen>
 
-    <dimen name="dialog_close_icon_radius">@dimen/_16sdp</dimen>
-    <dimen name="dialog_zero">0dp</dimen>
-    <dimen name="dialog_code_entry_margin">@dimen/_8sdp</dimen>
-    
-    <dimen name="dialog_options_header_padding">@dimen/_7sdp</dimen>
+       <dimen name="dialog_negative_button_stroke">1dp</dimen>
+       <dimen name="dialog_negative_button_elevation">0dp</dimen>
+
+       <dimen name="dialog_close_icon_radius">@dimen/_16sdp</dimen>
+       <dimen name="dialog_zero">0dp</dimen>
+       <dimen name="dialog_code_entry_margin">@dimen/_8sdp</dimen>
+       <dimen name="dialog_elevation">1dp</dimen>
+
+       <dimen name="dialog_options_header_padding">@dimen/_7sdp</dimen>
+
+       <dimen name="dialog_list_row_margin_top">@dimen/_4sdp</dimen>
+       <dimen name="dialog_list_row_margin_start">@dimen/_8sdp</dimen>
+       <dimen name="dialog_list_separator_margin">@dimen/_16sdp</dimen>
 ````
 #### Integers
 ````
@@ -222,6 +229,8 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 
     <color name="titleTextColor">@color/dialogPositiveTextColor</color>
     <color name="dialogContentTextColor">@color/colorAccent</color>
+
+    <color name="dialogListItemTextColor">@color/colorAccent</color>
 
     <color name="dialogTransparent">#00000000</color>
 
@@ -276,6 +285,13 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
         <item name="android:textStyle">normal</item>
         <item name="android:textAllCaps">false</item>
     </style>
+
+     <style name="dialog_list_item_text_style" parent="@android:style/TextAppearance">
+            <item name="android:textSize">@dimen/dialog_list_item_text_size</item>
+            <item name="android:textColor">@color/dialogListItemTextColor</item>
+            <item name="android:textStyle">normal</item>
+            <item name="android:textAllCaps">false</item>
+        </style>
 
 
     <style name="dialog_positive_button_style" parent="@android:style/TextAppearance">

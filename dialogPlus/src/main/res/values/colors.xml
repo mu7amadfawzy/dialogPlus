@@ -2,10 +2,12 @@
 <resources>
     <color name="colorPrimary">#0698B5</color>
     <color name="colorPrimaryDark">#05839C</color>
-    <color name="colorAccent">@color/carbon_grey_400</color>
+    <color name="colorAccent">#000</color>
 
     <color name="titleTextColor">@color/dialogPositiveTextColor</color>
     <color name="dialogContentTextColor">@color/colorAccent</color>
+
+    <color name="dialogListItemTextColor">@color/colorAccent</color>
 
     <color name="dialogTransparent">#00000000</color>
 

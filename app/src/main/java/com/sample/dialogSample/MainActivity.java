@@ -91,6 +91,41 @@ public class MainActivity extends AppCompatActivity {
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
+    public void onListDialogClicked(View view) {
+        new DialogPlus()
+                .setListDialog("list_dialog_test_title", getListItems(), new DialogPlus.DialogListListener() {
+                    @Override
+                    public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
+                        Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
+                        dialogPlus.dismiss();
+                    }
+                })
+                .show(this.getSupportFragmentManager(), "dialog_plus");
+    }
+
+    private List<String> getListItems() {
+        List<String> dialogItemDMS = new ArrayList<>();
+        dialogItemDMS.add("title 4");
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 7"));
+        dialogItemDMS.add(("title 9"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 54"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add(("title 4"));
+
+
+        return dialogItemDMS;
+    }
+
     private class DialogListener extends DialogPlus.DialogActionListener {
         @Override
         public void onPositive(DialogPlus dialogPlus) {

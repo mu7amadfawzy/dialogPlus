@@ -18,15 +18,20 @@ import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.DialogPlusBinding;
+import com.dialog.plus.ui.list_dialog.ListAdapter;
 import com.dialog.plus.utils.KeyboardUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Muhammad Noamany
@@ -38,6 +43,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     private int dialog_type;
     private CodeTypeListener codeTypeListener;
     private DialogActionListener dialogActionListener;
+    private DialogListListener dialogListListener;
+    private List<String> listDialogItems = new ArrayList<>();
     private String title, content, correct_code, positiveText, negativeText;
     private int counterSeconds;
     @ColorRes
@@ -50,6 +57,10 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     private CountDownTimer countDownTimer;
     @ColorInt
     private int dialogCodeTextColor = Color.BLACK;
+
+    public DialogPlus() {
+        this(null, null);
+    }
 
     public DialogPlus(String content) {
         this(null, content);
@@ -98,6 +109,20 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
 
     public DialogPlus setMessageDialog(String positiveText, DialogActionListener actionClicked) {
         return setMessageDialog(positiveText).setDialogActionListener(actionClicked);
+    }
+
+    /**
+     * Sets a list dialog_plus interface
+     */
+    public DialogPlus setListDialog(String title, List<String> listItems, DialogListListener actionClicked) {
+        return setDialog_type(TYPE.LIST_DIALOG).setTitle(title).setListItems(listItems).setDialogListListener(actionClicked);
+
+    }
+
+    private DialogPlus setListItems(List<String> listItems) {
+        if (listDialogItems.size() > 0) listDialogItems.clear();
+        listDialogItems = listItems;
+        return this;
     }
 
     /**
@@ -153,6 +178,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
                 return R.layout.layout_error_dialog;
             case TYPE.SUCCESS_DIALOG:
                 return R.layout.layout_success_dialog;
+            case TYPE.LIST_DIALOG:
+                return R.layout.layout_dialog_list;
         }
         return R.layout.layout_confirmation_dialog;
     }
@@ -179,7 +206,16 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
                 setSuccessAnimation();
                 checkTexts();
                 break;
+            case TYPE.LIST_DIALOG:
+                renderItemsList();
+                break;
         }
+    }
+
+    private void renderItemsList() {
+        ListAdapter listAdapter = new ListAdapter(this, listDialogItems, dialogListListener);
+        ((RecyclerView) getDialogAddedView(R.id.recycler)).setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
+        ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listAdapter);
     }
 
     private void checkTexts() {
@@ -297,7 +333,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         if (dialog_type == TYPE.SUCCESS_DIALOG || dialog_type == TYPE.ERROR_DIALOG) {
             getDialogAddedView(R.id.closeIV).setOnClickListener(this);
             getDialogAddedView(R.id.confirmButton).setOnClickListener(this);
-        } else {
+        } else if (dialog_type == TYPE.CODE || dialog_type == TYPE.CONFIRMATION || dialog_type == TYPE.MESSAGE) {
             getHeaderChildView(R.id.closeIV).setOnClickListener(this);
             if (dialog_type == TYPE.CODE) {
                 getDialogAddedView(R.id.sendCode).setOnClickListener(this);
@@ -308,6 +344,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
                     getDialogAddedView(R.id.cancelButton).setOnClickListener(this);
             }
 
+        } else {
+            getHeaderChildView(R.id.closeIV).setOnClickListener(this);
         }
     }
 
@@ -600,6 +638,11 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         return this;
     }
 
+    public DialogPlus setDialogListListener(DialogListListener dialogListListener) {
+        this.dialogListListener = dialogListListener;
+        return this;
+    }
+
     public DialogPlus setContent(String content) {
         this.content = content;
         return this;
@@ -645,6 +688,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         int MESSAGE = 2;
         int ERROR_DIALOG = 3;
         int SUCCESS_DIALOG = 4;
+        int LIST_DIALOG = 5;
     }
 
     /**
@@ -667,6 +711,16 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
 
         public void onNegative(DialogPlus dialogPlus) {
             dialogPlus.dismiss(true);
+        }
+    }
+
+    public abstract static class DialogListListener {
+
+        public void onNegative(DialogPlus dialogPlus) {
+            dialogPlus.dismiss(true);
+        }
+
+        public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
         }
     }
 }

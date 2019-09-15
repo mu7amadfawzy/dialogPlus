@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layoutDirection="locale"
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_list_row_margin_start"
+            android:layout_marginTop="@dimen/dialog_list_row_margin_top"
+            android:layout_marginEnd="@dimen/dialog_list_row_margin_start"
+            android:layout_marginBottom="@dimen/dialog_list_row_margin_top"
+            android:text="@{title}"
+            android:textAppearance="@style/dialog_list_item_text_style" />
+
+        <include
+            android:id="@+id/dages"
+            layout="@layout/layout_dages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_list_separator_margin"
+            android:layout_marginEnd="@dimen/dialog_list_separator_margin" />
+
+    </LinearLayout>
+</layout>

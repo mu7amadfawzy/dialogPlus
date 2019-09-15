@@ -11,6 +11,8 @@
     <dimen name="dialog_content_margin">@dimen/_15sdp</dimen>
     <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
 
+    <dimen name="dialog_list_item_text_size">@dimen/_12ssp</dimen>
+
     <dimen name="dialog_action_buttons_margin">@dimen/_10sdp</dimen>
     <dimen name="dialog_action_button_corner">50dp</dimen>
     <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
@@ -30,4 +32,8 @@
     <dimen name="dialog_elevation">1dp</dimen>
 
     <dimen name="dialog_options_header_padding">@dimen/_7sdp</dimen>
+
+    <dimen name="dialog_list_row_margin_top">@dimen/_4sdp</dimen>
+    <dimen name="dialog_list_row_margin_start">@dimen/_8sdp</dimen>
+    <dimen name="dialog_list_separator_margin">@dimen/_16sdp</dimen>
 </resources>
