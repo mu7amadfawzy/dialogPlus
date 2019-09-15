@@ -75,6 +75,18 @@ new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
             }
         }).show(this.getSupportFragmentManager(), "option_dialog_plus");
 ```
+### 2.7 List Dialog:
+
+ ```
+ new DialogPlus()
+                .setListDialog("list_dialog_test_title", titleStringList, new DialogPlus.DialogListListener() {
+                    @Override
+                    public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
+                        dialogPlus.dismiss();
+                    }
+                })
+                .show(this.getSupportFragmentManager(), "dialog_plus");
+```
 
 ### 3 Listeners:
 
