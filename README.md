@@ -87,7 +87,21 @@ new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
                 })
                 .show(this.getSupportFragmentManager(), "dialog_plus");
 ```
+### 2.8 Year Picker Dialog:
 
+ ```
+ new MonthYearPickerDialog().getYearPicker(pickedYear ->
+                Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
+                .show(getSupportFragmentManager(), "dialog");
+```
+### 2.9 Month Picker Dialog:
+
+ ```
+  new MonthYearPickerDialog().getMonthPicker(pickedYear ->
+                Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
+                .show(getSupportFragmentManager(), "dialog");
+```
+     
 ### 3 Listeners:
 
  ```setDialogActionListener(DialogPlus.DialogActionListener)```  

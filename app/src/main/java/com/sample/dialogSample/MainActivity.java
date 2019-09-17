@@ -122,14 +122,19 @@ public class MainActivity extends AppCompatActivity {
         dialogItemDMS.add(("title 4"));
         dialogItemDMS.add(("title 4"));
         dialogItemDMS.add(("title 4"));
-
-
         return dialogItemDMS;
     }
 
     public void onMonthYearDialogClicked(View view) {
         new MonthYearPickerDialog().getYearPicker(pickedYear ->
-                Toast.makeText(this, "picked value: " + pickedYear, Toast.LENGTH_SHORT).show()).show(getSupportFragmentManager(), "dialog");
+                Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
+                .show(getSupportFragmentManager(), "dialog");
+    }
+
+    public void onMonthMonthDialogClicked(View view) {
+        new MonthYearPickerDialog().getMonthPicker(pickedYear ->
+                Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
+                .show(getSupportFragmentManager(), "dialog");
     }
 
     private class DialogListener extends DialogPlus.DialogActionListener {

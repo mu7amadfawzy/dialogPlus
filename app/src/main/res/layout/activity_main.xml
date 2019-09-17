@@ -110,10 +110,22 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="onMonthYearDialogClicked"
-        android:text="Show Month Year Dialog"
+        android:text="Show Year Year Dialog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onMonthMonthDialogClicked"
+        android:text="Show Month Dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </LinearLayout>

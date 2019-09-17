@@ -25,7 +25,6 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.DialogPlusBinding;
-import com.dialog.plus.ui.list_dialog.ListAdapter;
 import com.dialog.plus.utils.KeyboardUtil;
 
 import java.lang.annotation.Retention;
@@ -213,9 +212,9 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     }
 
     private void renderItemsList() {
-        ListAdapter listAdapter = new ListAdapter(this, listDialogItems, dialogListListener);
+        ListDialogAdapter listDialogAdapter = new ListDialogAdapter(this, listDialogItems, dialogListListener);
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
-        ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listAdapter);
+        ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listDialogAdapter);
     }
 
     private void checkTexts() {
