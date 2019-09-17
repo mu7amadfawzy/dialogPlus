@@ -172,7 +172,7 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
                 //(@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor)
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 
-             //(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground, @DrawableRes int headerBackground)
+                //(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground, @DrawableRes int headerBackground)
                 .setBackgrounds(R.drawable.cross, R.drawable.bg_header, R.drawable.checked)
                 
                 //(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor, @ColorRes int headerTextColor)

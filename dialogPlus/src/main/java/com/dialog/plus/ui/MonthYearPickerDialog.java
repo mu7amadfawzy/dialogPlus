@@ -6,7 +6,6 @@ import android.widget.NumberPicker;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.dialog.plus.BR;
 import com.dialog.plus.R;
@@ -19,14 +18,11 @@ import java.util.Locale;
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
-public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDialogBinding> {
+public class MonthYearPickerDialog extends BaseModelDialogFragment<LayoutMonthYearPickerDialogBinding> {
     private final int MIN_YEAR = 1970;
-    private int MAX_YEAR;
-    private int MAX_MONTH = 12;
-    private int MIN_MONTH = 1;
+    private int MAX_YEAR, MAX_MONTH = 12, MIN_MONTH = 1;
     private PickerListener listener;
     private boolean isMonthPicker;
-    private DialogUiModel model;
     @ColorRes
     private int dialogPositiveBgColor = R.color.dialogPositiveBgColor, titleTextColor = R.color.titleTextColor;
 
@@ -45,12 +41,6 @@ public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPic
         isMonthPicker = true;
         this.listener = listener;
         return this;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        model = new DialogUiModel(getTitle(), getBackgroundColor(), getHeaderTextColor());
     }
 
     private String getTitle() {
@@ -74,6 +64,7 @@ public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPic
     }
 
     private void renderViews() {
+        model.set(getTitle(), getBackgroundColor(), getHeaderTextColor());
         binding.setIsMonthPicker(isMonthPicker);
     }
 
@@ -98,18 +89,6 @@ public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPic
 
     private int getHeaderTextColor() {
         return titleTextColor;
-    }
-
-    public MonthYearPickerDialog setDialogPositiveBgColor(@ColorRes int dialogPositiveBgColor) {
-        this.dialogPositiveBgColor = dialogPositiveBgColor;
-        model.setPositiveBgColor(dialogPositiveBgColor);
-        return this;
-    }
-
-    public MonthYearPickerDialog setTitleTextColor(@ColorRes int titleTextColor) {
-        this.titleTextColor = titleTextColor;
-        model.setHeaderTextColor(titleTextColor);
-        return this;
     }
 
     public MonthYearPickerDialog setMAX_MONTH(int MAX_MONTH) {
@@ -139,6 +118,5 @@ public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPic
 
     public interface PickerListener {
         void onPicked(int pickedYear);
-
     }
 }

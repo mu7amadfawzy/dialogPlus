@@ -1,6 +1,5 @@
 package com.dialog.plus.ui;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -8,12 +7,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -36,26 +32,16 @@ import java.util.List;
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
-public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements View.OnClickListener {
-    private DialogUiModel model = new DialogUiModel();
-    @TYPE
-    private int dialog_type;
+public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> implements View.OnClickListener {
     private CodeTypeListener codeTypeListener;
     private DialogActionListener dialogActionListener;
     private DialogListListener dialogListListener;
     private List<String> listDialogItems = new ArrayList<>();
-    private String title, content, correct_code, positiveText, negativeText;
+    private String correct_code;
     private int counterSeconds;
-    @ColorRes
-    private int positiveBgColor = -1, negativeBgColor = -1, headerBgColor = -1;
-    @ColorRes
-    private int positiveTextColor = -1, negativeTextColor = -1, headerTextColor = -1;
-    @DrawableRes
-    private int positiveBgDrawable = -1, negativeBgDrawable = -1, headerBgDrawable = -1;
-    private boolean withResend, withSend, withCounter, typeMessage, separateActionButtons;
+    private boolean withResend, withSend, withCounter;
     private CountDownTimer countDownTimer;
-    @ColorInt
-    private int dialogCodeTextColor = Color.BLACK;
+
 
     public DialogPlus() {
         this(null, null);
@@ -81,7 +67,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
      * Sets a code confirmation dialog_plus interface
      */
     public DialogPlus setConfirmCodeDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, CodeTypeListener codeTypeListener) {
-        return setDialog_type(TYPE.CODE).setTexts(positiveText).setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener);
+        setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener).setDialog_type(TYPE.CODE);
+        return this;
     }
 
     /**
@@ -96,7 +83,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     }
 
     public DialogPlus setConfirmationDialog(String positiveText, String negativeText, boolean separateActionButtons, DialogActionListener actionClicked) {
-        return setDialog_type(TYPE.CONFIRMATION).setTexts(positiveText, negativeText).setSeparateActionButtons(separateActionButtons).setDialogActionListener(actionClicked);
+        setSeparateActionButtons(separateActionButtons).setDialogActionListener(actionClicked).setDialog_type(TYPE.CONFIRMATION).setTexts(positiveText, negativeText);
+        return this;
     }
 
     /**
@@ -107,15 +95,16 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     }
 
     public DialogPlus setMessageDialog(String positiveText, DialogActionListener actionClicked) {
-        return setMessageDialog(positiveText).setDialogActionListener(actionClicked);
+        setDialogActionListener(actionClicked).setMessageDialog(positiveText);
+        return this;
     }
 
     /**
      * Sets a list dialog_plus interface
      */
     public DialogPlus setListDialog(String title, List<String> listItems, DialogListListener actionClicked) {
-        return setDialog_type(TYPE.LIST_DIALOG).setTitle(title).setListItems(listItems).setDialogListListener(actionClicked);
-
+        setListItems(listItems).setDialogListListener(actionClicked).setTitle(title).setDialog_type(TYPE.LIST_DIALOG);
+        return this;
     }
 
     private DialogPlus setListItems(List<String> listItems) {
@@ -132,7 +121,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     }
 
     public DialogPlus setErrorDialog(String positiveText, DialogActionListener dialogActionListener) {
-        return setDialog_type(TYPE.ERROR_DIALOG).setTexts(positiveText).setDialogActionListener(dialogActionListener);
+        setDialogActionListener(dialogActionListener).setDialog_type(TYPE.ERROR_DIALOG).setTexts(positiveText);
+        return this;
     }
 
     /**
@@ -143,7 +133,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     }
 
     public DialogPlus setSuccessDialog(String positiveText, DialogActionListener dialogActionListener) {
-        return setDialog_type(TYPE.SUCCESS_DIALOG).setTexts(positiveText).setDialogActionListener(dialogActionListener);
+        setDialogActionListener(dialogActionListener).setDialog_type(TYPE.SUCCESS_DIALOG).setTexts(positiveText);
+        return this;
     }
 
     @Override
@@ -158,9 +149,6 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
 
     private void setUiModelData() {
         updateModelTexts();
-        updateModelBackground();
-        updateModelBackgroundColor();
-        updateModelTextColors();
     }
 
     private void renderView() {
@@ -170,7 +158,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
 
     private @LayoutRes
     int getDialogLayoutRes() {
-        switch (dialog_type) {
+        switch (model.getDialog_type()) {
             case TYPE.CODE:
                 return R.layout.layout_code_dialog;
             case TYPE.ERROR_DIALOG:
@@ -189,21 +177,15 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     }
 
     private void setDialogType() {
-        switch (dialog_type) {
-            case TYPE.MESSAGE:
-            case TYPE.CONFIRMATION:
-                checkTexts();
-                break;
+        switch (model.getDialog_type()) {
             case TYPE.CODE:
                 setOnTextListener();
                 break;
             case TYPE.ERROR_DIALOG:
                 setErrorAnimation();
-                checkTexts();
                 break;
             case TYPE.SUCCESS_DIALOG:
                 setSuccessAnimation();
-                checkTexts();
                 break;
             case TYPE.LIST_DIALOG:
                 renderItemsList();
@@ -215,22 +197,6 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         ListDialogAdapter listDialogAdapter = new ListDialogAdapter(this, listDialogItems, dialogListListener);
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listDialogAdapter);
-    }
-
-    private void checkTexts() {
-        changePositiveText();
-        if (dialog_type == TYPE.CONFIRMATION)
-            changeNegativeText();
-    }
-
-    private void changePositiveText() {
-        if (positiveText != null)
-            ((TextView) getDialogAddedView(R.id.confirmButton)).setText(positiveText);
-    }
-
-    private void changeNegativeText() {
-        if (negativeText != null)
-            ((TextView) getDialogAddedView(R.id.cancelButton)).setText(negativeText);
     }
 
     private void setErrorAnimation() {
@@ -257,7 +223,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
                 if (charSequence == null || charSequence.toString().isEmpty() || charSequence.toString().length() < correct_code.length())
                     return;
                 /////////// required length reached
-                hideKeyboard();
+                hideKeyboard(getDialogAddedView(R.id.txtPinEntry));
                 if (!withSend)
                     sendCode();
             }
@@ -265,7 +231,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editable.toString().length() == correct_code.length())
-                    hideKeyboard();
+                    hideKeyboard(getDialogAddedView(R.id.txtPinEntry));
             }
         });
     }
@@ -284,31 +250,12 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         setErrorTextColor();
         if (codeTypeListener != null)
             codeTypeListener.onWrongCode(this);
-        animateField(getActivity(), (EditText) getDialogAddedView(R.id.txtPinEntry));
+        shakeView((EditText) getDialogAddedView(R.id.txtPinEntry));
     }
 
     private void setErrorTextColor() {
-        setCodeTextColor(Color.RED);
-    }
-
-    private void setNormalTextColor() {
-        setCodeTextColor(dialogCodeTextColor);
-    }
-
-    public void setCodeTextColor(@ColorInt int colorInt) {
-        if (dialog_type == TYPE.CODE) {
-            ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).setTextColor(colorInt);
-            ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).getPaint().setColor(colorInt);
-        }
-    }
-
-    private void animateField(Context context, EditText editText) {
-        YoYo.with(Techniques.Shake)
-                .duration(700)
-                .onEnd(animator -> {
-                    editText.setText(null);
-                })
-                .playOn(editText);
+        ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).setTextColor(Color.RED);
+        ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).getPaint().setColor(Color.RED);
     }
 
     private void setCounter() {
@@ -329,23 +276,30 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     }
 
     private void setListeners() {
-        if (dialog_type == TYPE.SUCCESS_DIALOG || dialog_type == TYPE.ERROR_DIALOG) {
-            getDialogAddedView(R.id.closeIV).setOnClickListener(this);
-            getDialogAddedView(R.id.confirmButton).setOnClickListener(this);
-        } else if (dialog_type == TYPE.CODE || dialog_type == TYPE.CONFIRMATION || dialog_type == TYPE.MESSAGE) {
+        if (model.getDialog_type() == TYPE.SUCCESS_DIALOG || model.getDialog_type() == TYPE.ERROR_DIALOG) {
+            setSuccessErrorDialogListeners();
+        } else if (model.getDialog_type() == TYPE.CODE || model.getDialog_type() == TYPE.CONFIRMATION || model.getDialog_type() == TYPE.MESSAGE) {
             getHeaderChildView(R.id.closeIV).setOnClickListener(this);
-            if (dialog_type == TYPE.CODE) {
-                getDialogAddedView(R.id.sendCode).setOnClickListener(this);
-                getDialogAddedView(R.id.resendCode).setOnClickListener(this);
+            if (model.getDialog_type() == TYPE.CODE) {
+                setCodeDialogListeners();
             } else {
                 getDialogAddedView(R.id.confirmButton).setOnClickListener(this);
-                if (dialog_type == TYPE.CONFIRMATION)
+                if (model.getDialog_type() == TYPE.CONFIRMATION)
                     getDialogAddedView(R.id.cancelButton).setOnClickListener(this);
             }
-
         } else {
             getHeaderChildView(R.id.closeIV).setOnClickListener(this);
         }
+    }
+
+    private void setSuccessErrorDialogListeners() {
+        getDialogAddedView(R.id.closeIV).setOnClickListener(this);
+        getDialogAddedView(R.id.confirmButton).setOnClickListener(this);
+    }
+
+    void setCodeDialogListeners() {
+        getDialogAddedView(R.id.sendCode).setOnClickListener(this);
+        getDialogAddedView(R.id.resendCode).setOnClickListener(this);
     }
 
     private void timeUp() {
@@ -391,16 +345,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
             dismiss(true);
         } else {
             onWrong();
-            showKeyboard();
+            showKeyboard(getDialogAddedView(R.id.txtPinEntry));
         }
-    }
-
-    private void hideKeyboard() {
-        KeyboardUtil.getInstance().hideKeyboard(getDialogAddedView(R.id.txtPinEntry));
-    }
-
-    private void showKeyboard() {
-        KeyboardUtil.getInstance().showKeyboard(getDialogAddedView(R.id.txtPinEntry));
     }
 
     private void onNegativeClicked() {
@@ -438,8 +384,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
 
     private DialogPlus set(int dialog_type, String title, String content) {
         setDialog_type(dialog_type);
-        this.title = title;
-        this.content = content;
+        model.setTitle(title);
+        model.setContent(content);
         setBackgroundColors(R.color.dialogPositiveBgColor, R.color.dialogNegativeBgColor, R.color.dialogPositiveBgColor);
         setTextColors(R.color.dialogPositiveTextColor, R.color.dialogNegativeTextColor, R.color.dialogPositiveTextColor);
         return this;
@@ -451,32 +397,11 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         this.withSend = withSend;
         this.counterSeconds = counterSeconds;
         this.withCounter = counterSeconds > 0;
-        this.dialogCodeTextColor = codeTextColor;
-    }
-
-    private void updateModelTextColors() {
-        model.setPositiveTextColor(positiveTextColor);
-        model.setNegativeTextColor(negativeTextColor);
-        model.setHeaderTextColor(headerTextColor);
-    }
-
-    private void updateModelBackground() {
-        model.setPositiveBgDrawable(positiveBgDrawable);
-        model.setNegativeBgDrawable(negativeBgDrawable);
-        model.setHeaderBgDrawable(headerBgDrawable);
-        model.setSeparateActionButtons(separateActionButtons);
-    }
-
-    private void updateModelBackgroundColor() {
-        model.setPositiveBgColor(positiveBgColor);
-        model.setNegativeBackground(negativeBgColor);
-        model.setHeaderBgColor(headerBgColor);
+        model.setDialogCodeTextColor(codeTextColor);
     }
 
     private void updateModelTexts() {
-        model.setTitle(title);
-        model.setContent(content);
-        model.setTypeMessage(typeMessage);
+        model.setTypeMessage(model.getDialog_type() == TYPE.MESSAGE);
         model.setCorrectCode(correct_code);
         model.setTimeLeft(counterSeconds);
         model.setWithCounter(withCounter);
@@ -484,148 +409,6 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         model.setWithSend(withSend);
     }
 
-    /**
-     * sets the background color to header background and positive background
-     */
-    public DialogPlus setPrimaryBgColor(@ColorRes int primaryColor) {
-        this.positiveBgColor = primaryColor;
-        this.headerBgColor = primaryColor;
-        return this;
-    }
-
-    /**
-     * sets the background drawable to header background and positive background
-     */
-    public DialogPlus setPrimaryDrawable(@DrawableRes int primaryDrawable) {
-        this.positiveBgDrawable = primaryDrawable;
-        this.headerBgDrawable = primaryDrawable;
-        return this;
-    }
-
-    /**
-     * sets the text color to header background and positive background
-     */
-    public DialogPlus setPrimaryTextColor(@ColorRes int primaryTextColor) {
-        this.positiveTextColor = primaryTextColor;
-        this.headerTextColor = primaryTextColor;
-        return this;
-    }
-
-    /**
-     * sets the background color to the negative
-     */
-
-    public DialogPlus setSecondaryBgColor(@ColorRes int secondaryColor) {
-        this.negativeBgColor = secondaryColor;
-        return this;
-    }
-
-    /**
-     * sets the background drawable to the negative
-     */
-    public DialogPlus setSecondaryBgDrawable(@DrawableRes int secondaryDrawable) {
-        this.negativeBgDrawable = secondaryDrawable;
-        return this;
-    }
-
-    /**
-     * sets the text color to the negative
-     */
-    public DialogPlus setSecondaryTextColor(@ColorRes int secondaryTextColor) {
-        this.negativeTextColor = secondaryTextColor;
-        return this;
-    }
-
-    /**
-     * sets the background color to the header background and positive andnegative
-     */
-    public DialogPlus setBackgroundColors(@ColorRes int positiveBackground, @ColorRes int negativeColorRes) {
-        return setBackgroundColors(positiveBackground, negativeColorRes, 0);
-    }
-
-    public DialogPlus setBackgroundColors(@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor) {
-        this.positiveBgColor = positiveBackground;
-        this.headerBgColor = headerBgColor;
-        this.negativeBgColor = negativeColorRes;
-        return this;
-    }
-
-    /**
-     * sets the text color to the header background and positive and negative
-     */
-    public DialogPlus setTextColors(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor) {
-        return setTextColors(positiveTextColor, negativeTextColor, 0);
-    }
-
-    /**
-     * sets the text to the positiveBtn and negativeBtn
-     */
-    public DialogPlus setTexts(String positiveText) {
-        return setTexts(positiveText, null);
-    }
-
-    public DialogPlus setTexts(String positiveText, String negativeText) {
-        this.positiveText = positiveText;
-        this.negativeText = negativeText;
-        return this;
-    }
-
-    public DialogPlus setTextColors(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor, @ColorRes int headerTextColor) {
-        this.positiveTextColor = positiveTextColor;
-        this.headerTextColor = headerTextColor;
-        this.negativeTextColor = negativeTextColor;
-        return this;
-    }
-
-    /**
-     * sets the background drawable to the header background and positive andnegative
-     */
-    public DialogPlus setBackgrounds(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground) {
-        return setBackgrounds(positiveBackground, negativeBackground, 0);
-    }
-
-    public DialogPlus setBackgrounds(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground, @DrawableRes int headerBackground) {
-        this.positiveBgDrawable = positiveBackground;
-        this.headerBgDrawable = headerBackground;
-        this.negativeBgDrawable = negativeBackground;
-        return this;
-    }
-
-    private DialogPlus setDialog_type(@TYPE int dialog_type) {
-        this.dialog_type = dialog_type;
-        typeMessage = dialog_type == TYPE.MESSAGE;
-        return this;
-    }
-
-    public DialogPlus setHeaderBgColor(@ColorRes int headerBgColor) {
-        this.headerBgColor = headerBgColor;
-        return this;
-    }
-
-    public DialogPlus setNegativeBgColor(@ColorRes int negativeBgColor) {
-        this.negativeBgColor = negativeBgColor;
-        return this;
-    }
-
-    public DialogPlus setNegativeTextColor(@ColorRes int negativeTextColor) {
-        this.negativeTextColor = negativeTextColor;
-        return this;
-    }
-
-    public DialogPlus setHeaderTextColor(@ColorRes int headerTextColor) {
-        this.headerTextColor = headerTextColor;
-        return this;
-    }
-
-    public DialogPlus setDialogCodeTextColor(@ColorInt int dialogCodeTextColor) {
-        this.dialogCodeTextColor = dialogCodeTextColor;
-        return this;
-    }
-
-    public DialogPlus setHeaderBgDrawable(@DrawableRes int headerBgDrawable) {
-        this.headerBgDrawable = headerBgDrawable;
-        return this;
-    }
 
     public DialogPlus setCodeTypeListener(CodeTypeListener codeTypeListener) {
         this.codeTypeListener = codeTypeListener;
@@ -642,24 +425,9 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         return this;
     }
 
-    public DialogPlus setContent(String content) {
-        this.content = content;
-        return this;
-    }
-
-    public DialogPlus setTitle(String title) {
-        this.title = title;
-        return this;
-    }
-
     private DialogPlus setSeparateActionButtons(boolean separateActionButtons) {
-        this.separateActionButtons = separateActionButtons;
+        model.setSeparateActionButtons(separateActionButtons);
         return this;
-    }
-
-    private DialogPlus setMessageDialog(String positiveText) {
-        this.positiveText = positiveText;
-        return setDialog_type(TYPE.MESSAGE);
     }
 
     @Override
@@ -720,6 +488,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         }
 
         public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
+            dialogPlus.dismiss(true);
         }
     }
 }

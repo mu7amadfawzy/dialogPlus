@@ -1,5 +1,8 @@
 package com.dialog.plus.ui;
 
+import android.graphics.Color;
+
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.databinding.BaseObservable;
@@ -14,7 +17,7 @@ import com.dialog.plus.R;
  */
 public class DialogUiModel extends BaseObservable {
     private boolean withSend, withResend, withCounter, typeMessage, separateActionButtons;
-    private String title, correctCode, codeEntry, content, typed_code;
+    private String title, correctCode, codeEntry, content, typed_code, positiveText, negativeText, headerText;
     private int timeLeft;
     private @ColorRes
     int positiveBgColor, negativeBgColor, headerBgColor;
@@ -22,6 +25,10 @@ public class DialogUiModel extends BaseObservable {
     int positiveBgDrawable, negativeBgDrawable, headerBgDrawable;
     private @ColorRes
     int positiveTextColor, negativeTextColor, headerTextColor;
+    @ColorInt
+    private int dialogCodeTextColor = Color.BLACK;
+    @DialogPlus.TYPE
+    private int dialog_type;
 
     public DialogUiModel() {
     }
@@ -32,6 +39,11 @@ public class DialogUiModel extends BaseObservable {
         this.headerTextColor = headerTextColor;
     }
 
+    public void set(String title, int headerBgColor, int headerTextColor) {
+        this.title = title;
+        this.headerBgColor = headerBgColor;
+        this.headerTextColor = headerTextColor;
+    }
     @Bindable
     public boolean isWithResend() {
         return withResend;
@@ -49,6 +61,7 @@ public class DialogUiModel extends BaseObservable {
 
     public void setHeaderBgColor(@ColorRes int headerBgColor) {
         this.headerBgColor = headerBgColor;
+        notifyPropertyChanged(BR.headerBgColor);
     }
 
     @Bindable
@@ -57,12 +70,10 @@ public class DialogUiModel extends BaseObservable {
         return negativeBgColor;
     }
 
-    public void setNegativeBgColor(int negativeBgColor) {
-        this.negativeBgColor = negativeBgColor;
-    }
 
-    public void setNegativeBackground(@ColorRes int negativeColorRes) {
+    public void setNegativeBgColor(@ColorRes int negativeColorRes) {
         this.negativeBgColor = negativeColorRes;
+        notifyPropertyChanged(BR.negativeBgColor);
     }
 
     @Bindable
@@ -115,6 +126,7 @@ public class DialogUiModel extends BaseObservable {
 
     public void setPositiveBgDrawable(int positiveBgDrawable) {
         this.positiveBgDrawable = positiveBgDrawable;
+        notifyPropertyChanged(BR.positiveBgDrawable);
     }
 
     @Bindable
@@ -124,6 +136,7 @@ public class DialogUiModel extends BaseObservable {
 
     public void setNegativeBgDrawable(int negativeBgDrawable) {
         this.negativeBgDrawable = negativeBgDrawable;
+        notifyPropertyChanged(BR.negativeBgDrawable);
     }
 
     @Bindable
@@ -133,6 +146,7 @@ public class DialogUiModel extends BaseObservable {
 
     public void setHeaderBgDrawable(int headerBgDrawable) {
         this.headerBgDrawable = headerBgDrawable;
+        notifyPropertyChanged(BR.headerBgDrawable);
     }
 
     @Bindable
@@ -142,6 +156,7 @@ public class DialogUiModel extends BaseObservable {
 
     public void setPositiveTextColor(int positiveTextColor) {
         this.positiveTextColor = positiveTextColor;
+        notifyPropertyChanged(BR.positiveTextColor);
     }
 
     @Bindable
@@ -151,6 +166,7 @@ public class DialogUiModel extends BaseObservable {
 
     public void setNegativeTextColor(int negativeTextColor) {
         this.negativeTextColor = negativeTextColor;
+        notifyPropertyChanged(BR.negativeTextColor);
     }
 
     @Bindable
@@ -160,6 +176,7 @@ public class DialogUiModel extends BaseObservable {
 
     public void setHeaderTextColor(int headerTextColor) {
         this.headerTextColor = headerTextColor;
+        notifyPropertyChanged(BR.headerTextColor);
     }
 
     @Bindable
@@ -183,6 +200,7 @@ public class DialogUiModel extends BaseObservable {
 
     public void setPositiveBgColor(@ColorRes int positiveBgColor) {
         this.positiveBgColor = positiveBgColor;
+        notifyPropertyChanged(BR.positiveTextColor);
     }
 
     @Bindable
@@ -225,6 +243,46 @@ public class DialogUiModel extends BaseObservable {
     }
 
     @Bindable
+    public String getPositiveText() {
+        return positiveText;
+    }
+
+    public void setPositiveText(String positiveText) {
+        this.positiveText = positiveText;
+        notifyPropertyChanged(BR.positiveText);
+    }
+
+    @Bindable
+    public String getNegativeText() {
+        return negativeText;
+    }
+
+    public void setNegativeText(String negativeText) {
+        this.negativeText = negativeText;
+        notifyPropertyChanged(BR.negativeText);
+    }
+
+    @Bindable
+    public String getHeaderText() {
+        return headerText;
+    }
+
+    public void setHeaderText(String headerText) {
+        this.headerText = headerText;
+        notifyPropertyChanged(BR.headerText);
+    }
+
+    @Bindable
+    public int getDialogCodeTextColor() {
+        return dialogCodeTextColor;
+    }
+
+    public void setDialogCodeTextColor(int dialogCodeTextColor) {
+        this.dialogCodeTextColor = dialogCodeTextColor;
+        notifyPropertyChanged(BR.dialogCodeTextColor);
+    }
+
+    @Bindable
     public int getDialogWhite() {
         return R.color.dialogTransparent;
     }
@@ -234,4 +292,12 @@ public class DialogUiModel extends BaseObservable {
         return -1;
     }
 
+    @Bindable
+    public int getDialog_type() {
+        return dialog_type;
+    }
+
+    public void setDialog_type(int dialog_type) {
+        this.dialog_type = dialog_type;
+    }
 }

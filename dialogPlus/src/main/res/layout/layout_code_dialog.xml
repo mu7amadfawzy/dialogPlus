@@ -17,14 +17,14 @@
         android:layout_height="wrap_content"
         android:background="@color/dialog_white"
         android:orientation="vertical"
-       app:carbon_cornerRadius="@dimen/dialog_corner_radius"
-       app:dialog_width_percent="@{@integer/dialog_width_percent}"
+        app:carbon_cornerRadius="@dimen/dialog_corner_radius"
+        app:dialog_width_percent="@{@integer/dialog_width_percent}"
         tools:visibility="visible">
 
         <include
             android:id="@+id/headerLayout"
             layout="@layout/layout_dialog_header"
-           app:model="@{model}" />
+            app:model="@{model}" />
 
         <me.grantland.widget.AutofitTextView
             android:id="@+id/contentText"
@@ -42,7 +42,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-android:textColor="@color/colorPrimary"
             android:layout_marginStart="@dimen/dialog_code_entry_margin"
             android:layout_marginEnd="@dimen/dialog_code_entry_margin"
             android:layout_marginBottom="2dp"
@@ -51,9 +50,11 @@ android:textColor="@color/colorPrimary"
             android:inputType="number"
             android:maxLength="@{model.correctCode.length()}"
             android:text="@={model.codeEntry}"
+            android:textColor="@color/colorPrimary"
             android:textIsSelectable="false"
             android:textSize="@dimen/_16ssp"
-           app:dialog_plus_charsNumber="@{model.correctCode.length()}" />
+            app:dialog_plus_charsNumber="@{model.correctCode.length()}"
+            app:pinEntryTextColor="@{model.dialogCodeTextColor}" />
 
         <TextView
             android:id="@+id/timer"
@@ -65,7 +66,7 @@ android:textColor="@color/colorPrimary"
             android:text="@{model.timeLeft>0?model.timeLeft+``:@string/dialog_time_up}"
             android:textColor="@color/dialogTimeUpTextColor"
             android:textSize="@dimen/dialog_timeup_text_size"
-           app:visible="@{model.withCounter}" />
+            app:visible="@{model.withCounter}" />
 
         <carbon.widget.Button
             android:id="@+id/sendCode"
@@ -79,10 +80,10 @@ android:textColor="@color/colorPrimary"
             android:text="@string/dialog_positive_text"
             android:textAllCaps="false"
             android:textColor="@color/dialog_white"
-           app:backgroundColor="@{model.positiveBgColor}"
-           app:backgroundDrawable="@{model.positiveBgDrawable}"
-           app:carbon_cornerRadius="@dimen/dialog_corner_radius"
-           app:visible="@{model.withSend &amp;model.timeLeft!=0}" />
+            app:backgroundColor="@{model.positiveBgColor}"
+            app:backgroundDrawable="@{model.positiveBgDrawable}"
+            app:carbon_cornerRadius="@dimen/dialog_corner_radius"
+            app:visible="@{model.withSend &amp;model.timeLeft!=0}" />
 
         <carbon.widget.TextView
             android:id="@+id/resendCode"
@@ -92,9 +93,9 @@ android:textColor="@color/colorPrimary"
             android:layout_marginBottom="@dimen/_16sdp"
             android:text="@string/dialog_resend"
             android:textColor="@color/dialog_resend_text_color"
-           app:text_color="@{model.positiveBgColor}"
-           app:dialog_plus_underline="@{true}"
-           app:visible="@{!model.withCounter || (model.withResend &amp; model.timeLeft==0)}" />
+            app:dialog_plus_underline="@{true}"
+            app:text_color="@{model.positiveBgColor}"
+            app:visible="@{!model.withCounter || (model.withResend &amp; model.timeLeft==0)}" />
 
     </carbon.widget.LinearLayout>
 </layout>

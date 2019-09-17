@@ -41,54 +41,54 @@ public class MainActivity extends AppCompatActivity {
     public void onClickedMessageCode(View view) {
         new DialogPlus("Message Dialog", "message dialog_plus sample\n Welcome Back")
                 //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
-                .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
                 .setMessageDialog("alright", new DialogListener())
+                .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedConfirmCode(View view) {
         new DialogPlus("Code Dialog", "code dialog_plus sample with send enabled, resend enabled and counter 10 seconds")
-                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .setConfirmCodeDialog("12345", true, true, 60, Color.BLACK, null)
                 .setDialogActionListener(new DialogListener())
+                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedValidation(View view) {
         new DialogPlus("Code Dialog", "code dialog_plus sample with send enabled and zero seconds counter.")
-                .setBackgroundColors(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimary)
-                .setHeaderBgDrawable(R.drawable.bg_header)
                 .setConfirmCodeDialog("123", false, true, 0, Color.BLUE, null)
                 .setDialogActionListener(new DialogListener())
+                .setBackgroundColors(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimary)
+                .setHeaderBgDrawable(R.drawable.bg_header)
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedConfirmation(View view) {
         new DialogPlus("Confirmation Dialog", "confirmation dialog_plus message content ...")
-                .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .setConfirmationDialog("confirm", "cancel", new DialogListener())
+                .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedConfirmation2(View view) {
         new DialogPlus("Confirmation Dialog option two interface", "Confirmation Dialog with separated action buttons ...")
+                .setConfirmationDialog("confirm", "cancel", true, new DialogListener())
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .setSecondaryTextColor(R.color.colorPrimary)
-                .setConfirmationDialog("confirm", "cancel", true, new DialogListener())
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedErrorDialog(View view) {
         new DialogPlus("error dialog_plus content message")
-                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .setErrorDialog("Peace", new DialogListener())
+                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedSuccessDialog(View view) {
         new DialogPlus("Success message content..")
-                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .setSuccessDialog("Cool", new DialogListener())
+                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
                         Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
-                        dialogPlus.dismiss();
                     }
                 })
                 .show(this.getSupportFragmentManager(), "dialog_plus");
@@ -128,12 +127,14 @@ public class MainActivity extends AppCompatActivity {
     public void onMonthYearDialogClicked(View view) {
         new MonthYearPickerDialog().getYearPicker(pickedYear ->
                 Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
+                .setHeaderBgDrawable(R.drawable.bg_header)
                 .show(getSupportFragmentManager(), "dialog");
     }
 
     public void onMonthMonthDialogClicked(View view) {
         new MonthYearPickerDialog().getMonthPicker(pickedYear ->
                 Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
+                .setHeaderTextColor(R.color.black)
                 .show(getSupportFragmentManager(), "dialog");
     }
 

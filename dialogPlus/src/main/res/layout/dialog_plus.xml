@@ -19,9 +19,9 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/dialog_margin"
         android:background="#00000000"
-       app:carbon_cornerRadius="@dimen/dialog_corner_radius"
-       app:carbon_elevation="@dimen/dialog_elevation"
-       app:dialog_width_percent="@{@integer/dialog_width_percent}"
-       app:includeLayout="@{dialogLayoutRes}"
-       app:model="@{model}" />
+        app:carbon_cornerRadius="@dimen/dialog_corner_radius"
+        app:carbon_elevation="@dimen/dialog_elevation"
+        app:dialog_width_percent="@{@integer/dialog_width_percent}"
+        app:includeLayout="@{dialogLayoutRes}"
+        app:model="@{model}" />
 </layout>

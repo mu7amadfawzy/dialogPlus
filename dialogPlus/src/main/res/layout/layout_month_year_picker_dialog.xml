@@ -48,10 +48,10 @@
 
         <carbon.widget.Button
             android:id="@+id/confirmButton"
+            android:text="@{model.positiveText!=null?model.positiveText:@string/dialog_ok_text}"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dialog_action_buttons_height"
             android:layout_gravity="center"
-            android:text="@string/dialog_ok_text"
             android:textColor="@color/dialog_month_year_action_text_color"
             android:textAppearance="@style/dialog_positive_button_style"
             android:background="@color/dialog_month_year_action_background" />

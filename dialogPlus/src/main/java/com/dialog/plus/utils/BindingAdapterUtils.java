@@ -258,4 +258,10 @@ public class BindingAdapterUtils {
             textView.setText(content);
         }
     }
+
+    @BindingAdapter("pinEntryTextColor")
+    public static void setCodeTextColor(PinEntryEditText view, @ColorInt int colorInt) {
+        view.setTextColor(colorInt);
+        view.getPaint().setColor(colorInt);
+    }
 }

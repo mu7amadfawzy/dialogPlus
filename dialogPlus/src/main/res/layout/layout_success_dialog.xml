@@ -65,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="@{model.positiveText!=null?model.positiveText:@string/dialog_ok_text}"
             android:background="@color/dialog_success_button_background"
             android:paddingStart="@dimen/dialog_action_buttons_margin"
             android:paddingEnd="@dimen/dialog_action_buttons_margin"
