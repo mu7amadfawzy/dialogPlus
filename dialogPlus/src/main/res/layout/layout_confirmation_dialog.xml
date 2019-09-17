@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -18,14 +18,14 @@
         android:background="@color/dialog_white"
         android:gravity="center"
         android:orientation="vertical"
-        bind:carbon_cornerRadius="@dimen/dialog_corner_radius"
-        bind:dialog_width_percent="@{@integer/dialog_width_percent}"
+        app:carbon_cornerRadius="@dimen/dialog_corner_radius"
+        app:dialog_width_percent="@{@integer/dialog_width_percent}"
         tools:visibility="visible">
 
         <include
             android:id="@+id/headerLayout"
             layout="@layout/layout_dialog_header"
-            bind:model="@{model}" />
+            app:model="@{model}" />
 
         <me.grantland.widget.AutofitTextView
             android:id="@+id/contentText"
@@ -35,7 +35,7 @@
             android:gravity="center"
             android:text="@{model.content}"
             android:textAppearance="@style/dialog_content_message_style"
-            bind:visible="@{model.content!=null}"
+            app:visible="@{model.content!=null}"
             tools:text="message \n message \n message"
             tools:visibility="visible" />
 
@@ -49,12 +49,12 @@
             android:background="@{model.separateActionButtons?@color/dialog_white:@color/dialogNegativeBgColor}"
             android:gravity="center"
             android:orientation="horizontal"
-            bind:backgroundColor="@{model.separateActionButtons?model.dialogWhite:model.negativeBgColor}"
-            bind:backgroundDrawable="@{model.separateActionButtons?model.noDrawable:model.negativeBgDrawable}"
-            bind:cornerRadius="@{model.separateActionButtons?@dimen/dialog_zero:@dimen/dialog_action_button_corner}"
-            bind:marginTop="@{model.separateActionButtons?@dimen/dialog_zero:@dimen/dialog_action_buttons_bottom_margin}"
-            bind:strokeColor="@{model.separateActionButtons?@color/dialog_white:@color/dialogActionButtonsStrokeColor}"
-            bind:strokeWidth="@{model.separateActionButtons?@dimen/dialog_zero:@dimen/dialog_negative_button_stroke}">
+            app:backgroundColor="@{model.separateActionButtons?model.dialogWhite:model.negativeBgColor}"
+            app:backgroundDrawable="@{model.separateActionButtons?model.noDrawable:model.negativeBgDrawable}"
+            app:cornerRadius="@{model.separateActionButtons?@dimen/dialog_zero:@dimen/dialog_action_button_corner}"
+            app:marginTop="@{model.separateActionButtons?@dimen/dialog_zero:@dimen/dialog_action_buttons_bottom_margin}"
+            app:strokeColor="@{model.separateActionButtons?@color/dialog_white:@color/dialogActionButtonsStrokeColor}"
+            app:strokeWidth="@{model.separateActionButtons?@dimen/dialog_zero:@dimen/dialog_negative_button_stroke}">
 
             <carbon.widget.Button
                 android:id="@+id/cancelButton"
@@ -64,23 +64,23 @@
                 android:background="@{model.separateActionButtons?@color/dialogNegativeBgColor:@color/dialogTransparent}"
                 android:text="@string/dialog_negative_text"
                 android:textAppearance="@style/dialog_negative_button_style"
-                bind:backgroundColor="@{model.separateActionButtons?model.negativeBgColor:model.dialogWhite}"
-                bind:backgroundDrawable="@{model.separateActionButtons?model.negativeBgDrawable:model.noDrawable}"
-                bind:cornerRadius="@{model.separateActionButtons?@dimen/dialog_action_button_corner:@dimen/dialog_zero}"
-                bind:elevation="@{model.separateActionButtons?@dimen/dialog_negative_button_elevation:@dimen/dialog_zero}"
-                bind:layout_weight="@{model.separateActionButtons?1f:0.9f}"
-                bind:marginBottom="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
-                bind:marginTop="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
-                bind:strokeWidth="@{model.separateActionButtons?@dimen/dialog_negative_button_stroke:@dimen/dialog_zero}"
-                bind:text_color="@{model.negativeTextColor}"
-                bind:visible="@{!model.typeMessage}"
+                app:backgroundColor="@{model.separateActionButtons?model.negativeBgColor:model.dialogWhite}"
+                app:backgroundDrawable="@{model.separateActionButtons?model.negativeBgDrawable:model.noDrawable}"
+                app:cornerRadius="@{model.separateActionButtons?@dimen/dialog_action_button_corner:@dimen/dialog_zero}"
+                app:elevation="@{model.separateActionButtons?@dimen/dialog_negative_button_elevation:@dimen/dialog_zero}"
+                app:layout_weight="@{model.separateActionButtons?1f:0.9f}"
+                app:marginBottom="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
+                app:marginTop="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
+                app:strokeWidth="@{model.separateActionButtons?@dimen/dialog_negative_button_stroke:@dimen/dialog_zero}"
+                app:text_color="@{model.negativeTextColor}"
+                app:visible="@{!model.typeMessage}"
                 tools:visibility="visible" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight=".1"
-                bind:visible="@{model.separateActionButtons}" />
+                app:visible="@{model.separateActionButtons}" />
 
             <carbon.widget.Button
                 android:id="@+id/confirmButton"
@@ -89,14 +89,14 @@
                 android:layout_weight="1.1"
                 android:text="@{model.typeMessage?@string/dialog_ok_text:@string/dialog_positive_text}"
                 android:textAppearance="@style/dialog_positive_button_style"
-                bind:backgroundColor="@{model.positiveBgColor}"
-                bind:backgroundDrawable="@{model.positiveBgDrawable}"
-                bind:carbon_cornerRadius="@dimen/dialog_action_button_corner"
-                bind:carbon_elevation="@dimen/dialog_positive_button_elevation"
-                bind:layout_weight="@{model.separateActionButtons?1f:1.1f}"
-                bind:marginBottom="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
-                bind:marginTop="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
-                bind:text_color="@{model.positiveTextColor}" />
+                app:backgroundColor="@{model.positiveBgColor}"
+                app:backgroundDrawable="@{model.positiveBgDrawable}"
+                app:carbon_cornerRadius="@dimen/dialog_action_button_corner"
+                app:carbon_elevation="@dimen/dialog_positive_button_elevation"
+                app:layout_weight="@{model.separateActionButtons?1f:1.1f}"
+                app:marginBottom="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
+                app:marginTop="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
+                app:text_color="@{model.positiveTextColor}" />
 
         </carbon.widget.LinearLayout>
     </carbon.widget.LinearLayout>

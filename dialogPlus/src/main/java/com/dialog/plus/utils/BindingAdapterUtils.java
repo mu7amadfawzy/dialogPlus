@@ -211,9 +211,9 @@ public class BindingAdapterUtils {
             textView.setText(text);
     }
 
-    @BindingAdapter("charsNumber")
-    public static void charsNumber(PinEntryEditText textView, int charsNumber) {
-        textView.setNumOfChars(charsNumber);
+    @BindingAdapter("dialog_plus_charsNumber")
+    public static void dialog_plus_charsNumber(PinEntryEditText textView, int dialog_plus_charsNumber) {
+        textView.setNumOfChars(dialog_plus_charsNumber);
     }
 
     @BindingAdapter("dialog_width_percent")
@@ -250,8 +250,8 @@ public class BindingAdapterUtils {
         }
     }
 
-    @BindingAdapter("underline")
-    public static void underline(TextView textView, boolean doUnderline) {
+    @BindingAdapter("dialog_plus_underline")
+    public static void dialog_plus_underline(TextView textView, boolean doUnderline) {
         if (doUnderline) {
             SpannableString content = new SpannableString(textView.getText().toString());
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);

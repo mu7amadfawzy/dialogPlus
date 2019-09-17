@@ -26,6 +26,12 @@ public class DialogUiModel extends BaseObservable {
     public DialogUiModel() {
     }
 
+    public DialogUiModel(String title, int headerBgColor, int headerTextColor) {
+        this.title = title;
+        this.headerBgColor = headerBgColor;
+        this.headerTextColor = headerTextColor;
+    }
+
     @Bindable
     public boolean isWithResend() {
         return withResend;

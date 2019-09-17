@@ -38,6 +38,7 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textStyle">normal</item>
     </style>
+
     <style name="dialog_negative_button_style" parent="@android:style/TextAppearance">
         <item name="android:text">@string/dialog_negative_text</item>
         <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
@@ -60,6 +61,12 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/dialog_white</item>
         <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="dialog_month_year_picker_text_style">
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="colorControlNormal">#00000000</item>
+        <item name="android:textColorPrimary">#000</item>
     </style>
 
 </resources>

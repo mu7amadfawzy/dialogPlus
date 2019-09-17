@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -25,8 +25,8 @@
         android:background="@color/dialog_option_background"
         android:gravity="center"
         android:orientation="vertical"
-        bind:carbon_cornerRadius="@dimen/dialog_corner_radius"
-        bind:carbon_elevation="@dimen/dialog_elevation">
+       app:carbon_cornerRadius="@dimen/dialog_corner_radius"
+       app:carbon_elevation="@dimen/dialog_elevation">
 
         <TextView
             android:id="@+id/titleText"
@@ -51,8 +51,8 @@
             android:layout_margin="@dimen/dialog_action_buttons_margin"
             android:gravity="center"
             android:orientation="vertical"
-            bind:addOptions="@{optionsTitle}"
-            bind:callback="@{callback}" />
+           app:addOptions="@{optionsTitle}"
+           app:callback="@{callback}" />
 
         <View
             android:layout_width="match_parent"

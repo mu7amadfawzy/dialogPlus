@@ -10,4 +10,6 @@
     <string name="dialog_time_up">Time up</string>
     <string name="dialog_incomplete_code_msg">Please enter complete code</string>
     <string name="dialog_options_close">Close</string>
+    <string name="dialog_pick_year_title">Choose year</string>
+    <string name="dialog_pick_month_title">Choose month</string>
 </resources>

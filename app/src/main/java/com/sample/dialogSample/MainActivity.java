@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dialog.plus.ui.DialogPlus;
+import com.dialog.plus.ui.MonthYearPickerDialog;
 import com.dialog.plus.ui.MultiOptionsDialog;
 
 import java.util.ArrayList;
@@ -124,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         return dialogItemDMS;
+    }
+
+    public void onMonthYearDialogClicked(View view) {
+        new MonthYearPickerDialog().getYearPicker(pickedYear ->
+                Toast.makeText(this, "picked value: " + pickedYear, Toast.LENGTH_SHORT).show()).show(getSupportFragmentManager(), "dialog");
     }
 
     private class DialogListener extends DialogPlus.DialogActionListener {

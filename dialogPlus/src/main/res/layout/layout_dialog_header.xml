@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,15 +14,15 @@
     <carbon.widget.RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dialog_header_height"
-        bind:visible="@{model.title!=null}">
+       app:visible="@{model.title!=null}">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:scaleType="centerCrop"
-            bind:backgroundColor="@{model.headerBgColor}"
-            bind:backgroundDrawable="@{model.headerBgDrawable}" />
+           app:backgroundColor="@{model.headerBgColor}"
+           app:backgroundDrawable="@{model.headerBgDrawable}" />
 
         <TextView
             android:id="@+id/titleText"
@@ -39,8 +39,8 @@
             android:singleLine="true"
             android:text="@{model.title}"
             android:textAppearance="@style/dialog_header_style"
-            bind:setSelected="@{true}"
-            bind:text_color="@{model.headerTextColor}" />
+           app:setSelected="@{true}"
+           app:text_color="@{model.headerTextColor}" />
 
         <ImageView
             android:id="@+id/closeIV"
@@ -51,6 +51,6 @@
             android:layout_margin="@dimen/dialog_header_padding"
             android:src="@drawable/ic_dialog_close"
             android:tint="@color/dialogPositiveTextColor"
-            bind:tintColor="@{model.headerTextColor}" />
+           app:tintColor="@{model.headerTextColor}" />
     </carbon.widget.RelativeLayout>
 </layout>

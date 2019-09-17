@@ -231,6 +231,7 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 ````
     <integer name="dialog_content_maxLines">4</integer>
     <integer name="dialog_width_percent">90</integer>
+    <integer name="dialog_month_year_width_percent">60</integer>
     <integer name="dialog_header_maxLines">1</integer>
 ````
 #### Colors
@@ -269,6 +270,9 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
     <color name="dialog_option_close_text_color">@color/colorPrimaryDark</color>
     <color name="dialog_option_title_text_color">#000000</color>
     <color name="dialog_action_seperator">@color/carbon_grey_400</color>
+
+    <color name="dialog_month_year_action_background">#00000000</color>
+    <color name="dialog_month_year_action_text_color">@color/colorPrimary</color>
 ````
 
 #### Strings
@@ -280,6 +284,8 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
     <string name="dialog_time_up">Time up</string>
     <string name="dialog_incomplete_code_msg">Please enter complete code</string>  
     <string name="dialog_options_close">Close</string>
+    <string name="dialog_pick_year_title">Choose year</string>
+    <string name="dialog_pick_month_title">Choose month</string>
 ````
 
 #### Styles
@@ -345,6 +351,11 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
         <item name="android:textAllCaps">false</item>
         <item name="android:textStyle">normal</item>
     </style>
+     <style name="dialog_month_year_picker_text_style">
+            <item name="android:textSize">@dimen/_12ssp</item>
+            <item name="colorControlNormal">#00000000</item>
+            <item name="android:textColorPrimary">#000</item>
+        </style>
 ````
 
 ### Happy Coding
