@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 .setListDialog("list_dialog_test_title", getListItems(), new DialogPlus.DialogListListener() {
                     @Override
                     public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
+                        dialogPlus.dismiss(true);
                         Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
                     }
                 })
