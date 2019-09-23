@@ -137,14 +137,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMonthYearDialogClicked(View view) {
         new MonthYearPickerDialog().getYearPicker(pickedYear ->
-                Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
+                Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .setHeaderBgDrawable(R.drawable.bg_header)
                 .show(getSupportFragmentManager(), "dialog");
     }
 
     public void onMonthMonthDialogClicked(View view) {
         new MonthYearPickerDialog().getMonthPicker(pickedYear ->
-                Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
+                Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .setHeaderTextColor(R.color.black)
                 .show(getSupportFragmentManager(), "dialog");
     }
