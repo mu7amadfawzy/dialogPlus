@@ -41,35 +41,11 @@ import carbon.widget.Button;
  */
 public class BindingAdapterUtils {
 
+    private static final short COLOR_NOT_EXIST = -99;
+
     @BindingAdapter("visible")
     public static void visibility(View view, boolean visible) {
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
-
-    @BindingAdapter("backgroundColor")
-    public static void backgroundColor(View view, @ColorRes int colorRes) {
-        if (!resourceExist(colorRes))
-            return;
-        int color = getColor(colorRes, view.getContext());
-        if (color != 99) {//if color exists
-            view.setBackground(null);
-            view.setBackgroundColor(color);
-        } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
-    }
-
-    @BindingAdapter("tintColor")
-    public static void tintColor(ImageView view, @ColorRes int tintColor) {
-        if (!resourceExist(tintColor))
-            return;
-        int color = getColor(tintColor, view.getContext());
-        if (color != 99) {//if color exists
-            view.setColorFilter(color);
-        } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
-    }
-
-    @BindingAdapter("strokeColor")
-    public static void strokeColor(carbon.view.View view, @ColorInt int colorRes) {
-        view.setStroke(colorRes);
     }
 
     @BindingAdapter("strokeWidth")
@@ -91,7 +67,7 @@ public class BindingAdapterUtils {
         try {
             return ContextCompat.getColor(context, colorRes);
         } catch (Resources.NotFoundException e) {
-            return -99;
+            return COLOR_NOT_EXIST;
         }
     }
 
@@ -146,8 +122,8 @@ public class BindingAdapterUtils {
         }
     }
 
-    @BindingAdapter("elevation")
-    public static void elevation(carbon.view.View view, float elevation) {
+    @BindingAdapter("dialog_elevation")
+    public static void dialog_elevation(Button view, float elevation) {
         view.setElevation(elevation);
     }
 
@@ -164,6 +140,31 @@ public class BindingAdapterUtils {
         }
     }
 
+    @BindingAdapter("backgroundColor")
+    public static void backgroundColor(View view, @ColorRes int colorRes) {
+        if (!resourceExist(colorRes))
+            return;
+        int color = getColor(colorRes, view.getContext());
+        if (color != COLOR_NOT_EXIST) {//if color exists
+            view.setBackground(null);
+            view.setBackgroundColor(color);
+        } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
+    }
+
+    @BindingAdapter("tintColor")
+    public static void tintColor(ImageView view, @ColorRes int tintColor) {
+        if (!resourceExist(tintColor))
+            return;
+        int color = getColor(tintColor, view.getContext());
+        if (color != COLOR_NOT_EXIST) {//if color exists
+            view.setColorFilter(color);
+        } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
+    }
+
+    @BindingAdapter("strokeColor")
+    public static void strokeColor(carbon.view.View view, @ColorInt int colorRes) {
+        view.setStroke(colorRes);
+    }
 
     @BindingAdapter("backgroundDrawable")
     public static void backgroundDrawable(View view, @DrawableRes int drawableRes) {

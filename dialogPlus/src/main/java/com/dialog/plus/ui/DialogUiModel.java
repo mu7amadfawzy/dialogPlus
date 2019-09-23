@@ -21,11 +21,11 @@ public class DialogUiModel extends BaseObservable {
     private int timeLeft, starsNumber = 5;
     private float rateValue;
     private @ColorRes
-    int positiveBgColor, negativeBgColor, headerBgColor;
+    int positiveBgColor = -1, negativeBgColor = -1, headerBgColor = -1;
     private @DrawableRes
-    int positiveBgDrawable, negativeBgDrawable, headerBgDrawable;
+    int positiveBgDrawable = -1, negativeBgDrawable = -1, headerBgDrawable = -1;
     private @ColorRes
-    int positiveTextColor, negativeTextColor, headerTextColor;
+    int positiveTextColor = -1, negativeTextColor = -1, headerTextColor = -1;
     @ColorInt
     private int dialogCodeTextColor = Color.BLACK;
     @DialogPlus.TYPE
@@ -304,6 +304,11 @@ public class DialogUiModel extends BaseObservable {
 
     @Bindable
     public int getDialogWhite() {
+        return R.color.dialog_white;
+    }
+
+    @Bindable
+    public int getDialogTransparent() {
         return R.color.dialogTransparent;
     }
 
