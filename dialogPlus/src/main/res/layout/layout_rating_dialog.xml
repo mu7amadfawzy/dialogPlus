@@ -39,6 +39,16 @@
             tools:text="message \n message \n message"
             tools:visibility="visible" />
 
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dialog_rating_bar_margin"
+            android:numStars="5"
+            android:rating="@={model.rateValue}"
+            android:theme="@style/dialog_rating_bar_style" />
+
         <include
             android:id="@+id/actionButtons"
             layout="@layout/layout_action_buttons"

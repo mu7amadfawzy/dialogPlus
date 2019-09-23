@@ -103,6 +103,17 @@ public class MainActivity extends AppCompatActivity {
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
+    public void onClickedRating(View view) {
+        new DialogPlus("Rating Dialog", "Rate dialog_plus message content ...")
+                .setRatingDialog(1.7f, "rate", "cancel", new DialogPlus.DialogRateListener() {
+                    @Override
+                    public void onRateGiven(float rate, DialogPlus dialogPlus) {
+                        Toast.makeText(MainActivity.this, "rated with " + rate, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show(this.getSupportFragmentManager(), "dialog_plus");
+    }
+
     private List<String> getListItems() {
         List<String> dialogItemDMS = new ArrayList<>();
         dialogItemDMS.add("title 4");

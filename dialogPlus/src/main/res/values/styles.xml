@@ -69,4 +69,8 @@
         <item name="android:textColorPrimary">#000</item>
     </style>
 
+    <style name="dialog_rating_bar_style" parent="Widget.AppCompat.RatingBar">
+        <item name="colorControlActivated">@color/dialog_rating_bar_active_color</item>
+        <item name="colorControlNormal">@color/dialog_rating_bar_accent_color</item>
+    </style>
 </resources>

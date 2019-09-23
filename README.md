@@ -101,6 +101,18 @@ new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
                 Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "dialog");
 ```
+### 2.10 Rate Dialog:
+
+ ```
+   new DialogPlus("Rating Dialog", "Rate dialog_plus message content ...")
+                .setRatingDialog(1.7f,"rate", "cancel", new DialogPlus.DialogRateListener() {
+                    @Override
+                    public void onRateGiven(float rate, DialogPlus dialogPlus) {
+                        Toast.makeText(MainActivity.this, "rated with " + rate, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show(this.getSupportFragmentManager(), "dialog_plus");
+```
      
 ### 3 Listeners:
 
@@ -163,6 +175,8 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
                     }
                 });
 ````
+#### ```setRateListener(DialogPlus.DialogRateListener)```  Used only with RATE dialog
+
 ### 4 Customizing:
 ### 4.1 per use
 ```
@@ -240,6 +254,8 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
        <dimen name="dialog_list_row_margin_top">@dimen/_4sdp</dimen>
        <dimen name="dialog_list_row_margin_start">@dimen/_8sdp</dimen>
        <dimen name="dialog_list_separator_margin">@dimen/_16sdp</dimen>
+       
+       <dimen name="dialog_rating_bar_margin">@dimen/_15sdp</dimen>
 ````
 #### Integers
 ````
@@ -287,6 +303,9 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 
     <color name="dialog_month_year_action_background">#00000000</color>
     <color name="dialog_month_year_action_text_color">@color/colorPrimary</color>
+    
+    <color name="dialog_rating_bar_active_color">@color/colorPrimary</color>
+    <color name="dialog_rating_bar_accent_color">@color/colorAccent</color>
 ````
 
 #### Strings
@@ -358,18 +377,23 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
         <item name="android:textStyle">normal</item>
     </style>
     
-     <style name="dialog_option_button_style" parent="@android:style/TextAppearance">
+    <style name="dialog_option_button_style" parent="@android:style/TextAppearance">
         <item name="android:text">@string/dialog_positive_text</item>
         <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
         <item name="android:textColor">@color/dialogPositiveTextColor</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textStyle">normal</item>
     </style>
-     <style name="dialog_month_year_picker_text_style">
+    <style name="dialog_month_year_picker_text_style">
             <item name="android:textSize">@dimen/_12ssp</item>
             <item name="colorControlNormal">#00000000</item>
             <item name="android:textColorPrimary">#000</item>
-        </style>
+    </style>
+        
+     <style name="dialog_rating_bar_style" parent="Widget.AppCompat.RatingBar">
+        <item name="colorControlActivated">@color/dialog_rating_bar_active_color</item>
+        <item name="colorControlNormal">@color/dialog_rating_bar_accent_color</item>
+    </style>
 ````
 
 ### Happy Coding

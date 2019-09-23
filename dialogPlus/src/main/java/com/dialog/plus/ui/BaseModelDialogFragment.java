@@ -89,13 +89,6 @@ public abstract class BaseModelDialogFragment<Binding extends ViewDataBinding> e
     }
 
     /**
-     * sets the text color to the header background and positive and negative
-     */
-    public BaseModelDialogFragment<Binding> setTextColors(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor) {
-        return setTextColors(positiveTextColor, negativeTextColor, 0);
-    }
-
-    /**
      * sets the text to the positiveBtn and negativeBtn
      */
     public BaseModelDialogFragment<Binding> setTexts(String positiveText) {
@@ -103,29 +96,58 @@ public abstract class BaseModelDialogFragment<Binding extends ViewDataBinding> e
     }
 
     public BaseModelDialogFragment<Binding> setTexts(String positiveText, String negativeText) {
-        model.setPositiveText(positiveText);
-        model.setNegativeText(negativeText);
+        return setTexts(positiveText, negativeText, null);
+    }
+
+    public BaseModelDialogFragment<Binding> setTexts(String positiveText, String negativeText, String headerText) {
+        if (positiveText != null)
+            model.setPositiveText(positiveText);
+        if (negativeText != null)
+            model.setNegativeText(negativeText);
+        if (headerText != null)
+            model.setHeaderText(headerText);
         return this;
     }
 
+    /**
+     * sets the text color to the header background and positive and negative
+     */
+    public BaseModelDialogFragment<Binding> setTextColors(@ColorRes int positiveTextColor) {
+        return setTextColors(positiveTextColor, -1, -1);
+    }
+
+    public BaseModelDialogFragment<Binding> setTextColors(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor) {
+        return setTextColors(positiveTextColor, negativeTextColor, -1);
+    }
+
     public BaseModelDialogFragment<Binding> setTextColors(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor, @ColorRes int headerTextColor) {
-        model.setPositiveTextColor(positiveTextColor);
-        model.setHeaderTextColor(headerTextColor);
-        model.setNegativeTextColor(negativeTextColor);
+        if (positiveTextColor != -1)
+            model.setPositiveTextColor(positiveTextColor);
+        if (headerTextColor != -1)
+            model.setHeaderTextColor(headerTextColor);
+        if (negativeTextColor != -1)
+            model.setNegativeTextColor(negativeTextColor);
         return this;
     }
 
     /**
      * sets the background drawable to the header background and positive andnegative
      */
+    public BaseModelDialogFragment<Binding> setBackgrounds(@DrawableRes int positiveBackground) {
+        return setBackgrounds(positiveBackground, -1, -1);
+    }
+
     public BaseModelDialogFragment<Binding> setBackgrounds(@DrawableRes int positiveBackground, @DrawableRes int negativeBackground) {
-        return setBackgrounds(positiveBackground, negativeBackground, 0);
+        return setBackgrounds(positiveBackground, negativeBackground, -1);
     }
 
     public BaseModelDialogFragment<Binding> setBackgrounds(@DrawableRes int positiveBgDrawable, @DrawableRes int negativeBgDrawable, @DrawableRes int headerBgDrawable) {
-        model.setPositiveBgDrawable(positiveBgDrawable);
-        model.setHeaderBgDrawable(headerBgDrawable);
-        model.setNegativeBgDrawable(negativeBgDrawable);
+        if (positiveBgDrawable != -1)
+            model.setPositiveBgDrawable(positiveBgDrawable);
+        if (positiveBgDrawable != -1)
+            model.setHeaderBgDrawable(positiveBgDrawable);
+        if (negativeBgDrawable != -1)
+            model.setNegativeBgDrawable(negativeBgDrawable);
         return this;
     }
 
@@ -176,7 +198,7 @@ public abstract class BaseModelDialogFragment<Binding extends ViewDataBinding> e
 
     protected BaseModelDialogFragment<Binding> setMessageDialog(String positiveText) {
         model.setPositiveText(positiveText);
-        setDialog_type(DialogPlus.TYPE.MESSAGE);
+        setDialog_type(DialogPlus.TYPE.MESSAGE_DIALOG);
         return this;
     }
 

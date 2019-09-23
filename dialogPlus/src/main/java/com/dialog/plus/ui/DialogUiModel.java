@@ -18,7 +18,8 @@ import com.dialog.plus.R;
 public class DialogUiModel extends BaseObservable {
     private boolean withSend, withResend, withCounter, typeMessage, separateActionButtons;
     private String title, correctCode, codeEntry, content, typed_code, positiveText, negativeText, headerText;
-    private int timeLeft;
+    private int timeLeft, starsNumber = 5;
+    private float rateValue;
     private @ColorRes
     int positiveBgColor, negativeBgColor, headerBgColor;
     private @DrawableRes
@@ -44,6 +45,7 @@ public class DialogUiModel extends BaseObservable {
         this.headerBgColor = headerBgColor;
         this.headerTextColor = headerTextColor;
     }
+
     @Bindable
     public boolean isWithResend() {
         return withResend;
@@ -280,6 +282,24 @@ public class DialogUiModel extends BaseObservable {
     public void setDialogCodeTextColor(int dialogCodeTextColor) {
         this.dialogCodeTextColor = dialogCodeTextColor;
         notifyPropertyChanged(BR.dialogCodeTextColor);
+    }
+
+    public int getStarsNumber() {
+        return starsNumber;
+    }
+
+    public void setStarsNumber(int starsNumber) {
+        this.starsNumber = starsNumber;
+    }
+
+    @Bindable
+    public float getRateValue() {
+        return rateValue;
+    }
+
+    public void setRateValue(float rateValue) {
+        this.rateValue = rateValue;
+        notifyPropertyChanged(BR.rateValue);
     }
 
     @Bindable

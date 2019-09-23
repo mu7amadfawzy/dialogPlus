@@ -37,4 +37,7 @@
 
     <color name="dialog_month_year_action_background">#00000000</color>
     <color name="dialog_month_year_action_text_color">@color/colorPrimary</color>
+
+    <color name="dialog_rating_bar_active_color">@color/colorPrimary</color>
+    <color name="dialog_rating_bar_accent_color">@color/colorAccent</color>
 </resources>

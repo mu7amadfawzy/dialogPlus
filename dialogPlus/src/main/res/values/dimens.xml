@@ -36,4 +36,6 @@
     <dimen name="dialog_list_row_margin_top">@dimen/_4sdp</dimen>
     <dimen name="dialog_list_row_margin_start">@dimen/_8sdp</dimen>
     <dimen name="dialog_list_separator_margin">@dimen/_16sdp</dimen>
+
+    <dimen name="dialog_rating_bar_margin">@dimen/_15sdp</dimen>
 </resources>

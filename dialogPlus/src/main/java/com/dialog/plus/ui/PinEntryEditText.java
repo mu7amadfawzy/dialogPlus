@@ -25,17 +25,9 @@ import com.dialog.plus.R;
 
 public class PinEntryEditText extends AppCompatEditText {
     public static final String XML_NAMESPACE_ANDROID = "http://schemas.android.com/apk/res/android";
-    int[][] mStates = new int[][]{
-            new int[]{android.R.attr.state_selected}, // selected
-            new int[]{android.R.attr.state_focused}, // focused
-            new int[]{-android.R.attr.state_focused}, // unfocused
-    };
-    int[] mColors = new int[]{
-            R.color.colorPrimary,
-            R.color.colorPrimary,
-            R.color.colorPrimary
-    };
-    ColorStateList mColorStates = new ColorStateList(mStates, mColors);
+    private int[][] mStates = new int[][]{new int[]{android.R.attr.state_selected}, new int[]{android.R.attr.state_focused}, new int[]{-android.R.attr.state_focused}};
+    private int[] mColors = new int[]{R.color.colorPrimary, R.color.colorPrimary, R.color.colorPrimary};
+    private ColorStateList mColorStates = new ColorStateList(mStates, mColors);
     private int digitTextColor;
     private float mSpace = 12; //24 dp by default, space between the lines
     private float mCharSize;

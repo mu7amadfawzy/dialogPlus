@@ -41,6 +41,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     private int counterSeconds;
     private boolean withResend, withSend, withCounter;
     private CountDownTimer countDownTimer;
+    private DialogRateListener rateListener;
 
 
     public DialogPlus() {
@@ -52,7 +53,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     public DialogPlus(String title, String content) {
-        this(TYPE.MESSAGE, title, content);
+        this(TYPE.MESSAGE_DIALOG, title, content);
     }
 
     public DialogPlus(@TYPE int type, String title, String content) {
@@ -67,7 +68,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
      * Sets a code confirmation dialog_plus interface
      */
     public DialogPlus setConfirmCodeDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, CodeTypeListener codeTypeListener) {
-        setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener).setDialog_type(TYPE.CODE);
+        setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener).setDialog_type(TYPE.CODE_DIALOG);
         return this;
     }
 
@@ -83,7 +84,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     public DialogPlus setConfirmationDialog(String positiveText, String negativeText, boolean separateActionButtons, DialogActionListener actionClicked) {
-        setSeparateActionButtons(separateActionButtons).setDialogActionListener(actionClicked).setDialog_type(TYPE.CONFIRMATION).setTexts(positiveText, negativeText);
+        setSeparateActionButtons(separateActionButtons).setDialogActionListener(actionClicked).setDialog_type(TYPE.CONFIRMATION_DIALOG).setTexts(positiveText, negativeText);
         return this;
     }
 
@@ -125,6 +126,23 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
         return this;
     }
 
+
+    /**
+     * Sets a Rating dialog_plus interface(with positive and negative actions)
+     */
+    public DialogPlus setRatingDialog(DialogRateListener rateListener) {
+        return setRatingDialog(2, null, null, rateListener);
+    }
+
+    public DialogPlus setRatingDialog(float initialRate, String positiveText, String negativeText, DialogRateListener rateListener) {
+        return setRatingDialog(initialRate, positiveText, negativeText, false, rateListener);
+    }
+
+    public DialogPlus setRatingDialog(float initialRate, String positiveText, String negativeText, boolean separateActionButtons, DialogRateListener rateListener) {
+        setInitialRate(initialRate).setSeparateActionButtons(separateActionButtons).setRateListener(rateListener).setDialog_type(TYPE.RATING_DIALOG).setTexts(positiveText, negativeText);
+        return this;
+    }
+
     /**
      * Sets a Success dialog_plus interface
      */
@@ -159,7 +177,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     private @LayoutRes
     int getDialogLayoutRes() {
         switch (model.getDialog_type()) {
-            case TYPE.CODE:
+            case TYPE.CODE_DIALOG:
                 return R.layout.layout_code_dialog;
             case TYPE.ERROR_DIALOG:
                 return R.layout.layout_error_dialog;
@@ -167,6 +185,8 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
                 return R.layout.layout_success_dialog;
             case TYPE.LIST_DIALOG:
                 return R.layout.layout_dialog_list;
+            case TYPE.RATING_DIALOG:
+                return R.layout.layout_rating_dialog;
         }
         return R.layout.layout_confirmation_dialog;
     }
@@ -178,7 +198,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
 
     private void setDialogType() {
         switch (model.getDialog_type()) {
-            case TYPE.CODE:
+            case TYPE.CODE_DIALOG:
                 setOnTextListener();
                 break;
             case TYPE.ERROR_DIALOG:
@@ -278,13 +298,14 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     private void setListeners() {
         if (model.getDialog_type() == TYPE.SUCCESS_DIALOG || model.getDialog_type() == TYPE.ERROR_DIALOG) {
             setSuccessErrorDialogListeners();
-        } else if (model.getDialog_type() == TYPE.CODE || model.getDialog_type() == TYPE.CONFIRMATION || model.getDialog_type() == TYPE.MESSAGE) {
+        } else if (model.getDialog_type() == TYPE.CODE_DIALOG || model.getDialog_type() == TYPE.CONFIRMATION_DIALOG
+                || model.getDialog_type() == TYPE.RATING_DIALOG || model.getDialog_type() == TYPE.MESSAGE_DIALOG) {
             getHeaderChildView(R.id.closeIV).setOnClickListener(this);
-            if (model.getDialog_type() == TYPE.CODE) {
+            if (model.getDialog_type() == TYPE.CODE_DIALOG) {
                 setCodeDialogListeners();
             } else {
                 getDialogAddedView(R.id.confirmButton).setOnClickListener(this);
-                if (model.getDialog_type() == TYPE.CONFIRMATION)
+                if (model.getDialog_type() == TYPE.CONFIRMATION_DIALOG || model.getDialog_type() == TYPE.RATING_DIALOG)
                     getDialogAddedView(R.id.cancelButton).setOnClickListener(this);
             }
         } else {
@@ -326,6 +347,8 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void onPositiveClicked() {
+        if (model.getDialog_type() == TYPE.RATING_DIALOG && rateListener != null)
+            rateListener.onRateGiven(model.getRateValue(), this);
         if (dialogActionListener != null)
             dialogActionListener.onPositive(this);
         else dismiss(true);
@@ -350,6 +373,8 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void onNegativeClicked() {
+        if (model.getDialog_type() == TYPE.RATING_DIALOG && rateListener != null)
+            rateListener.onNegative(this);
         if (dialogActionListener != null)
             dialogActionListener.onNegative(this);
         else dismiss(true);
@@ -401,7 +426,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void updateModelTexts() {
-        model.setTypeMessage(model.getDialog_type() == TYPE.MESSAGE);
+        model.setTypeMessage(model.getDialog_type() == TYPE.MESSAGE_DIALOG);
         model.setCorrectCode(correct_code);
         model.setTimeLeft(counterSeconds);
         model.setWithCounter(withCounter);
@@ -417,6 +442,16 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
 
     public DialogPlus setDialogActionListener(DialogActionListener dialogActionListener) {
         this.dialogActionListener = dialogActionListener;
+        return this;
+    }
+
+    public DialogPlus setInitialRate(float initialRate) {
+        model.setRateValue(initialRate);
+        return this;
+    }
+
+    public DialogPlus setRateListener(DialogRateListener rateListener) {
+        this.rateListener = rateListener;
         return this;
     }
 
@@ -450,12 +485,13 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
      */
     @Retention(RetentionPolicy.SOURCE)
     public @interface TYPE {
-        int CONFIRMATION = 0;
-        int CODE = 1;
-        int MESSAGE = 2;
+        int CONFIRMATION_DIALOG = 0;
+        int CODE_DIALOG = 1;
+        int MESSAGE_DIALOG = 2;
         int ERROR_DIALOG = 3;
         int SUCCESS_DIALOG = 4;
         int LIST_DIALOG = 5;
+        int RATING_DIALOG = 6;
     }
 
     /**
@@ -488,6 +524,17 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
         }
 
         public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
+            dialogPlus.dismiss(true);
+        }
+    }
+
+    public abstract static class DialogRateListener {
+
+        public void onNegative(DialogPlus dialogPlus) {
+            dialogPlus.dismiss(true);
+        }
+
+        public void onRateGiven(float rate, DialogPlus dialogPlus) {
             dialogPlus.dismiss(true);
         }
     }
