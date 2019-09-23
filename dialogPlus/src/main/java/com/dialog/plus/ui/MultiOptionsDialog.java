@@ -16,14 +16,16 @@ import java.util.List;
  * ma7madfawzy@gmail.com
  **/
 public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBinding> {
-    private final String title;
-    private ActionListener actionListener;
-    private List<String> optionsTitle;
+    private DialogUiModel model = new DialogUiModel();
+
+    public MultiOptionsDialog(DialogUiModel uiModel) {
+        this.model = uiModel;
+    }
 
     public MultiOptionsDialog(String title, List<String> optionsTitle, ActionListener actionListener) {
-        this.actionListener = actionListener;
-        this.optionsTitle = optionsTitle;
-        this.title = title;
+        model.setMultiOptionsDialogListener(actionListener);
+        model.setListDialogItems(optionsTitle);
+        model.setTitle(title);
     }
 
     @Override
@@ -35,8 +37,7 @@ public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBin
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.setCallback(getActionListener());
-        binding.setOptionsTitle(optionsTitle);
-        binding.setTitle(title);
+        binding.setModel(model);
         setListeners();
     }
 
@@ -44,7 +45,7 @@ public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBin
         return new ActionListener() {
             @Override
             public void onActionClicked(String clickedOption) {
-                actionListener.onActionClicked(clickedOption);
+                model.getMultiOptionsDialogListener().onActionClicked(clickedOption);
                 dismiss(true);
             }
         };
@@ -60,8 +61,8 @@ public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBin
     }
 
     private void onCloseClicked() {
-        if (actionListener != null)
-            actionListener.onCancel(this);
+        if (model.getMultiOptionsDialogListener() != null)
+            model.getMultiOptionsDialogListener().onCancel(this);
         dismiss(true);
     }
 

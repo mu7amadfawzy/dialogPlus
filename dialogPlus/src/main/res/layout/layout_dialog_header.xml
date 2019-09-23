@@ -49,7 +49,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/dialog_header_padding"
-            android:src="@drawable/ic_dialog_close"
+            app:srcCompat="@drawable/ic_dialog_close"
             android:tint="@color/dialogPositiveTextColor"
             app:tintColor="@{model.headerTextColor}" />
     </carbon.widget.RelativeLayout>

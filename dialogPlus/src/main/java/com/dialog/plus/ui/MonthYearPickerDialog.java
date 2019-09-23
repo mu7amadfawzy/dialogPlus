@@ -11,6 +11,8 @@ import com.dialog.plus.BR;
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.LayoutMonthYearPickerDialogBinding;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -21,10 +23,16 @@ import java.util.Locale;
 public class MonthYearPickerDialog extends BaseModelDialogFragment<LayoutMonthYearPickerDialogBinding> {
     private final int MIN_YEAR = 1970;
     private int MAX_YEAR, MAX_MONTH = 12, MIN_MONTH = 1;
-    private PickerListener listener;
     private boolean isMonthPicker;
     @ColorRes
     private int dialogPositiveBgColor = R.color.dialogPositiveBgColor, titleTextColor = R.color.titleTextColor;
+
+    public MonthYearPickerDialog(DialogUiModel model, @TYPE int type) {
+        this.model = model;
+        this.isMonthPicker = type == TYPE.MONTH;
+        if (model.getMaxYear() != 0)
+            this.MAX_YEAR = model.getMaxYear();
+    }
 
     public MonthYearPickerDialog getYearPicker(PickerListener listener) {
         return getYearPicker(Calendar.getInstance().get(Calendar.YEAR), listener);
@@ -32,14 +40,14 @@ public class MonthYearPickerDialog extends BaseModelDialogFragment<LayoutMonthYe
 
     public MonthYearPickerDialog getYearPicker(int maxYear, PickerListener listener) {
         isMonthPicker = false;
-        this.listener = listener;
+        model.setPickerListener(listener);
         this.MAX_YEAR = maxYear;
         return this;
     }
 
     public MonthYearPickerDialog getMonthPicker(PickerListener listener) {
         isMonthPicker = true;
-        this.listener = listener;
+        model.setPickerListener(listener);
         return this;
     }
 
@@ -57,7 +65,7 @@ public class MonthYearPickerDialog extends BaseModelDialogFragment<LayoutMonthYe
 
     private void setListeners() {
         binding.confirmButton.setOnClickListener(v -> {
-            listener.onPicked(binding.picker.getValue());
+            model.getPickerListener().onPicked(binding.picker.getValue());
             dismiss(true);
         });
         binding.headerLayout.closeIV.setOnClickListener(v -> dismiss(true));
@@ -114,6 +122,15 @@ public class MonthYearPickerDialog extends BaseModelDialogFragment<LayoutMonthYe
     @Override
     public int getLayoutId() {
         return R.layout.layout_month_year_picker_dialog;
+    }
+
+    /**
+     * dialog_plus type will be indicated by one of the bellow integers
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface TYPE {
+        int YEAR = 0;
+        int MONTH = 1;
     }
 
     public interface PickerListener {

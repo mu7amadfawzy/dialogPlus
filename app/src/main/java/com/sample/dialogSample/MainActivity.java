@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dialog.plus.ui.DialogPlus;
-import com.dialog.plus.ui.MonthYearPickerDialog;
+import com.dialog.plus.ui.DialogPlusBuilder;
 import com.dialog.plus.ui.MultiOptionsDialog;
 
 import java.util.ArrayList;
@@ -24,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMultiOptionsDialogClicked(View view) {
-        new MultiOptionsDialog("Multi Options Dialog Sample Title", getOptions()
-                , new MultiOptionsDialog.ActionListener() {
-            @Override
-            public void onActionClicked(String clickedOption) {
-                Toast.makeText(MainActivity.this, clickedOption, Toast.LENGTH_SHORT).show();
-            }
-        }).show(this.getSupportFragmentManager(), "dialog_plus");
+        new DialogPlusBuilder()
+                .buildMultiOptionsDialog("Multi Options Dialog Sample Title", getOptions()
+                        , new MultiOptionsDialog.ActionListener() {
+                            @Override
+                            public void onActionClicked(String clickedOption) {
+                                Toast.makeText(MainActivity.this, clickedOption, Toast.LENGTH_SHORT).show();
+                            }
+                        }).show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     private List<String> getOptions() {
@@ -39,79 +40,93 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickedMessageCode(View view) {
-        new DialogPlus("Message Dialog", "message dialog_plus sample\n Welcome Back")
+        new DialogPlusBuilder("Message Dialog", "message dialog_plus sample\n Welcome Back")
                 //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
-                .setMessageDialog("alright", new DialogListener())
+                .setMessageDialog("alright", new DialogListener() {
+                })// implement methods
                 .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
+                .build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedConfirmCode(View view) {
-        new DialogPlus("Code Dialog", "code dialog_plus sample with send enabled, resend enabled and counter 10 seconds")
+        new DialogPlusBuilder("Code Dialog", "code dialog_plus sample with send enabled, resend enabled and counter 10 seconds")
                 .setConfirmCodeDialog("12345", true, true, 60, Color.BLACK, null)
-                .setDialogActionListener(new DialogListener())
+                .setDialogActionListener(new DialogListener() {
+                })// implement methods
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                .build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedValidation(View view) {
-        new DialogPlus("Code Dialog", "code dialog_plus sample with send enabled and zero seconds counter.")
+        new DialogPlusBuilder("Code Dialog", "code dialog_plus sample with send enabled and zero seconds counter.")
                 .setConfirmCodeDialog("123", false, true, 50, Color.BLUE, null)
-                .setDialogActionListener(new DialogListener())
+                .setDialogActionListener(new DialogListener() {
+                })// implement methods
                 .setBackgroundColors(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimary)
                 .setHeaderBgDrawable(R.drawable.bg_header)
+                .build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedConfirmation(View view) {
-        new DialogPlus("Confirmation Dialog", "confirmation dialog_plus message content ...")
-                .setConfirmationDialog("confirm", "cancel", new DialogListener())
+        new DialogPlusBuilder("Confirmation Dialog", "confirmation dialog_plus message content ...")
+                .setConfirmationDialog("confirm", "cancel", new DialogListener() {
+                })
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
+                .build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedConfirmation2(View view) {
-        new DialogPlus("Confirmation Dialog option two interface", "Confirmation Dialog with separated action buttons ...")
-                .setConfirmationDialog("confirm", "cancel", true, new DialogListener())
+        new DialogPlusBuilder("Confirmation Dialog option two interface", "Confirmation Dialog with separated action buttons ...")
+                .setConfirmationDialog("confirm", "cancel", true, new DialogListener() {
+                })// implement methods
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .setSecondaryTextColor(R.color.colorPrimary)
+                .build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedErrorDialog(View view) {
-        new DialogPlus("error dialog_plus content message")
-                .setErrorDialog("Peace", new DialogListener())
+        new DialogPlusBuilder("error dialog_plus content message")
+                .setErrorDialog("Peace", new DialogListener() {
+                })// implement methods
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                .build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedSuccessDialog(View view) {
-        new DialogPlus("Success message content..")
-                .setSuccessDialog("Cool", new DialogListener())
+        new DialogPlusBuilder("Success message content..")
+                .setSuccessDialog("Cool", new DialogListener() {
+                })// implement methods
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                .build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onListDialogClicked(View view) {
-        new DialogPlus()
+        new DialogPlusBuilder()
                 .setListDialog("list_dialog_test_title", getListItems(), new DialogPlus.DialogListListener() {
                     @Override
                     public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
                         dialogPlus.dismiss(true);
                         Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
                     }
-                })
+                }).build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
     public void onClickedRating(View view) {
-        new DialogPlus("Rating Dialog", "Rate dialog_plus message content ...")
+        new DialogPlusBuilder("Rating Dialog", "Rate dialog_plus message content ...")
                 .setRatingDialog(1.7f, "rate", "cancel", new DialogPlus.DialogRateListener() {
                     @Override
                     public void onRateGiven(float rate, DialogPlus dialogPlus) {
                         Toast.makeText(MainActivity.this, "rated with " + rate, Toast.LENGTH_SHORT).show();
                     }
-                })
+                }).build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
     }
 
@@ -137,16 +152,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMonthYearDialogClicked(View view) {
-        new MonthYearPickerDialog().getYearPicker(pickedYear ->
+        new DialogPlusBuilder().setHeaderBgDrawable(R.drawable.bg_header).buildYearDialog(pickedYear ->
                 Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
-                .setHeaderBgDrawable(R.drawable.bg_header)
                 .show(getSupportFragmentManager(), "dialog");
     }
 
     public void onMonthMonthDialogClicked(View view) {
-        new MonthYearPickerDialog().getMonthPicker(pickedYear ->
+        new DialogPlusBuilder().setHeaderTextColor(R.color.black).buildMonthDialog(pickedYear ->
                 Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
-                .setHeaderTextColor(R.color.black)
                 .show(getSupportFragmentManager(), "dialog");
     }
 

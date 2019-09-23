@@ -11,14 +11,17 @@ import androidx.databinding.Bindable;
 import com.dialog.plus.BR;
 import com.dialog.plus.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
 public class DialogUiModel extends BaseObservable {
-    private boolean withSend, withResend, withCounter, typeMessage, separateActionButtons;
+    private boolean withSend, withResend, withCounter, separateActionButtons;
     private String title, correctCode, codeEntry, content, typed_code, positiveText, negativeText, headerText;
-    private int timeLeft, starsNumber = 5;
+    private int timeLeft, starsNumber = 5, counterSeconds, maxYear;
     private float rateValue;
     private @ColorRes
     int positiveBgColor = -1, negativeBgColor = -1, headerBgColor = -1;
@@ -30,6 +33,17 @@ public class DialogUiModel extends BaseObservable {
     private int dialogCodeTextColor = Color.BLACK;
     @DialogPlus.TYPE
     private int dialog_type;
+    /**
+     * Listeners
+     **/
+    private DialogPlus.CodeTypeListener codeTypeListener;
+    private DialogPlus.DialogActionListener dialogActionListener;
+    private DialogPlus.DialogListListener dialogListListener;
+    private DialogPlus.DialogRateListener rateListener;
+    private MonthYearPickerDialog.PickerListener pickerListener;
+    private MultiOptionsDialog.ActionListener multiOptionsDialogListener;
+
+    private List<String> listDialogItems = new ArrayList<>();
 
     public DialogUiModel() {
     }
@@ -108,8 +122,9 @@ public class DialogUiModel extends BaseObservable {
         return title;
     }
 
-    public void setTitle(String title) {
+    public DialogUiModel setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     @Bindable
@@ -225,11 +240,7 @@ public class DialogUiModel extends BaseObservable {
 
     @Bindable
     public boolean isTypeMessage() {
-        return typeMessage;
-    }
-
-    public void setTypeMessage(boolean typeMessage) {
-        this.typeMessage = typeMessage;
+        return getDialog_type() == DialogPlus.TYPE.MESSAGE_DIALOG;
     }
 
     public boolean isCorrectCode() {
@@ -324,5 +335,80 @@ public class DialogUiModel extends BaseObservable {
 
     public void setDialog_type(int dialog_type) {
         this.dialog_type = dialog_type;
+    }
+
+    public DialogPlus.CodeTypeListener getCodeTypeListener() {
+        return codeTypeListener;
+    }
+
+    public void setCodeTypeListener(DialogPlus.CodeTypeListener codeTypeListener) {
+        this.codeTypeListener = codeTypeListener;
+    }
+
+    public DialogPlus.DialogActionListener getDialogActionListener() {
+        return dialogActionListener;
+    }
+
+    public void setDialogActionListener(DialogPlus.DialogActionListener dialogActionListener) {
+        this.dialogActionListener = dialogActionListener;
+    }
+
+    public DialogPlus.DialogListListener getDialogListListener() {
+        return dialogListListener;
+    }
+
+    public void setDialogListListener(DialogPlus.DialogListListener dialogListListener) {
+        this.dialogListListener = dialogListListener;
+    }
+
+    public DialogPlus.DialogRateListener getRateListener() {
+        return rateListener;
+    }
+
+    public void setRateListener(DialogPlus.DialogRateListener rateListener) {
+        this.rateListener = rateListener;
+    }
+
+    public int getCounterSeconds() {
+        return counterSeconds;
+    }
+
+    public void setCounterSeconds(int counterSeconds) {
+        this.counterSeconds = counterSeconds;
+    }
+
+    public List<String> getListDialogItems() {
+        return listDialogItems;
+    }
+
+    public DialogUiModel setListDialogItems(List<String> listDialogItems) {
+        this.listDialogItems = listDialogItems;
+        return this;
+    }
+
+    public MonthYearPickerDialog.PickerListener getPickerListener() {
+        return pickerListener;
+    }
+
+    public void setPickerListener(MonthYearPickerDialog.PickerListener pickerListener) {
+        this.pickerListener = pickerListener;
+    }
+
+    public int getMaxYear() {
+        return maxYear;
+    }
+
+    public DialogUiModel setMaxYear(int maxYear) {
+        this.maxYear = maxYear;
+        return this;
+    }
+
+    public MultiOptionsDialog.ActionListener getMultiOptionsDialogListener() {
+        return multiOptionsDialogListener;
+    }
+
+    public DialogUiModel setMultiOptionsDialogListener(MultiOptionsDialog.ActionListener multiOptionsDialogListener) {
+        this.multiOptionsDialogListener = multiOptionsDialogListener;
+        return this;
     }
 }

@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -25,150 +24,25 @@ import com.dialog.plus.utils.KeyboardUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
 public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> implements View.OnClickListener {
-    /**
-     * Listeners
-     */
-    private CodeTypeListener codeTypeListener;
-    private DialogActionListener dialogActionListener;
-    private DialogListListener dialogListListener;
-    private DialogRateListener rateListener;
-
-    private List<String> listDialogItems = new ArrayList<>();
-    private int counterSeconds;
     private CountDownTimer countDownTimer;
 
-
-    public DialogPlus() {
-        this(null, null);
-    }
-
-    public DialogPlus(String content) {
-        this(null, content);
-    }
-
-    public DialogPlus(String title, String content) {
-        this(TYPE.MESSAGE_DIALOG, title, content);
-    }
-
-    public DialogPlus(@TYPE int type, String title, String content) {
-        set(type, title, content);
-    }
-
-    /**
-     * Helper Methods--> helps to set your specific dialog_plus based on parameters
-     */
-
-    /**
-     * Sets a code confirmation dialog_plus interface
-     */
-    public DialogPlus setConfirmCodeDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, CodeTypeListener codeTypeListener) {
-        setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener).setDialog_type(TYPE.CODE_DIALOG);
-        return this;
-    }
-
-    /**
-     * Sets a confirmation dialog_plus interface(with positive and negative actions)
-     */
-    public DialogPlus setConfirmationDialog(DialogActionListener actionClicked) {
-        return setConfirmationDialog(null, null, actionClicked);
-    }
-
-    public DialogPlus setConfirmationDialog(String positiveText, String negativeText, DialogActionListener actionClicked) {
-        return setConfirmationDialog(positiveText, negativeText, false, actionClicked);
-    }
-
-    public DialogPlus setConfirmationDialog(String positiveText, String negativeText, boolean separateActionButtons, DialogActionListener actionClicked) {
-        setSeparateActionButtons(separateActionButtons).setDialogActionListener(actionClicked).setDialog_type(TYPE.CONFIRMATION_DIALOG).setTexts(positiveText, negativeText);
-        return this;
-    }
-
-    /**
-     * Sets a message dialog_plus interface
-     */
-    public DialogPlus setMessageDialog(DialogActionListener actionClicked) {
-        return setMessageDialog(null, actionClicked);
-    }
-
-    public DialogPlus setMessageDialog(String positiveText, DialogActionListener actionClicked) {
-        setDialogActionListener(actionClicked).setMessageDialog(positiveText);
-        return this;
-    }
-
-    /**
-     * Sets a list dialog_plus interface
-     */
-    public DialogPlus setListDialog(String title, List<String> listItems, DialogListListener actionClicked) {
-        setListItems(listItems).setDialogListListener(actionClicked).setTitle(title).setDialog_type(TYPE.LIST_DIALOG);
-        return this;
-    }
-
-    private DialogPlus setListItems(List<String> listItems) {
-        if (listDialogItems.size() > 0) listDialogItems.clear();
-        listDialogItems = listItems;
-        return this;
-    }
-
-    /**
-     * Sets an Error dialog_plus interface
-     */
-    public DialogPlus setErrorDialog(DialogActionListener dialogActionListener) {
-        return setErrorDialog(null, dialogActionListener);
-    }
-
-    public DialogPlus setErrorDialog(String positiveText, DialogActionListener dialogActionListener) {
-        setDialogActionListener(dialogActionListener).setDialog_type(TYPE.ERROR_DIALOG).setTexts(positiveText);
-        return this;
-    }
-
-
-    /**
-     * Sets a Rating dialog_plus interface(with positive and negative actions)
-     */
-    public DialogPlus setRatingDialog(DialogRateListener rateListener) {
-        return setRatingDialog(2, null, null, rateListener);
-    }
-
-    public DialogPlus setRatingDialog(float initialRate, String positiveText, String negativeText, DialogRateListener rateListener) {
-        return setRatingDialog(initialRate, positiveText, negativeText, false, rateListener);
-    }
-
-    public DialogPlus setRatingDialog(float initialRate, String positiveText, String negativeText, boolean separateActionButtons, DialogRateListener rateListener) {
-        setInitialRate(initialRate).setSeparateActionButtons(separateActionButtons).setRateListener(rateListener).setDialog_type(TYPE.RATING_DIALOG).setTexts(positiveText, negativeText);
-        return this;
-    }
-
-    /**
-     * Sets a Success dialog_plus interface
-     */
-    public DialogPlus setSuccessDialog(DialogActionListener dialogActionListener) {
-        return setSuccessDialog(null, dialogActionListener);
-    }
-
-    public DialogPlus setSuccessDialog(String positiveText, DialogActionListener dialogActionListener) {
-        setDialogActionListener(dialogActionListener).setDialog_type(TYPE.SUCCESS_DIALOG).setTexts(positiveText);
-        return this;
+    public DialogPlus(DialogUiModel model) {
+        this.model = model;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setUiModelData();
         renderView();
         initViews();
         setCounter();
         setListeners();
-    }
-
-    private void setUiModelData() {
-        updateModelTexts();
     }
 
     private void renderView() {
@@ -216,7 +90,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void renderItemsList() {
-        ListDialogAdapter listDialogAdapter = new ListDialogAdapter(this, listDialogItems, dialogListListener);
+        ListDialogAdapter listDialogAdapter = new ListDialogAdapter(this, model.getListDialogItems(), model.getDialogListListener());
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listDialogAdapter);
     }
@@ -263,15 +137,15 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void onCorrect() {
-        if (codeTypeListener != null)
-            codeTypeListener.onSuccess(this);
+        if (model.getCodeTypeListener() != null)
+            model.getCodeTypeListener().onSuccess(this);
         dismiss(true);
     }
 
     private void onWrong() {
         setErrorTextColor();
-        if (codeTypeListener != null)
-            codeTypeListener.onWrongCode(this);
+        if (model.getCodeTypeListener() != null)
+            model.getCodeTypeListener().onWrongCode(this);
         shakeView((EditText) getDialogAddedView(R.id.txtPinEntry));
     }
 
@@ -281,8 +155,8 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void setCounter() {
-        if (counterSeconds > 0) {
-            countDownTimer = new CountDownTimer(counterSeconds * 1000, 1000) {
+        if (model.getCounterSeconds() > 0) {
+            countDownTimer = new CountDownTimer(model.getCounterSeconds() * 1000, 1000) {
 
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -332,8 +206,8 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
         KeyboardUtil.getInstance().hideKeyboard(binding.getRoot());
         if (getContext() != null)
             getDialogAddedView(R.id.sendCode).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.carbon_grey_300));
-        if (codeTypeListener != null)
-            codeTypeListener.onTimeUp(DialogPlus.this);
+        if (model.getCodeTypeListener() != null)
+            model.getCodeTypeListener().onTimeUp(DialogPlus.this);
     }
 
     @Override
@@ -349,10 +223,10 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void onPositiveClicked() {
-        if (model.getDialog_type() == TYPE.RATING_DIALOG && rateListener != null)
-            rateListener.onRateGiven(model.getRateValue(), this);
-        if (dialogActionListener != null)
-            dialogActionListener.onPositive(this);
+        if (model.getDialog_type() == TYPE.RATING_DIALOG && model.getRateListener() != null)
+            model.getRateListener().onRateGiven(model.getRateValue(), this);
+        if (model.getDialogActionListener() != null)
+            model.getDialogActionListener().onPositive(this);
         else dismiss(true);
     }
 
@@ -375,17 +249,17 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void onNegativeClicked() {
-        if (model.getDialog_type() == TYPE.RATING_DIALOG && rateListener != null)
-            rateListener.onNegative(this);
-        if (dialogActionListener != null)
-            dialogActionListener.onNegative(this);
+        if (model.getDialog_type() == TYPE.RATING_DIALOG && model.getRateListener() != null)
+            model.getRateListener().onNegative(this);
+        if (model.getDialogActionListener() != null)
+            model.getDialogActionListener().onNegative(this);
         else dismiss(true);
     }
 
 
     private void handleResendCode() {
-        if (codeTypeListener != null)
-            codeTypeListener.onResend(this);
+        if (model.getCodeTypeListener() != null)
+            model.getCodeTypeListener().onResend(this);
         cancelTimer();
     }
 
@@ -401,67 +275,6 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
         return getDialogAddedView(R.id.headerLayout).findViewById(idRes);
     }
 
-    /**
-     * Builders
-     */
-    private DialogPlus setConfirmDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, CodeTypeListener codeTypeListener) {
-        set(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener);
-        return this;
-    }
-
-    private DialogPlus set(int dialog_type, String title, String content) {
-        setDialog_type(dialog_type);
-        model.setTitle(title);
-        model.setContent(content);
-        setBackgroundColors(R.color.dialogPositiveBgColor, R.color.dialogNegativeBgColor, R.color.dialogPositiveBgColor);
-        setTextColors(R.color.dialogPositiveTextColor, R.color.dialogNegativeTextColor, R.color.dialogPositiveTextColor);
-        return this;
-    }
-
-    private void set(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, CodeTypeListener codeTypeListener) {
-        model.setCorrectCode(correct_code);
-        this.counterSeconds = counterSeconds;
-        model.setWithSend(withSend);
-        model.setWithResend(withResend);
-        model.setWithCounter(counterSeconds > 0);
-        model.setDialogCodeTextColor(codeTextColor);
-    }
-
-    private void updateModelTexts() {
-        model.setTypeMessage(model.getDialog_type() == TYPE.MESSAGE_DIALOG);
-        model.setTimeLeft(counterSeconds);
-    }
-
-
-    public DialogPlus setCodeTypeListener(CodeTypeListener codeTypeListener) {
-        this.codeTypeListener = codeTypeListener;
-        return this;
-    }
-
-    public DialogPlus setDialogActionListener(DialogActionListener dialogActionListener) {
-        this.dialogActionListener = dialogActionListener;
-        return this;
-    }
-
-    public DialogPlus setInitialRate(float initialRate) {
-        model.setRateValue(initialRate);
-        return this;
-    }
-
-    public DialogPlus setRateListener(DialogRateListener rateListener) {
-        this.rateListener = rateListener;
-        return this;
-    }
-
-    public DialogPlus setDialogListListener(DialogListListener dialogListListener) {
-        this.dialogListListener = dialogListListener;
-        return this;
-    }
-
-    private DialogPlus setSeparateActionButtons(boolean separateActionButtons) {
-        model.setSeparateActionButtons(separateActionButtons);
-        return this;
-    }
 
     @Override
     protected Object getVariableValue() {

@@ -5,12 +5,8 @@
     <data>
 
         <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="optionsTitle"
-            type="java.util.List" />
+            name="model"
+            type="com.dialog.plus.ui.DialogUiModel" />
 
         <variable
             name="callback"
@@ -25,8 +21,8 @@
         android:background="@color/dialog_option_background"
         android:gravity="center"
         android:orientation="vertical"
-       app:carbon_cornerRadius="@dimen/dialog_corner_radius"
-       app:carbon_elevation="@dimen/dialog_elevation">
+        app:carbon_cornerRadius="@dimen/dialog_corner_radius"
+        app:carbon_elevation="@dimen/dialog_elevation">
 
         <TextView
             android:id="@+id/titleText"
@@ -40,9 +36,13 @@
             android:padding="@dimen/dialog_options_header_padding"
             android:paddingStart="@dimen/dialog_close_icon_radius"
             android:paddingEnd="@dimen/dialog_close_icon_radius"
-            android:text="@{title}"
+            android:text="@{model.title}"
             android:textAppearance="@style/dialog_header_style"
-            android:textColor="@color/dialog_option_title_text_color" />
+            android:textColor="@color/dialog_option_title_text_color"
+            app:backgroundColor="@{model.headerBgColor}"
+            app:backgroundDrawable="@{model.headerBgDrawable}"
+            app:setSelected="@{true}"
+            app:text_color="@{model.headerTextColor}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,8 +51,8 @@
             android:layout_margin="@dimen/dialog_action_buttons_margin"
             android:gravity="center"
             android:orientation="vertical"
-           app:addOptions="@{optionsTitle}"
-           app:callback="@{callback}" />
+            app:addOptions="@{model.listDialogItems}"
+            app:callback="@{callback}" />
 
         <View
             android:layout_width="match_parent"
@@ -67,7 +67,10 @@
             android:gravity="center"
             android:text="@string/dialog_options_close"
             android:textAppearance="@style/dialog_option_button_style"
-            android:textColor="@color/dialog_option_close_text_color" />
+            android:textColor="@color/dialog_option_close_text_color"
+            app:backgroundColor="@{model.negativeBgColor}"
+            app:backgroundDrawable="@{model.negativeBgDrawable}"
+            app:text_color="@{model.negativeTextColor}" />
 
     </carbon.widget.LinearLayout>
 

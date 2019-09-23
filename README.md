@@ -30,87 +30,101 @@ implementation  'com.dialog:plus:2+'
 ### 2.1 MESSAGE Dialog:
 
  ```
-new DialogPlus("Message Dialog", "message dialog sample\n Welcome Back")
-                .setMessageDialog(new DialogPlus.OnDialogActionClicked()  {// implement methods})
-                .show(this.getSupportFragmentManager(), "dialog");
+ new DialogPlusBuilder("Message Dialog", "message dialog_plus sample\n Welcome Back")
+                //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
+                .setMessageDialog("alright", new DialogListener(){})// implement methods
+                .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
+                .build()
+                .show(this.getSupportFragmentManager(), "dialog_plus");
 ```
 ### 2.2 CONFIRMATION Dialog:
 
  ```
- new DialogPlus("Confirmation Dialog", "confirmation dialog message content ...")
-                .setOnDialogActionClicked(new DialogPlus.OnDialogActionClicked()  {// implement methods})
-                .show(this.getSupportFragmentManager(), "dialog");
+ new DialogPlusBuilder("Confirmation Dialog option two interface", "Confirmation Dialog with separated action buttons ...")
+                .setConfirmationDialog("confirm", "cancel", true, new DialogListener(){})// implement methods
+                .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
+                .setSecondaryTextColor(R.color.colorPrimary)
+                .build()
+                .show(this.getSupportFragmentManager(), "dialog_plus");
 ```
 ### 2.3 SUCCESS Dialog:
 
  ```
- new DialogPlus("Success message content..")
-                .setSuccessDialog(new DialogPlus.OnDialogActionClicked()  {// implement methods})
-                .show(this.getSupportFragmentManager(), "dialog");
+ new DialogPlusBuilder("Success message content..")
+                .setSuccessDialog("Cool", new DialogListener(){})// implement methods
+                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                .build()
+                .show(this.getSupportFragmentManager(), "dialog_plus");
 ```
 ### 2.4 ERROR Dialog:
 
  ```
- new DialogPlus("error dialog content message")
-                .setErrorDialog(new DialogPlus.OnDialogActionClicked()  {// implement methods})
-                .show(this.getSupportFragmentManager(), "dialog");
+ new DialogPlusBuilder("error dialog_plus content message")
+                .setErrorDialog("Peace", new DialogListener(){})// implement methods
+                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                .build()
+                .show(this.getSupportFragmentManager(), "dialog_plus");
 ```
 ### 2.5 CODE Dialog:
 
  ```
- new DialogPlus("Code Dialog", "code dialog sample with send enabled, resend enabled and counter 10 seconds")
-                /**(String correct_code, boolean withSend, boolean withResend, int counterSeconds
-                   , @ColorInt int codeTextColor,CodeTypeListener codeTypeListener)**/
-                .setConfirmCodeDialog("12345", true, true, 10, Color.BLACK, new DialogPlus.CodeTypeListener() {})
-                .show(this.getSupportFragmentManager(), "dialog");
+ new DialogPlusBuilder("Code Dialog", "code dialog_plus sample with send enabled, resend enabled and counter 10 seconds")
+                .setConfirmCodeDialog("12345", true, true, 60, Color.BLACK, null)
+                .setDialogActionListener(new DialogListener(){})// implement methods
+                .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
+                .build()
+                .show(this.getSupportFragmentManager(), "dialog_plus");
 ```
 ### 2.6 Multi Options Dialog:
 
  ```
-  new MultiOptionsDialog("Multi Options Dialog Sample Title", titlesList
-                , new MultiOptionsDialog.ActionListener() {
-            @Override
-            public void onActionClicked(String clickedOption) {
-                Toast.makeText(MainActivity.this, clickedOption, Toast.LENGTH_SHORT).show();
-            }
-        }).show(this.getSupportFragmentManager(), "option_dialog_plus");
+  new DialogPlusBuilder()
+                .buildMultiOptionsDialog("Multi Options Dialog Sample Title", getOptions()
+                        , new MultiOptionsDialog.ActionListener() {
+                            @Override
+                            public void onActionClicked(String clickedOption) {
+                                Toast.makeText(MainActivity.this, clickedOption, Toast.LENGTH_SHORT).show();
+                            }
+                        }).show(this.getSupportFragmentManager(), "dialog_plus");
 ```
 ### 2.7 List Dialog:
 
  ```
- new DialogPlus()
-                .setListDialog("list_dialog_test_title", titleStringList, new DialogPlus.DialogListListener() {
+ new DialogPlusBuilder()
+                .setListDialog("list_dialog_test_title"
+                , getListItems(), new DialogPlus.DialogListListener() {
                     @Override
                     public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
-                        dialogPlus.dismiss();
+                        dialogPlus.dismiss(true);
+                        Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
                     }
-                })
+                }).build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
 ```
 ### 2.8 Year Picker Dialog:
 
  ```
- new MonthYearPickerDialog().getYearPicker(pickedYear ->
-                Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
+ new DialogPlusBuilder().setHeaderBgDrawable(R.drawable.bg_header).buildYearDialog(pickedYear ->
+                Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "dialog");
 ```
 ### 2.9 Month Picker Dialog:
 
  ```
-  new MonthYearPickerDialog().getMonthPicker(pickedYear ->
-                Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
+  new DialogPlusBuilder().setHeaderTextColor(R.color.black).buildMonthDialog(pickedYear ->
+                Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "dialog");
 ```
 ### 2.10 Rate Dialog:
 
  ```
-   new DialogPlus("Rating Dialog", "Rate dialog_plus message content ...")
-                .setRatingDialog(1.7f,"rate", "cancel", new DialogPlus.DialogRateListener() {
+    new DialogPlusBuilder("Rating Dialog", "Rate dialog_plus message content ...")
+                .setRatingDialog(1.7f, "rate", "cancel", new DialogPlus.DialogRateListener() {
                     @Override
                     public void onRateGiven(float rate, DialogPlus dialogPlus) {
                         Toast.makeText(MainActivity.this, "rated with " + rate, Toast.LENGTH_SHORT).show();
                     }
-                })
+                }).build()
                 .show(this.getSupportFragmentManager(), "dialog_plus");
 ```
      
@@ -180,7 +194,7 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 ### 4 Customizing:
 ### 4.1 per use
 ```
- new DialogPlus("Dialog Title", "dialog content ...")
+ new DialogPlusBuilder("Dialog Title", "dialog content ...")
                  .setTitle(null)//will hide the header view
                  .setContent(null)//will hide the content view
                 //(@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor)
