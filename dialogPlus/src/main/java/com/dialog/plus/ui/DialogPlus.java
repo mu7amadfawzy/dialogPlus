@@ -33,15 +33,17 @@ import java.util.List;
  * muhammadnoamany@gmail.com
  */
 public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> implements View.OnClickListener {
+    /**
+     * Listeners
+     */
     private CodeTypeListener codeTypeListener;
     private DialogActionListener dialogActionListener;
     private DialogListListener dialogListListener;
-    private List<String> listDialogItems = new ArrayList<>();
-    private String correct_code;
-    private int counterSeconds;
-    private boolean withResend, withSend, withCounter;
-    private CountDownTimer countDownTimer;
     private DialogRateListener rateListener;
+
+    private List<String> listDialogItems = new ArrayList<>();
+    private int counterSeconds;
+    private CountDownTimer countDownTimer;
 
 
     public DialogPlus() {
@@ -240,17 +242,17 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence == null || charSequence.toString().isEmpty() || charSequence.toString().length() < correct_code.length())
+                if (charSequence == null || charSequence.toString().isEmpty() || charSequence.toString().length() < model.getCorrectCode().length())
                     return;
                 /////////// required length reached
                 hideKeyboard(getDialogAddedView(R.id.txtPinEntry));
-                if (!withSend)
+                if (!model.isWithSend())
                     sendCode();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().length() == correct_code.length())
+                if (editable.toString().length() == model.getCorrectCode().length())
                     hideKeyboard(getDialogAddedView(R.id.txtPinEntry));
             }
         });
@@ -355,7 +357,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void sendCode() {
-        if (model.getCodeEntry() != null && model.getCodeEntry().length() == correct_code.length()) {
+        if (model.getCodeEntry() != null && model.getCodeEntry().length() == model.getCorrectCode().length()) {
             onCompleteCodeTyped();
         } else
             Toast.makeText(getActivity(), getString(R.string.dialog_incomplete_code_msg), Toast.LENGTH_SHORT).show();
@@ -417,21 +419,17 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void set(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, CodeTypeListener codeTypeListener) {
-        this.correct_code = correct_code;
-        this.withResend = withResend;
-        this.withSend = withSend;
+        model.setCorrectCode(correct_code);
         this.counterSeconds = counterSeconds;
-        this.withCounter = counterSeconds > 0;
+        model.setWithSend(withSend);
+        model.setWithResend(withResend);
+        model.setWithCounter(counterSeconds > 0);
         model.setDialogCodeTextColor(codeTextColor);
     }
 
     private void updateModelTexts() {
         model.setTypeMessage(model.getDialog_type() == TYPE.MESSAGE_DIALOG);
-        model.setCorrectCode(correct_code);
         model.setTimeLeft(counterSeconds);
-        model.setWithCounter(withCounter);
-        model.setWithResend(withResend);
-        model.setWithSend(withSend);
     }
 
 

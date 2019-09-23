@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickedValidation(View view) {
         new DialogPlus("Code Dialog", "code dialog_plus sample with send enabled and zero seconds counter.")
-                .setConfirmCodeDialog("123", false, true, 0, Color.BLUE, null)
+                .setConfirmCodeDialog("123", false, true, 50, Color.BLUE, null)
                 .setDialogActionListener(new DialogListener())
                 .setBackgroundColors(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimary)
                 .setHeaderBgDrawable(R.drawable.bg_header)
