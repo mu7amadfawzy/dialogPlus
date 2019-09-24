@@ -9,14 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.widget.EditText;
 
 import androidx.annotation.LayoutRes;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.DialogFragment;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
 import com.dialog.plus.utils.AnimationUtils;
+import com.dialog.plus.utils.KeyboardUtil;
 
 /**
  * Created by fawzy on 04,September,2019
@@ -26,15 +30,10 @@ import com.dialog.plus.utils.AnimationUtils;
  */
 
 public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extends DialogFragment {
+    protected DialogPlusUiModel model = new DialogPlusUiModel();
     protected Binding binding;
     protected View mDialogView;
     private AnimationSet mModalInAnim, mModalOutAnim;
-
-    @Override
-    public void onCreate(@androidx.annotation.Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(false);
-    }
 
     @Override
     public View onCreateView(@androidx.annotation.NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,12 +49,6 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     }
 
     @Override
-    public void onViewCreated(@androidx.annotation.NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-
-    @Override
     public void onStart() {
         super.onStart();
         setDialog();
@@ -69,6 +62,12 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().setGravity(Gravity.CENTER);
         }
+    }
+
+    public void dismiss(boolean animate) {
+        if (animate)
+            mDialogView.startAnimation(mModalOutAnim);
+        else dismiss(true);
     }
 
     private void initAnimations() {
@@ -97,11 +96,28 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
         });
     }
 
+    protected void animate(View view, Techniques techniques) {
+        YoYo.with(techniques)
+                .duration(700)
+                .playOn(view);
+    }
 
-    public void dismiss(boolean animate) {
-        if (animate)
-            mDialogView.startAnimation(mModalOutAnim);
-        else dismiss(true);
+    protected void shakeView(EditText editText) {
+        YoYo.with(Techniques.Shake)
+                .duration(700)
+                .onEnd(animator -> {
+                    editText.setText(null);
+                    showKeyboard(editText);
+                })
+                .playOn(editText);
+    }
+
+    protected void hideKeyboard(View view) {
+        KeyboardUtil.getInstance().hideKeyboard(view);
+    }
+
+    protected void showKeyboard(View view) {
+        KeyboardUtil.getInstance().showKeyboard(view);
     }
 
     protected abstract Object getVariableValue();

@@ -22,7 +22,7 @@ class ListDialogAdapter extends RecyclerView.Adapter<ListDialogAdapter.ViewHolde
     private DialogPlus.DialogListListener onItemClickListener;
 
 
-    public ListDialogAdapter(DialogPlus dialogPlus, List<String> dataList, DialogPlus.DialogListListener onItemClickListener) {
+    ListDialogAdapter(DialogPlus dialogPlus, List<String> dataList, DialogPlus.DialogListListener onItemClickListener) {
         super();
         this.dataList = new ArrayList<>(dataList);
         this.onItemClickListener = onItemClickListener;

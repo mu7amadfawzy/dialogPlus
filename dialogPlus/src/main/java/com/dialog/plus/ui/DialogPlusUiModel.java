@@ -18,17 +18,17 @@ import java.util.List;
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
-public class DialogUiModel extends BaseObservable {
+public class DialogPlusUiModel extends BaseObservable {
     private boolean withSend, withResend, withCounter, separateActionButtons;
     private String title, correctCode, codeEntry, content, typed_code, positiveText, negativeText, headerText;
     private int timeLeft, starsNumber = 5, counterSeconds, maxYear;
     private float rateValue;
-    private @ColorRes
-    int positiveBgColor = -1, negativeBgColor = -1, headerBgColor = -1;
-    private @DrawableRes
-    int positiveBgDrawable = -1, negativeBgDrawable = -1, headerBgDrawable = -1;
-    private @ColorRes
-    int positiveTextColor = -1, negativeTextColor = -1, headerTextColor = -1;
+    @ColorRes
+    private int positiveBgColor = -1, negativeBgColor = -1, headerBgColor = -1;
+    @DrawableRes
+    private int positiveBgDrawable = -1, negativeBgDrawable = -1, headerBgDrawable = -1;
+    @ColorRes
+    private int positiveTextColor = -1, negativeTextColor = -1, headerTextColor = -1;
     @ColorInt
     private int dialogCodeTextColor = Color.BLACK;
     @DialogPlus.TYPE
@@ -45,10 +45,10 @@ public class DialogUiModel extends BaseObservable {
 
     private List<String> listDialogItems = new ArrayList<>();
 
-    public DialogUiModel() {
+    DialogPlusUiModel() {
     }
 
-    public DialogUiModel(String title, int headerBgColor, int headerTextColor) {
+    public DialogPlusUiModel(String title, int headerBgColor, int headerTextColor) {
         this.title = title;
         this.headerBgColor = headerBgColor;
         this.headerTextColor = headerTextColor;
@@ -75,9 +75,12 @@ public class DialogUiModel extends BaseObservable {
         return headerBgColor;
     }
 
-    public void setHeaderBgColor(@ColorRes int headerBgColor) {
+    public DialogPlusUiModel setHeaderBgColor(@ColorRes int headerBgColor) {
+        if (headerBgColor == -1)
+            return null;
         this.headerBgColor = headerBgColor;
         notifyPropertyChanged(BR.headerBgColor);
+        return this;
     }
 
     @Bindable
@@ -88,6 +91,8 @@ public class DialogUiModel extends BaseObservable {
 
 
     public void setNegativeBgColor(@ColorRes int negativeColorRes) {
+        if (negativeBgColor == -1)
+            return;
         this.negativeBgColor = negativeColorRes;
         notifyPropertyChanged(BR.negativeBgColor);
     }
@@ -122,7 +127,7 @@ public class DialogUiModel extends BaseObservable {
         return title;
     }
 
-    public DialogUiModel setTitle(String title) {
+    public DialogPlusUiModel setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -141,9 +146,12 @@ public class DialogUiModel extends BaseObservable {
         return positiveBgDrawable;
     }
 
-    public void setPositiveBgDrawable(int positiveBgDrawable) {
+    public DialogPlusUiModel setPositiveBgDrawable(int positiveBgDrawable) {
+        if (positiveBgDrawable == -1)
+            return this;
         this.positiveBgDrawable = positiveBgDrawable;
         notifyPropertyChanged(BR.positiveBgDrawable);
+        return this;
     }
 
     @Bindable
@@ -151,9 +159,12 @@ public class DialogUiModel extends BaseObservable {
         return negativeBgDrawable;
     }
 
-    public void setNegativeBgDrawable(int negativeBgDrawable) {
+    public DialogPlusUiModel setNegativeBgDrawable(int negativeBgDrawable) {
+        if (negativeBgDrawable == -1)
+            return this;
         this.negativeBgDrawable = negativeBgDrawable;
         notifyPropertyChanged(BR.negativeBgDrawable);
+        return this;
     }
 
     @Bindable
@@ -161,9 +172,12 @@ public class DialogUiModel extends BaseObservable {
         return headerBgDrawable;
     }
 
-    public void setHeaderBgDrawable(int headerBgDrawable) {
+    public DialogPlusUiModel setHeaderBgDrawable(int headerBgDrawable) {
+        if (headerBgDrawable == -1)
+            return this;
         this.headerBgDrawable = headerBgDrawable;
         notifyPropertyChanged(BR.headerBgDrawable);
+        return this;
     }
 
     @Bindable
@@ -171,9 +185,12 @@ public class DialogUiModel extends BaseObservable {
         return positiveTextColor;
     }
 
-    public void setPositiveTextColor(int positiveTextColor) {
+    public DialogPlusUiModel setPositiveTextColor(int positiveTextColor) {
+        if (positiveTextColor == -1)
+            return this;
         this.positiveTextColor = positiveTextColor;
         notifyPropertyChanged(BR.positiveTextColor);
+        return this;
     }
 
     @Bindable
@@ -181,9 +198,12 @@ public class DialogUiModel extends BaseObservable {
         return negativeTextColor;
     }
 
-    public void setNegativeTextColor(int negativeTextColor) {
+    public DialogPlusUiModel setNegativeTextColor(int negativeTextColor) {
+        if (negativeTextColor == -1)
+            return this;
         this.negativeTextColor = negativeTextColor;
         notifyPropertyChanged(BR.negativeTextColor);
+        return this;
     }
 
     @Bindable
@@ -191,9 +211,12 @@ public class DialogUiModel extends BaseObservable {
         return headerTextColor;
     }
 
-    public void setHeaderTextColor(int headerTextColor) {
+    public DialogPlusUiModel setHeaderTextColor(int headerTextColor) {
+        if (headerTextColor == -1)
+            return this;
         this.headerTextColor = headerTextColor;
         notifyPropertyChanged(BR.headerTextColor);
+        return this;
     }
 
     @Bindable
@@ -201,9 +224,10 @@ public class DialogUiModel extends BaseObservable {
         return codeEntry;
     }
 
-    public void setCodeEntry(String codeEntry) {
+    public DialogPlusUiModel setCodeEntry(String codeEntry) {
         this.codeEntry = codeEntry;
         notifyPropertyChanged(BR.codeEntry);
+        return this;
     }
 
     @Bindable
@@ -215,9 +239,12 @@ public class DialogUiModel extends BaseObservable {
         this.correctCode = correctCode;
     }
 
-    public void setPositiveBgColor(@ColorRes int positiveBgColor) {
+    public DialogPlusUiModel setPositiveBgColor(@ColorRes int positiveBgColor) {
+        if (positiveBgColor == -1)
+            return null;
         this.positiveBgColor = positiveBgColor;
         notifyPropertyChanged(BR.positiveTextColor);
+        return this;
     }
 
     @Bindable
@@ -260,9 +287,12 @@ public class DialogUiModel extends BaseObservable {
         return positiveText;
     }
 
-    public void setPositiveText(String positiveText) {
+    public DialogPlusUiModel setPositiveText(String positiveText) {
+        if (positiveText == null)
+            return this;
         this.positiveText = positiveText;
         notifyPropertyChanged(BR.positiveText);
+        return this;
     }
 
     @Bindable
@@ -270,9 +300,12 @@ public class DialogUiModel extends BaseObservable {
         return negativeText;
     }
 
-    public void setNegativeText(String negativeText) {
+    public DialogPlusUiModel setNegativeText(String negativeText) {
+        if (negativeText == null)
+            return this;
         this.negativeText = negativeText;
         notifyPropertyChanged(BR.negativeText);
+        return this;
     }
 
     @Bindable
@@ -280,9 +313,12 @@ public class DialogUiModel extends BaseObservable {
         return headerText;
     }
 
-    public void setHeaderText(String headerText) {
+    public DialogPlusUiModel setHeaderText(String headerText) {
+        if (headerText == null)
+            return this;
         this.headerText = headerText;
         notifyPropertyChanged(BR.headerText);
+        return this;
     }
 
     @Bindable
@@ -290,9 +326,17 @@ public class DialogUiModel extends BaseObservable {
         return dialogCodeTextColor;
     }
 
-    public void setDialogCodeTextColor(int dialogCodeTextColor) {
+    public DialogPlusUiModel setDialogCodeTextColor(@ColorInt int dialogCodeTextColor) {
+        if (dialogCodeTextColor == -1)
+            return this;
         this.dialogCodeTextColor = dialogCodeTextColor;
         notifyPropertyChanged(BR.dialogCodeTextColor);
+        return this;
+    }
+
+    public DialogPlusUiModel notifyCodeTextColor() {
+        notifyPropertyChanged(BR.dialogCodeTextColor);
+        return this;
     }
 
     public int getStarsNumber() {
@@ -333,8 +377,9 @@ public class DialogUiModel extends BaseObservable {
         return dialog_type;
     }
 
-    public void setDialog_type(int dialog_type) {
+    public DialogPlusUiModel setDialog_type(int dialog_type) {
         this.dialog_type = dialog_type;
+        return this;
     }
 
     public DialogPlus.CodeTypeListener getCodeTypeListener() {
@@ -349,8 +394,9 @@ public class DialogUiModel extends BaseObservable {
         return dialogActionListener;
     }
 
-    public void setDialogActionListener(DialogPlus.DialogActionListener dialogActionListener) {
+    public DialogPlusUiModel setDialogActionListener(DialogPlus.DialogActionListener dialogActionListener) {
         this.dialogActionListener = dialogActionListener;
+        return this;
     }
 
     public DialogPlus.DialogListListener getDialogListListener() {
@@ -381,7 +427,8 @@ public class DialogUiModel extends BaseObservable {
         return listDialogItems;
     }
 
-    public DialogUiModel setListDialogItems(List<String> listDialogItems) {
+    public DialogPlusUiModel setDialogListItems(List<String> listDialogItems) {
+        if (this.listDialogItems.size() > 0) this.listDialogItems.clear();
         this.listDialogItems = listDialogItems;
         return this;
     }
@@ -390,15 +437,16 @@ public class DialogUiModel extends BaseObservable {
         return pickerListener;
     }
 
-    public void setPickerListener(MonthYearPickerDialog.PickerListener pickerListener) {
+    public DialogPlusUiModel setPickerListener(MonthYearPickerDialog.PickerListener pickerListener) {
         this.pickerListener = pickerListener;
+        return this;
     }
 
     public int getMaxYear() {
         return maxYear;
     }
 
-    public DialogUiModel setMaxYear(int maxYear) {
+    public DialogPlusUiModel setMaxYear(int maxYear) {
         this.maxYear = maxYear;
         return this;
     }
@@ -407,7 +455,7 @@ public class DialogUiModel extends BaseObservable {
         return multiOptionsDialogListener;
     }
 
-    public DialogUiModel setMultiOptionsDialogListener(MultiOptionsDialog.ActionListener multiOptionsDialogListener) {
+    public DialogPlusUiModel setMultiOptionsDialogListener(MultiOptionsDialog.ActionListener multiOptionsDialogListener) {
         this.multiOptionsDialogListener = multiOptionsDialogListener;
         return this;
     }

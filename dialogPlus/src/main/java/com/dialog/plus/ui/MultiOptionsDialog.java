@@ -16,15 +16,15 @@ import java.util.List;
  * ma7madfawzy@gmail.com
  **/
 public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBinding> {
-    private DialogUiModel model = new DialogUiModel();
+    private DialogPlusUiModel model = new DialogPlusUiModel();
 
-    public MultiOptionsDialog(DialogUiModel uiModel) {
+    MultiOptionsDialog(DialogPlusUiModel uiModel) {
         this.model = uiModel;
     }
 
-    public MultiOptionsDialog(String title, List<String> optionsTitle, ActionListener actionListener) {
+    MultiOptionsDialog(String title, List<String> optionsTitle, ActionListener actionListener) {
         model.setMultiOptionsDialogListener(actionListener);
-        model.setListDialogItems(optionsTitle);
+        model.setDialogListItems(optionsTitle);
         model.setTitle(title);
     }
 

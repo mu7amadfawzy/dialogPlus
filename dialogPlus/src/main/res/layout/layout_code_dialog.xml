@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.dialog.plus.ui.DialogUiModel" />
+            type="com.dialog.plus.ui.DialogPlusUiModel" />
 
 
     </data>
@@ -53,8 +53,7 @@
             android:textColor="@color/colorPrimary"
             android:textIsSelectable="false"
             android:textSize="@dimen/_16ssp"
-            app:dialog_plus_charsNumber="@{model.correctCode.length()}"
-            app:pinEntryTextColor="@{model.dialogCodeTextColor}" />
+            app:dialog_plus_charsNumber="@{model.correctCode.length()}" />
 
         <TextView
             android:id="@+id/timer"

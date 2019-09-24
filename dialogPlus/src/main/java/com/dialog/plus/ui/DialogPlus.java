@@ -1,6 +1,5 @@
 package com.dialog.plus.ui;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
+import com.dialog.plus.BR;
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.DialogPlusBinding;
 import com.dialog.plus.utils.KeyboardUtil;
@@ -29,10 +29,10 @@ import java.lang.annotation.RetentionPolicy;
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
-public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> implements View.OnClickListener {
+public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements View.OnClickListener {
     private CountDownTimer countDownTimer;
 
-    public DialogPlus(DialogUiModel model) {
+    DialogPlus(DialogPlusUiModel model) {
         this.model = model;
     }
 
@@ -96,22 +96,17 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void setErrorAnimation() {
-        YoYo.with(Techniques.BounceIn)
-                .duration(700)
-                .playOn(getDialogAddedView(R.id.error_img));
+        animate(getDialogAddedView(R.id.error_img), Techniques.BounceIn);
     }
 
     private void setSuccessAnimation() {
-        YoYo.with(Techniques.FadeIn)
-                .duration(700)
-                .playOn(getDialogAddedView(R.id.successImg));
+        animate(getDialogAddedView(R.id.successImg), Techniques.FadeIn);
     }
-
     private void setOnTextListener() {
         ((EditText) getDialogAddedView(R.id.txtPinEntry)).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                setNormalTextColor();
+                setNormalCodeTextColor();
             }
 
             @Override
@@ -150,8 +145,16 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
     }
 
     private void setErrorTextColor() {
-        ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).setTextColor(Color.RED);
-        ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).getPaint().setColor(Color.RED);
+        setPinEntryTextColor(getResources().getColor(R.color.carbon_red_400));
+    }
+
+    private void setNormalCodeTextColor() {
+        setPinEntryTextColor(model.getDialogCodeTextColor());
+    }
+
+    private void setPinEntryTextColor(@ColorInt int color) {
+        ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).setTextColor(color);
+        ((PinEntryEditText) getDialogAddedView(R.id.txtPinEntry)).getPaint().setColor(color);
     }
 
     private void setCounter() {
@@ -182,7 +185,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
             } else {
                 getDialogAddedView(R.id.confirmButton).setOnClickListener(this);
                 if (model.getDialog_type() == TYPE.CONFIRMATION_DIALOG || model.getDialog_type() == TYPE.RATING_DIALOG)
-                    getDialogAddedView(R.id.cancelButton).setOnClickListener(this);
+                    getDialogAddedView(R.id.cancelBtn).setOnClickListener(this);
             }
         } else {
             getHeaderChildView(R.id.closeIV).setOnClickListener(this);
@@ -218,7 +221,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
             handleResendCode();
         else if (view.getId() == R.id.confirmButton)
             onPositiveClicked();
-        else if (view.getId() == R.id.cancelButton || view.getId() == R.id.closeIV)
+        else if (view.getId() == R.id.cancelBtn || view.getId() == R.id.closeIV)
             onNegativeClicked();
     }
 
@@ -275,7 +278,6 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
         return getDialogAddedView(R.id.headerLayout).findViewById(idRes);
     }
 
-
     @Override
     protected Object getVariableValue() {
         return model;
@@ -283,7 +285,7 @@ public class DialogPlus extends BaseModelDialogFragment<DialogPlusBinding> imple
 
     @Override
     public int getBindingVariable() {
-        return com.dialog.plus.BR.model;
+        return BR.model;
     }
 
     @Override

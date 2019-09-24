@@ -1,13 +1,9 @@
 package com.dialog.plus.ui;
 
-import android.widget.EditText;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
 
 import java.util.Calendar;
@@ -18,8 +14,13 @@ import java.util.List;
  * ma7madfawzy@gmail.com
  **/
 public class DialogPlusBuilder {
-    private DialogUiModel model = new DialogUiModel();
+    private DialogPlusUiModel model = new DialogPlusUiModel();
 
+    /***
+     * Constructors
+     *  a null title  will make the header view to be invisible.
+     *  a null content  will make the content view to be invisible.
+     */
     public DialogPlusBuilder() {
         this(null, null);
     }
@@ -36,122 +37,143 @@ public class DialogPlusBuilder {
         set(type, title, content);
     }
 
-    public DialogPlus build() {
+    /**
+     * build: with only @param actionListener returns a dialogPlus.
+     */
+    public DialogPlus build(DialogPlus.DialogActionListener actionListener) {
+        return build(model.getDialog_type(), actionListener);
+    }
+
+    /**
+     * @param type sets the dialog interface type
+     */
+    public DialogPlus build(@DialogPlus.TYPE int type, DialogPlus.DialogActionListener actionListener) {
+        return new DialogPlus(model.setDialog_type(type).setDialogActionListener(actionListener));
+    }
+
+    /**
+     * build:  returns a dialogPlus instance which used as MESSAGE DIALOG
+     */
+    public DialogPlus buildMessageDialog(DialogPlus.DialogActionListener actionListener) {
+        return new DialogPlus(model.setDialog_type(DialogPlus.TYPE.MESSAGE_DIALOG).setDialogActionListener(actionListener));
+    }
+
+    /**
+     * build: returns a dialogPlus instance which used as CONFIRMATION DIALOG
+     */
+    public DialogPlus buildConfirmationDialog(DialogPlus.DialogActionListener actionListener) {
+        return buildConfirmationDialog(false, actionListener);
+    }
+
+    public DialogPlus buildConfirmationDialog(boolean separateActionButtons, DialogPlus.DialogActionListener actionListener) {
+        return setSeparateActionButtons(separateActionButtons).build(DialogPlus.TYPE.CONFIRMATION_DIALOG, actionListener);
+    }
+
+    /**
+     * build: returns a dialogPlus instance which used as SUCCESS DIALOG
+     */
+    public DialogPlus buildSuccessDialog(DialogPlus.DialogActionListener actionListener) {
+        return build(DialogPlus.TYPE.SUCCESS_DIALOG, actionListener);
+    }
+
+    /**
+     * build: returns a dialogPlus instance which used as ERROR DIALOG
+     */
+    public DialogPlus buildErrorDialog(DialogPlus.DialogActionListener actionListener) {
+        return build(DialogPlus.TYPE.ERROR_DIALOG, actionListener);
+    }
+
+    /**
+     * buildCodeDialog: returns a dialogPlus instance which  used as  CODE DIALOG
+     *
+     * @param counterSeconds sending it as 0 will disable the counter
+     */
+    public DialogPlus buildCodeDialog(String correct_code, int counterSeconds, DialogPlus.DialogActionListener actionListener) {
+        return buildCodeDialog(correct_code, counterSeconds, false, true, actionListener);
+    }
+
+    public DialogPlus buildCodeDialog(String correct_code, int counterSeconds, boolean withSend, boolean withResend, DialogPlus.DialogActionListener actionListener) {
+        return setDialog_type(DialogPlus.TYPE.CODE_DIALOG)
+                .set(correct_code, withSend, withResend, counterSeconds)
+                .build(actionListener);
+    }
+
+    /**
+     * buildMonthPickerDialog: returns a MonthYearPickerDialog instance used to pick month
+     */
+
+    public MonthYearPickerDialog buildMonthPickerDialog(MonthYearPickerDialog.PickerListener listener) {
+        return new MonthYearPickerDialog(model.setPickerListener(listener), MonthYearPickerDialog.TYPE.MONTH);
+    }
+
+    /**
+     * buildMonthPickerDialog: returns a MonthYearPickerDialog instance used to pick month
+     */
+    public DialogPlus buildListDialog(List<String> listItems, DialogPlus.DialogListListener dialogListListener) {
+        model.setDialog_type(DialogPlus.TYPE.LIST_DIALOG).setDialogListItems(listItems).setDialogListListener(dialogListListener);
         return new DialogPlus(model);
     }
 
-    public MonthYearPickerDialog buildMonthDialog(MonthYearPickerDialog.PickerListener listener) {
-        model.setPickerListener(listener);
-        return new MonthYearPickerDialog(model, MonthYearPickerDialog.TYPE.MONTH);
-    }
-
-    public MonthYearPickerDialog buildYearDialog(MonthYearPickerDialog.PickerListener listener) {
+    /**
+     * buildMonthPickerDialog: returns a MonthYearPickerDialog instance used to pick year
+     */
+    public MonthYearPickerDialog buildYearPickerDialog(MonthYearPickerDialog.PickerListener listener) {
         model.setMaxYear(Calendar.getInstance().get(Calendar.YEAR)).setPickerListener(listener);
         return new MonthYearPickerDialog(model, MonthYearPickerDialog.TYPE.YEAR);
     }
 
-    public MonthYearPickerDialog buildYearDialog(int maxYear, MonthYearPickerDialog.PickerListener listener) {
+    public MonthYearPickerDialog buildYearPickerDialog(int maxYear, MonthYearPickerDialog.PickerListener listener) {
         model.setMaxYear(maxYear).setPickerListener(listener);
         return new MonthYearPickerDialog(model, MonthYearPickerDialog.TYPE.YEAR);
     }
 
-    public DialogPlus buildMultiOptionsDialog(String title, List<String> optionsTitle, MultiOptionsDialog.ActionListener actionListener) {
-        model.setTitle(title).setListDialogItems(optionsTitle).setMultiOptionsDialogListener(actionListener);
+    /**
+     * buildMultiOptionsDialog: returns a MultiOptionsDialog instance used to pick option among many
+     */
+    public MultiOptionsDialog buildMultiOptionsDialog(List<String> optionsTitle, MultiOptionsDialog.ActionListener actionListener) {
+        model.setDialogListItems(optionsTitle).setMultiOptionsDialogListener(actionListener);
+        return new MultiOptionsDialog(model);
+    }
+
+    /**
+     * buildRatingDialog: returns a DialogPlus instance used to give a rate
+     */
+    public DialogPlus buildRatingDialog(DialogPlus.DialogRateListener rateListener) {
+        return buildRatingDialog(2, false, rateListener);
+    }
+
+    public DialogPlus buildRatingDialog(float initialRate, boolean separateActionButtons, DialogPlus.DialogRateListener rateListener) {
+        setInitialRate(initialRate).setSeparateActionButtons(separateActionButtons).setRateListener(rateListener).setDialog_type(DialogPlus.TYPE.RATING_DIALOG);
         return new DialogPlus(model);
     }
 
-    /**
-     * Helper Methods--> helps to set your specific dialog_plus based on parameters
-     */
-
-    /**
-     * Sets a code confirmation dialog_plus interface
-     */
-    public DialogPlusBuilder setConfirmCodeDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, DialogPlus.CodeTypeListener codeTypeListener) {
-        setConfirmDialog(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener).setDialog_type(DialogPlus.TYPE.CODE_DIALOG);
-        return this;
-    }
-
-    /**
-     * Sets a confirmation dialog_plus interface(with positive and negative actions)
-     */
-    public DialogPlusBuilder setConfirmationDialog(DialogPlus.DialogActionListener actionClicked) {
-        return setConfirmationDialog(null, null, actionClicked);
-    }
-
-    public DialogPlusBuilder setConfirmationDialog(String positiveText, String negativeText, DialogPlus.DialogActionListener actionClicked) {
-        return setConfirmationDialog(positiveText, negativeText, false, actionClicked);
-    }
-
-    public DialogPlusBuilder setConfirmationDialog(String positiveText, String negativeText, boolean separateActionButtons, DialogPlus.DialogActionListener actionClicked) {
-        setSeparateActionButtons(separateActionButtons).setDialogActionListener(actionClicked).setDialog_type(DialogPlus.TYPE.CONFIRMATION_DIALOG).setTexts(positiveText, negativeText);
-        return this;
-    }
-
-    /**
-     * Sets a message dialog_plus interface
-     */
-    public DialogPlusBuilder setMessageDialog(DialogPlus.DialogActionListener actionClicked) {
-        return setMessageDialog(null, actionClicked);
-    }
-
-    public DialogPlusBuilder setMessageDialog(String positiveText, DialogPlus.DialogActionListener actionClicked) {
-        setDialogActionListener(actionClicked).setMessageDialog(positiveText);
-        return this;
-    }
-
-    /**
-     * Sets a list dialog_plus interface
-     */
-    public DialogPlusBuilder setListDialog(String title, List<String> listItems, DialogPlus.DialogListListener actionClicked) {
-        setListItems(listItems).setDialogListListener(actionClicked).setTitle(title).setDialog_type(DialogPlus.TYPE.LIST_DIALOG);
-        return this;
-    }
-
-    private DialogPlusBuilder setListItems(List<String> listItems) {
-        if (model.getListDialogItems().size() > 0) model.getListDialogItems().clear();
-        model.setListDialogItems(listItems);
-        return this;
-    }
-
-    /**
-     * Sets an Error dialog_plus interface
-     */
-    public DialogPlusBuilder setErrorDialog(DialogPlus.DialogActionListener dialogActionListener) {
-        return setErrorDialog(null, dialogActionListener);
-    }
-
-    public DialogPlusBuilder setErrorDialog(String positiveText, DialogPlus.DialogActionListener dialogActionListener) {
-        setDialogActionListener(dialogActionListener).setDialog_type(DialogPlus.TYPE.ERROR_DIALOG).setTexts(positiveText);
-        return this;
-    }
-
-
-    /**
-     * Sets a Rating dialog_plus interface(with positive and negative actions)
-     */
-    public DialogPlusBuilder setRatingDialog(DialogPlus.DialogRateListener rateListener) {
-        return setRatingDialog(2, null, null, rateListener);
-    }
-
-    public DialogPlusBuilder setRatingDialog(float initialRate, String positiveText, String negativeText, DialogPlus.DialogRateListener rateListener) {
-        return setRatingDialog(initialRate, positiveText, negativeText, false, rateListener);
-    }
-
-    public DialogPlusBuilder setRatingDialog(float initialRate, String positiveText, String negativeText, boolean separateActionButtons, DialogPlus.DialogRateListener rateListener) {
-        setInitialRate(initialRate).setSeparateActionButtons(separateActionButtons).setRateListener(rateListener).setDialog_type(DialogPlus.TYPE.RATING_DIALOG).setTexts(positiveText, negativeText);
-        return this;
-    }
+    /********************************************************************************************************/
 
     /**
      * Sets a Success dialog_plus interface
      */
-    public DialogPlusBuilder setSuccessDialog(DialogPlus.DialogActionListener dialogActionListener) {
-        return setSuccessDialog(null, dialogActionListener);
+
+    public DialogPlusBuilder setSuccessDialog(String positiveText) {
+        setDialog_type(DialogPlus.TYPE.SUCCESS_DIALOG).setTexts(positiveText);
+        return this;
     }
 
-    public DialogPlusBuilder setSuccessDialog(String positiveText, DialogPlus.DialogActionListener dialogActionListener) {
-        setDialogActionListener(dialogActionListener).setDialog_type(DialogPlus.TYPE.SUCCESS_DIALOG).setTexts(positiveText);
+    public DialogPlusBuilder setSuccessDialog() {
+        setDialog_type(DialogPlus.TYPE.SUCCESS_DIALOG);
+        return this;
+    }
+
+    /**
+     * Sets a Error dialog_plus interface
+     */
+
+    public DialogPlusBuilder setErrorDialog(String positiveText) {
+        setDialog_type(DialogPlus.TYPE.ERROR_DIALOG).setTexts(positiveText);
+        return this;
+    }
+
+    public DialogPlusBuilder setErrorDialog() {
+        setDialog_type(DialogPlus.TYPE.ERROR_DIALOG);
         return this;
     }
 
@@ -211,13 +233,11 @@ public class DialogPlusBuilder {
      * sets the background color to the header background and positive andnegative
      */
     public DialogPlusBuilder setBackgroundColors(@ColorRes int positiveBackground, @ColorRes int negativeColorRes) {
-        return setBackgroundColors(positiveBackground, negativeColorRes, 0);
+        return setBackgroundColors(positiveBackground, negativeColorRes, -1);
     }
 
     public DialogPlusBuilder setBackgroundColors(@ColorRes int positiveBgColor, @ColorRes int negativeBgColor, @ColorRes int headerBgColor) {
-        model.setPositiveBgColor(positiveBgColor);
-        model.setHeaderBgColor(headerBgColor);
-        model.setNegativeBgColor(negativeBgColor);
+        model.setPositiveBgColor(positiveBgColor).setHeaderBgColor(headerBgColor).setNegativeBgColor(negativeBgColor);
         return this;
     }
 
@@ -233,12 +253,12 @@ public class DialogPlusBuilder {
     }
 
     public DialogPlusBuilder setTexts(String positiveText, String negativeText, String headerText) {
-        if (positiveText != null)
-            model.setPositiveText(positiveText);
-        if (negativeText != null)
-            model.setNegativeText(negativeText);
-        if (headerText != null)
-            model.setHeaderText(headerText);
+        model.setPositiveText(positiveText).setNegativeText(negativeText).setHeaderText(headerText);
+        return this;
+    }
+
+    public DialogPlusBuilder setNegativeText(String negativeText) {
+        model.setNegativeText(negativeText);
         return this;
     }
 
@@ -254,12 +274,7 @@ public class DialogPlusBuilder {
     }
 
     public DialogPlusBuilder setTextColors(@ColorRes int positiveTextColor, @ColorRes int negativeTextColor, @ColorRes int headerTextColor) {
-        if (positiveTextColor != -1)
-            model.setPositiveTextColor(positiveTextColor);
-        if (headerTextColor != -1)
-            model.setHeaderTextColor(headerTextColor);
-        if (negativeTextColor != -1)
-            model.setNegativeTextColor(negativeTextColor);
+        model.setPositiveTextColor(positiveTextColor).setHeaderTextColor(headerTextColor).setNegativeTextColor(negativeTextColor);
         return this;
     }
 
@@ -275,12 +290,7 @@ public class DialogPlusBuilder {
     }
 
     public DialogPlusBuilder setBackgrounds(@DrawableRes int positiveBgDrawable, @DrawableRes int negativeBgDrawable, @DrawableRes int headerBgDrawable) {
-        if (positiveBgDrawable != -1)
-            model.setPositiveBgDrawable(positiveBgDrawable);
-        if (positiveBgDrawable != -1)
-            model.setHeaderBgDrawable(positiveBgDrawable);
-        if (negativeBgDrawable != -1)
-            model.setNegativeBgDrawable(negativeBgDrawable);
+        model.setPositiveBgDrawable(positiveBgDrawable).setHeaderBgDrawable(headerBgDrawable).setNegativeBgDrawable(negativeBgDrawable);
         return this;
     }
 
@@ -314,7 +324,7 @@ public class DialogPlusBuilder {
         return this;
     }
 
-    protected DialogPlusBuilder setDialog_type(@DialogPlus.TYPE int dialog_type) {
+    public DialogPlusBuilder setDialog_type(@DialogPlus.TYPE int dialog_type) {
         model.setDialog_type(dialog_type);
         return this;
     }
@@ -324,22 +334,14 @@ public class DialogPlusBuilder {
         return this;
     }
 
-    protected DialogPlusBuilder setNormalTextColor() {
-        model.setDialogCodeTextColor(model.getDialogCodeTextColor());
-        return this;
+    public DialogPlusBuilder setMessageDialog() {
+        return setMessageDialog(null);
     }
 
-    protected DialogPlusBuilder setMessageDialog(String positiveText) {
+    public DialogPlusBuilder setMessageDialog(String positiveText) {
         model.setPositiveText(positiveText);
         setDialog_type(DialogPlus.TYPE.MESSAGE_DIALOG);
         return this;
-    }
-
-    protected void shakeView(EditText editText) {
-        YoYo.with(Techniques.Shake)
-                .duration(700)
-                .onEnd(animator -> editText.setText(null))
-                .playOn(editText);
     }
 
     public DialogPlusBuilder setTitle(String title) {
@@ -347,11 +349,24 @@ public class DialogPlusBuilder {
         return this;
     }
 
-    /**
-     * Builders
-     */
-    private DialogPlusBuilder setConfirmDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, DialogPlus.CodeTypeListener codeTypeListener) {
-        set(correct_code, withSend, withResend, counterSeconds, codeTextColor, codeTypeListener);
+
+    public DialogPlusBuilder setCodeDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds) {
+        setDialog_type(DialogPlus.TYPE.CODE_DIALOG).set(correct_code, withSend, withResend, counterSeconds);
+        return this;
+    }
+
+    private DialogPlusBuilder setInitialRate(float initialRate) {
+        model.setRateValue(initialRate);
+        return this;
+    }
+
+    private DialogPlusBuilder setRateListener(DialogPlus.DialogRateListener rateListener) {
+        model.setRateListener(rateListener);
+        return this;
+    }
+
+    private DialogPlusBuilder setDialogActionListener(DialogPlus.DialogActionListener dialogActionListener) {
+        model.setDialogActionListener(dialogActionListener);
         return this;
     }
 
@@ -364,42 +379,17 @@ public class DialogPlusBuilder {
         return this;
     }
 
-    private void set(String correct_code, boolean withSend, boolean withResend, int counterSeconds, @ColorInt int codeTextColor, DialogPlus.CodeTypeListener codeTypeListener) {
+    private DialogPlusBuilder set(String correct_code, boolean withSend, boolean withResend, int counterSeconds) {
         model.setCorrectCode(correct_code);
         model.setCounterSeconds(counterSeconds);
         model.setTimeLeft(counterSeconds);
         model.setWithSend(withSend);
         model.setWithResend(withResend);
         model.setWithCounter(counterSeconds > 0);
-        model.setDialogCodeTextColor(codeTextColor);
-    }
-
-    public DialogPlusBuilder setCodeTypeListener(DialogPlus.CodeTypeListener codeTypeListener) {
-        model.setCodeTypeListener(codeTypeListener);
         return this;
     }
 
-    public DialogPlusBuilder setDialogActionListener(DialogPlus.DialogActionListener dialogActionListener) {
-        model.setDialogActionListener(dialogActionListener);
-        return this;
-    }
-
-    public DialogPlusBuilder setInitialRate(float initialRate) {
-        model.setRateValue(initialRate);
-        return this;
-    }
-
-    public DialogPlusBuilder setRateListener(DialogPlus.DialogRateListener rateListener) {
-        model.setRateListener(rateListener);
-        return this;
-    }
-
-    public DialogPlusBuilder setDialogListListener(DialogPlus.DialogListListener dialogListListener) {
-        model.setDialogListListener(dialogListListener);
-        return this;
-    }
-
-    private DialogPlusBuilder setSeparateActionButtons(boolean separateActionButtons) {
+    public DialogPlusBuilder setSeparateActionButtons(boolean separateActionButtons) {
         model.setSeparateActionButtons(separateActionButtons);
         return this;
     }

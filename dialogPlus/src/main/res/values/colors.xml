@@ -10,6 +10,7 @@
     <color name="dialogListItemTextColor">@color/colorAccent</color>
 
     <color name="dialogTransparent">#00000000</color>
+    <color name="dialogBlack">#000000</color>dialogBlack
 
     <color name="dialogNegativeBgColor">@color/dialogTransparent</color>
     <color name="dialogNegativeTextColor">@color/carbon_red_800</color>
@@ -40,4 +41,5 @@
 
     <color name="dialog_rating_bar_active_color">@color/colorPrimary</color>
     <color name="dialog_rating_bar_accent_color">@color/colorAccent</color>
+    <color name="dialog_code_text_color">@color/dialogBlack</color>
 </resources>

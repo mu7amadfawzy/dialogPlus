@@ -10,7 +10,7 @@
 
         <variable
             name="model"
-            type="com.dialog.plus.ui.DialogUiModel" />
+            type="com.dialog.plus.ui.DialogPlusUiModel" />
     </data>
 
     <carbon.widget.LinearLayout

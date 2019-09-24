@@ -7,9 +7,7 @@
 
         <variable
             name="model"
-            type="com.dialog.plus.ui.DialogUiModel" />
-
-
+            type="com.dialog.plus.ui.DialogPlusUiModel" />
     </data>
 
     <carbon.widget.LinearLayout
@@ -29,11 +27,11 @@
         app:strokeWidth="@{model.separateActionButtons?@dimen/dialog_zero:@dimen/dialog_negative_button_stroke}">
 
         <carbon.widget.Button
-            android:id="@+id/cancelButton"
+            android:id="@+id/cancelBtn"
             android:layout_width="0dp"
-            android:background="@color/dialogTransparent"
             android:layout_height="@dimen/dialog_action_buttons_height"
             android:layout_weight=".9"
+            android:background="@color/dialogTransparent"
             android:text="@{model.negativeText!=null?model.negativeText:@string/dialog_negative_text}"
             android:textAppearance="@style/dialog_negative_button_style"
             app:backgroundColor="@{model.separateActionButtons?model.dialogTransparent:model.negativeBgColor}"
@@ -51,8 +49,8 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@color/dialogTransparent"
             android:layout_weight=".1"
+            android:background="@color/dialogTransparent"
             app:visible="@{model.separateActionButtons}" />
 
         <carbon.widget.Button

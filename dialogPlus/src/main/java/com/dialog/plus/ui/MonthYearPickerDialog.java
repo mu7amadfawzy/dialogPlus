@@ -20,14 +20,14 @@ import java.util.Locale;
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
-public class MonthYearPickerDialog extends BaseModelDialogFragment<LayoutMonthYearPickerDialogBinding> {
+public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDialogBinding> {
     private final int MIN_YEAR = 1970;
     private int MAX_YEAR, MAX_MONTH = 12, MIN_MONTH = 1;
     private boolean isMonthPicker;
     @ColorRes
     private int dialogPositiveBgColor = R.color.dialogPositiveBgColor, titleTextColor = R.color.titleTextColor;
 
-    public MonthYearPickerDialog(DialogUiModel model, @TYPE int type) {
+    MonthYearPickerDialog(DialogPlusUiModel model, @TYPE int type) {
         this.model = model;
         this.isMonthPicker = type == TYPE.MONTH;
         if (model.getMaxYear() != 0)

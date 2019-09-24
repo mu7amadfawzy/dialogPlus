@@ -26,7 +26,7 @@ import androidx.databinding.ViewDataBinding;
 
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.LayoutDialogOptionBinding;
-import com.dialog.plus.ui.DialogUiModel;
+import com.dialog.plus.ui.DialogPlusUiModel;
 import com.dialog.plus.ui.MultiOptionsDialog;
 import com.dialog.plus.ui.PinEntryEditText;
 
@@ -41,7 +41,7 @@ import carbon.widget.Button;
  */
 public class BindingAdapterUtils {
 
-    private static final short COLOR_NOT_EXIST = -99;
+    private static final short Res_NOT_EXIST = -99;
 
     @BindingAdapter("visible")
     public static void visibility(View view, boolean visible) {
@@ -67,7 +67,7 @@ public class BindingAdapterUtils {
         try {
             return ContextCompat.getColor(context, colorRes);
         } catch (Resources.NotFoundException e) {
-            return COLOR_NOT_EXIST;
+            return Res_NOT_EXIST;
         }
     }
 
@@ -145,7 +145,7 @@ public class BindingAdapterUtils {
         if (!resourceExist(colorRes))
             return;
         int color = getColor(colorRes, view.getContext());
-        if (color != COLOR_NOT_EXIST) {//if color exists
+        if (color != Res_NOT_EXIST) {//if color exists
             view.setBackground(null);
             view.setBackgroundColor(color);
         } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
@@ -156,7 +156,7 @@ public class BindingAdapterUtils {
         if (!resourceExist(tintColor))
             return;
         int color = getColor(tintColor, view.getContext());
-        if (color != COLOR_NOT_EXIST) {//if color exists
+        if (color != Res_NOT_EXIST) {//if color exists
             view.setColorFilter(color);
         } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
     }
@@ -235,7 +235,7 @@ public class BindingAdapterUtils {
     }
 
     @BindingAdapter({"includeLayout", "model"})
-    public static void includeLayout(ViewGroup view, int viewRes, DialogUiModel model) {
+    public static void includeLayout(ViewGroup view, int viewRes, DialogPlusUiModel model) {
         ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(view.getContext()), viewRes, view, true);
         binding.setVariable(BR.model, model);
         binding.executePendingBindings();
@@ -261,8 +261,10 @@ public class BindingAdapterUtils {
     }
 
     @BindingAdapter("pinEntryTextColor")
-    public static void setCodeTextColor(PinEntryEditText view, @ColorInt int colorInt) {
-        view.setTextColor(colorInt);
-        view.getPaint().setColor(colorInt);
+    public static void setCodeTextColor(PinEntryEditText view, @ColorInt int color) {
+        if (color == -1)
+            return;
+        view.setTextColor(color);
+        view.getPaint().setColor(color);
     }
 }
