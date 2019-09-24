@@ -3,7 +3,7 @@
 
 An Android library that lets you create a sweet interface dialog layout in a simple and easy way ,with different types which you can use easily without any boilerbate code and with a great flexibilty to fit your desired user interface.
 
-The Dialog provides many types such as Message Dialog, Confirmation Dialog(a yes/no dialog), Code Entry Dialog, Success Dialog, Error Dialog, Multi Options Dialog, List Dialog, Year Picker and Month Picker.
+The Dialog provides many types such as Message Dialog, Confirmation Dialog(a yes/no dialog), Code Entry Dialog, Success Dialog, Error Dialog, Multi Options Dialog, List Dialog, Rating Dialog, Year Picker and Month Picker.
 ![sample](files/demo.gif)
 
 ## Quick Setup
