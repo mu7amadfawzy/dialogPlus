@@ -38,4 +38,5 @@
     <dimen name="dialog_list_separator_margin">@dimen/_16sdp</dimen>
 
     <dimen name="dialog_rating_bar_margin">@dimen/_15sdp</dimen>
+    <dimen name="dialog_image_width">@dimen/_200sdp</dimen>
 </resources>

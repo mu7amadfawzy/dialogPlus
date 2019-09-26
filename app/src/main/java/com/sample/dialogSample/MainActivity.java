@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onClickedMessageCode(View view) {
+    public void onClickedMessageDialog(View view) {
         new DialogPlusBuilder("Message Dialog", "message dialog_plus sample\n Welcome Back")
                 //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
                 .setTexts("alright")
@@ -32,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
                 .show(this.getSupportFragmentManager(), "Message Dialog");
     }
 
+    public void onClickedMessageDialogWithImage(View view) {
+        new DialogPlusBuilder("Message Dialog", "message dialog_plus sample\n Welcome Back")
+                //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
+                .setTexts("alright")
+                .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
+                .buildMessageDialog(R.drawable.no_notification_state, new DialogListener() {//implement functions
+                })
+                .show(this.getSupportFragmentManager(), "Message Dialog");
+    }
 
     public void onClickedConfirmation(View view) {
         new DialogPlusBuilder("Confirmation Dialog", "confirmation dialog_plus message content ...")
@@ -144,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .show(this.getSupportFragmentManager(), "Rating Dialog");
     }
+
     private List<String> getListItems() {
         List<String> dialogItemDMS = new ArrayList<>();
         dialogItemDMS.add("title 4");
@@ -169,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         String[] titles = {"Option 1", "Option 2", "Option 3", "Option 4"};
         return new ArrayList<>(Arrays.asList(titles));
     }
+
     private class DialogListener extends DialogPlus.DialogActionListener {
         @Override
         public void onPositive(DialogPlus dialogPlus) {

@@ -26,7 +26,7 @@ public class DialogPlusUiModel extends BaseObservable {
     @ColorRes
     private int positiveBgColor = -1, negativeBgColor = -1, headerBgColor = -1;
     @DrawableRes
-    private int positiveBgDrawable = -1, negativeBgDrawable = -1, headerBgDrawable = -1;
+    private int positiveBgDrawable = -1, negativeBgDrawable = -1, headerBgDrawable = -1, dialogImageRes = -1;
     @ColorRes
     private int positiveTextColor = -1, negativeTextColor = -1, headerTextColor = -1;
     @ColorInt
@@ -457,6 +457,15 @@ public class DialogPlusUiModel extends BaseObservable {
 
     public DialogPlusUiModel setMultiOptionsDialogListener(MultiOptionsDialog.ActionListener multiOptionsDialogListener) {
         this.multiOptionsDialogListener = multiOptionsDialogListener;
+        return this;
+    }
+
+    public int getDialogImageRes() {
+        return dialogImageRes;
+    }
+
+    public DialogPlusUiModel setDialogImageRes(int dialogImageRes) {
+        this.dialogImageRes = dialogImageRes;
         return this;
     }
 }

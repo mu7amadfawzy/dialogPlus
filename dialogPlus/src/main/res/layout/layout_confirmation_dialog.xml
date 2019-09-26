@@ -27,17 +27,32 @@
             layout="@layout/layout_dialog_header"
             app:model="@{model}" />
 
-        <me.grantland.widget.AutofitTextView
-            android:id="@+id/contentText"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/dialog_content_margin"
-            android:gravity="center"
-            android:text="@{model.content}"
-            android:textAppearance="@style/dialog_content_message_style"
-            app:visible="@{model.content!=null}"
-            tools:text="message \n message \n message"
-            tools:visibility="visible" />
+            android:gravity="center">
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/contentText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{model.content}"
+                android:textAppearance="@style/dialog_content_message_style"
+                app:visible="@{model.content!=null}"
+                tools:text="message \n message \n message"
+                tools:visibility="visible" />
+
+            <com.dialog.plus.views.GifImageView
+                android:layout_width="@dimen/dialog_image_width"
+                android:layout_height="@dimen/dialog_image_width"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                app:gifSrc="@{model.dialogImageRes}"
+                app:visible="@{model.dialogImageRes!=-1}" />
+        </RelativeLayout>
 
         <include
             android:id="@+id/actionButtons"

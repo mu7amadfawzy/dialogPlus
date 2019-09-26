@@ -55,7 +55,15 @@ public class DialogPlusBuilder {
      * build:  returns a dialogPlus instance which used as MESSAGE DIALOG
      */
     public DialogPlus buildMessageDialog(DialogPlus.DialogActionListener actionListener) {
-        return new DialogPlus(model.setDialog_type(DialogPlus.TYPE.MESSAGE_DIALOG).setDialogActionListener(actionListener));
+        return buildMessageDialog(-1, actionListener);
+    }
+
+    /**
+     * @param gifImageRes shows an imageView(below the content) with the sent res just
+     */
+    public DialogPlus buildMessageDialog(@DrawableRes int gifImageRes, DialogPlus.DialogActionListener actionListener) {
+        return new DialogPlus(model.setDialog_type(DialogPlus.TYPE.MESSAGE_DIALOG)
+                .setDialogActionListener(actionListener).setDialogImageRes(gifImageRes));
     }
 
     /**
@@ -66,7 +74,12 @@ public class DialogPlusBuilder {
     }
 
     public DialogPlus buildConfirmationDialog(boolean separateActionButtons, DialogPlus.DialogActionListener actionListener) {
-        return setSeparateActionButtons(separateActionButtons).build(DialogPlus.TYPE.CONFIRMATION_DIALOG, actionListener);
+        return buildConfirmationDialog(separateActionButtons, -1, actionListener);
+    }
+
+    public DialogPlus buildConfirmationDialog(boolean separateActionButtons, @DrawableRes int gifImageRes, DialogPlus.DialogActionListener actionListener) {
+        return setSeparateActionButtons(separateActionButtons).setImageRes(gifImageRes)
+                .build(DialogPlus.TYPE.CONFIRMATION_DIALOG, actionListener);
     }
 
     /**
@@ -391,6 +404,11 @@ public class DialogPlusBuilder {
 
     public DialogPlusBuilder setSeparateActionButtons(boolean separateActionButtons) {
         model.setSeparateActionButtons(separateActionButtons);
+        return this;
+    }
+
+    private DialogPlusBuilder setImageRes(@DrawableRes int gifImageRes) {
+        model.setDialogImageRes(gifImageRes);
         return this;
     }
 }

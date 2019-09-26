@@ -29,6 +29,7 @@ import com.dialog.plus.databinding.LayoutDialogOptionBinding;
 import com.dialog.plus.ui.DialogPlusUiModel;
 import com.dialog.plus.ui.MultiOptionsDialog;
 import com.dialog.plus.ui.PinEntryEditText;
+import com.dialog.plus.views.GifImageView;
 
 import java.util.List;
 
@@ -267,4 +268,11 @@ public class BindingAdapterUtils {
         view.setTextColor(color);
         view.getPaint().setColor(color);
     }
+
+    @BindingAdapter("gifSrc")
+    public static void gifSrc(GifImageView view, int drawableRes) {
+        if (resourceExist(drawableRes))
+            view.setImageResource(drawableRes);
+    }
+
 }
