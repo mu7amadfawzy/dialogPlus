@@ -29,12 +29,12 @@ import com.dialog.plus.databinding.LayoutDialogOptionBinding;
 import com.dialog.plus.ui.DialogPlusUiModel;
 import com.dialog.plus.ui.MultiOptionsDialog;
 import com.dialog.plus.ui.PinEntryEditText;
-import com.dialog.plus.views.GifImageView;
 
 import java.util.List;
 
 import carbon.BR;
 import carbon.widget.Button;
+import pl.droidsonroids.gif.GifImageView;
 
 /**
  * Created by Muhammad Noamany

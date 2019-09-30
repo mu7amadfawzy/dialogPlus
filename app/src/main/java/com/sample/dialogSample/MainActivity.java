@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
                 .setTexts("alright")
                 .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
-                .buildMessageDialog(R.drawable.no_notification_state, new DialogListener() {//implement functions
+                .buildMessageDialog(R.drawable.send_anim, new DialogListener() {//implement functions
                 })
                 .show(this.getSupportFragmentManager(), "Message Dialog");
     }

@@ -27,17 +27,29 @@
             layout="@layout/layout_dialog_header"
             app:model="@{model}" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/dialog_content_margin"
             android:gravity="center">
+
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/msgImage"
+                android:layout_width="@dimen/dialog_image_width"
+                android:layout_height="@dimen/dialog_image_width"
+                android:layout_gravity="center"
+                android:gravity="center"
+                app:gifSrc="@{model.dialogImageRes}"
+                app:visible="@{model.dialogImageRes!=-1}" />
 
             <me.grantland.widget.AutofitTextView
                 android:id="@+id/contentText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@{model.content}"
                 android:textAppearance="@style/dialog_content_message_style"
@@ -45,14 +57,8 @@
                 tools:text="message \n message \n message"
                 tools:visibility="visible" />
 
-            <com.dialog.plus.views.GifImageView
-                android:layout_width="@dimen/dialog_image_width"
-                android:layout_height="@dimen/dialog_image_width"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                app:gifSrc="@{model.dialogImageRes}"
-                app:visible="@{model.dialogImageRes!=-1}" />
-        </RelativeLayout>
+
+        </LinearLayout>
 
         <include
             android:id="@+id/actionButtons"
