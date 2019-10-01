@@ -23,6 +23,8 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.LayoutDialogOptionBinding;
@@ -275,4 +277,20 @@ public class BindingAdapterUtils {
             view.setImageResource(drawableRes);
     }
 
+    @BindingAdapter("srcByLanguage")
+    public static void srcByLanguage(ImageView view, String language) {
+        view.setImageResource(FlagsUtil.getFlagByLanguage(language));
+    }
+
+    @BindingAdapter({"dialog_plus_setVerticalLayoutManager"})
+    public static void dialog_plus_setVerticalLayoutManager(RecyclerView recyclerView, boolean set) {
+        if (set)
+            recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.VERTICAL, false));
+    }
+
+    @BindingAdapter({"dialog_plus_setDialogCountriesDivider"})
+    public static void dialog_plus_setDialogCountriesDivider(RecyclerView recyclerView, boolean set) {
+        if (set)
+            recyclerView.addItemDecoration(new DIalogCountriesDivider(recyclerView.getContext()));
+    }
 }

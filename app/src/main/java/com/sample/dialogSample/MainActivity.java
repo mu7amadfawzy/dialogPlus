@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dialog.plus.ui.CountryDataModel;
 import com.dialog.plus.ui.DialogPlus;
 import com.dialog.plus.ui.DialogPlusBuilder;
 import com.dialog.plus.ui.MultiOptionsDialog;
@@ -125,6 +126,18 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
                         super.onItemClicked(title, index, dialogPlus);
                         Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show(this.getSupportFragmentManager(), "List Dialog");
+    }
+
+    public void onCountriesListDialogClicked(View view) {
+        new DialogPlusBuilder().setTitle("Countries List Dialog")
+                .buildCountriesListDialog(new DialogPlus.CountriesDialogListener() {
+                    @Override
+                    public void onItemClicked(CountryDataModel countryDataModel, DialogPlus dialogPlus) {
+                        super.onItemClicked(countryDataModel, dialogPlus);
+                        Toast.makeText(MainActivity.this, "country:" + countryDataModel.getName() + " ,Code: " + countryDataModel.getPhone_code(), Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show(this.getSupportFragmentManager(), "List Dialog");

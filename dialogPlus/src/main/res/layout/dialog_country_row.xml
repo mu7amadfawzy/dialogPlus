@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="showCode"
+            type="boolean" />
+
+        <variable
+            name="dataModel"
+            type="com.dialog.plus.ui.CountryDataModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_list_row_margin_top"
+        android:layout_marginBottom="@dimen/dialog_list_row_margin_top"
+        android:gravity="center_vertical"
+        android:layoutDirection="locale"
+        android:orientation="horizontal"
+        android:padding="@dimen/dialog_country_row_padding">
+
+        <ImageView
+            android:id="@+id/image_flag"
+            android:layout_width="@dimen/dialog_country_flag_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_country_flag_margin"
+            android:adjustViewBounds="true"
+            android:gravity="center"
+            android:src="@mipmap/flag_egypt"
+            app:srcByLanguage="@{dataModel.code}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_list_row_margin_start"
+            android:layout_marginEnd="@dimen/dialog_country_flag_margin"
+            android:text="@{dataModel.code+'\t'+'+'+dataModel.phone_code+'\t'}"
+            android:textAppearance="@style/dialog_list_item_text_style"
+            app:visible="@{showCode}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_list_row_margin_start"
+            android:layout_marginEnd="@dimen/dialog_list_row_margin_start"
+            android:text="@{dataModel.name}"
+            android:textAppearance="@style/dialog_list_item_text_style" />
+
+    </LinearLayout>
+</layout>

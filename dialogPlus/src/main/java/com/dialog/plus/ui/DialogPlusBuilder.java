@@ -120,10 +120,26 @@ public class DialogPlusBuilder {
     }
 
     /**
-     * buildMonthPickerDialog: returns a MonthYearPickerDialog instance used to pick month
+     * buildListDialog: returns a DialogPlus instance used to pick item among list
      */
     public DialogPlus buildListDialog(List<String> listItems, DialogPlus.DialogListListener dialogListListener) {
-        model.setDialog_type(DialogPlus.TYPE.LIST_DIALOG).setDialogListItems(listItems).setDialogListListener(dialogListListener);
+        return buildListDialog(listItems, false, dialogListListener);
+    }
+
+    public DialogPlus buildListDialog(List<String> listItems, boolean enableSearch, DialogPlus.DialogListListener dialogListListener) {
+        model.setDialog_type(DialogPlus.TYPE.LIST_DIALOG).setDialogListItems(listItems).enableSearch(enableSearch).setDialogListListener(dialogListListener);
+        return new DialogPlus(model);
+    }
+
+    /**
+     * buildCountriesListDialog: returns a DialogPlus instance used to pick country
+     */
+    public DialogPlus buildCountriesListDialog(DialogPlus.CountriesDialogListener countriesDialogListener) {
+        return buildCountriesListDialog(true, countriesDialogListener);
+    }
+
+    public DialogPlus buildCountriesListDialog(boolean showCountryCode, DialogPlus.CountriesDialogListener countriesDialogListener) {
+        model.setDialog_type(DialogPlus.TYPE.COUNTRIES_LIST_DIALOG).enableSearch(true).setShowCountryCode(showCountryCode).setCountriesDialogListener(countriesDialogListener);
         return new DialogPlus(model);
     }
 

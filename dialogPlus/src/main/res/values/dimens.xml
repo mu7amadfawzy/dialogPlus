@@ -13,13 +13,18 @@
 
     <dimen name="dialog_list_item_text_size">@dimen/_12ssp</dimen>
     <dimen name="dialog_list_search_bar_text_size">@dimen/_11ssp</dimen>
-    <dimen name="dialog_list_search_bar_padding">@dimen/_3sdp</dimen>
-    <dimen name="dialog_list_search_bar_corner">@dimen/_8sdp</dimen>
+    <dimen name="dialog_list_search_bar_padding">@dimen/_5sdp</dimen>
+    <dimen name="dialog_list_search_bar_corner">0dp</dimen>
+    <dimen name="dialog_list_search_bar_elevation">0dp</dimen>
+    <dimen name="dialog_list_Search_bar_margin">0dp</dimen>
+
+    <dimen name="dialog_country_flag_width">@dimen/_25sdp</dimen>
+    <dimen name="dialog_country_flag_margin">@dimen/_8sdp</dimen>
+    <dimen name="dialog_country_row_padding">@dimen/_2sdp</dimen>
 
     <dimen name="dialog_action_buttons_margin">@dimen/_10sdp</dimen>
     <dimen name="dialog_action_button_corner">50dp</dimen>
     <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
-    <dimen name="dialog_list_search_bar_elevation">1dp</dimen>
 
     <!--    space for showing elevation-->
     <dimen name="dialog_action_buttons_bottom_margin">2dp</dimen>
@@ -44,5 +49,4 @@
 
     <dimen name="dialog_rating_bar_margin">@dimen/_15sdp</dimen>
     <dimen name="dialog_image_width">@dimen/_150sdp</dimen>
-    <dimen name="dialog_list_Search_bar_margin">@dimen/_4sdp</dimen>
 </resources>

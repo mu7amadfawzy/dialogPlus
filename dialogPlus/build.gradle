@@ -80,6 +80,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation "me.grantland:autofittextview:0.2.1"
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
 group = publishedGroupId
 version = libraryVersion
