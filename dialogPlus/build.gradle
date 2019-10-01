@@ -16,7 +16,8 @@ ext {
     bintrayName = 'com.dialog.plus'//the package name in Bintray repo
     libraryName = 'dialogPlus'           // the module name in the android studio project
     //library name will be like -> publishedGroupId:artifact:libraryVersion
-    publishedGroupId = 'com.dialog'             //the ID you want to add in the 'implementation line'
+    publishedGroupId = 'com.dialog'
+    //the ID you want to add in the 'implementation line'
     artifact = 'plus'               //the artifact you want to add in the 'implementation line'
     libraryVersion = '4.1.1'
     libraryDescription = 'An Android library that lets you show Dialog in a custom simple and fast way.'
@@ -68,7 +69,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -76,9 +77,9 @@ dependencies {
     implementation project(':GifDrawableLib')
     implementation "com.intuit.sdp:sdp-android:1.0.6"
     implementation "com.intuit.ssp:ssp-android:1.0.6"
-    implementation 'androidx.multidex:multidex:2.+'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
-    implementation "me.grantland:autofittextview:0.+"
+    implementation "me.grantland:autofittextview:0.2.1"
 }
 group = publishedGroupId
 version = libraryVersion
@@ -161,7 +162,7 @@ bintray {
     }
 }
 //this line makes it easier to make uploading to Bintray
-if(project.rootProject.file('local.properities').exists()){
+if (project.rootProject.file('local.properities').exists()) {
     apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
     apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 }

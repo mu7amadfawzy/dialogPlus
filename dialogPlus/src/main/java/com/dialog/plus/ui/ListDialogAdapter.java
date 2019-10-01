@@ -34,6 +34,10 @@ class ListDialogAdapter extends RecyclerView.Adapter<ListDialogAdapter.ViewHolde
         notifyDataSetChanged();
     }
 
+    public void filter(String str) {
+
+    }
+
 
     @Override
     public ListDialogAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

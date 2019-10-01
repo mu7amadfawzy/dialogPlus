@@ -12,4 +12,5 @@
     <string name="dialog_options_close">Close</string>
     <string name="dialog_pick_year_title">Choose year</string>
     <string name="dialog_pick_month_title">Choose month</string>
+    <string name="dialog_list_search_hint">type here to search</string>
 </resources>

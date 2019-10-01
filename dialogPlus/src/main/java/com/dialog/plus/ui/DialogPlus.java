@@ -25,6 +25,8 @@ import com.dialog.plus.utils.KeyboardUtil;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import carbon.internal.SimpleTextWatcher;
+
 /**
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
@@ -93,6 +95,21 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         ListDialogAdapter listDialogAdapter = new ListDialogAdapter(this, model.getListDialogItems(), model.getDialogListListener());
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listDialogAdapter);
+        setSearchTextWatcher(listDialogAdapter);
+    }
+
+    private void setSearchTextWatcher(ListDialogAdapter listDialogAdapter) {
+        ((EditText) getDialogAddedView(R.id.searchInputET))
+                .addTextChangedListener(new SimpleTextWatcher() {
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        super.afterTextChanged(editable);
+                        if (editable.toString().trim().isEmpty())
+                            listDialogAdapter.setDataList(model.getListDialogItems());
+                        else
+                            listDialogAdapter.filter(editable.toString());
+                    }
+                });
     }
 
     private void setErrorAnimation() {
@@ -102,6 +119,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     private void setSuccessAnimation() {
         animate(getDialogAddedView(R.id.successImg), Techniques.FadeIn);
     }
+
     private void setOnTextListener() {
         ((EditText) getDialogAddedView(R.id.txtPinEntry)).addTextChangedListener(new TextWatcher() {
             @Override
