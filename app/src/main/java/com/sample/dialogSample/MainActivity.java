@@ -1,5 +1,6 @@
 package com.sample.dialogSample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import com.dialog.plus.ui.CountryDataModel;
 import com.dialog.plus.ui.DialogPlus;
 import com.dialog.plus.ui.DialogPlusBuilder;
 import com.dialog.plus.ui.MultiOptionsDialog;
+import com.sample.dialogSample.settings.LocalityUtil;
+import com.sample.dialogSample.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +24,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setLocality();
         setContentView(R.layout.activity_main);
+    }
+
+    private void setLocality() {
+        LocalityUtil.getInstance().setLocality(this, isArabic() ? "ar" : "en");
+    }
+
+    private boolean isArabic() {
+        return getSharedPreferences("sample", MODE_PRIVATE).getBoolean("isArabic", false);
     }
 
     public void onClickedMessageDialog(View view) {
@@ -194,6 +206,11 @@ public class MainActivity extends AppCompatActivity {
     private List<String> getOptions() {
         String[] titles = {"Option 1", "Option 2", "Option 3", "Option 4"};
         return new ArrayList<>(Arrays.asList(titles));
+    }
+
+    public void onSettingsClicked(View view) {
+        startActivity(new Intent(this, SettingsActivity.class));
+        finish();
     }
 
     private class DialogListener extends DialogPlus.DialogActionListener {
