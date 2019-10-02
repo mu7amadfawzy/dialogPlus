@@ -1,5 +1,6 @@
 package com.dialog.plus.ui;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
 import com.dialog.plus.utils.AnimationUtils;
-import com.dialog.plus.utils.KeyboardUtil;
+import com.dialog.plus.utils.CommonUtil;
 import com.dialog.plus.utils.SampleAnimationListener;
 
 /**
@@ -35,6 +36,7 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     protected Binding binding;
     protected View mDialogView;
     private AnimationSet mModalInAnim, mModalOutAnim;
+    private ProgressDialog mProgressDialog;
 
     @Override
     public View onCreateView(@androidx.annotation.NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,11 +106,24 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     }
 
     protected void hideKeyboard(View view) {
-        KeyboardUtil.getInstance().hideKeyboard(view);
+        CommonUtil.getInstance().hideKeyboard(view);
     }
 
     protected void showKeyboard(View view) {
-        KeyboardUtil.getInstance().showKeyboard(view);
+        CommonUtil.getInstance().showKeyboard(view);
+    }
+
+    public void showLoading() {
+        hideLoading();
+        if (mProgressDialog == null)
+            mProgressDialog = CommonUtil.getInstance().getProgressDialog(getContext());
+        mProgressDialog.show();
+    }
+
+    public void hideLoading() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
+        }
     }
 
     protected abstract Object getVariableValue();

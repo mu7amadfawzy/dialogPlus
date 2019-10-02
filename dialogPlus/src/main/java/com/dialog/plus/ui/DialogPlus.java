@@ -21,7 +21,7 @@ import com.dialog.plus.BR;
 import com.dialog.plus.R;
 import com.dialog.plus.data.CountryRepo;
 import com.dialog.plus.databinding.DialogPlusBinding;
-import com.dialog.plus.utils.KeyboardUtil;
+import com.dialog.plus.utils.CommonUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -98,11 +98,13 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     }
 
     private void setDialogCountriesRecycler() {
+        showLoading();
         model.setCountryDataModels(new ArrayList<>(new CountryRepo(getContext()).getCountriesList()));
         CountryListDialogAdapter listDialogAdapter = new CountryListDialogAdapter(this, model.getCountryDataModels()
                 , model.isShowCountryCode(), model.getCountriesDialogListener());
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listDialogAdapter);
         setSearchTextWatcher(listDialogAdapter.getFilter());
+        hideLoading();
     }
 
 
@@ -236,7 +238,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         model.setTimeLeft(0);
         getDialogAddedView(R.id.sendCode).setClickable(false);
         getDialogAddedView(R.id.txtPinEntry).setEnabled(false);
-        KeyboardUtil.getInstance().hideKeyboard(binding.getRoot());
+        CommonUtil.getInstance().hideKeyboard(binding.getRoot());
         if (getContext() != null)
             getDialogAddedView(R.id.sendCode).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.carbon_grey_300));
         if (model.getCodeTypeListener() != null)
