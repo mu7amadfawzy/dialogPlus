@@ -1,7 +1,0 @@
-pl.droidsonroids.gif
-attr freezesAnimation
-attr gifSource
-attr isOpaque
-attr loopCount
-styleable GifTextureView gifSource isOpaque
-styleable GifView freezesAnimation loopCount
