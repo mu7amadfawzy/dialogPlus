@@ -1,1 +1,1 @@
-include ':app', ':dialogPlus', ':GifDrawableLib'
+include ':app', ':dialogPlus'
