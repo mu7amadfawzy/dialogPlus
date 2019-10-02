@@ -115,6 +115,8 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     private List<CountryDataModel> getCountriesList() {
         String language = CommonUtil.getCurrentLocale(getContext()).getLanguage().toLowerCase();
         String countriesStr = CommonUtil.loadJSONFromAsset(getContext(), PREFIX + language + ".json");
+        if (countriesStr == null)
+            countriesStr = CommonUtil.loadJSONFromAsset(getContext(), PREFIX + "en" + ".json");
         Type listType = new TypeToken<List<CountryDataModel>>() {
         }.getType();
         JsonReader reader = new JsonReader(new StringReader(countriesStr));

@@ -133,14 +133,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCountriesListDialogClicked(View view) {
         new DialogPlusBuilder().setTitle("Countries List Dialog")
-                .buildCountriesListDialog(new DialogPlus.CountriesDialogListener() {
+                .buildCountriesListDialog(true, new DialogPlus.CountriesDialogListener() {
                     @Override
                     public void onItemClicked(CountryDataModel countryDataModel, DialogPlus dialogPlus) {
                         super.onItemClicked(countryDataModel, dialogPlus);
                         Toast.makeText(MainActivity.this, "country:" + countryDataModel.getName() + " ,Code: " + countryDataModel.getPhone_code(), Toast.LENGTH_SHORT).show();
                     }
                 })
-                .show(this.getSupportFragmentManager(), "List Dialog");
+                .show(this.getSupportFragmentManager(), "Countries List Dialog");
     }
 
     public void onMonthYearDialogClicked(View view) {

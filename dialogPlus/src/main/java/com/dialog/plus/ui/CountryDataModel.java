@@ -28,6 +28,9 @@ public class CountryDataModel {
         return phone_code;
     }
 
+    public String getPhoneCodeStr() {
+        return phone_code + "";
+    }
     public void setPhone_code(int phone_code) {
         this.phone_code = phone_code;
     }

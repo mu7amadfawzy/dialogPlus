@@ -13,7 +13,7 @@
             type="com.dialog.plus.ui.CountryDataModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,9 +25,10 @@
         android:padding="@dimen/dialog_country_row_padding">
 
         <ImageView
-            android:id="@+id/image_flag"
+            android:id="@+id/flagIV"
             android:layout_width="@dimen/dialog_country_flag_width"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/dialog_country_flag_margin"
             android:adjustViewBounds="true"
             android:gravity="center"
@@ -37,19 +38,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dialog_list_row_margin_start"
-            android:layout_marginEnd="@dimen/dialog_country_flag_margin"
-            android:text="@{dataModel.code+'\t'+'+'+dataModel.phone_code+'\t'}"
-            android:textAppearance="@style/dialog_list_item_text_style"
-            app:visible="@{showCode}" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/dialog_list_row_margin_start"
             android:layout_marginEnd="@dimen/dialog_list_row_margin_start"
+            android:layout_toStartOf="@id/codeTV"
+            android:layout_toEndOf="@id/flagIV"
             android:text="@{dataModel.name}"
             android:textAppearance="@style/dialog_list_item_text_style" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/codeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dialog_list_row_margin_start"
+            android:layout_marginEnd="@dimen/dialog_country_flag_margin"
+            android:text="@{`+`+dataModel.phoneCodeStr}"
+            android:textAppearance="@style/dialog_list_item_text_style"
+            app:visible="@{showCode}" />
+    </RelativeLayout>
 </layout>
