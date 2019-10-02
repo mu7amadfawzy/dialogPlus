@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/dialog_country_flag_margin"
             android:adjustViewBounds="true"
             android:gravity="center"
-            android:src="@mipmap/flag_egypt"
+            android:src="@mipmap/flag_eg"
             app:srcByLanguage="@{dataModel.code}" />
 
         <TextView

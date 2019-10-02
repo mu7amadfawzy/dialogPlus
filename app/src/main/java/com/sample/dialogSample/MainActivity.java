@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dialog.plus.data.CountryRepo;
 import com.dialog.plus.ui.CountryDataModel;
 import com.dialog.plus.ui.DialogPlus;
 import com.dialog.plus.ui.DialogPlusBuilder;
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onListDialogClicked(View view) {
         new DialogPlusBuilder().setTitle("List Dialog")
-                .buildListDialog(getListItems(), new DialogPlus.DialogListListener() {
+                .buildListDialog(getListItems(), true, new DialogPlus.DialogListListener() {
                     @Override
                     public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
                         super.onItemClicked(title, index, dialogPlus);
@@ -132,12 +133,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onCountriesListDialogClicked(View view) {
-        new DialogPlusBuilder().setTitle("Countries List Dialog")
+        new DialogPlusBuilder()
                 .buildCountriesListDialog(true, new DialogPlus.CountriesDialogListener() {
                     @Override
                     public void onItemClicked(CountryDataModel countryDataModel, DialogPlus dialogPlus) {
                         super.onItemClicked(countryDataModel, dialogPlus);
-                        Toast.makeText(MainActivity.this, "country:" + countryDataModel.getName() + " ,Code: " + countryDataModel.getPhone_code(), Toast.LENGTH_SHORT).show();
+                        String arabicStr = new CountryRepo(MainActivity.this).getCounty("ar", countryDataModel.getCode()).getName();
+                        Toast.makeText(MainActivity.this, "country:" + countryDataModel.getName()
+                                + " ,arabic name: " + arabicStr, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show(this.getSupportFragmentManager(), "Countries List Dialog");

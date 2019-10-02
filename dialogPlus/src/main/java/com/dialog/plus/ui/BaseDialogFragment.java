@@ -21,6 +21,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
 import com.dialog.plus.utils.AnimationUtils;
 import com.dialog.plus.utils.KeyboardUtil;
+import com.dialog.plus.utils.SampleAnimationListener;
 
 /**
  * Created by fawzy on 04,September,2019
@@ -77,21 +78,11 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     }
 
     private void setAnimationListener() {
-        mModalOutAnim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
+        mModalOutAnim.setAnimationListener(new SampleAnimationListener() {
             @Override
             public void onAnimationEnd(Animation animation) {
                 mDialogView.setVisibility(View.GONE);
                 mDialogView.post(() -> dismiss());
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
             }
         });
     }

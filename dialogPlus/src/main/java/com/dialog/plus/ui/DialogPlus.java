@@ -19,19 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.dialog.plus.BR;
 import com.dialog.plus.R;
+import com.dialog.plus.data.CountryRepo;
 import com.dialog.plus.databinding.DialogPlusBinding;
-import com.dialog.plus.utils.CommonUtil;
 import com.dialog.plus.utils.KeyboardUtil;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 
-import java.io.StringReader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import carbon.internal.SimpleTextWatcher;
 
@@ -40,7 +34,6 @@ import carbon.internal.SimpleTextWatcher;
  * muhammadnoamany@gmail.com
  */
 public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements View.OnClickListener {
-    private final String PREFIX = "countries_";
     private CountDownTimer countDownTimer;
 
     DialogPlus(DialogPlusUiModel model) {
@@ -105,25 +98,13 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     }
 
     private void setDialogCountriesRecycler() {
-        model.setCountryDataModels(new ArrayList<>(getCountriesList()));
+        model.setCountryDataModels(new ArrayList<>(new CountryRepo(getContext()).getCountriesList()));
         CountryListDialogAdapter listDialogAdapter = new CountryListDialogAdapter(this, model.getCountryDataModels()
                 , model.isShowCountryCode(), model.getCountriesDialogListener());
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listDialogAdapter);
         setSearchTextWatcher(listDialogAdapter.getFilter());
     }
 
-    private List<CountryDataModel> getCountriesList() {
-        String language = CommonUtil.getCurrentLocale(getContext()).getLanguage().toLowerCase();
-        String countriesStr = CommonUtil.loadJSONFromAsset(getContext(), PREFIX + language + ".json");
-        if (countriesStr == null)
-            countriesStr = CommonUtil.loadJSONFromAsset(getContext(), PREFIX + "en" + ".json");
-        Type listType = new TypeToken<List<CountryDataModel>>() {
-        }.getType();
-        JsonReader reader = new JsonReader(new StringReader(countriesStr));
-        reader.setLenient(true);
-        List<CountryDataModel> countryDataModels = new Gson().fromJson(reader, listType);
-        return countryDataModels;
-    }
 
     private void setListDialogRecycler() {
         ListDialogAdapter listDialogAdapter = new ListDialogAdapter(this, model.getListDialogItems()

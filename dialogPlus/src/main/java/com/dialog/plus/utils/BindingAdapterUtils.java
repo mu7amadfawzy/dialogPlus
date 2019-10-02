@@ -279,7 +279,7 @@ public class BindingAdapterUtils {
 
     @BindingAdapter("srcByLanguage")
     public static void srcByLanguage(ImageView view, String language) {
-        view.setImageResource(FlagsUtil.getFlagByLanguage(language));
+        view.setImageDrawable(FlagsUtil.getFlagByLanguage(view.getContext(), language));
     }
 
     @BindingAdapter({"dialog_plus_setVerticalLayoutManager"})

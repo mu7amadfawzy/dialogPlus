@@ -150,6 +150,9 @@ implementation  'com.dialog:plus:2+'
                 })
                 .show(this.getSupportFragmentManager(), "Countries List Dialog");
 ```
+#### Note you can use CountryRepo to retrieve any country in any language using the country code
+``` String arabicStr = new CountryRepo(MainActivity.this).getCounty("ar", 20).getName(); ```
+
 ### 3 Listeners:
 
  ```setDialogActionListener(DialogPlus.DialogActionListener)```  

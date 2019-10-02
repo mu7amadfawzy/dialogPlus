@@ -24,22 +24,23 @@ public class CountryDataModel {
         this.code = code;
     }
 
-    public int getPhone_code() {
+    public int getPhoneCode() {
         return phone_code;
     }
 
     public String getPhoneCodeStr() {
         return phone_code + "";
     }
-    public void setPhone_code(int phone_code) {
+
+    public void setPhoneCode(int phone_code) {
         this.phone_code = phone_code;
     }
 
-    public String getEnglish_name() {
+    public String getEnglishName() {
         return english_name;
     }
 
-    public void setEnglish_name(String english_name) {
+    public void setEnglishName(String english_name) {
         this.english_name = english_name;
     }
 }
