@@ -137,7 +137,19 @@ implementation  'com.dialog:plus:2+'
                 })
                 .show(this.getSupportFragmentManager(), "Rating Dialog");
 ```
-     
+### 2.11 Country Picker Dialog:
+
+ ```
+     new DialogPlusBuilder().setTitle("Countries List Dialog")
+                .buildCountriesListDialog(true,new DialogPlus.CountriesDialogListener() {
+                    @Override
+                    public void onItemClicked(CountryDataModel countryDataModel, DialogPlus dialogPlus) {
+                        super.onItemClicked(countryDataModel, dialogPlus);
+                        Toast.makeText(MainActivity.this, "country:" + countryDataModel.getName() + " ,Code: " + countryDataModel.getPhone_code(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show(this.getSupportFragmentManager(), "Countries List Dialog");
+```
 ### 3 Listeners:
 
  ```setDialogActionListener(DialogPlus.DialogActionListener)```  
@@ -242,44 +254,55 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 ### 4.2 Override any of these resources to set the dialog attributes for whole project
 #### Dimensions
 ````
-   <dimen name="dialog_corner_radius">15dp</dimen>
-       <dimen name="dialog_margin">@dimen/_30sdp</dimen>
-       <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
+    <dimen name="dialog_corner_radius">15dp</dimen>
+    <dimen name="dialog_margin">@dimen/_30sdp</dimen>
+    <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
 
-       <dimen name="dialog_header_height">@dimen/_40sdp</dimen>
-       <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
-       <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
+    <dimen name="dialog_header_height">@dimen/_40sdp</dimen>
+    <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
+    <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
 
-       <dimen name="dialog_content_margin">@dimen/_15sdp</dimen>
-       <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
+    <dimen name="dialog_content_margin">@dimen/_15sdp</dimen>
+    <dimen name="dialog_content_message_text_size">@dimen/_12ssp</dimen>
 
-       <dimen name="dialog_list_item_text_size">@dimen/_12ssp</dimen>
+    <dimen name="dialog_list_item_text_size">@dimen/_12ssp</dimen>
+    <dimen name="dialog_list_search_bar_text_size">@dimen/_11ssp</dimen>
+    <dimen name="dialog_list_search_bar_padding">@dimen/_5sdp</dimen>
+    <dimen name="dialog_list_search_bar_corner">0dp</dimen>
+    <dimen name="dialog_list_search_bar_elevation">0dp</dimen>
+    <dimen name="dialog_list_Search_bar_margin">0dp</dimen>
 
-       <dimen name="dialog_action_buttons_margin">@dimen/_10sdp</dimen>
-       <dimen name="dialog_action_button_corner">50dp</dimen>
-       <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
-       <!--    space for showing elevation-->
-       <dimen name="dialog_action_buttons_bottom_margin">2dp</dimen>
+    <dimen name="dialog_country_flag_width">@dimen/_25sdp</dimen>
+    <dimen name="dialog_country_flag_margin">@dimen/_8sdp</dimen>
+    <dimen name="dialog_country_row_padding">@dimen/_2sdp</dimen>
 
-       <dimen name="dialog_action_button_textSize">@dimen/_12ssp</dimen>
+    <dimen name="dialog_action_buttons_margin">@dimen/_10sdp</dimen>
+    <dimen name="dialog_action_button_corner">50dp</dimen>
+    <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
 
-       <dimen name="dialog_positive_button_elevation">1dp</dimen>
+    <!--    space for showing elevation-->
+    <dimen name="dialog_action_buttons_bottom_margin">2dp</dimen>
 
-       <dimen name="dialog_negative_button_stroke">1dp</dimen>
-       <dimen name="dialog_negative_button_elevation">0dp</dimen>
+    <dimen name="dialog_action_button_textSize">@dimen/_12ssp</dimen>
 
-       <dimen name="dialog_close_icon_radius">@dimen/_16sdp</dimen>
-       <dimen name="dialog_zero">0dp</dimen>
-       <dimen name="dialog_code_entry_margin">@dimen/_8sdp</dimen>
-       <dimen name="dialog_elevation">1dp</dimen>
+    <dimen name="dialog_positive_button_elevation">1dp</dimen>
 
-       <dimen name="dialog_options_header_padding">@dimen/_7sdp</dimen>
+    <dimen name="dialog_negative_button_stroke">1dp</dimen>
+    <dimen name="dialog_negative_button_elevation">0dp</dimen>
 
-       <dimen name="dialog_list_row_margin_top">@dimen/_4sdp</dimen>
-       <dimen name="dialog_list_row_margin_start">@dimen/_8sdp</dimen>
-       <dimen name="dialog_list_separator_margin">@dimen/_16sdp</dimen>
-       
-       <dimen name="dialog_rating_bar_margin">@dimen/_15sdp</dimen>
+    <dimen name="dialog_close_icon_radius">@dimen/_16sdp</dimen>
+    <dimen name="dialog_zero">0dp</dimen>
+    <dimen name="dialog_code_entry_margin">@dimen/_8sdp</dimen>
+    <dimen name="dialog_elevation">1dp</dimen>
+
+    <dimen name="dialog_options_header_padding">@dimen/_7sdp</dimen>
+
+    <dimen name="dialog_list_row_margin_top">@dimen/_4sdp</dimen>
+    <dimen name="dialog_list_row_margin_start">@dimen/_8sdp</dimen>
+    <dimen name="dialog_list_separator_margin">@dimen/_16sdp</dimen>
+
+    <dimen name="dialog_rating_bar_margin">@dimen/_15sdp</dimen>
+    <dimen name="dialog_image_width">@dimen/_150sdp</dimen>
 ````
 #### Integers
 ````
@@ -290,16 +313,19 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 ````
 #### Colors
 ````
-   <color name="colorPrimary">#0698B5</color>
-    <color name="colorPrimaryDark">#0694B3</color>
-    <color name="colorAccent">@color/carbon_grey_400</color>
+    <color name="colorPrimary">#0698B5</color>
+    <color name="colorPrimaryDark">#05839C</color>
+    <color name="colorAccent">#000</color>
 
     <color name="titleTextColor">@color/dialogPositiveTextColor</color>
     <color name="dialogContentTextColor">@color/colorAccent</color>
 
-    <color name="dialogListItemTextColor">@color/colorAccent</color>
+    <color name="dialogListItemTextColor">@color/colorPrimary</color>
+    <color name="dialogListSearchBarBackgroundColor">@color/carbon_grey_200</color>
+    <color name="dialogListSearchBarTextColor">@color/carbon_grey_600</color>
 
     <color name="dialogTransparent">#00000000</color>
+    <color name="dialogBlack">#000000</color>dialogBlack
 
     <color name="dialogNegativeBgColor">@color/dialogTransparent</color>
     <color name="dialogNegativeTextColor">@color/carbon_red_800</color>
@@ -318,7 +344,7 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 
     <color name="dialog_error_button_background">@color/carbon_red_600</color>
     <color name="dialog_success_button_background">@color/carbon_green_500</color>
-    
+
     <color name="dialog_option_background">@color/carbon_grey_200</color>
     <color name="dialog_option_text_color">@color/colorPrimary</color>
     <color name="dialog_option_close_text_color">@color/colorPrimaryDark</color>
@@ -327,9 +353,10 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
 
     <color name="dialog_month_year_action_background">#00000000</color>
     <color name="dialog_month_year_action_text_color">@color/colorPrimary</color>
-    
+
     <color name="dialog_rating_bar_active_color">@color/colorPrimary</color>
     <color name="dialog_rating_bar_accent_color">@color/colorAccent</color>
+    <color name="dialog_code_text_color">@color/dialogBlack</color>
 ````
 
 #### Strings
@@ -339,15 +366,16 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
     <string name="dialog_positive_text">Confirm</string>
     <string name="dialog_resend">Resend</string>
     <string name="dialog_time_up">Time up</string>
-    <string name="dialog_incomplete_code_msg">Please enter complete code</string>  
+    <string name="dialog_incomplete_code_msg">Please enter complete code</string>
     <string name="dialog_options_close">Close</string>
     <string name="dialog_pick_year_title">Choose year</string>
     <string name="dialog_pick_month_title">Choose month</string>
+    <string name="dialog_list_search_hint">type here to search</string>
 ````
 
 #### Styles
 ````
-   <style name="dialog_header_style" parent="@android:style/TextAppearance">
+    <style name="dialog_header_style" parent="@android:style/TextAppearance">
         <item name="android:textSize">@dimen/dialog_header_text_size</item>
         <item name="android:textColor">@color/titleTextColor</item>
         <item name="android:textAllCaps">false</item>
@@ -361,15 +389,29 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
         <item name="android:textAllCaps">false</item>
     </style>
 
-     <style name="dialog_list_item_text_style" parent="@android:style/TextAppearance">
-            <item name="android:textSize">@dimen/dialog_list_item_text_size</item>
-            <item name="android:textColor">@color/dialogListItemTextColor</item>
-            <item name="android:textStyle">normal</item>
-            <item name="android:textAllCaps">false</item>
-        </style>
+    <style name="dialog_list_item_text_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/dialog_list_item_text_size</item>
+        <item name="android:textColor">@color/dialogListSearchBarTextColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 
+    <style name="dialog_list_Search_bar_text_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/dialog_list_search_bar_text_size</item>
+        <item name="android:textColor">@color/dialogListSearchBarTextColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 
     <style name="dialog_positive_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_positive_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textColor">@color/dialogPositiveTextColor</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="dialog_option_button_style" parent="@android:style/TextAppearance">
         <item name="android:text">@string/dialog_positive_text</item>
         <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
         <item name="android:textColor">@color/dialogPositiveTextColor</item>
@@ -380,7 +422,7 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
     <style name="dialog_negative_button_style" parent="@android:style/TextAppearance">
         <item name="android:text">@string/dialog_negative_text</item>
         <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
-        <item name="android:textColor">@color/dialogContentTextColor</item>
+        <item name="android:textColor">@color/dialogNegativeTextColor</item>
         <item name="android:textStyle">normal</item>
         <item name="android:maxLines">@integer/dialog_content_maxLines</item>
     </style>
@@ -400,21 +442,14 @@ setCodeTypeListener(new DialogPlus.CodeTypeListener() {
         <item name="android:textColor">@color/dialog_white</item>
         <item name="android:textStyle">normal</item>
     </style>
-    
-    <style name="dialog_option_button_style" parent="@android:style/TextAppearance">
-        <item name="android:text">@string/dialog_positive_text</item>
-        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
-        <item name="android:textColor">@color/dialogPositiveTextColor</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textStyle">normal</item>
-    </style>
+
     <style name="dialog_month_year_picker_text_style">
-            <item name="android:textSize">@dimen/_12ssp</item>
-            <item name="colorControlNormal">#00000000</item>
-            <item name="android:textColorPrimary">#000</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="colorControlNormal">#00000000</item>
+        <item name="android:textColorPrimary">#000</item>
     </style>
-        
-     <style name="dialog_rating_bar_style" parent="Widget.AppCompat.RatingBar">
+
+    <style name="dialog_rating_bar_style" parent="Widget.AppCompat.RatingBar">
         <item name="colorControlActivated">@color/dialog_rating_bar_active_color</item>
         <item name="colorControlNormal">@color/dialog_rating_bar_accent_color</item>
     </style>

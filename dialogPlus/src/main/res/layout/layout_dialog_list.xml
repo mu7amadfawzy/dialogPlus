@@ -12,11 +12,12 @@
 
     <carbon.widget.LinearLayout
         android:layout_width="0dp"
-        android:layout_marginBottom="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_16sdp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
         android:background="@color/dialog_white"
+        android:focusableInTouchMode="true"
         android:gravity="center"
         android:orientation="vertical"
         app:carbon_cornerRadius="@dimen/dialog_corner_radius"
@@ -28,11 +29,33 @@
             layout="@layout/layout_dialog_header"
             app:model="@{model}" />
 
+        <carbon.widget.EditText
+            android:id="@+id/searchInputET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dialog_list_Search_bar_margin"
+            android:layout_marginTop="@dimen/dialog_list_Search_bar_margin"
+            android:layout_marginEnd="@dimen/dialog_list_Search_bar_margin"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="@color/dialogListSearchBarBackgroundColor"
+            android:cursorVisible="true"
+            android:drawableStart="@drawable/dialog_plus_ic_search"
+            android:hint="@string/dialog_list_search_hint"
+            android:padding="@dimen/dialog_list_search_bar_padding"
+            android:textAppearance="@style/dialog_list_item_text_style"
+            android:textColor="@color/dialogListSearchBarTextColor"
+            app:carbon_cornerRadius="@dimen/dialog_list_search_bar_corner"
+            app:carbon_cursorColor="@color/colorPrimaryDark"
+            app:carbon_elevation="@dimen/dialog_list_search_bar_elevation"
+            app:visible="@{model.enableSearch}" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp" />
+            android:layout_margin="@dimen/_8sdp"
+            app:dialog_plus_setDialogCountriesDivider="@{true}"
+            app:dialog_plus_setVerticalLayoutManager="@{true}" />
 
     </carbon.widget.LinearLayout>
 </layout>

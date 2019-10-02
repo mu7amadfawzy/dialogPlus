@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
@@ -13,23 +14,33 @@ import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.dialog.plus.BR;
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.DialogPlusBinding;
+import com.dialog.plus.utils.CommonUtil;
 import com.dialog.plus.utils.KeyboardUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
+import java.io.StringReader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import carbon.internal.SimpleTextWatcher;
 
 /**
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
  */
 public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements View.OnClickListener {
+    private final String PREFIX = "countries_";
     private CountDownTimer countDownTimer;
 
     DialogPlus(DialogPlusUiModel model) {
@@ -60,6 +71,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
             case TYPE.SUCCESS_DIALOG:
                 return R.layout.layout_success_dialog;
             case TYPE.LIST_DIALOG:
+            case TYPE.COUNTRIES_LIST_DIALOG:
                 return R.layout.layout_dialog_list;
             case TYPE.RATING_DIALOG:
                 return R.layout.layout_rating_dialog;
@@ -84,15 +96,51 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
                 setSuccessAnimation();
                 break;
             case TYPE.LIST_DIALOG:
-                renderItemsList();
+                setListDialogRecycler();
+                break;
+            case TYPE.COUNTRIES_LIST_DIALOG:
+                setDialogCountriesRecycler();
                 break;
         }
     }
 
-    private void renderItemsList() {
-        ListDialogAdapter listDialogAdapter = new ListDialogAdapter(this, model.getListDialogItems(), model.getDialogListListener());
-        ((RecyclerView) getDialogAddedView(R.id.recycler)).setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
+    private void setDialogCountriesRecycler() {
+        model.setCountryDataModels(new ArrayList<>(getCountriesList()));
+        CountryListDialogAdapter listDialogAdapter = new CountryListDialogAdapter(this, model.getCountryDataModels()
+                , model.isShowCountryCode(), model.getCountriesDialogListener());
         ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listDialogAdapter);
+        setSearchTextWatcher(listDialogAdapter.getFilter());
+    }
+
+    private List<CountryDataModel> getCountriesList() {
+        String language = CommonUtil.getCurrentLocale(getContext()).getLanguage().toLowerCase();
+        String countriesStr = CommonUtil.loadJSONFromAsset(getContext(), PREFIX + language + ".json");
+        if (countriesStr == null)
+            countriesStr = CommonUtil.loadJSONFromAsset(getContext(), PREFIX + "en" + ".json");
+        Type listType = new TypeToken<List<CountryDataModel>>() {
+        }.getType();
+        JsonReader reader = new JsonReader(new StringReader(countriesStr));
+        reader.setLenient(true);
+        List<CountryDataModel> countryDataModels = new Gson().fromJson(reader, listType);
+        return countryDataModels;
+    }
+
+    private void setListDialogRecycler() {
+        ListDialogAdapter listDialogAdapter = new ListDialogAdapter(this, model.getListDialogItems()
+                , model.getDialogListListener());
+        ((RecyclerView) getDialogAddedView(R.id.recycler)).setAdapter(listDialogAdapter);
+        setSearchTextWatcher(listDialogAdapter.getFilter());
+    }
+
+    private void setSearchTextWatcher(Filter filter) {
+        ((EditText) getDialogAddedView(R.id.searchInputET))
+                .addTextChangedListener(new SimpleTextWatcher() {
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        super.afterTextChanged(editable);
+                        filter.filter(editable.toString());
+                    }
+                });
     }
 
     private void setErrorAnimation() {
@@ -102,6 +150,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     private void setSuccessAnimation() {
         animate(getDialogAddedView(R.id.successImg), Techniques.FadeIn);
     }
+
     private void setOnTextListener() {
         ((EditText) getDialogAddedView(R.id.txtPinEntry)).addTextChangedListener(new TextWatcher() {
             @Override
@@ -305,6 +354,7 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         int SUCCESS_DIALOG = 4;
         int LIST_DIALOG = 5;
         int RATING_DIALOG = 6;
+        int COUNTRIES_LIST_DIALOG = 7;
     }
 
     /**
@@ -337,6 +387,17 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
         }
 
         public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
+            dialogPlus.dismiss(true);
+        }
+    }
+
+    public abstract static class CountriesDialogListener {
+
+        public void onNegative(DialogPlus dialogPlus) {
+            dialogPlus.dismiss(true);
+        }
+
+        public void onItemClicked(CountryDataModel countryDataModel, DialogPlus dialogPlus) {
             dialogPlus.dismiss(true);
         }
     }

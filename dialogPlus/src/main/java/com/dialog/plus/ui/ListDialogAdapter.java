@@ -2,6 +2,8 @@ package com.dialog.plus.ui;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,25 +17,60 @@ import java.util.List;
 /**
  * Created by Muhammad Noamany on 25,March,2019
  */
-class ListDialogAdapter extends RecyclerView.Adapter<ListDialogAdapter.ViewHolder> {
-    private ArrayList<String> dataList;
+class ListDialogAdapter extends RecyclerView.Adapter<ListDialogAdapter.ViewHolder> implements Filterable {
+    private ArrayList<String> unfilteredData, dataList;
     private ListDialogRowBinding binding;
     private DialogPlus dialogPlus;
     private DialogPlus.DialogListListener onItemClickListener;
+    private Filter filter;
 
 
-    ListDialogAdapter(DialogPlus dialogPlus, List<String> dataList, DialogPlus.DialogListListener onItemClickListener) {
+    ListDialogAdapter(DialogPlus dialogPlus, ArrayList<String> unfilteredData, DialogPlus.DialogListListener onItemClickListener) {
         super();
-        this.dataList = new ArrayList<>(dataList);
         this.onItemClickListener = onItemClickListener;
         this.dialogPlus = dialogPlus;
+        setUnfilteredData(unfilteredData);
+        setFilter();
     }
 
-    public void setDataList(List<String> list) {
-        this.dataList = new ArrayList<>(list);
+    public void setUnfilteredData(List<String> list) {
+        this.unfilteredData = new ArrayList<>(list);
+        this.dataList = unfilteredData;
         notifyDataSetChanged();
     }
 
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    private void setFilter() {
+        filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    dataList = unfilteredData;
+                } else {
+                    ArrayList<String> filteredList = new ArrayList<>();
+                    for (String row : unfilteredData)
+                        if (row.toLowerCase().contains(charString.toLowerCase()))
+                            filteredList.add(row);
+                    dataList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = dataList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                dataList = (ArrayList<String>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     @Override
     public ListDialogAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -48,8 +85,6 @@ class ListDialogAdapter extends RecyclerView.Adapter<ListDialogAdapter.ViewHolde
     @Override
     public void onBindViewHolder(ListDialogAdapter.ViewHolder holder, int position) {
         holder.bind(position);
-
-
     }
 
     @Override
@@ -72,15 +107,14 @@ class ListDialogAdapter extends RecyclerView.Adapter<ListDialogAdapter.ViewHolde
 
         private void setListener() {
             if (onItemClickListener != null)
-                this.binding.item.setOnClickListener(v -> {
-                    onItemClickListener.onItemClicked(dataList.get(getAdapterPosition()), getAdapterPosition(), dialogPlus);
+                this.binding.getRoot().setOnClickListener(v -> {
+                    int desiredIndex = unfilteredData.indexOf(dataList.get(getAdapterPosition()));
+                    onItemClickListener.onItemClicked(unfilteredData.get(desiredIndex), desiredIndex, dialogPlus);
                 });
         }
 
         public void bind(int position) {
             binding.setTitle(dataList.get(getAdapterPosition()));
-            if (getAdapterPosition() == dataList.size() - 1) binding.dages.setHidden(true);
-            else binding.dages.setHidden(false);
         }
 
     }

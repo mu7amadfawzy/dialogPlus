@@ -7,7 +7,9 @@
     <color name="titleTextColor">@color/dialogPositiveTextColor</color>
     <color name="dialogContentTextColor">@color/colorAccent</color>
 
-    <color name="dialogListItemTextColor">@color/colorAccent</color>
+    <color name="dialogListItemTextColor">@color/colorPrimary</color>
+    <color name="dialogListSearchBarBackgroundColor">@color/carbon_grey_200</color>
+    <color name="dialogListSearchBarTextColor">@color/carbon_grey_600</color>
 
     <color name="dialogTransparent">#00000000</color>
     <color name="dialogBlack">#000000</color>dialogBlack

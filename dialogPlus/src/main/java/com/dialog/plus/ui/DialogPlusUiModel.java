@@ -19,7 +19,7 @@ import java.util.List;
  * muhammadnoamany@gmail.com
  */
 public class DialogPlusUiModel extends BaseObservable {
-    private boolean withSend, withResend, withCounter, separateActionButtons;
+    private boolean withSend, withResend, withCounter, separateActionButtons, enableSearch, showCountryCode;
     private String title, correctCode, codeEntry, content, typed_code, positiveText, negativeText, headerText;
     private int timeLeft, starsNumber = 5, counterSeconds, maxYear;
     private float rateValue;
@@ -33,6 +33,8 @@ public class DialogPlusUiModel extends BaseObservable {
     private int dialogCodeTextColor = Color.BLACK;
     @DialogPlus.TYPE
     private int dialog_type;
+    private DialogPlus.CountriesDialogListener countriesDialogListener;
+    private ArrayList<CountryDataModel> countryDataModels;
     /**
      * Listeners
      **/
@@ -43,7 +45,7 @@ public class DialogPlusUiModel extends BaseObservable {
     private MonthYearPickerDialog.PickerListener pickerListener;
     private MultiOptionsDialog.ActionListener multiOptionsDialogListener;
 
-    private List<String> listDialogItems = new ArrayList<>();
+    private ArrayList<String> listDialogItems = new ArrayList<>();
 
     DialogPlusUiModel() {
     }
@@ -423,13 +425,13 @@ public class DialogPlusUiModel extends BaseObservable {
         this.counterSeconds = counterSeconds;
     }
 
-    public List<String> getListDialogItems() {
+    public ArrayList<String> getListDialogItems() {
         return listDialogItems;
     }
 
     public DialogPlusUiModel setDialogListItems(List<String> listDialogItems) {
         if (this.listDialogItems.size() > 0) this.listDialogItems.clear();
-        this.listDialogItems = listDialogItems;
+        this.listDialogItems = new ArrayList<>(listDialogItems);
         return this;
     }
 
@@ -466,6 +468,46 @@ public class DialogPlusUiModel extends BaseObservable {
 
     public DialogPlusUiModel setDialogImageRes(int dialogImageRes) {
         this.dialogImageRes = dialogImageRes;
+        return this;
+    }
+
+    public boolean isEnableSearch() {
+        return enableSearch;
+    }
+
+    public DialogPlusUiModel enableSearch(boolean enableSearch) {
+        this.enableSearch = enableSearch;
+        return this;
+    }
+
+    public DialogPlus.CountriesDialogListener getCountriesDialogListener() {
+        return countriesDialogListener;
+    }
+
+    public DialogPlusUiModel setCountriesDialogListener(DialogPlus.CountriesDialogListener countriesDialogListener) {
+        this.countriesDialogListener = countriesDialogListener;
+        return this;
+    }
+
+    public ArrayList<CountryDataModel> getCountryDataModels() {
+        return countryDataModels;
+    }
+
+    public void setCountryDataModels(ArrayList<CountryDataModel> countryDataModels) {
+        this.countryDataModels = countryDataModels;
+    }
+
+    public boolean isShowCountryCode() {
+        return showCountryCode;
+    }
+
+    public DialogPlusUiModel setShowCountryCode(boolean showCountryCode) {
+        this.showCountryCode = showCountryCode;
+        return this;
+    }
+
+    public DialogPlusUiModel showCountryCode() {
+        this.showCountryCode = true;
         return this;
     }
 }
