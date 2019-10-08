@@ -30,6 +30,7 @@
             android:text="@string/english"
             android:textColor="@color/colorPrimary" />
 
+
     </LinearLayout>
 
 

@@ -1,0 +1,1454 @@
+[
+  {
+    "name": "ઍંડોરા",
+    "english_name": "Andorra",
+    "code": "ad",
+    "phone_code": "376"
+  },
+  {
+    "name": "સંયુક્ત આરબ અમીરાત",
+    "english_name": "United Arab Emirates (UAE)",
+    "code": "ae",
+    "phone_code": "971"
+  },
+  {
+    "name": "અફઘાનિસ્તાન",
+    "english_name": "Afghanistan",
+    "code": "af",
+    "phone_code": "93"
+  },
+  {
+    "name": "એન્ટિગુઆ અને બાર્બુડા",
+    "english_name": "Antigua and Barbuda",
+    "code": "ag",
+    "phone_code": "1"
+  },
+  {
+    "name": "એંગુલા",
+    "english_name": "Anguilla",
+    "code": "ai",
+    "phone_code": "1"
+  },
+  {
+    "name": "અલ્બેનિયા",
+    "english_name": "Albania",
+    "code": "al",
+    "phone_code": "355"
+  },
+  {
+    "name": "આર્મેનિયા",
+    "english_name": "Armenia",
+    "code": "am",
+    "phone_code": "374"
+  },
+  {
+    "name": "અંગોલા",
+    "english_name": "Angola",
+    "code": "ao",
+    "phone_code": "244"
+  },
+  {
+    "name": "એન્ટાર્કટિકા",
+    "english_name": "Antarctica",
+    "code": "aq",
+    "phone_code": "672"
+  },
+  {
+    "name": "અર્જેન્ટીના",
+    "english_name": "Argentina",
+    "code": "ar",
+    "phone_code": "54"
+  },
+  {
+    "name": "અમેરિકન સમોઆ",
+    "english_name": "American Samoa",
+    "code": "as",
+    "phone_code": "1"
+  },
+  {
+    "name": "ઓસ્ટ્રિયા",
+    "english_name": "Austria",
+    "code": "at",
+    "phone_code": "43"
+  },
+  {
+    "name": "ઓસ્ટ્રેલિયા",
+    "english_name": "Australia",
+    "code": "au",
+    "phone_code": "61"
+  },
+  {
+    "name": "અરુબા",
+    "english_name": "Aruba",
+    "code": "aw",
+    "phone_code": "297"
+  },
+  {
+    "name": "ઍલૅન્ડ આઇલેન્ડ્સ",
+    "english_name": "Åland Islands",
+    "code": "ax",
+    "phone_code": "358"
+  },
+  {
+    "name": "અઝરબૈજાન",
+    "english_name": "Azerbaijan",
+    "code": "az",
+    "phone_code": "994"
+  },
+  {
+    "name": "બોસ્નિયા અને હર્ઝેગોવિના",
+    "english_name": "Bosnia And Herzegovina",
+    "code": "ba",
+    "phone_code": "387"
+  },
+  {
+    "name": "બાર્બાડોસ",
+    "english_name": "Barbados",
+    "code": "bb",
+    "phone_code": "1"
+  },
+  {
+    "name": "બાંગ્લાદેશ",
+    "english_name": "Bangladesh",
+    "code": "bd",
+    "phone_code": "880"
+  },
+  {
+    "name": "બેલ્જીયમ",
+    "english_name": "Belgium",
+    "code": "be",
+    "phone_code": "32"
+  },
+  {
+    "name": "બુર્કિના ફાસો",
+    "english_name": "Burkina Faso",
+    "code": "bf",
+    "phone_code": "226"
+  },
+  {
+    "name": "બલ્ગેરિયા",
+    "english_name": "Bulgaria",
+    "code": "bg",
+    "phone_code": "359"
+  },
+  {
+    "name": "બેહરીન",
+    "english_name": "Bahrain",
+    "code": "bh",
+    "phone_code": "973"
+  },
+  {
+    "name": "બરુન્ડી",
+    "english_name": "Burundi",
+    "code": "bi",
+    "phone_code": "257"
+  },
+  {
+    "name": "બેનિન",
+    "english_name": "Benin",
+    "code": "bj",
+    "phone_code": "229"
+  },
+  {
+    "name": "સેન્ટ બાર્થેલેમી",
+    "english_name": "Saint Barthélemy",
+    "code": "bl",
+    "phone_code": "590"
+  },
+  {
+    "name": "બર્મુડા",
+    "english_name": "Bermuda",
+    "code": "bm",
+    "phone_code": "1"
+  },
+  {
+    "name": "બ્રુનેઇ દારુસલામ",
+    "english_name": "Brunei Darussalam",
+    "code": "bn",
+    "phone_code": "673"
+  },
+  {
+    "name": "બોલિવિયા, પ્લુરિનેશનલ સ્ટેટ",
+    "english_name": "Bolivia, Plurinational State Of",
+    "code": "bo",
+    "phone_code": "591"
+  },
+  {
+    "name": "બ્રાઝીલ",
+    "english_name": "Brazil",
+    "code": "br",
+    "phone_code": "55"
+  },
+  {
+    "name": "બહામાસ",
+    "english_name": "Bahamas",
+    "code": "bs",
+    "phone_code": "1"
+  },
+  {
+    "name": "ભુતાન",
+    "english_name": "Bhutan",
+    "code": "bt",
+    "phone_code": "975"
+  },
+  {
+    "name": "બોત્સ્વાના",
+    "english_name": "Botswana",
+    "code": "bw",
+    "phone_code": "267"
+  },
+  {
+    "name": "બેલારુસ",
+    "english_name": "Belarus",
+    "code": "by",
+    "phone_code": "375"
+  },
+  {
+    "name": "બેલીઝ",
+    "english_name": "Belize",
+    "code": "bz",
+    "phone_code": "501"
+  },
+  {
+    "name": "કેનેડા",
+    "english_name": "Canada",
+    "code": "ca",
+    "phone_code": "1"
+  },
+  {
+    "name": "કોકોસ (કીલીંગ) આઇલેન્ડ",
+    "english_name": "Cocos (keeling) Islands",
+    "code": "cc",
+    "phone_code": "61"
+  },
+  {
+    "name": "કોંગો, ડેમોક્રેટિક રિપબ્લિક ઓફ",
+    "english_name": "Congo, The Democratic Republic Of The",
+    "code": "cd",
+    "phone_code": "243"
+  },
+  {
+    "name": "સેન્ટ્રલ આફ્રિકન રિપબ્લિક",
+    "english_name": "Central African Republic",
+    "code": "cf",
+    "phone_code": "236"
+  },
+  {
+    "name": "કોંગો",
+    "english_name": "Congo",
+    "code": "cg",
+    "phone_code": "242"
+  },
+  {
+    "name": "સ્વિટ્ઝર્લૅન્ડ",
+    "english_name": "Switzerland",
+    "code": "ch",
+    "phone_code": "41"
+  },
+  {
+    "name": "કોટ ડી સાથેની આઈવોર",
+    "english_name": "Côte D'ivoire",
+    "code": "ci",
+    "phone_code": "225"
+  },
+  {
+    "name": "કુક આઇલેન્ડ",
+    "english_name": "Cook Islands",
+    "code": "ck",
+    "phone_code": "682"
+  },
+  {
+    "name": "ચીલી",
+    "english_name": "Chile",
+    "code": "cl",
+    "phone_code": "56"
+  },
+  {
+    "name": "કૅમરૂન",
+    "english_name": "Cameroon",
+    "code": "cm",
+    "phone_code": "237"
+  },
+  {
+    "name": "ચાઇના",
+    "english_name": "China",
+    "code": "cn",
+    "phone_code": "86"
+  },
+  {
+    "name": "કોલંબિયા",
+    "english_name": "Colombia",
+    "code": "co",
+    "phone_code": "57"
+  },
+  {
+    "name": "કોસ્ટા રિકા",
+    "english_name": "Costa Rica",
+    "code": "cr",
+    "phone_code": "506"
+  },
+  {
+    "name": "ક્યુબા",
+    "english_name": "Cuba",
+    "code": "cu",
+    "phone_code": "53"
+  },
+  {
+    "name": "કેપ વર્દ",
+    "english_name": "Cape Verde",
+    "code": "cv",
+    "phone_code": "238"
+  },
+  {
+    "name": "કુરાકો",
+    "english_name": "Curaçao",
+    "code": "cw",
+    "phone_code": "599"
+  },
+  {
+    "name": "ક્રિસ્મસ આઇલેન્ડ",
+    "english_name": "Christmas Island",
+    "code": "cx",
+    "phone_code": "61"
+  },
+  {
+    "name": "સાયપ્રસ",
+    "english_name": "Cyprus",
+    "code": "cy",
+    "phone_code": "357"
+  },
+  {
+    "name": "ઝેક રીપબ્લીક",
+    "english_name": "Czech Republic",
+    "code": "cz",
+    "phone_code": "420"
+  },
+  {
+    "name": "જર્મની",
+    "english_name": "Germany",
+    "code": "de",
+    "phone_code": "49"
+  },
+  {
+    "name": "જીબુટી",
+    "english_name": "Djibouti",
+    "code": "dj",
+    "phone_code": "253"
+  },
+  {
+    "name": "ડેનમાર્ક",
+    "english_name": "Denmark",
+    "code": "dk",
+    "phone_code": "45"
+  },
+  {
+    "name": "ડોમિનિકા",
+    "english_name": "Dominica",
+    "code": "dm",
+    "phone_code": "1"
+  },
+  {
+    "name": "ડોમિનિકન રિપબ્લિક",
+    "english_name": "Dominican Republic",
+    "code": "do",
+    "phone_code": "1"
+  },
+  {
+    "name": "અલજીર્યા",
+    "english_name": "Algeria",
+    "code": "dz",
+    "phone_code": "213"
+  },
+  {
+    "name": "એક્વાડોર",
+    "english_name": "Ecuador",
+    "code": "ec",
+    "phone_code": "593"
+  },
+  {
+    "name": "એસ્ટોનિયા",
+    "english_name": "Estonia",
+    "code": "ee",
+    "phone_code": "372"
+  },
+  {
+    "name": "ઇજીપ્ટ",
+    "english_name": "Egypt",
+    "code": "eg",
+    "phone_code": "20"
+  },
+  {
+    "name": "એરિટ્રિયા",
+    "english_name": "Eritrea",
+    "code": "er",
+    "phone_code": "291"
+  },
+  {
+    "name": "સ્પેઇન",
+    "english_name": "Spain",
+    "code": "es",
+    "phone_code": "34"
+  },
+  {
+    "name": "ઇથોપિયા",
+    "english_name": "Ethiopia",
+    "code": "et",
+    "phone_code": "251"
+  },
+  {
+    "name": "ફિનલેન્ડ",
+    "english_name": "Finland",
+    "code": "fi",
+    "phone_code": "358"
+  },
+  {
+    "name": "ફીજી",
+    "english_name": "Fiji",
+    "code": "fj",
+    "phone_code": "679"
+  },
+  {
+    "name": "ફોકલેન્ડ આઇલેન્ડ (માલવિનસ)",
+    "english_name": "Falkland Islands (malvinas)",
+    "code": "fk",
+    "phone_code": "500"
+  },
+  {
+    "name": "માઇક્રોનેશિયા, ઓફ ફેડરેટેડ સ્ટેટ્સ",
+    "english_name": "Micronesia, Federated States Of",
+    "code": "fm",
+    "phone_code": "691"
+  },
+  {
+    "name": "ફેરો આઇલેન્ડ",
+    "english_name": "Faroe Islands",
+    "code": "fo",
+    "phone_code": "298"
+  },
+  {
+    "name": "ફ્રાન્સ",
+    "english_name": "France",
+    "code": "fr",
+    "phone_code": "33"
+  },
+  {
+    "name": "ગાબોન",
+    "english_name": "Gabon",
+    "code": "ga",
+    "phone_code": "241"
+  },
+  {
+    "name": "યુનાઇટેડ કિંગડમ",
+    "english_name": "United Kingdom",
+    "code": "gb",
+    "phone_code": "44"
+  },
+  {
+    "name": "ગ્રેનાડા",
+    "english_name": "Grenada",
+    "code": "gd",
+    "phone_code": "1"
+  },
+  {
+    "name": "જ્યોર્જિયા",
+    "english_name": "Georgia",
+    "code": "ge",
+    "phone_code": "995"
+  },
+  {
+    "name": "ફ્રેન્ચ ગુયાના",
+    "english_name": "French Guyana",
+    "code": "gf",
+    "phone_code": "594"
+  },
+  {
+    "name": "ગ્યુર્નસી",
+    "english_name": "Guernsey",
+    "code": "gg",
+    "phone_code": "44"
+  },
+  {
+    "name": "ઘાના",
+    "english_name": "Ghana",
+    "code": "gh",
+    "phone_code": "233"
+  },
+  {
+    "name": "જીબ્રાલ્ટર",
+    "english_name": "Gibraltar",
+    "code": "gi",
+    "phone_code": "350"
+  },
+  {
+    "name": "ગ્રીનલેન્ડ",
+    "english_name": "Greenland",
+    "code": "gl",
+    "phone_code": "299"
+  },
+  {
+    "name": "ગેમ્બિયા",
+    "english_name": "Gambia",
+    "code": "gm",
+    "phone_code": "220"
+  },
+  {
+    "name": "ગિની",
+    "english_name": "Guinea",
+    "code": "gn",
+    "phone_code": "224"
+  },
+  {
+    "name": "ગ્વાડેલોપ",
+    "english_name": "Guadeloupe",
+    "code": "gp",
+    "phone_code": "590"
+  },
+  {
+    "name": "ઈક્વેટોરિયલ ગિની",
+    "english_name": "Equatorial Guinea",
+    "code": "gq",
+    "phone_code": "240"
+  },
+  {
+    "name": "ગ્રીસ",
+    "english_name": "Greece",
+    "code": "gr",
+    "phone_code": "30"
+  },
+  {
+    "name": "ગ્વાટેમાલા",
+    "english_name": "Guatemala",
+    "code": "gt",
+    "phone_code": "502"
+  },
+  {
+    "name": "ગુઆમ",
+    "english_name": "Guam",
+    "code": "gu",
+    "phone_code": "1"
+  },
+  {
+    "name": "ગિની-બિસ્સાઉ",
+    "english_name": "Guinea-bissau",
+    "code": "gw",
+    "phone_code": "245"
+  },
+  {
+    "name": "ગયાના",
+    "english_name": "Guyana",
+    "code": "gy",
+    "phone_code": "592"
+  },
+  {
+    "name": "હોંગ કોંગ",
+    "english_name": "Hong Kong",
+    "code": "hk",
+    "phone_code": "852"
+  },
+  {
+    "name": "હોન્ડુરાસ",
+    "english_name": "Honduras",
+    "code": "hn",
+    "phone_code": "504"
+  },
+  {
+    "name": "ક્રોએશિયા",
+    "english_name": "Croatia",
+    "code": "hr",
+    "phone_code": "385"
+  },
+  {
+    "name": "હૈતી",
+    "english_name": "Haiti",
+    "code": "ht",
+    "phone_code": "509"
+  },
+  {
+    "name": "હંગેરી",
+    "english_name": "Hungary",
+    "code": "hu",
+    "phone_code": "36"
+  },
+  {
+    "name": "ઇન્ડોનેશિયા",
+    "english_name": "Indonesia",
+    "code": "id",
+    "phone_code": "62"
+  },
+  {
+    "name": "આયર્લેન્ડ",
+    "english_name": "Ireland",
+    "code": "ie",
+    "phone_code": "353"
+  },
+  {
+    "name": "ઇઝરાયેલ",
+    "english_name": "Israel",
+    "code": "il",
+    "phone_code": "972"
+  },
+  {
+    "name": "આઇલ ઓફ માં",
+    "english_name": "Isle Of Man",
+    "code": "im",
+    "phone_code": "44"
+  },
+  {
+    "name": "આઇસલેન્ડ",
+    "english_name": "Iceland",
+    "code": "is",
+    "phone_code": "354"
+  },
+  {
+    "name": "ભારત",
+    "english_name": "India",
+    "code": "in",
+    "phone_code": "91"
+  },
+  {
+    "name": "બ્રિટીશ હિંદ મહાસાગર પ્રદેશ",
+    "english_name": "British Indian Ocean Territory",
+    "code": "io",
+    "phone_code": "246"
+  },
+  {
+    "name": "ઇરાક",
+    "english_name": "Iraq",
+    "code": "iq",
+    "phone_code": "964"
+  },
+  {
+    "name": "ઈરાન, ઇસ્લામિક રિપબ્લિક",
+    "english_name": "Iran, Islamic Republic Of",
+    "code": "ir",
+    "phone_code": "98"
+  },
+  {
+    "name": "ઇટાલી",
+    "english_name": "Italy",
+    "code": "it",
+    "phone_code": "39"
+  },
+  {
+    "name": "જર્સી",
+    "english_name": "Jersey",
+    "code": "je",
+    "phone_code": "44"
+  },
+  {
+    "name": "જમૈકા",
+    "english_name": "Jamaica",
+    "code": "jm",
+    "phone_code": "1"
+  },
+  {
+    "name": "જોર્ડન",
+    "english_name": "Jordan",
+    "code": "jo",
+    "phone_code": "962"
+  },
+  {
+    "name": "જાપાન",
+    "english_name": "Japan",
+    "code": "jp",
+    "phone_code": "81"
+  },
+  {
+    "name": "કેન્યા",
+    "english_name": "Kenya",
+    "code": "ke",
+    "phone_code": "254"
+  },
+  {
+    "name": "કીર્ઘીસ્તાન",
+    "english_name": "Kyrgyzstan",
+    "code": "kg",
+    "phone_code": "996"
+  },
+  {
+    "name": "કંબોડિયા",
+    "english_name": "Cambodia",
+    "code": "kh",
+    "phone_code": "855"
+  },
+  {
+    "name": "કિરીબાટી",
+    "english_name": "Kiribati",
+    "code": "ki",
+    "phone_code": "686"
+  },
+  {
+    "name": "કોમોરોસ",
+    "english_name": "Comoros",
+    "code": "km",
+    "phone_code": "269"
+  },
+  {
+    "name": "સેન્ટ કિટ્સ અને નેવિસ",
+    "english_name": "Saint Kitts and Nevis",
+    "code": "kn",
+    "phone_code": "1"
+  },
+  {
+    "name": "કોરિયા, ડેમોક્રેટિક પીપલ્સ સાથેની એસ રિપબ્લિક",
+    "english_name": "North Korea",
+    "code": "kp",
+    "phone_code": "850"
+  },
+  {
+    "name": "કોરિયા",
+    "english_name": "South Korea",
+    "code": "kr",
+    "phone_code": "82"
+  },
+  {
+    "name": "કુવૈત",
+    "english_name": "Kuwait",
+    "code": "kw",
+    "phone_code": "965"
+  },
+  {
+    "name": "કેમેન ટાપુઓ",
+    "english_name": "Cayman Islands",
+    "code": "ky",
+    "phone_code": "1"
+  },
+  {
+    "name": "કઝાકિસ્તાન",
+    "english_name": "Kazakhstan",
+    "code": "kz",
+    "phone_code": "7"
+  },
+  {
+    "name": "લાઓ પીપલ્સ સાથેની ઓ ડેમોક્રેટિક રિપબ્લિક",
+    "english_name": "Lao People's Democratic Republic",
+    "code": "la",
+    "phone_code": "856"
+  },
+  {
+    "name": "લેબનોન",
+    "english_name": "Lebanon",
+    "code": "lb",
+    "phone_code": "961"
+  },
+  {
+    "name": "સેન્ટ લુસિયા",
+    "english_name": "Saint Lucia",
+    "code": "lc",
+    "phone_code": "1"
+  },
+  {
+    "name": "લૈચટેંસ્ટેઇન",
+    "english_name": "Liechtenstein",
+    "code": "li",
+    "phone_code": "423"
+  },
+  {
+    "name": "શ્રિલંકા",
+    "english_name": "Sri Lanka",
+    "code": "lk",
+    "phone_code": "94"
+  },
+  {
+    "name": "લાઇબેરીયા",
+    "english_name": "Liberia",
+    "code": "lr",
+    "phone_code": "231"
+  },
+  {
+    "name": "લેસોથો",
+    "english_name": "Lesotho",
+    "code": "ls",
+    "phone_code": "266"
+  },
+  {
+    "name": "લીથુનીયા",
+    "english_name": "Lithuania",
+    "code": "lt",
+    "phone_code": "370"
+  },
+  {
+    "name": "લક્ઝમબર્ગ",
+    "english_name": "Luxembourg",
+    "code": "lu",
+    "phone_code": "352"
+  },
+  {
+    "name": "લેતવિયા",
+    "english_name": "Latvia",
+    "code": "lv",
+    "phone_code": "371"
+  },
+  {
+    "name": "લિબિયા",
+    "english_name": "Libya",
+    "code": "ly",
+    "phone_code": "218"
+  },
+  {
+    "name": "મોરોક્કો",
+    "english_name": "Morocco",
+    "code": "ma",
+    "phone_code": "212"
+  },
+  {
+    "name": "મોનાકો",
+    "english_name": "Monaco",
+    "code": "mc",
+    "phone_code": "377"
+  },
+  {
+    "name": "મોલ્ડોવા, રિપબ્લિક ઓફ",
+    "english_name": "Moldova, Republic Of",
+    "code": "md",
+    "phone_code": "373"
+  },
+  {
+    "name": "મોન્ટેનેગ્રો",
+    "english_name": "Montenegro",
+    "code": "me",
+    "phone_code": "382"
+  },
+  {
+    "name": "સેન્ટ માર્ટિન",
+    "english_name": "Saint Martin",
+    "code": "mf",
+    "phone_code": "590"
+  },
+  {
+    "name": "મેડાગાસ્કર",
+    "english_name": "Madagascar",
+    "code": "mg",
+    "phone_code": "261"
+  },
+  {
+    "name": "માર્શલ આઈલેન્ડ",
+    "english_name": "Marshall Islands",
+    "code": "mh",
+    "phone_code": "692"
+  },
+  {
+    "name": "મેસેડોનિયા, ભૂતપૂર્વ યુગોસ્લાવ રિપબ્લિક",
+    "english_name": "Macedonia (FYROM)",
+    "code": "mk",
+    "phone_code": "389"
+  },
+  {
+    "name": "માલી",
+    "english_name": "Mali",
+    "code": "ml",
+    "phone_code": "223"
+  },
+  {
+    "name": "મ્યાનમાર",
+    "english_name": "Myanmar",
+    "code": "mm",
+    "phone_code": "95"
+  },
+  {
+    "name": "મંગોલિયા",
+    "english_name": "Mongolia",
+    "code": "mn",
+    "phone_code": "976"
+  },
+  {
+    "name": "મકાઓ",
+    "english_name": "Macau",
+    "code": "mo",
+    "phone_code": "853"
+  },
+  {
+    "name": "ઉત્તરીય મેરીયાના ટાપુઓ",
+    "english_name": "Northern Mariana Islands",
+    "code": "mp",
+    "phone_code": "1"
+  },
+  {
+    "name": "માર્ટીનીક",
+    "english_name": "Martinique",
+    "code": "mq",
+    "phone_code": "596"
+  },
+  {
+    "name": "મૌરિટાનિયા",
+    "english_name": "Mauritania",
+    "code": "mr",
+    "phone_code": "222"
+  },
+  {
+    "name": "મોંટસેરાત",
+    "english_name": "Montserrat",
+    "code": "ms",
+    "phone_code": "1"
+  },
+  {
+    "name": "માલ્ટા",
+    "english_name": "Malta",
+    "code": "mt",
+    "phone_code": "356"
+  },
+  {
+    "name": "મોરિશિયસ",
+    "english_name": "Mauritius",
+    "code": "mu",
+    "phone_code": "230"
+  },
+  {
+    "name": "માલદીવ",
+    "english_name": "Maldives",
+    "code": "mv",
+    "phone_code": "960"
+  },
+  {
+    "name": "મલાવી",
+    "english_name": "Malawi",
+    "code": "mw",
+    "phone_code": "265"
+  },
+  {
+    "name": "મેક્સિકો",
+    "english_name": "Mexico",
+    "code": "mx",
+    "phone_code": "52"
+  },
+  {
+    "name": "મલેશિયા",
+    "english_name": "Malaysia",
+    "code": "my",
+    "phone_code": "60"
+  },
+  {
+    "name": "મોઝામ્બિક",
+    "english_name": "Mozambique",
+    "code": "mz",
+    "phone_code": "258"
+  },
+  {
+    "name": "નામિબિયા",
+    "english_name": "Namibia",
+    "code": "na",
+    "phone_code": "264"
+  },
+  {
+    "name": "ન્યુ કેલેડોનીયા",
+    "english_name": "New Caledonia",
+    "code": "nc",
+    "phone_code": "687"
+  },
+  {
+    "name": "નાઇજર",
+    "english_name": "Niger",
+    "code": "ne",
+    "phone_code": "227"
+  },
+  {
+    "name": "નોરફોક ટાપુઓ",
+    "english_name": "Norfolk Islands",
+    "code": "nf",
+    "phone_code": "672"
+  },
+  {
+    "name": "નાઇજીરીયા",
+    "english_name": "Nigeria",
+    "code": "ng",
+    "phone_code": "234"
+  },
+  {
+    "name": "નિકારાગુઆ",
+    "english_name": "Nicaragua",
+    "code": "ni",
+    "phone_code": "505"
+  },
+  {
+    "name": "નેધરલેન્ડ",
+    "english_name": "Netherlands",
+    "code": "nl",
+    "phone_code": "31"
+  },
+  {
+    "name": "નોર્વે",
+    "english_name": "Norway",
+    "code": "no",
+    "phone_code": "47"
+  },
+  {
+    "name": "નેપાળ",
+    "english_name": "Nepal",
+    "code": "np",
+    "phone_code": "977"
+  },
+  {
+    "name": "નાઉરૂ",
+    "english_name": "Nauru",
+    "code": "nr",
+    "phone_code": "674"
+  },
+  {
+    "name": "નિયુએ",
+    "english_name": "Niue",
+    "code": "nu",
+    "phone_code": "683"
+  },
+  {
+    "name": "ન્યૂઝીલેન્ડ",
+    "english_name": "New Zealand",
+    "code": "nz",
+    "phone_code": "64"
+  },
+  {
+    "name": "ઓમાન",
+    "english_name": "Oman",
+    "code": "om",
+    "phone_code": "968"
+  },
+  {
+    "name": "પનામા",
+    "english_name": "Panama",
+    "code": "pa",
+    "phone_code": "507"
+  },
+  {
+    "name": "પેરુ",
+    "english_name": "Peru",
+    "code": "pe",
+    "phone_code": "51"
+  },
+  {
+    "name": "ફ્રેન્ચ પોલીનેશિયા",
+    "english_name": "French Polynesia",
+    "code": "pf",
+    "phone_code": "689"
+  },
+  {
+    "name": "પપુઆ ન્યુ ગીની",
+    "english_name": "Papua New Guinea",
+    "code": "pg",
+    "phone_code": "675"
+  },
+  {
+    "name": "ફિલિપાઇન્સ",
+    "english_name": "Philippines",
+    "code": "ph",
+    "phone_code": "63"
+  },
+  {
+    "name": "પાકિસ્તાન",
+    "english_name": "Pakistan",
+    "code": "pk",
+    "phone_code": "92"
+  },
+  {
+    "name": "પોલેન્ડ",
+    "english_name": "Poland",
+    "code": "pl",
+    "phone_code": "48"
+  },
+  {
+    "name": "સેન્ટ પીઅર એન્ડ મીક્વેલન",
+    "english_name": "Saint Pierre And Miquelon",
+    "code": "pm",
+    "phone_code": "508"
+  },
+  {
+    "name": "પીટકૈર્ન",
+    "english_name": "Pitcairn Islands",
+    "code": "pn",
+    "phone_code": "870"
+  },
+  {
+    "name": "પ્યુઅર્ટો રિકો",
+    "english_name": "Puerto Rico",
+    "code": "pr",
+    "phone_code": "1"
+  },
+  {
+    "name": "પેલેસ્ટાઇન",
+    "english_name": "Palestine",
+    "code": "ps",
+    "phone_code": "970"
+  },
+  {
+    "name": "પોર્ટુગલ",
+    "english_name": "Portugal",
+    "code": "pt",
+    "phone_code": "351"
+  },
+  {
+    "name": "પલાઉ",
+    "english_name": "Palau",
+    "code": "pw",
+    "phone_code": "680"
+  },
+  {
+    "name": "પેરાગ્વે",
+    "english_name": "Paraguay",
+    "code": "py",
+    "phone_code": "595"
+  },
+  {
+    "name": "કતાર",
+    "english_name": "Qatar",
+    "code": "qa",
+    "phone_code": "974"
+  },
+  {
+    "name": "રીયુનિયન",
+    "english_name": "Réunion",
+    "code": "re",
+    "phone_code": "262"
+  },
+  {
+    "name": "રોમાનિયા",
+    "english_name": "Romania",
+    "code": "ro",
+    "phone_code": "40"
+  },
+  {
+    "name": "સર્બિયા",
+    "english_name": "Serbia",
+    "code": "rs",
+    "phone_code": "381"
+  },
+  {
+    "name": "રશિયન ફેડરેશન",
+    "english_name": "Russian Federation",
+    "code": "ru",
+    "phone_code": "7"
+  },
+  {
+    "name": "રવાન્ડા",
+    "english_name": "Rwanda",
+    "code": "rw",
+    "phone_code": "250"
+  },
+  {
+    "name": "સાઉદી અરેબિયા",
+    "english_name": "Saudi Arabia",
+    "code": "sa",
+    "phone_code": "966"
+  },
+  {
+    "name": "સોલોમન આઇલેન્ડ",
+    "english_name": "Solomon Islands",
+    "code": "sb",
+    "phone_code": "677"
+  },
+  {
+    "name": "સીશલ્સ",
+    "english_name": "Seychelles",
+    "code": "sc",
+    "phone_code": "248"
+  },
+  {
+    "name": "સુદાન",
+    "english_name": "Sudan",
+    "code": "sd",
+    "phone_code": "249"
+  },
+  {
+    "name": "સ્વીડન",
+    "english_name": "Sweden",
+    "code": "se",
+    "phone_code": "46"
+  },
+  {
+    "name": "સિંગાપુર",
+    "english_name": "Singapore",
+    "code": "sg",
+    "phone_code": "65"
+  },
+  {
+    "name": "સેન્ટ હેલેના, એસેન્શન અને ટ્રીસ્ટન દા કુન્હા",
+    "english_name": "Saint Helena, Ascension And Tristan Da Cunha",
+    "code": "sh",
+    "phone_code": "290"
+  },
+  {
+    "name": "સાઇપ્રસ",
+    "english_name": "Slovenia",
+    "code": "si",
+    "phone_code": "386"
+  },
+  {
+    "name": "સ્લોવેકિયા",
+    "english_name": "Slovakia",
+    "code": "sk",
+    "phone_code": "421"
+  },
+  {
+    "name": "સીયેરા લીયોન",
+    "english_name": "Sierra Leone",
+    "code": "sl",
+    "phone_code": "232"
+  },
+  {
+    "name": "સૅન મેરિનો",
+    "english_name": "San Marino",
+    "code": "sm",
+    "phone_code": "378"
+  },
+  {
+    "name": "સેનેગલ",
+    "english_name": "Senegal",
+    "code": "sn",
+    "phone_code": "221"
+  },
+  {
+    "name": "સોમાલિયા",
+    "english_name": "Somalia",
+    "code": "so",
+    "phone_code": "252"
+  },
+  {
+    "name": "સુરીનામ",
+    "english_name": "Suriname",
+    "code": "sr",
+    "phone_code": "597"
+  },
+  {
+    "name": "દક્ષિણ સુદાન",
+    "english_name": "South Sudan",
+    "code": "ss",
+    "phone_code": "211"
+  },
+  {
+    "name": "સાઓ ટોમ એન્ડ પ્રિન્સાઇપ",
+    "english_name": "Sao Tome And Principe",
+    "code": "st",
+    "phone_code": "239"
+  },
+  {
+    "name": "એલ સાલ્વાડોર",
+    "english_name": "El Salvador",
+    "code": "sv",
+    "phone_code": "503"
+  },
+  {
+    "name": "સિન્ટ માર્ટન",
+    "english_name": "Sint Maarten",
+    "code": "sx",
+    "phone_code": "1"
+  },
+  {
+    "name": "સીરીયન આરબ રીપબ્લીક",
+    "english_name": "Syrian Arab Republic",
+    "code": "sy",
+    "phone_code": "963"
+  },
+  {
+    "name": "સ્વાઝીલેન્ડ",
+    "english_name": "Swaziland",
+    "code": "sz",
+    "phone_code": "268"
+  },
+  {
+    "name": "ટર્ક્સ અને કેઇકોસ આઇલેન્ડ્સ",
+    "english_name": "Turks and Caicos Islands",
+    "code": "tc",
+    "phone_code": "1"
+  },
+  {
+    "name": "ચાડ",
+    "english_name": "Chad",
+    "code": "td",
+    "phone_code": "235"
+  },
+  {
+    "name": "જાઓ",
+    "english_name": "Togo",
+    "code": "tg",
+    "phone_code": "228"
+  },
+  {
+    "name": "થાઇલેન્ડ",
+    "english_name": "Thailand",
+    "code": "th",
+    "phone_code": "66"
+  },
+  {
+    "name": "તજીકીસ્તાન",
+    "english_name": "Tajikistan",
+    "code": "tj",
+    "phone_code": "992"
+  },
+  {
+    "name": "તોકેલાઉ",
+    "english_name": "Tokelau",
+    "code": "tk",
+    "phone_code": "690"
+  },
+  {
+    "name": "પૂર્વ તિમોર",
+    "english_name": "Timor-leste",
+    "code": "tl",
+    "phone_code": "670"
+  },
+  {
+    "name": "તુર્કમેનિસ્તાન",
+    "english_name": "Turkmenistan",
+    "code": "tm",
+    "phone_code": "993"
+  },
+  {
+    "name": "ટ્યુનિશિયા",
+    "english_name": "Tunisia",
+    "code": "tn",
+    "phone_code": "216"
+  },
+  {
+    "name": "ટોંગા",
+    "english_name": "Tonga",
+    "code": "to",
+    "phone_code": "676"
+  },
+  {
+    "name": "તુર્કી",
+    "english_name": "Turkey",
+    "code": "tr",
+    "phone_code": "90"
+  },
+  {
+    "name": "ત્રિનિદાદ અને ટોબેગો",
+    "english_name": "Trinidad & Tobago",
+    "code": "tt",
+    "phone_code": "1"
+  },
+  {
+    "name": "તુવાલુ",
+    "english_name": "Tuvalu",
+    "code": "tv",
+    "phone_code": "688"
+  },
+  {
+    "name": "તાઇવાન",
+    "english_name": "Taiwan",
+    "code": "tw",
+    "phone_code": "886"
+  },
+  {
+    "name": "તાંઝાનિયા, યુનાઇટેડ રીપબ્લિક",
+    "english_name": "Tanzania, United Republic Of",
+    "code": "tz",
+    "phone_code": "255"
+  },
+  {
+    "name": "યુક્રેન",
+    "english_name": "Ukraine",
+    "code": "ua",
+    "phone_code": "380"
+  },
+  {
+    "name": "યુગાન્ડા",
+    "english_name": "Uganda",
+    "code": "ug",
+    "phone_code": "256"
+  },
+  {
+    "name": "યુનાઈટેડ સ્ટેટ્સ",
+    "english_name": "United States (USA)",
+    "code": "us",
+    "phone_code": "1"
+  },
+  {
+    "name": "ઉરુગ્વે",
+    "english_name": "Uruguay",
+    "code": "uy",
+    "phone_code": "598"
+  },
+  {
+    "name": "ઉઝબેકિસ્તાન",
+    "english_name": "Uzbekistan",
+    "code": "uz",
+    "phone_code": "998"
+  },
+  {
+    "name": "હોલી સી (વેટીકન સીટી સ્ટેટ)",
+    "english_name": "Holy See (vatican City State)",
+    "code": "va",
+    "phone_code": "379"
+  },
+  {
+    "name": "સેન્ટ વિન્સેન્ટ અને ગ્રેનેડિન્સ",
+    "english_name": "Saint Vincent & The Grenadines",
+    "code": "vc",
+    "phone_code": "1"
+  },
+  {
+    "name": "વેનેઝુએલા, બોલિવેરિઅન રિપબ્લિક",
+    "english_name": "Venezuela, Bolivarian Republic Of",
+    "code": "ve",
+    "phone_code": "58"
+  },
+  {
+    "name": "બ્રિટિશ વર્જિન ટાપુઓ",
+    "english_name": "British Virgin Islands",
+    "code": "vg",
+    "phone_code": "1"
+  },
+  {
+    "name": "યુ વર્જિન આઇલેન્ડ્સ",
+    "english_name": "US Virgin Islands",
+    "code": "vi",
+    "phone_code": "1"
+  },
+  {
+    "name": "વેઇત નામ",
+    "english_name": "Vietnam",
+    "code": "vn",
+    "phone_code": "84"
+  },
+  {
+    "name": "વેનૌતા",
+    "english_name": "Vanuatu",
+    "code": "vu",
+    "phone_code": "678"
+  },
+  {
+    "name": "વેલીસ એન્ડ ફ્યુટુના",
+    "english_name": "Wallis And Futuna",
+    "code": "wf",
+    "phone_code": "681"
+  },
+  {
+    "name": "સમોઆ",
+    "english_name": "Samoa",
+    "code": "ws",
+    "phone_code": "685"
+  },
+  {
+    "name": "કોસોવો",
+    "english_name": "Kosovo",
+    "code": "xk",
+    "phone_code": "383"
+  },
+  {
+    "name": "યેમેન",
+    "english_name": "Yemen",
+    "code": "ye",
+    "phone_code": "967"
+  },
+  {
+    "name": "માયોટી",
+    "english_name": "Mayotte",
+    "code": "yt",
+    "phone_code": "262"
+  },
+  {
+    "name": "દક્ષિણ આફ્રિકા",
+    "english_name": "South Africa",
+    "code": "za",
+    "phone_code": "27"
+  },
+  {
+    "name": "ઝામ્બિયા",
+    "english_name": "Zambia",
+    "code": "zm",
+    "phone_code": "260"
+  },
+  {
+    "name": "ઝિમ્બાબ્વે",
+    "english_name": "Zimbabwe",
+    "code": "zw",
+    "phone_code": "263"
+  }
+]
