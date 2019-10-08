@@ -1,10 +1,8 @@
 package com.dialog.plus.ui;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +11,8 @@ import android.view.animation.AnimationSet;
 import android.widget.EditText;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.DialogFragment;
@@ -39,6 +39,12 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     private ProgressDialog mProgressDialog;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.dialog_plus_style);
+    }
+
+    @Override
     public View onCreateView(@androidx.annotation.NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         bindView();
@@ -55,22 +61,35 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     public void onStart() {
         super.onStart();
         setDialog();
-        mDialogView.startAnimation(mModalInAnim);
+        binding.getRoot().startAnimation(mModalInAnim);
     }
 
     private void setDialog() {
         android.app.Dialog dialog = getDialog();
         if (dialog != null) {
             mDialogView = dialog.getWindow().getDecorView().findViewById(android.R.id.content);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.getWindow().setGravity(Gravity.CENTER);
+
+//            BitmapDrawable draw = new BitmapDrawable(getResources(), BlurBuilder.blur(getContext(), ScreenUtil.takeScreenShot(getActivity())));
+//            mDialogView.setBackground(draw);
         }
     }
 
     public void dismiss(boolean animate) {
+        mDialogView.setBackground(null);
         if (animate)
-            mDialogView.startAnimation(mModalOutAnim);
-        else dismiss(true);
+            binding.getRoot().startAnimation(mModalOutAnim);
+        else super.dismiss();
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        return new Dialog(getActivity(), getTheme()) {
+            @Override
+            public void onBackPressed() {
+                BaseDialogFragment.this.dismiss(true);
+            }
+        };
     }
 
     private void initAnimations() {

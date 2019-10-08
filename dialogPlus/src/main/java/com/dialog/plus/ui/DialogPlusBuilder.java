@@ -1,8 +1,11 @@
 package com.dialog.plus.ui;
 
+import android.view.View;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 
 import com.dialog.plus.R;
 
@@ -174,6 +177,21 @@ public class DialogPlusBuilder {
     public DialogPlus buildRatingDialog(float initialRate, boolean separateActionButtons, DialogPlus.DialogRateListener rateListener) {
         setInitialRate(initialRate).setSeparateActionButtons(separateActionButtons).setRateListener(rateListener).setDialog_type(DialogPlus.TYPE.RATING_DIALOG);
         return new DialogPlus(model);
+    }
+
+    /**
+     * buildCustomLayoutDialog: returns a CustomLayoutDialog instance which can be used to inflate any custom layout and shows it
+     */
+    public CustomLayoutDialog buildCustomLayoutDialog(View view) {
+        return new CustomLayoutDialog(model, view);
+    }
+
+    public CustomLayoutDialog buildCustomLayoutDialog(@LayoutRes int customLayoutRes) {
+        return buildCustomLayoutDialog(customLayoutRes, 0, null);
+    }
+
+    public CustomLayoutDialog buildCustomLayoutDialog(@LayoutRes int customLayoutRes, int variableId, Object variableValue) {
+        return new CustomLayoutDialog(model, customLayoutRes, variableId, variableValue);
     }
 
     /********************************************************************************************************/

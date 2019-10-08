@@ -182,6 +182,18 @@ public class MainActivity extends AppCompatActivity {
                 .show(this.getSupportFragmentManager(), "Rating Dialog");
     }
 
+    public void onCustomLayoutClicked(View view) {
+        new DialogPlusBuilder()
+                .buildCustomLayoutDialog(R.layout.custom_layout)
+                .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
+    }
+
+    public void onCustomImageClicked(View view) {
+        new DialogPlusBuilder()
+                .buildCustomLayoutDialog(findViewById(R.id.iv))
+                .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
+    }
+
     private List<String> getListItems() {
         List<String> dialogItemDMS = new ArrayList<>();
         dialogItemDMS.add("title 4");

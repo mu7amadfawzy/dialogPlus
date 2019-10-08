@@ -16,7 +16,7 @@ import java.util.List;
  * ma7madfawzy@gmail.com
  **/
 public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBinding> {
-    private DialogPlusUiModel model = new DialogPlusUiModel();
+    private DialogPlusUiModel model;
 
     MultiOptionsDialog(DialogPlusUiModel uiModel) {
         this.model = uiModel;

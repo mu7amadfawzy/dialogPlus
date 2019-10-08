@@ -293,4 +293,15 @@ public class BindingAdapterUtils {
         if (set)
             recyclerView.addItemDecoration(new DIalogCountriesDivider(recyclerView.getContext()));
     }
+
+    @BindingAdapter(value = {"includeCustomLayout", "variableId", "variableValue"}, requireAll = true)
+    public static void includeCustomLayout(ViewGroup viewGroup, int viewRes, int variableId, Object variableValue) {
+        try {
+            ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), viewRes, viewGroup, true);
+            binding.setVariable(variableId, variableValue);
+            viewGroup.setTag(binding);
+        } catch (Exception e) {
+            viewGroup.setTag(viewGroup.getChildAt(0));
+        }
+    }
 }

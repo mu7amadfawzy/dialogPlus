@@ -12,6 +12,7 @@
     <color name="dialogListSearchBarTextColor">@color/carbon_grey_600</color>
 
     <color name="dialogTransparent">#00000000</color>
+    <color name="dialogDarkTransparent">#50000000</color>
     <color name="dialogBlack">#000000</color>dialogBlack
 
     <color name="dialogNegativeBgColor">@color/dialogTransparent</color>
@@ -44,4 +45,5 @@
     <color name="dialog_rating_bar_active_color">@color/colorPrimary</color>
     <color name="dialog_rating_bar_accent_color">@color/colorAccent</color>
     <color name="dialog_code_text_color">@color/dialogBlack</color>
+    <color name="dialog_cutom_layout_background">#00000000</color>
 </resources>

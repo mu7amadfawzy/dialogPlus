@@ -2,6 +2,7 @@ package com.dialog.plus.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.NumberPicker;
 
 import androidx.annotation.ColorRes;
@@ -36,6 +37,12 @@ public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPic
 
     public MonthYearPickerDialog getYearPicker(PickerListener listener) {
         return getYearPicker(Calendar.getInstance().get(Calendar.YEAR), listener);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     public MonthYearPickerDialog getYearPicker(int maxYear, PickerListener listener) {

@@ -18,6 +18,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/dialog_margin"
+        android:gravity="center"
         android:background="#00000000"
         app:carbon_elevation="@dimen/dialog_elevation"
         app:dialog_width_percent="@{@integer/dialog_width_percent}"

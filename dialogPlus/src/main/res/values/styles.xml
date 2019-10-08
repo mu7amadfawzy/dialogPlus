@@ -79,4 +79,16 @@
         <item name="colorControlActivated">@color/dialog_rating_bar_active_color</item>
         <item name="colorControlNormal">@color/dialog_rating_bar_accent_color</item>
     </style>
+
+    <style name="dialog_plus_style" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@color/dialogTransparent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- Set this to true if you want Full Screen without status bar -->
+        <item name="android:windowFullscreen">false</item>
+
+        <item name="android:windowIsFloating">true</item>
+
+    </style>
 </resources>

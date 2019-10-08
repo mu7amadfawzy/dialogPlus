@@ -15,7 +15,8 @@
 
     <carbon.widget.LinearLayout
         android:layout_width="@dimen/_200sdp"
-        android:background="@color/carbon_white"
+        android:layout_gravity="center"
+        android:background="@color/dialog_white"
         android:gravity="center"
         app:carbon_cornerRadius="@dimen/dialog_corner_radius"
         app:dialog_width_percent="@{@integer/dialog_month_year_width_percent}"

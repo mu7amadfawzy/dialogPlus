@@ -116,5 +116,26 @@
             android:layout_gravity="center"
             android:onClick="onClickedRating"
             android:text="Show Rating Dialog" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="onCustomLayoutClicked"
+            android:text="Show Custom Layout Dialog" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="onCustomImageClicked"
+                android:src="@drawable/checked" />
+        </RelativeLayout>
+
     </LinearLayout>
 </ScrollView>
