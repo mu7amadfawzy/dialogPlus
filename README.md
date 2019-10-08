@@ -154,6 +154,14 @@ implementation  'com.dialog:plus:4+'
 #### Note you can use CountryRepo to retrieve any country in any language using the country code
 ``` String arabicStr = new CountryRepo(MainActivity.this).getCounty("ar", 20).getName(); ```
 
+### 2.12 Custom Layout Dialog:
+
+ ```
+       new DialogPlusBuilder()
+                .buildCustomLayoutDialog(R.layout.custom_layout,BR.dataModel,dataModel)
+                .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
+```
+
 ### 3 Listeners:
 
  ```setDialogActionListener(DialogPlus.DialogActionListener)```  
