@@ -1,5 +1,6 @@
 # DialogPlus
 [ ![Download](https://api.bintray.com/packages/ma7madfawzy/DialogPlus/com.dialog.plus/images/download.svg) ](https://bintray.com/ma7madfawzy/DialogPlus/com.dialog.plus/_latestVersion)
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-DialogPlus-green.svg?style=flat )]( https://android-arsenal.com/details/1/7899 )
 
 An Android library that lets you create a sweet interface dialog layout in a simple and easy way ,with different types which you can use easily without any boilerbate code and with a great flexibilty to fit your desired user interface.
 
