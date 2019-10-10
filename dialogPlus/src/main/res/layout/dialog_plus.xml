@@ -13,15 +13,25 @@
             type="int" />
     </data>
 
-    <carbon.widget.RelativeLayout
-        android:id="@+id/dialogContainer"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/dialogParentView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/dialog_margin"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
-        android:background="#00000000"
-        app:carbon_elevation="@dimen/dialog_elevation"
-        app:dialog_width_percent="@{@integer/dialog_width_percent}"
-        app:includeLayout="@{dialogLayoutRes}"
-        app:model="@{model}" />
+        android:padding="@dimen/dialog_margin">
+
+        <carbon.widget.RelativeLayout
+            android:id="@+id/dialogContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#00000000"
+            android:gravity="center"
+            android:minWidth="@dimen/dialog_plus_min_width"
+            app:carbon_elevation="@dimen/dialog_elevation"
+            app:includeLayout="@{dialogLayoutRes}"
+            app:model="@{model}" />
+    </LinearLayout>
 </layout>

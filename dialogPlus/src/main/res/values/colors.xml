@@ -8,7 +8,7 @@
     <color name="dialogContentTextColor">@color/colorAccent</color>
 
     <color name="dialogListItemTextColor">@color/colorPrimary</color>
-    <color name="dialogListSearchBarBackgroundColor">@color/carbon_grey_200</color>
+    <color name="dialogListSearchBarBackgroundColor">@color/carbon_grey_300</color>
     <color name="dialogListSearchBarTextColor">@color/carbon_grey_600</color>
 
     <color name="dialogTransparent">#00000000</color>
@@ -30,8 +30,8 @@
 
     <color name="dialog_white">#ffffff</color>
 
-    <color name="dialog_error_button_background">@color/carbon_red_600</color>
-    <color name="dialog_success_button_background">@color/carbon_green_500</color>
+    <color name="dialog_error_accent_color">@color/carbon_red_600</color>
+    <color name="dialog_success_accent">@color/carbon_green_500</color>
 
     <color name="dialog_option_background">@color/carbon_grey_200</color>
     <color name="dialog_option_text_color">@color/colorPrimary</color>

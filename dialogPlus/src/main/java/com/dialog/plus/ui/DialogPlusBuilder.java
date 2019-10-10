@@ -115,14 +115,6 @@ public class DialogPlusBuilder {
     }
 
     /**
-     * buildMonthPickerDialog: returns a MonthYearPickerDialog instance used to pick month
-     */
-
-    public MonthYearPickerDialog buildMonthPickerDialog(MonthYearPickerDialog.PickerListener listener) {
-        return new MonthYearPickerDialog(model.setPickerListener(listener), MonthYearPickerDialog.TYPE.MONTH);
-    }
-
-    /**
      * buildListDialog: returns a DialogPlus instance used to pick item among list
      */
     public DialogPlus buildListDialog(List<String> listItems, DialogPlus.DialogListListener dialogListListener) {
@@ -147,16 +139,70 @@ public class DialogPlusBuilder {
     }
 
     /**
+     * buildMonthPickerDialog: returns a MonthYearPickerDialog instance used to pick month
+     */
+
+    public MonthYearPickerDialog buildMonthPickerDialog(MonthYearPickerDialog.PickerListener listener) {
+        return new MonthYearPickerDialog(model.setPickerListener(listener).setDialog_type(MonthYearPickerDialog.TYPE.MONTH));
+    }
+
+    /**
+     * buildDayPickerDialog: returns a MonthYearPickerDialog instance used to pick a day for a particular day
+     */
+    public MonthYearPickerDialog buildDayPickerDialog(int monthOfDays, MonthYearPickerDialog.PickerListener listener) {
+        return buildDayPickerDialog(monthOfDays, Calendar.getInstance().get(Calendar.YEAR), 1, listener);
+    }
+
+    public MonthYearPickerDialog buildDayPickerDialog(int monthOfDays, int year, int minDay, MonthYearPickerDialog.PickerListener listener) {
+        return new MonthYearPickerDialog(model.setMinDay(minDay).setMaxYear(year).setMonthOfDays(monthOfDays - 1).setPickerListener(listener).setDialog_type(MonthYearPickerDialog.TYPE.DAY));
+    }
+
+    /**
      * buildMonthPickerDialog: returns a MonthYearPickerDialog instance used to pick year
      */
     public MonthYearPickerDialog buildYearPickerDialog(MonthYearPickerDialog.PickerListener listener) {
-        model.setMaxYear(Calendar.getInstance().get(Calendar.YEAR)).setPickerListener(listener);
-        return new MonthYearPickerDialog(model, MonthYearPickerDialog.TYPE.YEAR);
+        return buildYearPickerDialog(Calendar.getInstance().get(Calendar.YEAR), 1970, listener);
     }
 
     public MonthYearPickerDialog buildYearPickerDialog(int maxYear, MonthYearPickerDialog.PickerListener listener) {
-        model.setMaxYear(maxYear).setPickerListener(listener);
-        return new MonthYearPickerDialog(model, MonthYearPickerDialog.TYPE.YEAR);
+        return buildYearPickerDialog(maxYear, 1970, listener);
+    }
+
+    public MonthYearPickerDialog buildYearPickerDialog(int maxYear, int minYear, MonthYearPickerDialog.PickerListener listener) {
+        model.setMaxYear(maxYear).setMinYear(minYear).setPickerListener(listener);
+        return new MonthYearPickerDialog(model.setDialog_type(MonthYearPickerDialog.TYPE.YEAR));
+    }
+
+    /**
+     * buildMonthYearPickerDialog: returns a MonthYearPickerDialog instance used to pick year and month
+     */
+    public MonthYearPickerDialog buildMonthYearPickerDialog(MonthYearPickerDialog.YearMonthPickerListener listener) {
+        return buildMonthYearPickerDialog(Calendar.getInstance().get(Calendar.YEAR), listener);
+    }
+
+    public MonthYearPickerDialog buildMonthYearPickerDialog(int maxYear, MonthYearPickerDialog.YearMonthPickerListener listener) {
+        return buildMonthYearPickerDialog(maxYear, 1970, listener);
+    }
+
+    public MonthYearPickerDialog buildMonthYearPickerDialog(int maxYear, int minYear, MonthYearPickerDialog.YearMonthPickerListener listener) {
+        model.setMaxYear(maxYear).setMinYear(minYear).setPickerListener(listener);
+        return new MonthYearPickerDialog(model.setDialog_type(MonthYearPickerDialog.TYPE.YEAR_MONTH));
+    }
+
+    /**
+     * buildDatePickerDialog: returns a MonthYearPickerDialog instance used to pick year , month and day
+     */
+    public MonthYearPickerDialog buildDatePickerDialog(MonthYearPickerDialog.DatePickerListener listener) {
+        return buildDatePickerDialog(Calendar.getInstance().get(Calendar.YEAR), 1970, listener);
+    }
+
+    public MonthYearPickerDialog buildDatePickerDialog(int maxYear, MonthYearPickerDialog.DatePickerListener listener) {
+        return buildDatePickerDialog(maxYear, 1970, listener);
+    }
+
+    public MonthYearPickerDialog buildDatePickerDialog(int maxYear, int minYear, MonthYearPickerDialog.DatePickerListener listener) {
+        model.setMaxYear(maxYear).setMinYear(minYear).setDatePickerListener(listener);
+        return new MonthYearPickerDialog(model.setDialog_type(MonthYearPickerDialog.TYPE.DATE));
     }
 
     /**
@@ -396,6 +442,15 @@ public class DialogPlusBuilder {
         return this;
     }
 
+    public DialogPlusBuilder hideCloseIcon() {
+        model.setHideCloseIcon(true);
+        return this;
+    }
+
+    public DialogPlusBuilder blurBackground() {
+        model.setBlurBackground(true);
+        return this;
+    }
 
     public DialogPlusBuilder setCodeDialog(String correct_code, boolean withSend, boolean withResend, int counterSeconds) {
         setDialog_type(DialogPlus.TYPE.CODE_DIALOG).set(correct_code, withSend, withResend, counterSeconds);

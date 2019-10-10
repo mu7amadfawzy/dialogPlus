@@ -14,14 +14,21 @@ import com.dialog.plus.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.DATE;
+import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.DAY;
+import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.MONTH;
+import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.YEAR;
+import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.YEAR_MONTH;
+
 /**
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
+ *  Modified  by Fawzy & ALi
  */
 public class DialogPlusUiModel extends BaseObservable {
-    private boolean withSend, withResend, withCounter, separateActionButtons, enableSearch, showCountryCode;
+    private boolean withSend, withResend, withCounter, separateActionButtons, enableSearch, showCountryCode, hideCloseIcon, blurBackground;
     private String title, correctCode, codeEntry, content, typed_code, positiveText, negativeText, headerText;
-    private int timeLeft, starsNumber = 5, counterSeconds, maxYear;
+    private int timeLeft, starsNumber = 5, counterSeconds, maxYear, minYear, minDay, monthOfDays;
     private float rateValue;
     @ColorRes
     private int positiveBgColor = -1, negativeBgColor = -1, headerBgColor = -1;
@@ -46,6 +53,8 @@ public class DialogPlusUiModel extends BaseObservable {
     private MultiOptionsDialog.ActionListener multiOptionsDialogListener;
 
     private ArrayList<String> listDialogItems = new ArrayList<>();
+    private MonthYearPickerDialog.YearMonthPickerListener yearMonthPickerListener;
+    private MonthYearPickerDialog.DatePickerListener datePickerListener;
 
     DialogPlusUiModel() {
     }
@@ -453,6 +462,33 @@ public class DialogPlusUiModel extends BaseObservable {
         return this;
     }
 
+    public int getMinYear() {
+        return minYear;
+    }
+
+    public DialogPlusUiModel setMinYear(int minYear) {
+        this.minYear = minYear;
+        return this;
+    }
+
+    public int getMinDay() {
+        return minDay;
+    }
+
+    public DialogPlusUiModel setMinDay(int minDay) {
+        this.minDay = minDay;
+        return this;
+    }
+
+    public int getMonthOfDays() {
+        return monthOfDays;
+    }
+
+    public DialogPlusUiModel setMonthOfDays(int monthOfDays) {
+        this.monthOfDays = monthOfDays;
+        return this;
+    }
+
     public MultiOptionsDialog.ActionListener getMultiOptionsDialogListener() {
         return multiOptionsDialogListener;
     }
@@ -509,5 +545,61 @@ public class DialogPlusUiModel extends BaseObservable {
     public DialogPlusUiModel showCountryCode() {
         this.showCountryCode = true;
         return this;
+    }
+
+    public boolean isHideCloseIcon() {
+        return hideCloseIcon;
+    }
+
+    public DialogPlusUiModel setHideCloseIcon(boolean hideIcon) {
+        this.hideCloseIcon = hideIcon;
+        return this;
+    }
+
+    public boolean isBlurBackground() {
+        return blurBackground;
+    }
+
+    public DialogPlusUiModel setBlurBackground(boolean blurBackground) {
+        this.blurBackground = blurBackground;
+        return this;
+    }
+
+    public DialogPlusUiModel setPickerListener(MonthYearPickerDialog.YearMonthPickerListener yearMonthPickerListener) {
+        this.yearMonthPickerListener = yearMonthPickerListener;
+        return this;
+    }
+
+    public MonthYearPickerDialog.YearMonthPickerListener getYearMonthPickerListener() {
+        return yearMonthPickerListener;
+    }
+
+    public MonthYearPickerDialog.DatePickerListener getDatePickerListener() {
+        return datePickerListener;
+    }
+
+    public DialogPlusUiModel setDatePickerListener(MonthYearPickerDialog.DatePickerListener datePickerListener) {
+        this.datePickerListener = datePickerListener;
+        return this;
+    }
+
+    public boolean isMonthPicker() {
+        return getDialog_type() == MONTH;
+    }
+
+    public boolean isYearPicker() {
+        return getDialog_type() == YEAR;
+    }
+
+    public boolean isYearMonthPicker() {
+        return getDialog_type() == YEAR_MONTH;
+    }
+
+    public boolean isDatePicker() {
+        return getDialog_type() == DATE;
+    }
+
+    public boolean isDayPicker() {
+        return getDialog_type() == DAY;
     }
 }

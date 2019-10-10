@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
 import com.dialog.plus.utils.AnimationUtils;
+import com.dialog.plus.utils.BlurBuilder;
 import com.dialog.plus.utils.CommonUtil;
 import com.dialog.plus.utils.SampleAnimationListener;
 
@@ -35,7 +38,7 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     protected DialogPlusUiModel model = new DialogPlusUiModel();
     protected Binding binding;
     protected View mDialogView;
-    private AnimationSet mModalInAnim, mModalOutAnim;
+    private AnimationSet scaleInAnimationSet, scaleOutAnimationSet;
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -58,27 +61,25 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        setDialog();
-        binding.getRoot().startAnimation(mModalInAnim);
-    }
-
-    private void setDialog() {
-        android.app.Dialog dialog = getDialog();
-        if (dialog != null) {
-            mDialogView = dialog.getWindow().getDecorView().findViewById(android.R.id.content);
-
-//            BitmapDrawable draw = new BitmapDrawable(getResources(), BlurBuilder.blur(getContext(), ScreenUtil.takeScreenShot(getActivity())));
-//            mDialogView.setBackground(draw);
-        }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getDialogContentView().startAnimation(scaleInAnimationSet);
     }
 
     public void dismiss(boolean animate) {
-        mDialogView.setBackground(null);
-        if (animate)
-            binding.getRoot().startAnimation(mModalOutAnim);
-        else super.dismiss();
+        if (animate) {
+            if (model.isBlurBackground())
+                clearDialogDim();//makes screen don't flash suddenly
+            getDialogContentView().startAnimation(scaleOutAnimationSet);
+        } else super.dismiss();
+    }
+
+    protected void clearDialogDim() {
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams windowParams = window.getAttributes();
+        windowParams.dimAmount = 0f;
+        windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        window.setAttributes(windowParams);
     }
 
     @NonNull
@@ -86,26 +87,45 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new Dialog(getActivity(), getTheme()) {
             @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setDialog(this);
+            }
+
+            @Override
             public void onBackPressed() {
                 BaseDialogFragment.this.dismiss(true);
             }
         };
     }
 
+    private void setDialog(Dialog dialog) {
+        if (dialog != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            mDialogView = dialog.getWindow().getDecorView().findViewById(android.R.id.content);
+            if (model.isBlurBackground())
+                BlurBuilder.blurView(getActivity(), getDialogParentView());
+        }
+    }
+
     private void initAnimations() {
-        mModalInAnim = (AnimationSet) AnimationUtils.loadAnimation(getContext(), R.anim.modal_in);
-        mModalOutAnim = (AnimationSet) AnimationUtils.loadAnimation(getContext(), R.anim.modal_out);
+        scaleInAnimationSet = (AnimationSet) AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
+        scaleOutAnimationSet = (AnimationSet) AnimationUtils.loadAnimation(getContext(), R.anim.scale_out);
         setAnimationListener();
     }
 
     private void setAnimationListener() {
-        mModalOutAnim.setAnimationListener(new SampleAnimationListener() {
+        scaleOutAnimationSet.setAnimationListener(new SampleAnimationListener() {
             @Override
             public void onAnimationEnd(Animation animation) {
-                mDialogView.setVisibility(View.GONE);
-                mDialogView.post(() -> dismiss());
+                onAnimationEnded();
+                dismissAllowingStateLoss();
             }
         });
+    }
+
+    protected void onAnimationEnded() {
+        //TODO override case needed
     }
 
     protected void animate(View view, Techniques techniques) {
@@ -145,8 +165,17 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
         }
     }
 
+    @Override
+    public void setCancelable(boolean cancelable) {
+        super.setCancelable(cancelable);
+        model.setHideCloseIcon(!cancelable);
+    }
+
     protected abstract Object getVariableValue();
 
+    protected abstract View getDialogParentView();
+
+    protected abstract View getDialogContentView();
 
     /**
      * Override for set binding variable

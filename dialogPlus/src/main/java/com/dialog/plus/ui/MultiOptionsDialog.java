@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.dialog.plus.BR;
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.MultiOptionsDialogBinding;
 
@@ -16,7 +17,6 @@ import java.util.List;
  * ma7madfawzy@gmail.com
  **/
 public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBinding> {
-    private DialogPlusUiModel model;
 
     MultiOptionsDialog(DialogPlusUiModel uiModel) {
         this.model = uiModel;
@@ -29,15 +29,9 @@ public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBin
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.setCallback(getActionListener());
-        binding.setModel(model);
         setListeners();
     }
 
@@ -51,13 +45,9 @@ public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBin
         };
     }
 
-    @Override
-    protected Object getVariableValue() {
-        return null;
-    }
-
     private void setListeners() {
         binding.cancelBtn.setOnClickListener(v -> onCloseClicked());
+        binding.headerLayout.closeIV.setOnClickListener(v -> dismiss(true));
     }
 
     private void onCloseClicked() {
@@ -67,8 +57,13 @@ public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBin
     }
 
     @Override
+    protected Object getVariableValue() {
+        return model;
+    }
+
+    @Override
     public int getBindingVariable() {
-        return 0;
+        return BR.model;
     }
 
     @Override
@@ -79,6 +74,16 @@ public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBin
     @Override
     public int getLayoutId() {
         return R.layout.multi_options_dialog;
+    }
+
+    @Override
+    protected View getDialogParentView() {
+        return binding.dialogParentView;
+    }
+
+    @Override
+    protected View getDialogContentView() {
+        return binding.dialogContainer;
     }
 
     public abstract static class ActionListener {

@@ -8,10 +8,6 @@
             name="model"
             type="com.dialog.plus.ui.DialogPlusUiModel" />
 
-        <variable
-            name="hideCloseIcon"
-            type="boolean" />
-
     </data>
 
     <carbon.widget.RelativeLayout
@@ -48,13 +44,13 @@
         <ImageView
             android:id="@+id/closeIV"
             android:layout_width="@dimen/dialog_close_icon_radius"
+            android:padding="@dimen/dialog_close_icon_padding"
             android:layout_height="@dimen/dialog_close_icon_radius"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/dialog_header_padding"
-            app:visible="@{!hideCloseIcon}"
-            app:srcCompat="@drawable/ic_dialog_close"
             android:tint="@color/dialogPositiveTextColor"
-            app:tintColor="@{model.headerTextColor}" />
+            app:srcCompat="@drawable/ic_dialog_close"
+            app:tintColor="@{model.headerTextColor}"
+            app:visible="@{!model.hideCloseIcon}" />
     </carbon.widget.RelativeLayout>
 </layout>

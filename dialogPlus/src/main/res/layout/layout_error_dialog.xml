@@ -12,37 +12,37 @@
     </data>
 
     <carbon.widget.LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
         android:background="@color/dialog_white"
-        android:minWidth="@dimen/_200sdp"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/dialog_header_padding"
         android:paddingBottom="@dimen/_3sdp"
-        app:carbon_cornerRadius="@dimen/dialog_corner_radius"
-        tools:visibility="visible">
+        app:carbon_cornerRadius="@dimen/dialog_corner_radius">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/closeIV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dialog_close_icon_radius"
+                android:layout_height="@dimen/dialog_close_icon_radius"
+                android:padding="@dimen/dialog_close_icon_padding"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
+                android:tint="@color/dialog_error_accent_color"
                 app:srcCompat="@drawable/ic_dialog_close"
-                android:tint="@color/carbon_red_600"
-                app:tint_color="@{model.headerBgColor}" />
+                app:visible="@{!model.hideCloseIcon}" />
 
             <ImageView
                 android:id="@+id/error_img"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
+                android:tint="@color/dialog_error_accent_color"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:src="@drawable/cross" />
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/dialog_error_button_background"
+            android:background="@color/dialog_error_accent_color"
             android:paddingStart="@dimen/dialog_action_buttons_margin"
             android:paddingEnd="@dimen/dialog_action_buttons_margin"
             android:text="@{model.positiveText!=null?model.positiveText:@string/dialog_ok_text}"

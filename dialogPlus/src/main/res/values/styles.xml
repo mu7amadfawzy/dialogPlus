@@ -69,10 +69,12 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="dialog_month_year_picker_text_style">
+    <style name="dialog_plus_number_picker">
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="colorControlNormal">#00000000</item>
         <item name="android:textColorPrimary">#000</item>
+        <item name="android:layout_width">@dimen/_100sdp</item>
+        <item name="android:layout_height">@dimen/_100sdp</item>
     </style>
 
     <style name="dialog_rating_bar_style" parent="Widget.AppCompat.RatingBar">
@@ -80,15 +82,20 @@
         <item name="colorControlNormal">@color/dialog_rating_bar_accent_color</item>
     </style>
 
-    <style name="dialog_plus_style" parent="Theme.AppCompat.Dialog">
+    <style name="dialog_plus_style" parent="Base.Theme.AppCompat.Dialog">
         <item name="android:windowBackground">@color/dialogTransparent</item>
-        <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:windowNoTitle">true</item>
         <!-- Set this to true if you want Full Screen without status bar -->
         <item name="android:windowFullscreen">false</item>
 
         <item name="android:windowIsFloating">true</item>
+
+        <item name="android:windowMinWidthMajor">50%</item>
+        <item name="android:windowMinWidthMinor">50%</item>
+
+
+        <item name="android:backgroundDimAmount">0.6</item>
 
     </style>
 </resources>

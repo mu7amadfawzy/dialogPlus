@@ -14,64 +14,77 @@
 
     </data>
 
-    <carbon.widget.LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/dialog_white"
+    <RelativeLayout
+        android:id="@+id/dialogParentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dialogTransparent"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
-        android:minWidth="@dimen/_200sdp"
-        android:orientation="vertical"
-        android:padding="@dimen/dialog_header_padding"
-        android:paddingBottom="@dimen/_3sdp"
-        app:carbon_cornerRadius="@dimen/dialog_corner_radius"
-        tools:visibility="visible">
+        android:padding="@dimen/dialog_margin">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/closeIV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_dialog_close"
-                android:tint="@color/dialog_success_button_background"
-                app:tint_color="@{model.headerBgColor}" />
-
-            <ImageView
-                android:id="@+id/successImg"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:src="@drawable/checked" />
-        </RelativeLayout>
-
-        <me.grantland.widget.AutofitTextView
-            android:id="@+id/contentText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dialog_content_margin"
-            android:gravity="center"
-            android:text="@{model.content}"
-            android:textAppearance="@style/dialog_content_message_style"
-            tools:text="message \n message \n message"
-            tools:visibility="visible" />
-
-        <carbon.widget.Button
-            android:id="@+id/confirmButton"
+        <carbon.widget.LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/dialog_success_button_background"
-            android:paddingStart="@dimen/dialog_action_buttons_margin"
-            android:paddingEnd="@dimen/dialog_action_buttons_margin"
-            android:text="@{model.positiveText!=null?model.positiveText:@string/dialog_ok_text}"
-            android:textAppearance="@style/dialog_success_button_style"
-            app:carbon_cornerRadius="@dimen/dialog_action_button_corner" />
+            android:background="@color/dialog_white"
+            android:gravity="center"
+            android:minWidth="@dimen/dialog_plus_min_width"
+            android:orientation="vertical"
+            android:padding="@dimen/dialog_header_padding"
+            android:paddingBottom="@dimen/_3sdp"
+            app:carbon_cornerRadius="@dimen/dialog_corner_radius"
+            tools:visibility="visible">
 
-    </carbon.widget.LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/closeIV"
+                    android:layout_width="@dimen/dialog_close_icon_radius"
+                    android:layout_height="@dimen/dialog_close_icon_radius"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:padding="@dimen/dialog_close_icon_padding"
+                    android:tint="@color/dialog_success_accent"
+                    app:srcCompat="@drawable/ic_dialog_close"
+                    app:visible="@{!model.hideCloseIcon}" />
+
+                <ImageView
+                    android:id="@+id/successImg"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/checked"
+                    android:tint="@color/dialog_success_accent" />
+            </RelativeLayout>
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/contentText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dialog_content_margin"
+                android:gravity="center"
+                android:text="@{model.content}"
+                android:textAppearance="@style/dialog_content_message_style"
+                tools:text="message \n message \n message"
+                tools:visibility="visible" />
+
+            <carbon.widget.Button
+                android:id="@+id/confirmButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/dialog_success_accent"
+                android:paddingStart="@dimen/dialog_action_buttons_margin"
+                android:paddingEnd="@dimen/dialog_action_buttons_margin"
+                android:text="@{model.positiveText!=null?model.positiveText:@string/dialog_ok_text}"
+                android:textAppearance="@style/dialog_success_button_style"
+                app:carbon_cornerRadius="@dimen/dialog_action_button_corner" />
+
+        </carbon.widget.LinearLayout>
+    </RelativeLayout>
 </layout>

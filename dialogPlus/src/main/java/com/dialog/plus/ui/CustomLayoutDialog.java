@@ -20,7 +20,6 @@ import carbon.BR;
  * ma7madfawzy@gmail.com
  **/
 public class CustomLayoutDialog extends BaseDialogFragment<CustomLayoutDialogBinding> {
-    private DialogPlusUiModel model;
     @LayoutRes
     private int customLayoutRes;
     private int variableId;
@@ -39,30 +38,19 @@ public class CustomLayoutDialog extends BaseDialogFragment<CustomLayoutDialogBin
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initBindingVariables();
         setListeners();
-        setHeader();
         if (customView != null)
             addCustomView();
-    }
-
-    private void setHeader() {
-        if (model.getTitle() == null)
-            model.setTitle("").setHeaderBgColor(R.color.dialogTransparent);
     }
 
     private void addCustomView() {
         customViewParent = (ViewGroup) customView.getParent();
         if (customViewParent != null)
             customViewParent.removeView(customView);
-        binding.container.addView(customView);
+        binding.customLayoutContainer.addView(customView);
     }
 
     private void setListeners() {
@@ -77,7 +65,8 @@ public class CustomLayoutDialog extends BaseDialogFragment<CustomLayoutDialogBin
     }
 
     private void moveViewBackToHisParent() {
-        binding.container.removeView(customView);
+        if (customView.getParent() != null)
+            ((ViewGroup) customView.getParent()).removeView(customView);
         if (customViewParent != null) {
             customViewParent.addView(customView);
         }
@@ -89,19 +78,14 @@ public class CustomLayoutDialog extends BaseDialogFragment<CustomLayoutDialogBin
         binding.setVariableValue(variableValue);
     }
 
-    @Override
-    protected Object getVariableValue() {
-        return model;
-    }
-
     /**
      * returns an instance of the inflated layout's viewDataBinding
      * just in case it was a binding layout(included in the tag <layout><layout/>)
      */
     public ViewDataBinding getCustomLayoutBinding() {
-        if (binding.container.getTag() == null || !(binding.container.getTag() instanceof ViewDataBinding))
+        if (binding.customLayoutContainer.getTag() == null || !(binding.customLayoutContainer.getTag() instanceof ViewDataBinding))
             return null;
-        return (ViewDataBinding) binding.container.getTag();
+        return (ViewDataBinding) binding.customLayoutContainer.getTag();
     }
 
     /**
@@ -109,13 +93,40 @@ public class CustomLayoutDialog extends BaseDialogFragment<CustomLayoutDialogBin
      * just in case it was a binding layout(included in the tag <layout><layout/>)
      */
     public View getCustomLayoutView() {
-        if (binding.container.getTag() != null)
-            if (binding.container.getTag() instanceof View)
-                return (View) binding.container.getTag();
-            else if (binding.container.getTag() instanceof ViewDataBinding)
+        if (binding.customLayoutContainer.getTag() != null)
+            if (binding.customLayoutContainer.getTag() instanceof View)
+                return (View) binding.customLayoutContainer.getTag();
+            else if (binding.customLayoutContainer.getTag() instanceof ViewDataBinding)
                 return getCustomLayoutBinding().getRoot();
         return null;
     }
+
+    private void initVariables(int customLayoutRes, int variableId, Object variableValue) {
+        this.customLayoutRes = customLayoutRes;
+        this.variableId = variableId;
+        this.variableValue = variableValue;
+    }
+
+    @Override
+    protected void onAnimationEnded() {
+        binding.customLayoutContainer.removeAllViews();
+    }
+
+    @Override
+    protected Object getVariableValue() {
+        return model;
+    }
+
+    @Override
+    protected View getDialogParentView() {
+        return binding.dialogParentView;
+    }
+
+    @Override
+    protected View getDialogContentView() {
+        return binding.dialogContainer;
+    }
+
 
     private void onCloseClicked() {
         dismiss(true);
@@ -136,9 +147,4 @@ public class CustomLayoutDialog extends BaseDialogFragment<CustomLayoutDialogBin
         return R.layout.custom_layout_dialog;
     }
 
-    private void initVariables(int customLayoutRes, int variableId, Object variableValue) {
-        this.customLayoutRes = customLayoutRes;
-        this.variableId = variableId;
-        this.variableValue = variableValue;
-    }
 }

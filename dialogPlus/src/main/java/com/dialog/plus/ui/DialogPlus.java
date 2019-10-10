@@ -32,6 +32,7 @@ import carbon.internal.SimpleTextWatcher;
 /**
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
+ *  Modified  by Fawzy & ALi
  */
 public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements View.OnClickListener {
     private CountDownTimer countDownTimer;
@@ -253,8 +254,10 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
             handleResendCode();
         else if (view.getId() == R.id.confirmButton)
             onPositiveClicked();
-        else if (view.getId() == R.id.cancelBtn || view.getId() == R.id.closeIV)
+        else if (view.getId() == R.id.cancelBtn)
             onNegativeClicked();
+        else if (view.getId() == R.id.closeIV)
+            dismiss(true);
     }
 
     private void onPositiveClicked() {
@@ -314,6 +317,17 @@ public class DialogPlus extends BaseDialogFragment<DialogPlusBinding> implements
     protected Object getVariableValue() {
         return model;
     }
+
+    @Override
+    protected View getDialogParentView() {
+        return binding.dialogParentView;
+    }
+
+    @Override
+    protected View getDialogContentView() {
+        return binding.dialogContainer;
+    }
+
 
     @Override
     public int getBindingVariable() {

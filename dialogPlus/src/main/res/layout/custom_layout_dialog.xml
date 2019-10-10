@@ -21,32 +21,42 @@
             type="Object" />
     </data>
 
-    <carbon.widget.LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/dialog_margin"
-        android:background="@color/dialog_cutom_layout_background"
+    <RelativeLayout
+        android:id="@+id/dialogParentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
-        android:orientation="vertical">
+        android:padding="@dimen/dialog_margin">
 
-        <include
-            android:id="@+id/headerLayout"
-            layout="@layout/layout_dialog_header"
-            app:model="@{model}" />
-
-        <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
+        <carbon.widget.LinearLayout
+            android:id="@+id/dialogContainer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/dialog_action_buttons_margin"
+            android:background="@color/dialog_cutom_layout_background"
             android:gravity="center"
-            android:orientation="vertical"
-            app:includeCustomLayout="@{customLayoutId}"
-            app:variableId="@{variableId}"
-            app:variableValue="@{variableValue}" />
+            android:minWidth="@dimen/dialog_plus_min_width"
+            android:orientation="vertical">
 
-    </carbon.widget.LinearLayout>
+            <include
+                android:id="@+id/headerLayout"
+                layout="@layout/layout_dialog_header"
+                app:model="@{model}" />
 
+            <LinearLayout
+                android:id="@+id/customLayoutContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/dialog_action_buttons_margin"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:includeCustomLayout="@{customLayoutId}"
+                app:variableId="@{variableId}"
+                app:variableValue="@{variableValue}" />
+
+        </carbon.widget.LinearLayout>
+    </RelativeLayout>
 </layout>

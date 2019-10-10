@@ -13,51 +13,60 @@
             type="com.dialog.plus.ui.MultiOptionsDialog.ActionListener" />
     </data>
 
-    <carbon.widget.LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/dialog_margin"
-        android:background="@color/dialog_option_background"
+    <RelativeLayout
+        android:id="@+id/dialogParentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
-        android:orientation="vertical"
-        app:carbon_cornerRadius="@dimen/dialog_corner_radius"
-        app:carbon_elevation="@dimen/dialog_elevation">
+        android:padding="@dimen/dialog_margin">
 
-        <include
-            android:id="@+id/headerLayout"
-            layout="@layout/layout_dialog_header"
-            app:hideCloseIcon="@{true}"
-            app:model="@{model}" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <carbon.widget.LinearLayout
+            android:id="@+id/dialogContainer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/dialog_action_buttons_margin"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:addOptions="@{model.listDialogItems}"
-            app:callback="@{callback}" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/dialog_action_seperator" />
-
-        <Button
-            android:id="@+id/cancelBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:background="@color/dialog_option_background"
             android:gravity="center"
-            android:text="@string/dialog_options_close"
-            android:textAppearance="@style/dialog_option_button_style"
-            android:textColor="@color/dialog_option_close_text_color"
-            app:backgroundColor="@{model.negativeBgColor}"
-            app:backgroundDrawable="@{model.negativeBgDrawable}"
-            app:text_color="@{model.negativeTextColor}" />
+            android:minWidth="@dimen/dialog_plus_min_width"
+            android:orientation="vertical"
+            app:carbon_cornerRadius="@dimen/dialog_corner_radius"
+            app:carbon_elevation="@dimen/dialog_elevation">
 
-    </carbon.widget.LinearLayout>
+            <include
+                android:id="@+id/headerLayout"
+                layout="@layout/layout_dialog_header"
+                app:model="@{model}" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/dialog_action_buttons_margin"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:addOptions="@{model.listDialogItems}"
+                app:callback="@{callback}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dialog_action_seperator" />
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_option_background"
+                android:gravity="center"
+                android:text="@string/dialog_options_close"
+                android:textAppearance="@style/dialog_option_button_style"
+                android:textColor="@color/dialog_option_close_text_color"
+                app:backgroundColor="@{model.negativeBgColor}"
+                app:backgroundDrawable="@{model.negativeBgDrawable}"
+                app:text_color="@{model.negativeTextColor}" />
+
+        </carbon.widget.LinearLayout>
+    </RelativeLayout>
 </layout>

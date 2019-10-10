@@ -13,13 +13,12 @@
     </data>
 
     <carbon.widget.LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dialog_white"
         android:orientation="vertical"
         android:gravity="center"
         app:carbon_cornerRadius="@dimen/dialog_corner_radius"
-        app:dialog_width_percent="@{@integer/dialog_width_percent}"
         tools:visibility="visible">
 
         <include

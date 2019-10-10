@@ -7,6 +7,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import java.util.Calendar;
+
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static android.view.Gravity.CENTER;
 
@@ -48,5 +50,21 @@ public class CommonUtil {
         final InputMethodManager inputMethodManager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         view.clearFocus();
+    }
+
+    public int getDaysInMonth(int yearValue, int monthValue) {
+        // First get an instance of calendar object.
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, yearValue);
+        calendar.set(Calendar.MONTH, monthValue);
+        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return maxDay;
+    }
+
+    private int[] getAllDays(int maxDay) {
+        int[] days = new int[maxDay - 1];
+        for (int i = 1; i <= maxDay; i++)
+            days[i - 1] = i;
+        return days;
     }
 }
