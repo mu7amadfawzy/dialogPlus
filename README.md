@@ -6,7 +6,7 @@ An Android library that lets you create a sweet interface dialog layout in a sim
 
 <br>Many types of dialogs provided: Message, Confirmation Dialog(a yes/no dialog), Code Entry, Success, Error, Multi Options, List, Rating, Year Picker,Day Picker, Month Picker ,Day Picker, Date Picker and Localized(32 Languages supported) Country Picker Dialog.
 </br>
-![sample](files/demo.gif)
+![sample](files/demo2.gif)
 
 
 ## Quick Setup
