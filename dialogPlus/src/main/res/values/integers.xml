@@ -3,6 +3,5 @@
     <integer name="dialog_content_maxLines">4</integer>
     <integer name="dialog_width_percent">80</integer>
     <integer name="dialog_header_maxLines">1</integer>
-
     <integer name="blur_radius">15</integer>
 </resources>

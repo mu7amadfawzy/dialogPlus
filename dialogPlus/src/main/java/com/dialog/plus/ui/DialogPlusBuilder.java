@@ -139,70 +139,70 @@ public class DialogPlusBuilder {
     }
 
     /**
-     * buildMonthPickerDialog: returns a MonthYearPickerDialog instance used to pick month
+     * buildMonthPickerDialog: returns a DatePickerDialog instance used to pick month
      */
 
-    public MonthYearPickerDialog buildMonthPickerDialog(MonthYearPickerDialog.PickerListener listener) {
-        return new MonthYearPickerDialog(model.setPickerListener(listener).setDialog_type(MonthYearPickerDialog.TYPE.MONTH));
+    public DatePickerDialog buildMonthPickerDialog(DatePickerDialog.PickerListener listener) {
+        return new DatePickerDialog(model.setPickerListener(listener).setDialog_type(DatePickerDialog.TYPE.MONTH));
     }
 
     /**
-     * buildDayPickerDialog: returns a MonthYearPickerDialog instance used to pick a day for a particular day
+     * buildDayPickerDialog: returns a DatePickerDialog instance used to pick a day for a particular day
      */
-    public MonthYearPickerDialog buildDayPickerDialog(int monthOfDays, MonthYearPickerDialog.PickerListener listener) {
+    public DatePickerDialog buildDayPickerDialog(int monthOfDays, DatePickerDialog.PickerListener listener) {
         return buildDayPickerDialog(monthOfDays, Calendar.getInstance().get(Calendar.YEAR), 1, listener);
     }
 
-    public MonthYearPickerDialog buildDayPickerDialog(int monthOfDays, int year, int minDay, MonthYearPickerDialog.PickerListener listener) {
-        return new MonthYearPickerDialog(model.setMinDay(minDay).setMaxYear(year).setMonthOfDays(monthOfDays - 1).setPickerListener(listener).setDialog_type(MonthYearPickerDialog.TYPE.DAY));
+    public DatePickerDialog buildDayPickerDialog(int monthOfDays, int year, int minDay, DatePickerDialog.PickerListener listener) {
+        return new DatePickerDialog(model.setMinDay(minDay).setMaxYear(year).setMonthOfDays(monthOfDays - 1).setPickerListener(listener).setDialog_type(DatePickerDialog.TYPE.DAY));
     }
 
     /**
-     * buildMonthPickerDialog: returns a MonthYearPickerDialog instance used to pick year
+     * buildMonthPickerDialog: returns a DatePickerDialog instance used to pick year
      */
-    public MonthYearPickerDialog buildYearPickerDialog(MonthYearPickerDialog.PickerListener listener) {
+    public DatePickerDialog buildYearPickerDialog(DatePickerDialog.PickerListener listener) {
         return buildYearPickerDialog(Calendar.getInstance().get(Calendar.YEAR), 1970, listener);
     }
 
-    public MonthYearPickerDialog buildYearPickerDialog(int maxYear, MonthYearPickerDialog.PickerListener listener) {
+    public DatePickerDialog buildYearPickerDialog(int maxYear, DatePickerDialog.PickerListener listener) {
         return buildYearPickerDialog(maxYear, 1970, listener);
     }
 
-    public MonthYearPickerDialog buildYearPickerDialog(int maxYear, int minYear, MonthYearPickerDialog.PickerListener listener) {
+    public DatePickerDialog buildYearPickerDialog(int maxYear, int minYear, DatePickerDialog.PickerListener listener) {
         model.setMaxYear(maxYear).setMinYear(minYear).setPickerListener(listener);
-        return new MonthYearPickerDialog(model.setDialog_type(MonthYearPickerDialog.TYPE.YEAR));
+        return new DatePickerDialog(model.setDialog_type(DatePickerDialog.TYPE.YEAR));
     }
 
     /**
-     * buildMonthYearPickerDialog: returns a MonthYearPickerDialog instance used to pick year and month
+     * buildMonthYearPickerDialog: returns a DatePickerDialog instance used to pick year and month
      */
-    public MonthYearPickerDialog buildMonthYearPickerDialog(MonthYearPickerDialog.YearMonthPickerListener listener) {
+    public DatePickerDialog buildMonthYearPickerDialog(DatePickerDialog.YearMonthPickerListener listener) {
         return buildMonthYearPickerDialog(Calendar.getInstance().get(Calendar.YEAR), listener);
     }
 
-    public MonthYearPickerDialog buildMonthYearPickerDialog(int maxYear, MonthYearPickerDialog.YearMonthPickerListener listener) {
+    public DatePickerDialog buildMonthYearPickerDialog(int maxYear, DatePickerDialog.YearMonthPickerListener listener) {
         return buildMonthYearPickerDialog(maxYear, 1970, listener);
     }
 
-    public MonthYearPickerDialog buildMonthYearPickerDialog(int maxYear, int minYear, MonthYearPickerDialog.YearMonthPickerListener listener) {
+    public DatePickerDialog buildMonthYearPickerDialog(int maxYear, int minYear, DatePickerDialog.YearMonthPickerListener listener) {
         model.setMaxYear(maxYear).setMinYear(minYear).setPickerListener(listener);
-        return new MonthYearPickerDialog(model.setDialog_type(MonthYearPickerDialog.TYPE.YEAR_MONTH));
+        return new DatePickerDialog(model.setDialog_type(DatePickerDialog.TYPE.YEAR_MONTH));
     }
 
     /**
-     * buildDatePickerDialog: returns a MonthYearPickerDialog instance used to pick year , month and day
+     * buildDatePickerDialog: returns a DatePickerDialog instance used to pick year , month and day
      */
-    public MonthYearPickerDialog buildDatePickerDialog(MonthYearPickerDialog.DatePickerListener listener) {
+    public DatePickerDialog buildDatePickerDialog(DatePickerDialog.DatePickerListener listener) {
         return buildDatePickerDialog(Calendar.getInstance().get(Calendar.YEAR), 1970, listener);
     }
 
-    public MonthYearPickerDialog buildDatePickerDialog(int maxYear, MonthYearPickerDialog.DatePickerListener listener) {
+    public DatePickerDialog buildDatePickerDialog(int maxYear, DatePickerDialog.DatePickerListener listener) {
         return buildDatePickerDialog(maxYear, 1970, listener);
     }
 
-    public MonthYearPickerDialog buildDatePickerDialog(int maxYear, int minYear, MonthYearPickerDialog.DatePickerListener listener) {
+    public DatePickerDialog buildDatePickerDialog(int maxYear, int minYear, DatePickerDialog.DatePickerListener listener) {
         model.setMaxYear(maxYear).setMinYear(minYear).setDatePickerListener(listener);
-        return new MonthYearPickerDialog(model.setDialog_type(MonthYearPickerDialog.TYPE.DATE));
+        return new DatePickerDialog(model.setDialog_type(DatePickerDialog.TYPE.DATE));
     }
 
     /**

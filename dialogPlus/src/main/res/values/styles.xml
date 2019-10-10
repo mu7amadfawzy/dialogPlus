@@ -86,15 +86,10 @@
         <item name="android:windowBackground">@color/dialogTransparent</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:windowNoTitle">true</item>
-        <!-- Set this to true if you want Full Screen without status bar -->
         <item name="android:windowFullscreen">false</item>
-
         <item name="android:windowIsFloating">true</item>
-
         <item name="android:windowMinWidthMajor">50%</item>
         <item name="android:windowMinWidthMinor">50%</item>
-
-
         <item name="android:backgroundDimAmount">0.6</item>
 
     </style>

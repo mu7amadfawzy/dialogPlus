@@ -22,21 +22,21 @@ import java.util.Locale;
  * muhammadnoamany@gmail.com
  * Modified  by Fawzy & ALi
  */
-public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDialogBinding> {
+public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDialogBinding> {
     private int MAX_MONTH = 12, MIN_MONTH = 1;
     @ColorRes
     private int dialogPositiveBgColor = R.color.dialogPositiveBgColor, titleTextColor = R.color.titleTextColor;
 
-    MonthYearPickerDialog(DialogPlusUiModel model) {
+    DatePickerDialog(DialogPlusUiModel model) {
         this.model = model;
     }
 
-    public MonthYearPickerDialog getYearPicker(PickerListener listener) {
+    public DatePickerDialog getYearPicker(PickerListener listener) {
         model.setPickerListener(listener);
         return this;
     }
 
-    public MonthYearPickerDialog getMonthPicker(PickerListener listener) {
+    public DatePickerDialog getMonthPicker(PickerListener listener) {
         model.setPickerListener(listener);
         return this;
     }
@@ -79,10 +79,10 @@ public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPic
 
     private void setMonthPickerListener() {
         NumberPicker.OnValueChangeListener listener = (picker, oldVal, newVal) -> {
-            int daysScrollPos = binding.dayPicker.getVerticalScrollbarPosition();
+            int selectedDay = binding.dayPicker.getValue();
             int maxDay = CommonUtil.getInstance().getDaysInMonth(getYearValue(), getMonthValue() - 1);
-            setPickerViews(binding.dayPicker, model.getMinDay(), maxDay, Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
-            binding.dayPicker.setVerticalScrollbarPosition(daysScrollPos);
+            setPickerViews(binding.dayPicker, model.getMinDay(), maxDay, selectedDay);
+            binding.dayPicker.setVerticalScrollbarPosition(selectedDay);
         };
         binding.monthPicker.setOnValueChangedListener(listener);
         binding.yearPicker.setOnValueChangedListener(listener);
@@ -139,12 +139,12 @@ public class MonthYearPickerDialog extends BaseDialogFragment<LayoutMonthYearPic
         return titleTextColor;
     }
 
-    public MonthYearPickerDialog setMAX_MONTH(int MAX_MONTH) {
+    public DatePickerDialog setMAX_MONTH(int MAX_MONTH) {
         this.MAX_MONTH = MAX_MONTH;
         return this;
     }
 
-    public MonthYearPickerDialog setMIN_MONTH(int MIN_MONTH) {
+    public DatePickerDialog setMIN_MONTH(int MIN_MONTH) {
         this.MIN_MONTH = MIN_MONTH;
         return this;
     }

@@ -211,21 +211,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void onDateDialogClicked(View view) {
         new DialogPlusBuilder().blurBackground()
-                .setHeaderBgDrawable(R.drawable.bg_header)
                 .buildDatePickerDialog(2030, 2019, (pickedYear, pickedMonth, pickedDay) ->
-                        Toast.makeText(this, "picked year: " + pickedYear + " ,picked month: " + pickedMonth + " ,picked day: " + pickedDay, Toast.LENGTH_SHORT).show())
+                        Toast.makeText(this, pickedYear + "-" + pickedMonth + "-" + pickedDay, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Year Picker");
     }
 
     public void onClickedRating(View view) {
         new DialogPlusBuilder("Rating Dialog", "Rate dialog_plus message content ...")
                 .setTexts("rate", "cancel").blurBackground()
-                .buildRatingDialog(1.7f, false, new DialogPlus.DialogRateListener() {
-                    @Override
-                    public void onRateGiven(float rate, DialogPlus dialogPlus) {
-                        Toast.makeText(MainActivity.this, "rated with " + rate, Toast.LENGTH_SHORT).show();
-                    }
-                })
+                .buildRatingDialog(1.7f, false
+                        , new DialogPlus.DialogRateListener() {
+                            @Override
+                            public void onRateGiven(float rate, DialogPlus dialogPlus) {
+                                Toast.makeText(MainActivity.this, "rated with " + rate, Toast.LENGTH_SHORT).show();
+                            }
+                        })
                 .show(this.getSupportFragmentManager(), "Rating Dialog");
     }
 

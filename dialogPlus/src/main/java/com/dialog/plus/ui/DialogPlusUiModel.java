@@ -14,11 +14,11 @@ import com.dialog.plus.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.DATE;
-import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.DAY;
-import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.MONTH;
-import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.YEAR;
-import static com.dialog.plus.ui.MonthYearPickerDialog.TYPE.YEAR_MONTH;
+import static com.dialog.plus.ui.DatePickerDialog.TYPE.DATE;
+import static com.dialog.plus.ui.DatePickerDialog.TYPE.DAY;
+import static com.dialog.plus.ui.DatePickerDialog.TYPE.MONTH;
+import static com.dialog.plus.ui.DatePickerDialog.TYPE.YEAR;
+import static com.dialog.plus.ui.DatePickerDialog.TYPE.YEAR_MONTH;
 
 /**
  * Created by Muhammad Noamany
@@ -49,12 +49,12 @@ public class DialogPlusUiModel extends BaseObservable {
     private DialogPlus.DialogActionListener dialogActionListener;
     private DialogPlus.DialogListListener dialogListListener;
     private DialogPlus.DialogRateListener rateListener;
-    private MonthYearPickerDialog.PickerListener pickerListener;
+    private DatePickerDialog.PickerListener pickerListener;
     private MultiOptionsDialog.ActionListener multiOptionsDialogListener;
 
     private ArrayList<String> listDialogItems = new ArrayList<>();
-    private MonthYearPickerDialog.YearMonthPickerListener yearMonthPickerListener;
-    private MonthYearPickerDialog.DatePickerListener datePickerListener;
+    private DatePickerDialog.YearMonthPickerListener yearMonthPickerListener;
+    private DatePickerDialog.DatePickerListener datePickerListener;
 
     DialogPlusUiModel() {
     }
@@ -444,11 +444,11 @@ public class DialogPlusUiModel extends BaseObservable {
         return this;
     }
 
-    public MonthYearPickerDialog.PickerListener getPickerListener() {
+    public DatePickerDialog.PickerListener getPickerListener() {
         return pickerListener;
     }
 
-    public DialogPlusUiModel setPickerListener(MonthYearPickerDialog.PickerListener pickerListener) {
+    public DialogPlusUiModel setPickerListener(DatePickerDialog.PickerListener pickerListener) {
         this.pickerListener = pickerListener;
         return this;
     }
@@ -565,20 +565,20 @@ public class DialogPlusUiModel extends BaseObservable {
         return this;
     }
 
-    public DialogPlusUiModel setPickerListener(MonthYearPickerDialog.YearMonthPickerListener yearMonthPickerListener) {
+    public DialogPlusUiModel setPickerListener(DatePickerDialog.YearMonthPickerListener yearMonthPickerListener) {
         this.yearMonthPickerListener = yearMonthPickerListener;
         return this;
     }
 
-    public MonthYearPickerDialog.YearMonthPickerListener getYearMonthPickerListener() {
+    public DatePickerDialog.YearMonthPickerListener getYearMonthPickerListener() {
         return yearMonthPickerListener;
     }
 
-    public MonthYearPickerDialog.DatePickerListener getDatePickerListener() {
+    public DatePickerDialog.DatePickerListener getDatePickerListener() {
         return datePickerListener;
     }
 
-    public DialogPlusUiModel setDatePickerListener(MonthYearPickerDialog.DatePickerListener datePickerListener) {
+    public DialogPlusUiModel setDatePickerListener(DatePickerDialog.DatePickerListener datePickerListener) {
         this.datePickerListener = datePickerListener;
         return this;
     }
