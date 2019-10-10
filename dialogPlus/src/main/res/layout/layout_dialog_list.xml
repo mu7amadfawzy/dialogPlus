@@ -11,7 +11,7 @@
     </data>
 
     <carbon.widget.LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/dialog_white"
@@ -48,7 +48,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dialog_list_recycler_margin"
             app:dialog_plus_setDialogCountriesDivider="@{true}"

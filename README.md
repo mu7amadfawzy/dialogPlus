@@ -4,7 +4,7 @@
 
 An Android library that lets you create a sweet interface dialog layout in a simple and easy way ,with different types which you can use easily without any boilerplate code and with a great flexibility to fit your desired user interface.
 
-<br>Many types of dialogs provided: Message, Confirmation Dialog(a yes/no dialog), Code Entry, Success, Error, Multi Options, List, Rating, Year Picker,Day Picker, Month Picker ,Day Picker, Date Picker and Country Picker Dialog.
+<br>Many types of dialogs provided: Message, Confirmation Dialog(a yes/no dialog), Code Entry, Success, Error, Multi Options, List, Rating, Year Picker,Day Picker, Month Picker ,Day Picker, Date Picker and Localized(32 Languages supported) Country Picker Dialog.
 </br>
 ![sample](files/demo.gif)
 
@@ -156,14 +156,7 @@ implementation  'com.dialog:plus:4+'
 #### Note you can use CountryRepo to retrieve any country in any language using the country code
 ``` String arabicStr = new CountryRepo(MainActivity.this).getCounty("ar", 20).getName(); ```
 
-### 2.12 Custom Layout:
-
- ```
-       new DialogPlusBuilder()
-                .buildCustomLayoutDialog(R.layout.custom_layout,BR.dataModel,dataModel)
-                .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
-```
-### 2.13 Day Picker:
+### 2.12 Day Picker:
 
  ```
      new DialogPlusBuilder().blurBackground()
@@ -205,14 +198,31 @@ implementation  'com.dialog:plus:4+'
                 .buildCustomLayoutDialog(R.layout.custom_layout,BR.model,model)
                 .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
 ```
-### 2.17 Focus View: Borrows a view (that already added to a parent) with it's attributes and view it in the dialog
+### 2.17 Message With Image Dialog: Accepts a DrawableRes to a an image(Supports Gif)
+
+ ```
+     new DialogPlusBuilder("Image Message Dialog", "message dialog_plus sample\n Welcome Back")
+                .setTexts("alright").blurBackground()
+                .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
+                .buildMessageDialog(R.drawable.send_anim
+                        , new DialogListener() {//implement functions
+                        }).show(this.getSupportFragmentManager(), "Image Message Dialog");
+```
+### 2.17 Custom Layout:
+
+ ```
+       new DialogPlusBuilder()
+                .buildCustomLayoutDialog(R.layout.custom_layout,BR.dataModel,dataModel)
+                .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
+```
+### 2.18 Focus View: Borrows a view (that already added to a parent) with it's attributes and view it in the dialog
 
  ```
      new DialogPlusBuilder().blurBackground()
                 .buildCustomLayoutDialog(findViewById(R.id.viewToShow))
                 .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
 ```
-##### Don't take this one seriously, just made for fun XD.
+##### Note that: Focus View is not stable yet, We are still applying different scenarios, Instead use Custom Layout for a stable behaviour.
 ### 3 Listeners:
 
 ##### You can implement the action you like to listen to(non-abstract methods used)

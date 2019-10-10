@@ -50,13 +50,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickedMessageDialogWithImage(View view) {
-        new DialogPlusBuilder("Message Dialog", "message dialog_plus sample\n Welcome Back")
-                //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
+        new DialogPlusBuilder("Image Message Dialog", "message dialog_plus sample\n Welcome Back")
                 .setTexts("alright").blurBackground()
                 .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
-                .buildMessageDialog(R.drawable.send_anim, new DialogListener() {//implement functions
-                })
-                .show(this.getSupportFragmentManager(), "Message Dialog");
+                .buildMessageDialog(R.drawable.send_anim
+                        , new DialogListener() {//implement functions
+                        }).show(this.getSupportFragmentManager(), "Image Message Dialog");
     }
 
     public void onClickedConfirmation(View view) {
@@ -243,22 +242,22 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> getListItems() {
         List<String> dialogItemDMS = new ArrayList<>();
-        dialogItemDMS.add("title 4");
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 7"));
-        dialogItemDMS.add(("title 9"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 54"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 4"));
-        dialogItemDMS.add(("title 4"));
+        dialogItemDMS.add("List Item Title 1");
+        dialogItemDMS.add(("List Item Title 2"));
+        dialogItemDMS.add(("List Item Title 3"));
+        dialogItemDMS.add(("List Item Title 4"));
+        dialogItemDMS.add(("List Item Title 5"));
+        dialogItemDMS.add(("List Item Title 6"));
+        dialogItemDMS.add(("List Item Title 7"));
+        dialogItemDMS.add(("List Item Title 8"));
+        dialogItemDMS.add(("List Item Title 9"));
+        dialogItemDMS.add(("List Item Title 10"));
+        dialogItemDMS.add(("List Item Title 11"));
+        dialogItemDMS.add(("List Item Title 12"));
+        dialogItemDMS.add(("List Item Title 13"));
+        dialogItemDMS.add(("List Item Title 14"));
+        dialogItemDMS.add(("List Item Title 15"));
+        dialogItemDMS.add(("List Item Title 16"));
         return dialogItemDMS;
     }
 
