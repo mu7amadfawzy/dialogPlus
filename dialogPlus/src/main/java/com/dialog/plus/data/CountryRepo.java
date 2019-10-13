@@ -41,7 +41,7 @@ public class CountryRepo {
         return getCountriesList(getCountriesStr());
     }
 
-    protected List<CountryDataModel> getCountriesList(String countriesStr) {
+    private List<CountryDataModel> getCountriesList(String countriesStr) {
         Type listType = new TypeToken<List<CountryDataModel>>() {
         }.getType();
         JsonReader reader = new JsonReader(new StringReader(countriesStr));
@@ -49,12 +49,12 @@ public class CountryRepo {
         return new Gson().fromJson(reader, listType);
     }
 
-    public String getCountriesStr() {
+    private String getCountriesStr() {
         String language = getCurrentLocale(context).getLanguage().toLowerCase();
         return getCountriesStr(language);
     }
 
-    public String getCountriesStr(String language) {
+    private String getCountriesStr(String language) {
         final String Countries_PREFIX = "countries_";
         String countriesStr = AssetUtils.loadJSONFromAsset(context, Countries_PREFIX + language + ".json");
         if (countriesStr == null)//return the english version in case no Locale one found

@@ -6,7 +6,7 @@ An Android library that lets you create a custom dialog in a simple and easy way
 
 <br>Many types of dialogs provided: Message, Confirmation Dialog(a yes/no dialog), Code Entry, Success, Error, Multi Options, List, Rating, Year Picker, Month Picker , Day Picker, Month/Year Picker, Month/Day Picker, Date Picker(Fully functional and can accept minimum date or maximum date), and Localized Country Picker Dialog(32 Languages supported).
 </br>
-![sample](files/demo2.gif)
+![sample](files/demo.gif)
 
 
 ## Quick Setup
