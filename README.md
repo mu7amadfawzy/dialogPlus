@@ -216,7 +216,7 @@ implementation  'com.dialog:plus:4+'
                 .buildCustomLayoutDialog(R.layout.custom_layout,BR.dataModel,dataModel)
                 .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
 ```
-### 2.18 Focus View: Borrows a view (that already added to a parent) with it's attributes and view it in the dialog
+### 2.19 Focus View: Borrows a view (that already added to a parent) with it's attributes and view it in the dialog
 
  ```
      new DialogPlusBuilder().blurBackground()
