@@ -12,8 +12,14 @@ import com.dialog.plus.R;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.dialog.plus.ui.DialogPlusUiModel.MAX_MONTH;
+import static com.dialog.plus.ui.DialogPlusUiModel.MAX_YEAR;
+import static com.dialog.plus.ui.DialogPlusUiModel.MIN_DAY;
+import static com.dialog.plus.ui.DialogPlusUiModel.MIN_MONTH;
+import static com.dialog.plus.ui.DialogPlusUiModel.MIN_YEAR;
+
 /**
- * Created by fawzy on 23,September,2019
+ * Created by F4awzy on 23,September,2019
  * ma7madfawzy@gmail.com
  **/
 public class DialogPlusBuilder {
@@ -143,29 +149,33 @@ public class DialogPlusBuilder {
      */
 
     public DatePickerDialog buildMonthPickerDialog(DatePickerDialog.PickerListener listener) {
-        return new DatePickerDialog(model.setPickerListener(listener).setDialog_type(DatePickerDialog.TYPE.MONTH));
+        return buildMonthPickerDialog(true, MIN_MONTH, MAX_MONTH, listener);
+    }
+
+    public DatePickerDialog buildMonthPickerDialog(boolean showMonthName, int minMonth, int maxMonth, DatePickerDialog.PickerListener listener) {
+        return new DatePickerDialog(model.setShowMonthName(showMonthName).setMinMonth(minMonth).setMaxMonth(maxMonth).setPickerListener(listener).setDialog_type(DatePickerDialog.TYPE.MONTH));
     }
 
     /**
      * buildDayPickerDialog: returns a DatePickerDialog instance used to pick a day for a particular day
      */
     public DatePickerDialog buildDayPickerDialog(int monthOfDays, DatePickerDialog.PickerListener listener) {
-        return buildDayPickerDialog(monthOfDays, Calendar.getInstance().get(Calendar.YEAR), 1, listener);
+        return buildDayPickerDialog(monthOfDays, Calendar.getInstance().get(Calendar.YEAR), MIN_DAY, listener);
     }
 
     public DatePickerDialog buildDayPickerDialog(int monthOfDays, int year, int minDay, DatePickerDialog.PickerListener listener) {
-        return new DatePickerDialog(model.setMinDay(minDay).setMaxYear(year).setMonthOfDays(monthOfDays - 1).setPickerListener(listener).setDialog_type(DatePickerDialog.TYPE.DAY));
+        return new DatePickerDialog(model.setMinDay(minDay).setYearOfMonth(year).setMonthOfDay(monthOfDays - 1).setPickerListener(listener).setDialog_type(DatePickerDialog.TYPE.DAY));
     }
 
     /**
      * buildMonthPickerDialog: returns a DatePickerDialog instance used to pick year
      */
     public DatePickerDialog buildYearPickerDialog(DatePickerDialog.PickerListener listener) {
-        return buildYearPickerDialog(Calendar.getInstance().get(Calendar.YEAR), 1970, listener);
+        return buildYearPickerDialog(Calendar.getInstance().get(Calendar.YEAR), MIN_YEAR, listener);
     }
 
     public DatePickerDialog buildYearPickerDialog(int maxYear, DatePickerDialog.PickerListener listener) {
-        return buildYearPickerDialog(maxYear, 1970, listener);
+        return buildYearPickerDialog(maxYear, MIN_YEAR, listener);
     }
 
     public DatePickerDialog buildYearPickerDialog(int maxYear, int minYear, DatePickerDialog.PickerListener listener) {
@@ -177,31 +187,94 @@ public class DialogPlusBuilder {
      * buildMonthYearPickerDialog: returns a DatePickerDialog instance used to pick year and month
      */
     public DatePickerDialog buildMonthYearPickerDialog(DatePickerDialog.YearMonthPickerListener listener) {
-        return buildMonthYearPickerDialog(Calendar.getInstance().get(Calendar.YEAR), listener);
+        return buildMonthYearPickerDialog(Calendar.getInstance().get(Calendar.YEAR), true, listener);
     }
 
-    public DatePickerDialog buildMonthYearPickerDialog(int maxYear, DatePickerDialog.YearMonthPickerListener listener) {
-        return buildMonthYearPickerDialog(maxYear, 1970, listener);
+    public DatePickerDialog buildMonthYearPickerDialog(int maxYear, boolean showMonthName, DatePickerDialog.YearMonthPickerListener listener) {
+        return buildMonthYearPickerDialog(maxYear, MIN_YEAR, showMonthName, listener);
     }
 
-    public DatePickerDialog buildMonthYearPickerDialog(int maxYear, int minYear, DatePickerDialog.YearMonthPickerListener listener) {
-        model.setMaxYear(maxYear).setMinYear(minYear).setPickerListener(listener);
-        return new DatePickerDialog(model.setDialog_type(DatePickerDialog.TYPE.YEAR_MONTH));
+    public DatePickerDialog buildMonthYearPickerDialog(int maxYear, int minYear, boolean showMonthName, DatePickerDialog.YearMonthPickerListener listener) {
+        return buildMonthYearPickerDialog(maxYear, minYear, showMonthName, MIN_MONTH, MAX_MONTH, listener);
+    }
+
+    public DatePickerDialog buildMonthYearPickerDialog(int maxYear, int minYear, boolean showMonthName, int mixMonth, int maxMonth, DatePickerDialog.YearMonthPickerListener listener) {
+        return new DatePickerDialog(model.setMaxYear(maxYear).setMinYear(minYear).setMinMonth(mixMonth).setMaxMonth(maxMonth).setPickerListener(listener).setShowMonthName(showMonthName).setDialog_type(DatePickerDialog.TYPE.YEAR_MONTH));
+    }
+
+    public DatePickerDialog buildMonthYearPickerDialog(Calendar minDate, DatePickerDialog.YearMonthPickerListener listener) {
+        return new DatePickerDialog(model.setMaxYear(MAX_YEAR).setMinDate(minDate).setPickerListener(listener)
+                .setShowMonthName(true).setDialog_type(DatePickerDialog.TYPE.YEAR_MONTH));
+    }
+
+    public DatePickerDialog buildMonthYearPickerDialog(Calendar maxDate, boolean showMonthName, DatePickerDialog.YearMonthPickerListener listener) {
+        return new DatePickerDialog(model.setMaxYear(maxDate.get(Calendar.YEAR)).setMaxCalendar(maxDate)
+                .setShowMonthName(showMonthName).setPickerListener(listener).setShowMonthName(true).setDialog_type(DatePickerDialog.TYPE.YEAR_MONTH));
+    }
+
+    /**
+     * buildMonthDayPickerDialog: returns a DatePickerDialog instance used to pick a month and day
+     */
+    public DatePickerDialog buildMonthDayPickerDialog(DatePickerDialog.MonthDayPickerListener listener) {
+        return buildMonthDayPickerDialog(true, listener);
+    }
+
+    public DatePickerDialog buildMonthDayPickerDialog(boolean showMonthName, DatePickerDialog.MonthDayPickerListener listener) {
+        return buildMonthDayPickerDialog(showMonthName, Calendar.getInstance().get(Calendar.YEAR), listener);
+    }
+
+    public DatePickerDialog buildMonthDayPickerDialog(boolean showMonthName, int year, DatePickerDialog.MonthDayPickerListener listener) {
+        return buildMonthDayPickerDialog(showMonthName, MIN_MONTH, MAX_MONTH, year, listener);
+    }
+
+    public DatePickerDialog buildMonthDayPickerDialog(boolean showMonthName, int minMonth, int maxMonth, int year, DatePickerDialog.MonthDayPickerListener listener) {
+        return buildMonthDayPickerDialog(showMonthName, minMonth, maxMonth, year, MIN_DAY, listener);
+    }
+
+    public DatePickerDialog buildMonthDayPickerDialog(boolean showMonthName, int minMonth, int maxMonth, int year, int minDay, DatePickerDialog.MonthDayPickerListener listener) {
+        return new DatePickerDialog(model.setShowMonthName(showMonthName).setMinMonth(minMonth).setMaxMonth(maxMonth)
+                .setMinDay(minDay).setYearOfMonth(year).setMonthDayPickerListener(listener)
+                .setDialog_type(DatePickerDialog.TYPE.MONTH_DAY));
+    }
+
+    public DatePickerDialog buildMonthDayPickerDialog(Calendar minDate, DatePickerDialog.MonthDayPickerListener listener) {
+        return buildMonthDayPickerDialog(Calendar.getInstance().get(Calendar.YEAR), minDate, listener);
+    }
+
+    public DatePickerDialog buildMonthDayPickerDialog(int year, Calendar minDate, DatePickerDialog.MonthDayPickerListener listener) {
+        return new DatePickerDialog(model.setYearOfMonth(year).setMinDate(minDate).setShowMonthName(true).setMonthDayPickerListener(listener).setDialog_type(DatePickerDialog.TYPE.MONTH_DAY));
+    }
+
+    public DatePickerDialog buildMonthDayPickerDialog(Calendar maxDate, boolean showMonthName, DatePickerDialog.MonthDayPickerListener listener) {
+        return new DatePickerDialog(model.setMaxCalendar(maxDate).setYearOfMonth(maxDate.get(Calendar.YEAR))
+                .setShowMonthName(showMonthName).setMonthDayPickerListener(listener).setDialog_type(DatePickerDialog.TYPE.MONTH_DAY));
     }
 
     /**
      * buildDatePickerDialog: returns a DatePickerDialog instance used to pick year , month and day
      */
     public DatePickerDialog buildDatePickerDialog(DatePickerDialog.DatePickerListener listener) {
-        return buildDatePickerDialog(Calendar.getInstance().get(Calendar.YEAR), 1970, listener);
+        return buildDatePickerDialog(Calendar.getInstance().get(Calendar.YEAR), listener);
     }
 
     public DatePickerDialog buildDatePickerDialog(int maxYear, DatePickerDialog.DatePickerListener listener) {
-        return buildDatePickerDialog(maxYear, 1970, listener);
+        return buildDatePickerDialog(maxYear, MIN_YEAR, MIN_MONTH, MAX_MONTH, MIN_DAY, true, listener);
     }
 
-    public DatePickerDialog buildDatePickerDialog(int maxYear, int minYear, DatePickerDialog.DatePickerListener listener) {
-        model.setMaxYear(maxYear).setMinYear(minYear).setDatePickerListener(listener);
+    public DatePickerDialog buildDatePickerDialog(int maxYear, int minYear, int minMonth, int maxMonth, int minDay, boolean showMonthName, DatePickerDialog.DatePickerListener listener) {
+        return new DatePickerDialog(model.setMaxYear(maxYear).setMinYear(minYear).setMinMonth(minMonth).setMaxMonth(maxMonth).setMinDay(minDay)
+                .setShowMonthName(showMonthName).setDatePickerListener(listener).setDialog_type(DatePickerDialog.TYPE.DATE));
+    }
+
+    public DatePickerDialog buildDatePickerDialog(boolean showMonthName, Calendar minCalendar, DatePickerDialog.DatePickerListener listener) {
+        return new DatePickerDialog(model.setMaxYear(MAX_YEAR).setMinYear(minCalendar.get(Calendar.YEAR))
+                .setMinDate(minCalendar).setShowMonthName(showMonthName).setDatePickerListener(listener)
+                .setDialog_type(DatePickerDialog.TYPE.DATE));
+    }
+
+    public DatePickerDialog buildDatePickerDialog(Calendar maxCalendar, DatePickerDialog.DatePickerListener listener) {
+        model.setMaxYear(maxCalendar.get(Calendar.YEAR))
+                .setMaxCalendar(maxCalendar).setShowMonthName(true).setDatePickerListener(listener);
         return new DatePickerDialog(model.setDialog_type(DatePickerDialog.TYPE.DATE));
     }
 
@@ -209,8 +282,7 @@ public class DialogPlusBuilder {
      * buildMultiOptionsDialog: returns a MultiOptionsDialog instance used to pick option among many
      */
     public MultiOptionsDialog buildMultiOptionsDialog(List<String> optionsTitle, MultiOptionsDialog.ActionListener actionListener) {
-        model.setDialogListItems(optionsTitle).setMultiOptionsDialogListener(actionListener);
-        return new MultiOptionsDialog(model);
+        return new MultiOptionsDialog(model.setDialogListItems(optionsTitle).setMultiOptionsDialogListener(actionListener));
     }
 
     /**

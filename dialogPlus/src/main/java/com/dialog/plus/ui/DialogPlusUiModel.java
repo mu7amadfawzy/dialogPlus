@@ -12,23 +12,29 @@ import com.dialog.plus.BR;
 import com.dialog.plus.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static com.dialog.plus.ui.DatePickerDialog.TYPE.DATE;
 import static com.dialog.plus.ui.DatePickerDialog.TYPE.DAY;
 import static com.dialog.plus.ui.DatePickerDialog.TYPE.MONTH;
+import static com.dialog.plus.ui.DatePickerDialog.TYPE.MONTH_DAY;
 import static com.dialog.plus.ui.DatePickerDialog.TYPE.YEAR;
 import static com.dialog.plus.ui.DatePickerDialog.TYPE.YEAR_MONTH;
 
 /**
  * Created by Muhammad Noamany
  * muhammadnoamany@gmail.com
- *  Modified  by Fawzy & ALi
+ * Modified  by Fawzy & ALi
  */
+
 public class DialogPlusUiModel extends BaseObservable {
-    private boolean withSend, withResend, withCounter, separateActionButtons, enableSearch, showCountryCode, hideCloseIcon, blurBackground;
+    public static int MAX_MONTH = 12, MIN_MONTH = 1, MIN_DAY = 1, MAX_YEAR = 2040, MIN_YEAR = 1970;
+
+    private boolean withSend, withResend, withCounter, separateActionButtons, enableSearch, showCountryCode, hideCloseIcon, blurBackground, showMonthName;
     private String title, correctCode, codeEntry, content, typed_code, positiveText, negativeText, headerText;
-    private int timeLeft, starsNumber = 5, counterSeconds, maxYear, minYear, minDay, monthOfDays;
+    private int timeLeft, starsNumber = 5, counterSeconds, maxYear, minYear = MIN_YEAR, minDay = MIN_DAY, monthOfDay;
+    private int minMonth = MIN_MONTH, maxMonth = MAX_MONTH, yearOfMonth;
     private float rateValue;
     @ColorRes
     private int positiveBgColor = -1, negativeBgColor = -1, headerBgColor = -1;
@@ -55,6 +61,8 @@ public class DialogPlusUiModel extends BaseObservable {
     private ArrayList<String> listDialogItems = new ArrayList<>();
     private DatePickerDialog.YearMonthPickerListener yearMonthPickerListener;
     private DatePickerDialog.DatePickerListener datePickerListener;
+    private DatePickerDialog.MonthDayPickerListener monthDayPickerListener;
+    private Calendar minCalendar, maxCalendar;
 
     DialogPlusUiModel() {
     }
@@ -480,12 +488,12 @@ public class DialogPlusUiModel extends BaseObservable {
         return this;
     }
 
-    public int getMonthOfDays() {
-        return monthOfDays;
+    public int getMonthOfDay() {
+        return monthOfDay;
     }
 
-    public DialogPlusUiModel setMonthOfDays(int monthOfDays) {
-        this.monthOfDays = monthOfDays;
+    public DialogPlusUiModel setMonthOfDay(int monthOfDay) {
+        this.monthOfDay = monthOfDay;
         return this;
     }
 
@@ -595,11 +603,90 @@ public class DialogPlusUiModel extends BaseObservable {
         return getDialog_type() == YEAR_MONTH;
     }
 
+    public boolean isMonthDayPicker() {
+        return getDialog_type() == MONTH_DAY;
+    }
+
     public boolean isDatePicker() {
         return getDialog_type() == DATE;
     }
 
     public boolean isDayPicker() {
         return getDialog_type() == DAY;
+    }
+
+    public DatePickerDialog.MonthDayPickerListener getMonthDayPickerListener() {
+        return monthDayPickerListener;
+    }
+
+    public DialogPlusUiModel setMonthDayPickerListener(DatePickerDialog.MonthDayPickerListener listener) {
+        this.monthDayPickerListener = listener;
+        return this;
+    }
+
+    public int getMinMonth() {
+        return minMonth;
+    }
+
+    public DialogPlusUiModel setMinMonth(int minMonth) {
+        this.minMonth = minMonth;
+        return this;
+    }
+
+    public int getMaxMonth() {
+        return maxMonth;
+    }
+
+    public DialogPlusUiModel setMaxMonth(int maxMonth) {
+        this.maxMonth = maxMonth;
+        return this;
+    }
+
+    public int getYearOfMonth() {
+        return yearOfMonth;
+    }
+
+    public DialogPlusUiModel setYearOfMonth(int yearOfMonth) {
+        this.yearOfMonth = yearOfMonth;
+        return this;
+    }
+
+    public boolean showYearPicker() {
+        return isYearPicker() || isYearMonthPicker() || isDatePicker();
+    }
+
+    public boolean showMonthPicker() {
+        return isMonthPicker() || isYearMonthPicker() || isMonthDayPicker() || isDatePicker();
+    }
+
+    public boolean showDayPicker() {
+        return isDayPicker() || isDatePicker() || isMonthDayPicker();
+    }
+
+    public boolean isShowMonthName() {
+        return showMonthName;
+    }
+
+    public DialogPlusUiModel setShowMonthName(boolean showMonthName) {
+        this.showMonthName = showMonthName;
+        return this;
+    }
+
+    public DialogPlusUiModel setMinDate(Calendar minCalendar) {
+        this.minCalendar = minCalendar;
+        return this;
+    }
+
+    public Calendar getMinCalendar() {
+        return minCalendar;
+    }
+
+    public Calendar getMaxCalendar() {
+        return maxCalendar;
+    }
+
+    public DialogPlusUiModel setMaxCalendar(Calendar maxCalendar) {
+        this.maxCalendar = maxCalendar;
+        return this;
     }
 }

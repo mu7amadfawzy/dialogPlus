@@ -13,7 +13,7 @@ import com.dialog.plus.databinding.MultiOptionsDialogBinding;
 import java.util.List;
 
 /**
- * Created by fawzy on 04,September,2019
+ * Created by Fawzy on 04,September,2019
  * ma7madfawzy@gmail.com
  **/
 public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBinding> {

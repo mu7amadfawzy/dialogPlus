@@ -72,7 +72,7 @@
     <style name="dialog_plus_number_picker">
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="colorControlNormal">#00000000</item>
-        <item name="android:textColorPrimary">#000</item>
+        <item name="android:textColorPrimary">@color/dialog_plus_number_picker_text_color</item>
         <item name="android:layout_width">@dimen/_100sdp</item>
         <item name="android:layout_height">@dimen/_100sdp</item>
     </style>
@@ -93,4 +93,5 @@
         <item name="android:backgroundDimAmount">0.6</item>
 
     </style>
+
 </resources>

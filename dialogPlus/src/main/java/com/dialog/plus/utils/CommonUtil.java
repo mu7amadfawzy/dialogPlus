@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
@@ -52,7 +53,7 @@ public class CommonUtil {
         view.clearFocus();
     }
 
-    public int getDaysInMonth(int yearValue, int monthValue) {
+    public int getMaxDayInMonth(int yearValue, int monthValue) {
         // First get an instance of calendar object.
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, yearValue);
@@ -66,5 +67,22 @@ public class CommonUtil {
         for (int i = 1; i <= maxDay; i++)
             days[i - 1] = i;
         return days;
+    }
+
+    public String[] getMonthNames(int minMonth, int maxMonth) {
+        String[] names = new String[(maxMonth - minMonth) + 1];
+        int index = 0;
+        for (int i = minMonth; i < maxMonth; i++) {
+            names[index] = getMonthName(i);
+            index++;
+            minMonth++;
+        }
+        return names;
+    }
+
+    public String getMonthName(int monthOfYear) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.MONTH, monthOfYear);
+        return new SimpleDateFormat("LLL").format(c.getTime());
     }
 }

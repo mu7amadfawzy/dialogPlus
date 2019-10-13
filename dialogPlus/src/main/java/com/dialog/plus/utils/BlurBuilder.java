@@ -14,7 +14,7 @@ import android.view.View;
 import com.dialog.plus.R;
 
 /**
- * Created by fawzy on 08,October,2019
+ * Created by Fawzy on 08,October,2019
  * ma7madfawzy@gmail.com
  **/
 public class BlurBuilder {
@@ -36,7 +36,7 @@ public class BlurBuilder {
         ScriptIntrinsicBlur theIntrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
         Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
         Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
-        theIntrinsic.setRadius(context.getResources().getInteger(R.integer.blur_radius));
+        theIntrinsic.setRadius(context.getResources().getInteger(R.integer.dialog_plus_blur_radius));
         theIntrinsic.setInput(tmpIn);
         theIntrinsic.forEach(tmpOut);
         tmpOut.copyTo(outputBitmap);

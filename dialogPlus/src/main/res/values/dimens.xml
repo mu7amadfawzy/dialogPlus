@@ -37,6 +37,8 @@
     <dimen name="dialog_negative_button_stroke">1dp</dimen>
     <dimen name="dialog_negative_button_elevation">0dp</dimen>
 
+    <dimen name="dialog_title_padding">@dimen/_4sdp</dimen>
+
     <dimen name="dialog_close_icon_radius">@dimen/_24sdp</dimen>
     <dimen name="dialog_zero">0dp</dimen>
     <dimen name="dialog_code_entry_margin">@dimen/_8sdp</dimen>
@@ -52,4 +54,9 @@
     <dimen name="dialog_image_width">@dimen/_150sdp</dimen>
     <dimen name="dialog_plus_min_width">@dimen/_200sdp</dimen>
     <dimen name="dialog_list_recycler_margin">@dimen/_8sdp</dimen>
+
+
+    <dimen name="dialog_picker_separator_margin_start_end">@dimen/_2sdp</dimen>
+    <dimen name="dialog_picker_separator_margin_top_bottom">@dimen/_30sdp</dimen>
+
 </resources>

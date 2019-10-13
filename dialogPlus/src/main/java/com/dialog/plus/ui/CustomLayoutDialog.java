@@ -16,7 +16,7 @@ import com.dialog.plus.databinding.CustomLayoutDialogBinding;
 import carbon.BR;
 
 /**
- * Created by fawzy on 04,September,2019
+ * Created by Fawzy on 04,September,2019
  * ma7madfawzy@gmail.com
  **/
 public class CustomLayoutDialog extends BaseDialogFragment<CustomLayoutDialogBinding> {

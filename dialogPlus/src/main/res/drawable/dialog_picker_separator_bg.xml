@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="90"
+        android:centerColor="@color/dialog_plus_number_picker_text_color"
+        android:endColor="@color/dialog_picker_separator_color"
+        android:startColor="@color/dialog_picker_separator_color"
+        android:type="linear" />
+
+</shape>

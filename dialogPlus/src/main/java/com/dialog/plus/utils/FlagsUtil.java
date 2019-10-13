@@ -7,7 +7,7 @@ import android.util.Log;
 import com.dialog.plus.R;
 
 /**
- * Created by fawzy on 23,September,2019
+ * Created by Fawzy on 23,September,2019
  * ma7madfawzy@gmail.com
  **/
 public class FlagsUtil {

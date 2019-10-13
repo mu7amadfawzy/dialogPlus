@@ -28,7 +28,7 @@ import com.dialog.plus.utils.CommonUtil;
 import com.dialog.plus.utils.SampleAnimationListener;
 
 /**
- * Created by fawzy on 04,September,2019
+ * Created by Fawzy on 04,September,2019
  * ma7madfawzy@gmail.com
  * <p>
  * param Binding: defines the layout binding implementation.

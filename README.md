@@ -2,9 +2,9 @@
 [ ![Download](https://api.bintray.com/packages/ma7madfawzy/DialogPlus/com.dialog.plus/images/download.svg) ](https://bintray.com/ma7madfawzy/DialogPlus/com.dialog.plus/_latestVersion)
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-DialogPlus-green.svg?style=flat )]( https://android-arsenal.com/details/1/7899 )
 
-An Android library that lets you create a sweet interface dialog layout in a simple and easy way ,with different types which you can use easily without any boilerplate code and with a great flexibility to fit your desired user interface.
+An Android library that lets you create a custom dialog in a simple and easy way ,with different types which you can use easily without any boilerplate code and with a great flexibility to fit your desired user interface.
 
-<br>Many types of dialogs provided: Message, Confirmation Dialog(a yes/no dialog), Code Entry, Success, Error, Multi Options, List, Rating, Year Picker,Day Picker, Month Picker ,Day Picker, Date Picker and Localized(32 Languages supported) Country Picker Dialog.
+<br>Many types of dialogs provided: Message, Confirmation Dialog(a yes/no dialog), Code Entry, Success, Error, Multi Options, List, Rating, Year Picker,Day Picker, Month Picker , Day Picker, Month/Year Picker, Month/Day Picker, Date Picker(Fully functional and can accept minimum date or maximum date), and Localized Country Picker Dialog(32 Languages supported).
 </br>
 ![sample](files/demo2.gif)
 
@@ -46,7 +46,7 @@ implementation  'com.dialog:plus:4+'
 
  ```
   new DialogPlusBuilder("Confirmation Dialog", "confirmation dialog_plus message content ...")
-                .setTexts("confirm", "cancel")
+                .setTexts("confirm", "cancel").blurBackground()
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
                 .buildConfirmationDialog(false,new DialogListener() {
                     // implement methods
@@ -57,7 +57,7 @@ implementation  'com.dialog:plus:4+'
 
  ```
   new DialogPlusBuilder("Success message content..")
-                .setSuccessDialog("Cool")
+                .setSuccessDialog("Cool").blurBackground()
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .build(new DialogListener() {
                     // implement methods
@@ -68,7 +68,7 @@ implementation  'com.dialog:plus:4+'
 
  ```
  new DialogPlusBuilder("Error Dialog content message")
-                .setErrorDialog("Peace")
+                .setErrorDialog("Peace").blurBackground()
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .build(new DialogListener() {
                     // implement methods
@@ -79,7 +79,7 @@ implementation  'com.dialog:plus:4+'
 
  ```
   new DialogPlusBuilder("Code Dialog", "code dialog_plus sample with send enabled, resend enabled and counter 10 seconds")
-                .setTexts("Confirm")
+                .setTexts("Confirm").blurBackground()
                 .setDialogCodeTextColor(getResources().getColor(R.color.colorPrimaryDark))
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
                 .buildCodeDialog("12345", 60, true, true, new DialogListener() {
@@ -91,7 +91,7 @@ implementation  'com.dialog:plus:4+'
 
  ```
    new DialogPlusBuilder().setTitle("Multi Options Dialog Sample Title")
-                .setHeaderBgColor(R.color.dialogTransparent).setHeaderTextColor(R.color.black)
+                .setHeaderBgColor(R.color.dialogTransparent).setHeaderTextColor(R.color.black).blurBackground()
                 .buildMultiOptionsDialog(getOptions()
                         , new MultiOptionsDialog.ActionListener() {
                             @Override
@@ -103,7 +103,7 @@ implementation  'com.dialog:plus:4+'
 ### 2.7 List:
 
  ```
-  new DialogPlusBuilder().setTitle("List Dialog")
+  new DialogPlusBuilder().setTitle("List Dialog").blurBackground()
                 .buildListDialog(getListItems(), new DialogPlus.DialogListListener() {
                     @Override
                     public void onItemClicked(String title, int index, DialogPlus dialogPlus) {
@@ -116,22 +116,23 @@ implementation  'com.dialog:plus:4+'
 ### 2.8 Year Picker:
 
  ```
- new DialogPlusBuilder().setHeaderBgDrawable(R.drawable.bg_header).buildYearPickerDialog(pickedYear ->
+ new DialogPlusBuilder().blurBackground().setHeaderBgDrawable(R.drawable.bg_header).buildYearPickerDialog(pickedYear ->
                 Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Year Picker");
 ```
 ### 2.9 Month Picker:
 
  ```
-   new DialogPlusBuilder().setTitle("pick month").setHeaderBgDrawable(R.drawable.bg_header).buildYearPickerDialog(pickedYear ->
-                Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
+   new DialogPlusBuilder().blurBackground().setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
+                          .buildYearPickerDialog(pickedYear ->
+                              Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Month Picker");
 ```
 ### 2.10 Rate:
 
  ```
      new DialogPlusBuilder("Rating Dialog", "Rate dialog_plus message content ...")
-                .setTexts("rate", "cancel")
+                .setTexts("rate", "cancel").blurBackground()
                 .buildRatingDialog(1.7f, false, new DialogPlus.DialogRateListener() {
                     @Override
                     public void onRateGiven(float rate, DialogPlus dialogPlus) {
@@ -143,7 +144,7 @@ implementation  'com.dialog:plus:4+'
 ### 2.11 Country Picker:
 
  ```
-     new DialogPlusBuilder().setTitle("Countries List Dialog")
+     new DialogPlusBuilder().setTitle("Countries List Dialog").blurBackground()
                 .buildCountriesListDialog(true,new DialogPlus.CountriesDialogListener() {
                     @Override
                     public void onItemClicked(CountryDataModel countryDataModel, DialogPlus dialogPlus) {
@@ -160,36 +161,36 @@ implementation  'com.dialog:plus:4+'
 
  ```
      new DialogPlusBuilder().blurBackground()
-                .setTitle("pick month").setHeaderBgDrawable(R.drawable.bg_header)
+                .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
                 .buildDayPickerDialog(2, 2019, 1, pickedDay ->
                         Toast.makeText(this, "picked day: " + pickedDay, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Day Picker");
 ```
-### 2.13 Month Picker:
+### 2.13 Month/Day Picker:
 
  ```
     new DialogPlusBuilder().blurBackground()
-                .setTitle("pick month").setHeaderBgDrawable(R.drawable.bg_header)
-                .buildMonthPickerDialog(pickedYear ->
-                        Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
-                .show(getSupportFragmentManager(), "Month Picker");
+                .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
+                .buildMonthDayPickerDialog(Calendar.getInstance(),
+                        (pickedMonth, pickedDay) -> //TODO
+                .show(getSupportFragmentManager(), "Month Day Picker");
 ```
 ### 2.14 Month/Year Picker:
 
  ```
      new DialogPlusBuilder().blurBackground()
-                .setHeaderBgDrawable(R.drawable.bg_header)
-                .buildMonthYearPickerDialog(2030, 2019, (pickedYear, pickedMonth) ->
-                        Toast.makeText(this, "picked year: " + pickedYear + " ,picked month: " + pickedMonth, Toast.LENGTH_SHORT).show())
-                .show(getSupportFragmentManager(), "Month Picker");
+                .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
+                .buildMonthYearPickerDialog(Calendar.getInstance(),
+                        (pickedYear, pickedMonth) -> //TODO
+                .show(getSupportFragmentManager(), "Year/Month Picker");
 ```
 ### 2.15 Date Picker:
 
  ```
-     new DialogPlusBuilder().blurBackground()
-                .buildDatePickerDialog(2030, 2019, (pickedYear, pickedMonth, pickedDay) ->
-                        Toast.makeText(this, pickedYear + "-" + pickedMonth + "-" + pickedDay, Toast.LENGTH_SHORT).show())
-                .show(getSupportFragmentManager(), "Year Picker");
+     new DialogPlusBuilder().blurBackground().setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
+                .buildDatePickerDialog(true, Calendar.getInstance()
+                        , (pickedYear, pickedMonth, pickedDay) -> //TODO
+                .show(getSupportFragmentManager(), "Date Picker");
 ```
 ### 2.16 Custom Dialog: Accepts a layoutRes to a layout xml file and adds it to the dialog(Supports Data Binding)
 
@@ -208,7 +209,7 @@ implementation  'com.dialog:plus:4+'
                         , new DialogListener() {//implement functions
                         }).show(this.getSupportFragmentManager(), "Image Message Dialog");
 ```
-### 2.17 Custom Layout:
+### 2.18 Custom Layout:
 
  ```
        new DialogPlusBuilder()
@@ -222,7 +223,7 @@ implementation  'com.dialog:plus:4+'
                 .buildCustomLayoutDialog(findViewById(R.id.viewToShow))
                 .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
 ```
-##### Note that: Focus View is not stable yet, We are still applying different scenarios, Instead use Custom Layout for a stable behaviour.
+##### Note that Focus View is not stable yet, We are still applying different scenarios. For better performance you better add the "viewToShow" in a viewGroup ust holding it. You can Use CustomLayout for a more stable behaviour.
 ### 3 Listeners:
 
 ##### You can implement the action you like to listen to(non-abstract methods used)
@@ -332,12 +333,16 @@ implementation  'com.dialog:plus:4+'
     <dimen name="dialog_image_width">@dimen/_150sdp</dimen>
     <dimen name="dialog_plus_min_width">@dimen/_200sdp</dimen>
     <dimen name="dialog_list_recycler_margin">@dimen/_8sdp</dimen>
+    
+    <dimen name="dialog_picker_separator_margin_start_end">@dimen/_2sdp</dimen>
+    <dimen name="dialog_picker_separator_margin_top_bottom">@dimen/_30sdp</dimen>
 ````
 #### Integers
 ````
     <integer name="dialog_content_maxLines">4</integer>
     <integer name="dialog_width_percent">80</integer>
     <integer name="dialog_header_maxLines">1</integer>
+    <!-- changing dialog_plus_blur_radius value will change the blur effect's radius-->
     <integer name="blur_radius">15</integer>
 ````
 #### Colors
@@ -379,7 +384,7 @@ implementation  'com.dialog:plus:4+'
     <color name="dialog_option_text_color">@color/colorPrimary</color>
     <color name="dialog_option_close_text_color">@color/colorPrimaryDark</color>
     <color name="dialog_option_title_text_color">#000000</color>
-    <color name="dialog_action_seperator">@color/carbon_grey_400</color>
+    <color name="dialog_action_separator">@color/carbon_grey_400</color>
 
     <color name="dialog_month_year_action_background">#00000000</color>
     <color name="dialog_month_year_action_text_color">@color/colorPrimary</color>
@@ -387,7 +392,10 @@ implementation  'com.dialog:plus:4+'
     <color name="dialog_rating_bar_active_color">@color/colorPrimary</color>
     <color name="dialog_rating_bar_accent_color">@color/colorAccent</color>
     <color name="dialog_code_text_color">@color/dialogBlack</color>
-    <color name="dialog_cutom_layout_background">#00000000</color>
+    <color name="dialog_custom_layout_background">#00000000</color>
+    
+    <color name="dialog_plus_number_picker_text_color">@color/dialogBlack</color>
+    <color name="dialog_picker_separator_color">@color/colorAccent</color>
 ````
 
 #### Strings
@@ -399,10 +407,13 @@ implementation  'com.dialog:plus:4+'
     <string name="dialog_time_up">Time up</string>
     <string name="dialog_incomplete_code_msg">Please enter complete code</string>
     <string name="dialog_options_close">Close</string>
-    <string name="dialog_pick_year_title">Pick year</string>
-    <string name="dialog_pick_month_title">Pick month</string>
-    <string name="dialog_pick_month_year_title">Pick date</string>
-    <string name="dialog_list_search_hint">type here to search</string>
+
+    <string name="dialog_list_search_hint">Type here to search</string>
+
+    <string name="dialog_pick_year_title">Pick yearOfMonth</string>
+    <string name="dialog_pick_month_title">Pick a month</string>
+    <string name="dialog_pick_month_year_title">Pick a date</string>
+    <string name="dialog_pick_day_title">Pick a day</string>
 ````
 
 #### Styles

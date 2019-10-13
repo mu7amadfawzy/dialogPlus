@@ -12,16 +12,12 @@
 
     <carbon.widget.RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_header_height"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:backgroundColor="@{model.headerBgColor}"
+        app:backgroundDrawable="@{model.headerBgDrawable}"
+        app:carbon_maxHeight="@dimen/dialog_header_height"
         app:visible="@{model.title!=null}">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:scaleType="centerCrop"
-            app:backgroundColor="@{model.headerBgColor}"
-            app:backgroundDrawable="@{model.headerBgDrawable}" />
 
         <TextView
             android:id="@+id/titleText"
@@ -34,7 +30,9 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:maxLines="@integer/dialog_header_maxLines"
             android:paddingStart="@dimen/dialog_close_icon_radius"
+            android:layout_marginTop="@dimen/dialog_title_padding"
             android:paddingEnd="@dimen/dialog_close_icon_radius"
+            android:layout_marginBottom="@dimen/dialog_title_padding"
             android:singleLine="true"
             android:text="@{model.title}"
             android:textAppearance="@style/dialog_header_style"
@@ -44,10 +42,10 @@
         <ImageView
             android:id="@+id/closeIV"
             android:layout_width="@dimen/dialog_close_icon_radius"
-            android:padding="@dimen/dialog_close_icon_padding"
             android:layout_height="@dimen/dialog_close_icon_radius"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:padding="@dimen/dialog_close_icon_padding"
             android:tint="@color/dialogPositiveTextColor"
             app:srcCompat="@drawable/ic_dialog_close"
             app:tintColor="@{model.headerTextColor}"

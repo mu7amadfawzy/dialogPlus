@@ -38,6 +38,51 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:onClick="onYearMonthDialogClicked"
+                    android:text="Year/Month"
+                    android:textAppearance="@style/button_text_style" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_header"
+                    android:onClick="onDateDialogClicked"
+                    android:text="Date Picker"
+                    android:textAppearance="@style/button_text_style"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:onClick="onMonthDayDialogClicked"
+                    android:text="Month/Day"
+                    android:textAppearance="@style/button_text_style" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="#BDBDBD" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,42 +122,6 @@
                 android:layout_margin="5dp"
                 android:background="#BDBDBD" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_header"
-                    android:onClick="onDateDialogClicked"
-                    android:text="Date Picker"
-                    android:textAppearance="@style/button_text_style"
-                    android:textColor="@color/white" />
-
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:maxLines="1"
-                    android:onClick="onYearMonthDialogClicked"
-                    android:text="Year/Month"
-                    android:textAppearance="@style/button_text_style" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="5dp"
-                android:background="#BDBDBD" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -205,6 +214,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:onClick="onClickedConfirmCode"
+                    android:text="Code"
+                    android:textAppearance="@style/button_text_style" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:onClick="onClickedConfirmCode2"
+                    android:text="Code 2"
+                    android:textAppearance="@style/button_text_style" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="#BDBDBD" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:onClick="onClickedErrorDialog"
                     android:text="Error"
                     android:textAppearance="@style/button_text_style" />
@@ -264,35 +301,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:onClick="onClickedConfirmCode"
-                    android:text="Code"
-                    android:textAppearance="@style/button_text_style" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:onClick="onClickedConfirmCode2"
-                    android:text="Code 2"
-                    android:textAppearance="@style/button_text_style" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="5dp"
-                android:background="#BDBDBD" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
@@ -340,11 +348,11 @@
                     android:layout_width="120dp"
                     android:layout_height="40dp"
                     android:layout_alignParentStart="true"
-                    android:onClick="onClickedRating"
                     android:background="@drawable/bg_header"
+                    android:onClick="onClickedRating"
                     android:text="Rating"
-                    android:textColor="@color/white"
-                    android:textAppearance="@style/button_text_style" />
+                    android:textAppearance="@style/button_text_style"
+                    android:textColor="@color/white" />
 
                 <Button
                     android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.sample.dialogSample.settings;
+package com.sample.dialogSample.utils;
 
 import android.content.Context;
 import android.content.res.Configuration;

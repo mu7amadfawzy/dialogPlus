@@ -14,10 +14,11 @@ import com.dialog.plus.ui.CountryDataModel;
 import com.dialog.plus.ui.DialogPlus;
 import com.dialog.plus.ui.DialogPlusBuilder;
 import com.dialog.plus.ui.MultiOptionsDialog;
-import com.sample.dialogSample.settings.LocalityUtil;
+import com.sample.dialogSample.utils.LocalityUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setLocality();
         setContentView(R.layout.activity_main);
         setSupportActionBar(findViewById(R.id.toolbar));
-
     }
 
     private void setLocality() {
@@ -137,11 +137,11 @@ public class MainActivity extends AppCompatActivity {
     private void onOptionSelected(String clickedOption) {
         switch (clickedOption) {
             case "Arabic":
-                onSelectArabic(null);
+                onSelectArabic();
                 Toast.makeText(MainActivity.this, clickedOption, Toast.LENGTH_SHORT).show();
                 break;
             case "English":
-                onSelectEnglish(null);
+                onSelectEnglish();
                 Toast.makeText(MainActivity.this, clickedOption, Toast.LENGTH_SHORT).show();
                 break;
             default:
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onYearDialogClicked(View view) {
         new DialogPlusBuilder().blurBackground()
-                .setHeaderBgDrawable(R.drawable.bg_header)
+                .setTitle("Please pick a Year").setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
                 .buildYearPickerDialog(pickedYear ->
                         Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Year Picker");
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMonthDialogClicked(View view) {
         new DialogPlusBuilder().blurBackground()
-                .setTitle("pick month").setHeaderBgDrawable(R.drawable.bg_header)
+                .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
                 .buildMonthPickerDialog(pickedYear ->
                         Toast.makeText(this, "picked month: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Month Picker");
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onDaysDialogClicked(View view) {
         new DialogPlusBuilder().blurBackground()
-                .setTitle("pick month").setHeaderBgDrawable(R.drawable.bg_header)
+                .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
                 .buildDayPickerDialog(2, 2019, 1, pickedDay ->
                         Toast.makeText(this, "picked day: " + pickedDay, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Day Picker");
@@ -202,17 +202,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void onYearMonthDialogClicked(View view) {
         new DialogPlusBuilder().blurBackground()
-                .setHeaderBgDrawable(R.drawable.bg_header)
-                .buildMonthYearPickerDialog(2030, 2019, (pickedYear, pickedMonth) ->
-                        Toast.makeText(this, "picked year: " + pickedYear + " ,picked month: " + pickedMonth, Toast.LENGTH_SHORT).show())
-                .show(getSupportFragmentManager(), "Month Picker");
+                .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
+                .buildMonthYearPickerDialog(Calendar.getInstance(), true,//remove true and it will be minDate
+                        (pickedYear, pickedMonth) -> Toast.makeText(this, "picked year: " + pickedYear + " ,picked month: " + pickedMonth, Toast.LENGTH_SHORT).show())
+                .show(getSupportFragmentManager(), "Year/Month Picker");
+    }
+
+    public void onMonthDayDialogClicked(View view) {
+        new DialogPlusBuilder().blurBackground()
+                .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
+                .buildMonthDayPickerDialog(Calendar.getInstance(), true,//remove true and it will be minDate
+                        (pickedMonth, pickedDay) -> Toast.makeText(this, "picked day: " + pickedDay + " ,picked month: " + pickedMonth, Toast.LENGTH_SHORT).show())
+                .show(getSupportFragmentManager(), "Month Day Picker");
     }
 
     public void onDateDialogClicked(View view) {
-        new DialogPlusBuilder().blurBackground()
-                .buildDatePickerDialog(2030, 2019, (pickedYear, pickedMonth, pickedDay) ->
-                        Toast.makeText(this, pickedYear + "-" + pickedMonth + "-" + pickedDay, Toast.LENGTH_SHORT).show())
-                .show(getSupportFragmentManager(), "Year Picker");
+        new DialogPlusBuilder().blurBackground().setTitle("Pick a date")
+                .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
+                .buildDatePickerDialog(Calendar.getInstance()
+                        , (pickedYear, pickedMonth, pickedDay) -> Toast.makeText(this, pickedYear + "-" + pickedMonth + "-" + pickedDay, Toast.LENGTH_SHORT).show())
+                .show(getSupportFragmentManager(), "Date Picker");
     }
 
     public void onClickedRating(View view) {
@@ -276,14 +285,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.setting:
-                onShowViewClicked(null);
+                onMultiOptionsDialogClicked(null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void onSelectArabic(View view) {
+    public void onSelectArabic() {
         setAppLanguageArabic();
         restart();
     }
@@ -292,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
         getSharedPreferences("sample", MODE_PRIVATE).edit().putBoolean("isArabic", true).apply();
     }
 
-    public void onSelectEnglish(View view) {
+    public void onSelectEnglish() {
         getSharedPreferences("sample", MODE_PRIVATE).edit().putBoolean("isArabic", false).apply();
         restart();
     }

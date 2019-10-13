@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">DialogPlusSample</string>
-    <!-- code dialogPlus strings -->
-    <string name="dages" translatable="false">------------------------------------------------------------------------------------------------</string>
 
     <string name="dialog_negative_text">Cancel</string>
     <string name="dialog_ok_text">Ok</string>
@@ -10,8 +8,12 @@
     <string name="dialog_time_up">Time up</string>
     <string name="dialog_incomplete_code_msg">Please enter complete code</string>
     <string name="dialog_options_close">Close</string>
-    <string name="dialog_pick_year_title">Pick year</string>
-    <string name="dialog_pick_month_title">Pick month</string>
-    <string name="dialog_pick_month_year_title">Pick date</string>
-    <string name="dialog_list_search_hint">type here to search</string>
+
+    <string name="dialog_list_search_hint">Type here to search</string>
+
+    <string name="dialog_pick_year_title">Pick a year</string>
+    <string name="dialog_pick_month_title">Pick a month</string>
+    <string name="dialog_pick_month_year_title">Pick a date</string>
+    <string name="dialog_pick_day_title">Pick a day</string>
+
 </resources>

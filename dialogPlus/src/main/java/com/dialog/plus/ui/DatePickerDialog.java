@@ -1,10 +1,10 @@
 package com.dialog.plus.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.NumberPicker;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 
 import com.dialog.plus.BR;
@@ -14,6 +14,7 @@ import com.dialog.plus.utils.CommonUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Method;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -23,27 +24,19 @@ import java.util.Locale;
  * Modified  by Fawzy & ALi
  */
 public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDialogBinding> {
-    private int MAX_MONTH = 12, MIN_MONTH = 1;
-    @ColorRes
-    private int dialogPositiveBgColor = R.color.dialogPositiveBgColor, titleTextColor = R.color.titleTextColor;
+
 
     DatePickerDialog(DialogPlusUiModel model) {
         this.model = model;
     }
 
-    public DatePickerDialog getYearPicker(PickerListener listener) {
-        model.setPickerListener(listener);
-        return this;
-    }
-
-    public DatePickerDialog getMonthPicker(PickerListener listener) {
-        model.setPickerListener(listener);
-        return this;
-    }
-
     private String getTitle() {
-        return getResources().getString(model.isMonthPicker() ? R.string.dialog_pick_month_title
-                : model.isYearPicker() ? R.string.dialog_pick_year_title : R.string.dialog_pick_month_year_title);
+        return model.isMonthDayPicker() ? model.getYearOfMonth() + ""
+                : model.isDayPicker() ? CommonUtil.getInstance().getMonthName(model.getMonthOfDay()) + "\t" + model.getYearOfMonth()
+                : getResources().getString(model.isMonthPicker() ? R.string.dialog_pick_month_title
+                : model.isYearPicker() ? R.string.dialog_pick_year_title
+                : model.isDayPicker() ? R.string.dialog_pick_day_title
+                : R.string.dialog_pick_month_year_title);
     }
 
     @Override
@@ -51,14 +44,13 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
         super.onViewCreated(view, savedInstanceState);
         renderViews();
         setListeners();
-        setMonthOrYear();
+        setPickers();
     }
 
     private void setListeners() {
         setOnConfirmClicked();
         setOnCloseClicked();
-        if (model.isDatePicker())
-            setMonthPickerListener();
+        setPickersListener();
     }
 
     private void setOnCloseClicked() {
@@ -71,21 +63,69 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
                 model.getPickerListener().onPicked(getPickerValue());
             else if (model.isYearMonthPicker())
                 model.getYearMonthPickerListener().onPicked(getYearValue(), getMonthValue());
+            else if (model.isMonthDayPicker())
+                model.getMonthDayPickerListener().onPicked(getMonthValue(), getDayValue());
             else if (model.isDatePicker())
                 model.getDatePickerListener().onPicked(getYearValue(), getMonthValue(), getDayValue());
             dismiss(true);
         });
     }
 
-    private void setMonthPickerListener() {
-        NumberPicker.OnValueChangeListener listener = (picker, oldVal, newVal) -> {
-            int selectedDay = binding.dayPicker.getValue();
-            int maxDay = CommonUtil.getInstance().getDaysInMonth(getYearValue(), getMonthValue() - 1);
-            setPickerViews(binding.dayPicker, model.getMinDay(), maxDay, selectedDay);
-            binding.dayPicker.setVerticalScrollbarPosition(selectedDay);
-        };
-        binding.monthPicker.setOnValueChangedListener(listener);
-        binding.yearPicker.setOnValueChangedListener(listener);
+    private void setPickersListener() {
+        if (model.isDatePicker() || model.isMonthDayPicker())
+            setMonthPickListener();
+        if (model.isDatePicker() || model.isYearMonthPicker()) {
+            setYearPickListener();
+        }
+    }
+
+    private void setYearPickListener() {
+        binding.yearPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
+            int selectedMonth = binding.monthPicker.getValue() > 0 ? binding.monthPicker.getValue() - 1 : binding.monthPicker.getValue();
+            setPickerViews(binding.monthPicker, getMinMonth(newVal), getMaxMonth(newVal), selectedMonth, false);
+            notifyValueChanged(binding.monthPicker);
+        });
+    }
+
+    private void setMonthPickListener() {
+        binding.monthPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
+            updateDaysPicker(getMinDay(newVal), getMaxDay());
+        });
+    }
+
+    private int getMinMonth(int yearValue) {
+        int minMonth = model.getMinMonth();
+        if (model.getMinCalendar() != null && yearValue == model.getMinCalendar().get(Calendar.YEAR))
+            minMonth = model.getMinCalendar().get(Calendar.MONTH) + 1;
+        return minMonth;
+    }
+
+    private int getMaxMonth(int yearValue) {
+        int maxMonth = model.getMaxMonth();
+        if (model.getMaxCalendar() != null && yearValue == model.getMaxCalendar().get(Calendar.YEAR))
+            maxMonth = model.getMaxCalendar().get(Calendar.MONTH) + 1;
+        return maxMonth;
+    }
+
+    private int getMinDay(int monthValue) {
+        int minDay = model.getMinDay();
+        if (model.getMinCalendar() != null && monthValue == model.getMinCalendar().get(Calendar.MONTH) + 1)
+            minDay = model.getMinCalendar().get(Calendar.DAY_OF_MONTH);
+        return minDay;
+    }
+
+    private int getMaxDay() {
+        if (model.getMaxCalendar() != null && getMonthValue() == model.getMaxCalendar().get(Calendar.MONTH) + 1) {
+            return model.getMaxCalendar().get(Calendar.DAY_OF_MONTH);
+        }
+        return CommonUtil.getInstance().getMaxDayInMonth(model.getYearOfMonth(), model.getMonthOfDay());
+    }
+
+
+    private void updateDaysPicker(int minDay, int maxDay) {
+        int selectedDay = binding.dayPicker.getValue();
+        setPickerViews(binding.dayPicker, minDay, maxDay, selectedDay, false);
+        binding.dayPicker.setVerticalScrollbarPosition(selectedDay);
     }
 
     private int getPickerValue() {
@@ -97,11 +137,11 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
     }
 
     private int getYearValue() {
-        return binding.yearPicker.getValue();
+        return model.showYearPicker() ? binding.yearPicker.getValue() : model.getYearOfMonth();
     }
 
     private int getMonthValue() {
-        return binding.monthPicker.getValue();
+        return model.showMonthPicker() ? binding.monthPicker.getValue() : model.getMonthOfDay();
     }
 
     private int getDayValue() {
@@ -109,44 +149,60 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
     }
 
     private void renderViews() {
-        model.set(getTitle(), getBackgroundColor(), getHeaderTextColor());
+        model.setTitle(model.getTitle() == null ? getTitle() : model.getTitle());
     }
 
-    private void setMonthOrYear() {
+    private void setPickers() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
-        if (model.isMonthPicker() || model.isYearMonthPicker() || model.isDatePicker())
-            setPickerViews(binding.monthPicker, MIN_MONTH, MAX_MONTH, cal.get(Calendar.MONTH) + 1);
+        setYearPicker(cal);
+        setMonthPicker(cal);
+        setDayPicker(cal);
+    }
+
+    private void setYearPicker(Calendar cal) {
         if (model.isYearPicker() || model.isYearMonthPicker() || model.isDatePicker())
-            setPickerViews(binding.yearPicker, model.getMinYear(), model.getMaxYear(), cal.get(Calendar.YEAR));
-        if (model.isDayPicker() || model.isDatePicker()) {
-            int maxDay = CommonUtil.getInstance().getDaysInMonth(model.getMaxYear(), model.getMonthOfDays());
-            setPickerViews(binding.dayPicker, model.getMinDay(), maxDay, Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
+            setPickerViews(binding.yearPicker, model.getMinYear(), model.getMaxYear(), cal.get(Calendar.YEAR), false);
+    }
+
+    private void setMonthPicker(Calendar cal) {
+        if (model.isMonthPicker() || model.isYearMonthPicker() || model.isMonthDayPicker() || model.isDatePicker()) {
+            setMonthNamesPicker();
+            setPickerViews(binding.monthPicker, getMinMonth(model.getYearOfMonth()), getMaxMonth(getYearValue()), cal.get(Calendar.MONTH) + 1, false);
         }
     }
 
-    private void setPickerViews(NumberPicker picker, int min, int max, int selectedValue) {
+    private void setDayPicker(Calendar cal) {
+        if (model.isDayPicker() || model.isMonthDayPicker() || model.isDatePicker()) {
+            int maxDay = getMaxDay();
+            int minDay = getMinDay(getMonthValue());
+            setPickerViews(binding.dayPicker, minDay, maxDay, cal.get(Calendar.DAY_OF_MONTH), model.getMinCalendar() != null);
+        }
+    }
+
+    private void setMonthNamesPicker() {
+        if (model.isShowMonthName()) {
+            binding.monthPicker.setFormatter(value -> CommonUtil.getInstance().getMonthName(value - 1));
+            notifyValueChanged(binding.monthPicker);
+        }
+    }
+
+    private void setPickerViews(NumberPicker picker, int min, int max, int selectedValue, boolean notifyChange) {
         picker.setMinValue(min);
         picker.setMaxValue(max);
         picker.setValue(selectedValue);
-        picker.setWrapSelectorWheel(false);
+        picker.setWrapSelectorWheel(true);
+        if (notifyChange)
+            notifyValueChanged(picker);
     }
 
-    private int getBackgroundColor() {
-        return dialogPositiveBgColor;
-    }
-
-    private int getHeaderTextColor() {
-        return titleTextColor;
-    }
-
-    public DatePickerDialog setMAX_MONTH(int MAX_MONTH) {
-        this.MAX_MONTH = MAX_MONTH;
-        return this;
-    }
-
-    public DatePickerDialog setMIN_MONTH(int MIN_MONTH) {
-        this.MIN_MONTH = MIN_MONTH;
-        return this;
+    private void notifyValueChanged(NumberPicker picker) {
+        try {
+            Method method = picker.getClass().getDeclaredMethod("changeValueByOne", boolean.class);
+            method.setAccessible(true);
+            method.invoke(binding.monthPicker, true);
+        } catch (Exception e) {
+            Log.e(getClass().getName(), "couldn't find method changeValueByOne in class NumberPicker to notify selected item");
+        }
     }
 
     @Override
@@ -183,7 +239,8 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
         int MONTH = 1;
         int DAY = 2;
         int YEAR_MONTH = 3;
-        int DATE = 4;
+        int MONTH_DAY = 4;
+        int DATE = 5;
     }
 
     public interface PickerListener {
@@ -192,6 +249,10 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
 
     public interface YearMonthPickerListener {
         void onPicked(int pickedYear, int pickedMonth);
+    }
+
+    public interface MonthDayPickerListener {
+        void onPicked(int pickedMonth, int pickedDay);
     }
 
     public interface DatePickerListener {

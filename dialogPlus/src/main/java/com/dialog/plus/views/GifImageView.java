@@ -11,7 +11,7 @@ import android.view.View;
 import androidx.appcompat.widget.AppCompatImageView;
 
 /**
- * Created by fawzy on 26,September,2019
+ * Created by Fawzy on 26,September,2019
  * ma7madfawzy@gmail.com
  **/
 public class GifImageView extends AppCompatImageView {

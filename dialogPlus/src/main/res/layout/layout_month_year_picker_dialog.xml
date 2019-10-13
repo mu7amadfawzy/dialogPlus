@@ -46,8 +46,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:descendantFocusability="blocksDescendants"
+                    android:gravity="center"
                     android:theme="@style/dialog_plus_number_picker"
-                    app:visible="@{model.yearPicker|model.yearMonthPicker|model.datePicker}" />
+                    app:visible="@{model.showYearPicker}" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dialog_picker_separator_margin_start_end"
+                    android:layout_marginTop="@dimen/dialog_picker_separator_margin_top_bottom"
+                    android:layout_marginEnd="@dimen/dialog_picker_separator_margin_start_end"
+                    android:layout_marginBottom="@dimen/dialog_picker_separator_margin_top_bottom"
+                    android:background="@drawable/dialog_picker_separator_bg"
+                    app:visible="@{model.yearMonthPicker|model.datePicker}" />
 
                 <NumberPicker
                     android:id="@+id/monthPicker"
@@ -55,9 +66,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:descendantFocusability="blocksDescendants"
+                    android:gravity="center"
                     android:theme="@style/dialog_plus_number_picker"
-                    app:visible="@{model.monthPicker|model.yearMonthPicker|model.datePicker}" />
+                    app:visible="@{model.showMonthPicker()}" />
 
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dialog_picker_separator_margin_start_end"
+                    android:layout_marginTop="@dimen/dialog_picker_separator_margin_top_bottom"
+                    android:layout_marginEnd="@dimen/dialog_picker_separator_margin_start_end"
+                    android:layout_marginBottom="@dimen/dialog_picker_separator_margin_top_bottom"
+                    android:background="@drawable/dialog_picker_separator_bg"
+                    app:visible="@{model.monthDayPicker|model.datePicker}" />
 
                 <NumberPicker
                     android:id="@+id/dayPicker"
@@ -65,14 +86,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:descendantFocusability="blocksDescendants"
+                    android:gravity="center"
                     android:theme="@style/dialog_plus_number_picker"
-                    app:visible="@{model.dayPicker|model.datePicker}" />
+                    app:visible="@{model.showDayPicker()}" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/dialog_action_seperator" />
+                android:background="@color/dialog_action_separator" />
 
             <carbon.widget.Button
                 android:id="@+id/confirmButton"

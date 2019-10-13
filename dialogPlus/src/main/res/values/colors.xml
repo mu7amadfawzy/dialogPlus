@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#0698B5</color>
     <color name="colorPrimaryDark">#05839C</color>
-    <color name="colorAccent">#000</color>
+    <color name="colorAccent">#757575</color>
 
     <color name="titleTextColor">@color/dialogPositiveTextColor</color>
     <color name="dialogContentTextColor">@color/colorAccent</color>
@@ -36,8 +36,8 @@
     <color name="dialog_option_background">@color/carbon_grey_200</color>
     <color name="dialog_option_text_color">@color/colorPrimary</color>
     <color name="dialog_option_close_text_color">@color/colorPrimaryDark</color>
-    <color name="dialog_option_title_text_color">#000000</color>
-    <color name="dialog_action_seperator">@color/carbon_grey_400</color>
+    <color name="dialog_option_title_text_color">@color/dialogBlack</color>
+    <color name="dialog_action_separator">@color/carbon_grey_400</color>
 
     <color name="dialog_month_year_action_background">#00000000</color>
     <color name="dialog_month_year_action_text_color">@color/colorPrimary</color>
@@ -45,5 +45,10 @@
     <color name="dialog_rating_bar_active_color">@color/colorPrimary</color>
     <color name="dialog_rating_bar_accent_color">@color/colorAccent</color>
     <color name="dialog_code_text_color">@color/dialogBlack</color>
-    <color name="dialog_cutom_layout_background">#00000000</color>
+
+    <color name="dialog_custom_layout_background">@color/dialogBlack</color>
+
+    <color name="dialog_plus_number_picker_text_color">@color/dialogBlack</color>
+    <color name="dialog_picker_separator_color">@color/colorAccent</color>
+
 </resources>

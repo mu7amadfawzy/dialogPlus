@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/dialog_cutom_layout_background"
+            android:background="@color/dialog_custom_layout_background"
             android:gravity="center"
             android:minWidth="@dimen/dialog_plus_min_width"
             android:orientation="vertical">
