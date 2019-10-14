@@ -4,7 +4,7 @@
     <dimen name="dialog_margin">@dimen/_30sdp</dimen>
     <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
 
-    <dimen name="dialog_header_height">@dimen/_40sdp</dimen>
+    <dimen name="dialog_header_max_height">@dimen/_40sdp</dimen>
     <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
     <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
     <dimen name="dialog_close_icon_padding">@dimen/_4sdp</dimen>
@@ -57,6 +57,6 @@
 
 
     <dimen name="dialog_picker_separator_margin_start_end">@dimen/_2sdp</dimen>
-    <dimen name="dialog_picker_separator_margin_top_bottom">@dimen/_30sdp</dimen>
+    <dimen name="dialog_picker_separator_margin_top_bottom">40dp</dimen>
 
 </resources>

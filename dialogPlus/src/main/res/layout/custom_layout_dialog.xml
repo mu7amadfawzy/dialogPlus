@@ -53,6 +53,8 @@
                 android:layout_margin="@dimen/dialog_action_buttons_margin"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
                 app:includeCustomLayout="@{customLayoutId}"
                 app:variableId="@{variableId}"
                 app:variableValue="@{variableValue}" />
