@@ -414,7 +414,7 @@ implementation  'com.dialog:plus:4+'
 
     <string name="dialog_list_search_hint">Type here to search</string>
 
-    <string name="dialog_pick_year_title">Pick yearOfMonth</string>
+    <string name="dialog_pick_year_title">Pick a year</string>
     <string name="dialog_pick_month_title">Pick a month</string>
     <string name="dialog_pick_month_year_title">Pick a date</string>
     <string name="dialog_pick_day_title">Pick a day</string>
