@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
     public void onYearMonthDialogClicked(View view) {
         new DialogPlusBuilder().blurBackground()
                 .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
-                .buildMonthYearPickerDialog(Calendar.getInstance(), true,//remove true and it will be minDate
+                .buildMonthYearPickerDialog(Calendar.getInstance(),//remove true and it will be minDate
                         (pickedYear, pickedMonth) -> Toast.makeText(this, "picked year: " + pickedYear + " ,picked month: " + pickedMonth, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Year/Month Picker");
     }

@@ -209,7 +209,7 @@ public class DialogPlusBuilder {
     }
 
     public DatePickerDialog buildMonthYearPickerDialog(Calendar minDate, DatePickerDialog.YearMonthPickerListener listener) {
-        return new DatePickerDialog(model.setMinCalendar(minDate).setPickerListener(listener)
+        return new DatePickerDialog(model.setMinCalendar(minDate).setMinYear(minDate.get(Calendar.YEAR)).setPickerListener(listener)
                 .setDialog_type(DatePickerDialog.TYPE.YEAR_MONTH));
     }
 
