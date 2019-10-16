@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="dialog_month_picker_weight">15</integer>
+</resources>

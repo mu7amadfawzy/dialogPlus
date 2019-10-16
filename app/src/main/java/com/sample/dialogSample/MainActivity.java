@@ -217,9 +217,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onDateDialogClicked(View view) {
+        Calendar afterYearCalendar = Calendar.getInstance();
+        afterYearCalendar.set(Calendar.getInstance().get(Calendar.YEAR) + 1, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+
         new DialogPlusBuilder().blurBackground().setTitle("Pick a date")
                 .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
-                .buildDatePickerDialog(Calendar.getInstance()
+                .buildDatePickerDialog(Calendar.getInstance(), afterYearCalendar
                         , (pickedYear, pickedMonth, pickedDay) -> Toast.makeText(this, pickedYear + "-" + pickedMonth + "-" + pickedDay, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Date Picker");
     }

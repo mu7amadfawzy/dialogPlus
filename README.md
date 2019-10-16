@@ -188,7 +188,7 @@ implementation  'com.dialog:plus:4+'
 
  ```
      new DialogPlusBuilder().blurBackground().setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
-                .buildDatePickerDialog(true, Calendar.getInstance()
+                .buildDatePickerDialog(nowCalendar, afterYearCalendar
                         , (pickedYear, pickedMonth, pickedDay) -> //TODO
                 .show(getSupportFragmentManager(), "Date Picker");
 ```
@@ -285,7 +285,7 @@ implementation  'com.dialog:plus:4+'
     <dimen name="dialog_margin">@dimen/_30sdp</dimen>
     <dimen name="dialog_timeup_text_size">@dimen/_10ssp</dimen>
 
-    <dimen name="dialog_header_height">@dimen/_40sdp</dimen>
+    <dimen name="dialog_header_max_height">@dimen/_40sdp</dimen>
     <dimen name="dialog_header_text_size">@dimen/_14ssp</dimen>
     <dimen name="dialog_header_padding">@dimen/_8sdp</dimen>
     <dimen name="dialog_close_icon_padding">@dimen/_4sdp</dimen>
@@ -344,6 +344,10 @@ implementation  'com.dialog:plus:4+'
     <integer name="dialog_header_maxLines">1</integer>
     <!-- changing dialog_plus_blur_radius value will change the blur effect's radius-->
     <integer name="blur_radius">15</integer>
+    
+    <integer name="dialog_year_picker_weight">10</integer>
+    <integer name="dialog_month_picker_weight">10</integer>
+    <integer name="dialog_day_picker_weight">10</integer>
 ````
 #### Colors
 ````
@@ -410,7 +414,7 @@ implementation  'com.dialog:plus:4+'
 
     <string name="dialog_list_search_hint">Type here to search</string>
 
-    <string name="dialog_pick_year_title">Pick yearOfMonth</string>
+    <string name="dialog_pick_year_title">Pick a year</string>
     <string name="dialog_pick_month_title">Pick a month</string>
     <string name="dialog_pick_month_year_title">Pick a date</string>
     <string name="dialog_pick_day_title">Pick a day</string>

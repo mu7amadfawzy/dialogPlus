@@ -29,11 +29,13 @@ import static com.dialog.plus.ui.DatePickerDialog.TYPE.YEAR_MONTH;
  */
 
 public class DialogPlusUiModel extends BaseObservable {
-    public static int MAX_MONTH = 12, MIN_MONTH = 1, MIN_DAY = 1, MAX_YEAR = 2040, MIN_YEAR = 1970;
+    public static int MAX_MONTH = 12, MIN_MONTH = 1, MIN_DAY = 1;
+    public static int MAX_YEAR = Calendar.getInstance().get(Calendar.YEAR) + 20;
+    public static int MIN_YEAR = Calendar.getInstance().get(Calendar.YEAR) - 50;
 
-    private boolean withSend, withResend, withCounter, separateActionButtons, enableSearch, showCountryCode, hideCloseIcon, blurBackground, showMonthName;
+    private boolean withSend, withResend, withCounter, separateActionButtons, enableSearch, showCountryCode, hideCloseIcon, blurBackground, showMonthName = true;
     private String title, correctCode, codeEntry, content, typed_code, positiveText, negativeText, headerText;
-    private int timeLeft, starsNumber = 5, counterSeconds, maxYear, minYear = MIN_YEAR, minDay = MIN_DAY, monthOfDay;
+    private int timeLeft, starsNumber = 5, counterSeconds, maxYear = MAX_YEAR, minYear = MIN_YEAR, minDay = MIN_DAY, monthOfDay;
     private int minMonth = MIN_MONTH, maxMonth = MAX_MONTH, yearOfMonth;
     private float rateValue;
     @ColorRes
@@ -672,13 +674,32 @@ public class DialogPlusUiModel extends BaseObservable {
         return this;
     }
 
-    public DialogPlusUiModel setMinDate(Calendar minCalendar) {
-        this.minCalendar = minCalendar;
-        return this;
-    }
-
     public Calendar getMinCalendar() {
         return minCalendar;
+    }
+
+    public boolean matchesMinCalendarMonth(int value) {
+        return minCalendar != null && (minCalendar.get(Calendar.MONTH) + 1) == value;
+    }
+
+    public boolean matchesMaxCalendarMonth(int value) {
+        return maxCalendar != null && (maxCalendar.get(Calendar.MONTH) + 1) == value;
+    }
+
+    public boolean matchesMinCalendarDay(int value) {
+        return minCalendar != null && minCalendar.get(Calendar.DAY_OF_MONTH) == value;
+    }
+
+    public boolean matchesMaxCalendarDay(int value) {
+        return maxCalendar != null && maxCalendar.get(Calendar.DAY_OF_MONTH) == value;
+    }
+
+    public boolean matchesMinCalendarYear(int value) {
+        return minCalendar != null && minCalendar.get(Calendar.YEAR) == value;
+    }
+
+    public boolean matchesMaxCalendarYear(int value) {
+        return maxCalendar != null && maxCalendar.get(Calendar.YEAR) == value;
     }
 
     public Calendar getMaxCalendar() {
@@ -688,5 +709,14 @@ public class DialogPlusUiModel extends BaseObservable {
     public DialogPlusUiModel setMaxCalendar(Calendar maxCalendar) {
         this.maxCalendar = maxCalendar;
         return this;
+    }
+
+    public DialogPlusUiModel setMinCalendar(Calendar minCalendar) {
+        this.minCalendar = minCalendar;
+        return this;
+    }
+
+    public boolean isShowCloseIcon() {
+        return hideCloseIcon;
     }
 }

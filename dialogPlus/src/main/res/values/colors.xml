@@ -46,7 +46,7 @@
     <color name="dialog_rating_bar_accent_color">@color/colorAccent</color>
     <color name="dialog_code_text_color">@color/dialogBlack</color>
 
-    <color name="dialog_custom_layout_background">@color/dialogBlack</color>
+    <color name="dialog_custom_layout_background">@color/dialogTransparent</color>
 
     <color name="dialog_plus_number_picker_text_color">@color/dialogBlack</color>
     <color name="dialog_picker_separator_color">@color/colorAccent</color>

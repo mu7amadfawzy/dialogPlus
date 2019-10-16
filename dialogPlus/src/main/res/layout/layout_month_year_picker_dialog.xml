@@ -11,7 +11,7 @@
 
     <RelativeLayout
         android:id="@+id/dialogParentView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
@@ -41,30 +41,30 @@
                 android:orientation="horizontal">
 
                 <NumberPicker
-                    android:id="@+id/yearPicker"
+                    android:id="@+id/dayPicker"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="@integer/dialog_day_picker_weight"
                     android:descendantFocusability="blocksDescendants"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:theme="@style/dialog_plus_number_picker"
-                    app:visible="@{model.showYearPicker}" />
+                    app:visible="@{model.showDayPicker()}" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/dialog_picker_separator_margin_start_end"
                     android:layout_marginStart="@dimen/dialog_picker_separator_margin_start_end"
                     android:layout_marginTop="@dimen/dialog_picker_separator_margin_top_bottom"
-                    android:layout_marginEnd="@dimen/dialog_picker_separator_margin_start_end"
                     android:layout_marginBottom="@dimen/dialog_picker_separator_margin_top_bottom"
                     android:background="@drawable/dialog_picker_separator_bg"
-                    app:visible="@{model.yearMonthPicker|model.datePicker}" />
+                    app:visible="@{model.monthDayPicker|model.datePicker}" />
 
                 <NumberPicker
                     android:id="@+id/monthPicker"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="@integer/dialog_month_picker_weight"
                     android:descendantFocusability="blocksDescendants"
                     android:gravity="center"
                     android:theme="@style/dialog_plus_number_picker"
@@ -78,17 +78,18 @@
                     android:layout_marginEnd="@dimen/dialog_picker_separator_margin_start_end"
                     android:layout_marginBottom="@dimen/dialog_picker_separator_margin_top_bottom"
                     android:background="@drawable/dialog_picker_separator_bg"
-                    app:visible="@{model.monthDayPicker|model.datePicker}" />
+                    app:visible="@{model.monthDayPicker|model.datePicker|model.yearMonthPicker}" />
 
                 <NumberPicker
-                    android:id="@+id/dayPicker"
+                    android:id="@+id/yearPicker"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="@integer/dialog_year_picker_weight"
                     android:descendantFocusability="blocksDescendants"
-                    android:gravity="center"
+                    android:gravity="end"
                     android:theme="@style/dialog_plus_number_picker"
-                    app:visible="@{model.showDayPicker()}" />
+                    app:visible="@{model.showYearPicker()}" />
+
             </LinearLayout>
 
             <View

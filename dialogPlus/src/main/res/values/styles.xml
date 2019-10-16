@@ -84,7 +84,6 @@
 
     <style name="dialog_plus_style" parent="Base.Theme.AppCompat.Dialog">
         <item name="android:windowBackground">@color/dialogTransparent</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowIsFloating">true</item>

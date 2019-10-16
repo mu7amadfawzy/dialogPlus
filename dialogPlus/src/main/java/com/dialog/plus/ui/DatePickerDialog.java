@@ -82,40 +82,40 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
     private void setYearPickListener() {
         binding.yearPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
             int selectedMonth = binding.monthPicker.getValue() > 0 ? binding.monthPicker.getValue() - 1 : binding.monthPicker.getValue();
-            setPickerViews(binding.monthPicker, getMinMonth(newVal), getMaxMonth(newVal), selectedMonth, false);
+            setPickerViews(binding.monthPicker, getMinMonth(), getMaxMonth(), selectedMonth, false);
             notifyValueChanged(binding.monthPicker);
         });
     }
 
     private void setMonthPickListener() {
-        binding.monthPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
-            updateDaysPicker(getMinDay(newVal), getMaxDay());
+        binding.monthPicker.setOnValueChangedListener((picker, oldVal, newMonth) -> {
+            updateDaysPicker(getMinDay(), getMaxDay());
         });
     }
 
-    private int getMinMonth(int yearValue) {
+    private int getMinMonth() {
         int minMonth = model.getMinMonth();
-        if (model.getMinCalendar() != null && yearValue == model.getMinCalendar().get(Calendar.YEAR))
+        if (model.matchesMinCalendarYear(getYearValue()))
             minMonth = model.getMinCalendar().get(Calendar.MONTH) + 1;
         return minMonth;
     }
 
-    private int getMaxMonth(int yearValue) {
+    private int getMaxMonth() {
         int maxMonth = model.getMaxMonth();
-        if (model.getMaxCalendar() != null && yearValue == model.getMaxCalendar().get(Calendar.YEAR))
+        if (model.matchesMaxCalendarYear(getYearValue()))
             maxMonth = model.getMaxCalendar().get(Calendar.MONTH) + 1;
         return maxMonth;
     }
 
-    private int getMinDay(int monthValue) {
+    private int getMinDay() {
         int minDay = model.getMinDay();
-        if (model.getMinCalendar() != null && monthValue == model.getMinCalendar().get(Calendar.MONTH) + 1)
+        if (model.matchesMinCalendarYear(getYearValue()) && model.matchesMinCalendarMonth(getMonthValue()))
             minDay = model.getMinCalendar().get(Calendar.DAY_OF_MONTH);
         return minDay;
     }
 
     private int getMaxDay() {
-        if (model.getMaxCalendar() != null && getMonthValue() == model.getMaxCalendar().get(Calendar.MONTH) + 1) {
+        if (model.matchesMaxCalendarYear(getYearValue()) && model.matchesMaxCalendarMonth(getMonthValue())) {
             return model.getMaxCalendar().get(Calendar.DAY_OF_MONTH);
         }
         return CommonUtil.getInstance().getMaxDayInMonth(model.getYearOfMonth(), model.getMonthOfDay());
@@ -167,14 +167,14 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
     private void setMonthPicker(Calendar cal) {
         if (model.isMonthPicker() || model.isYearMonthPicker() || model.isMonthDayPicker() || model.isDatePicker()) {
             setMonthNamesPicker();
-            setPickerViews(binding.monthPicker, getMinMonth(model.getYearOfMonth()), getMaxMonth(getYearValue()), cal.get(Calendar.MONTH) + 1, false);
+            setPickerViews(binding.monthPicker, getMinMonth(), getMaxMonth(), cal.get(Calendar.MONTH) + 1, false);
         }
     }
 
     private void setDayPicker(Calendar cal) {
         if (model.isDayPicker() || model.isMonthDayPicker() || model.isDatePicker()) {
             int maxDay = getMaxDay();
-            int minDay = getMinDay(getMonthValue());
+            int minDay = getMinDay();
             setPickerViews(binding.dayPicker, minDay, maxDay, cal.get(Calendar.DAY_OF_MONTH), model.getMinCalendar() != null);
         }
     }

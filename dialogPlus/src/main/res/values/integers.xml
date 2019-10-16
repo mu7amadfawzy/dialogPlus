@@ -5,4 +5,8 @@
     <integer name="dialog_header_maxLines">1</integer>
     <!--    changing dialog_plus_blur_radius value will change the blur effect's radius-->
     <integer name="dialog_plus_blur_radius">15</integer>
+
+    <integer name="dialog_year_picker_weight">10</integer>
+    <integer name="dialog_month_picker_weight">10</integer>
+    <integer name="dialog_day_picker_weight">10</integer>
 </resources>
