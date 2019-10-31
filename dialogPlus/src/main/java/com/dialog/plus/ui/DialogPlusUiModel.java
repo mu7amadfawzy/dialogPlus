@@ -112,7 +112,7 @@ public class DialogPlusUiModel extends BaseObservable {
 
 
     public void setNegativeBgColor(@ColorRes int negativeColorRes) {
-        if (negativeBgColor == -1)
+        if (negativeColorRes == -1)
             return;
         this.negativeBgColor = negativeColorRes;
         notifyPropertyChanged(BR.negativeBgColor);

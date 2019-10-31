@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/dialog_white"
+        android:background="@color/dialogPlusContentBgColor"
         android:gravity="center"
         android:orientation="vertical"
         app:carbon_cornerRadius="@dimen/dialog_corner_radius"

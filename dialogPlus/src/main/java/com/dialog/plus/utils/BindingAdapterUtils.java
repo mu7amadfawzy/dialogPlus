@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.DisplayMetrics;
@@ -72,11 +73,6 @@ public class BindingAdapterUtils {
         } catch (Resources.NotFoundException e) {
             return Res_NOT_EXIST;
         }
-    }
-
-    @BindingAdapter("cornerRadius")
-    public static void cornerRadius(carbon.view.View view, float corner) {
-        view.setCornerRadius(corner);
     }
 
     @BindingAdapter("cornerRadius")
@@ -164,11 +160,6 @@ public class BindingAdapterUtils {
         } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to setBackgroundColor");
     }
 
-    @BindingAdapter("strokeColor")
-    public static void strokeColor(carbon.view.View view, @ColorInt int colorRes) {
-        view.setStroke(colorRes);
-    }
-
     @BindingAdapter("backgroundDrawable")
     public static void backgroundDrawable(View view, @DrawableRes int drawableRes) {
         if (!resourceExist(drawableRes))
@@ -179,6 +170,22 @@ public class BindingAdapterUtils {
             view.setBackgroundColor(Color.TRANSPARENT);
             view.setBackground(drawable);
         } else Log.e("DialogPlus !!!", "ResourcesNotFoundException to backgroundDrawable");
+    }
+
+    @BindingAdapter("wrapWidth")
+    public static void wrapWidth(View view, boolean wrap) {
+        if (!wrap || view.getLayoutParams() == null)
+            return;
+        if (view.getLayoutParams() instanceof carbon.widget.LinearLayout.LayoutParams) {
+            carbon.widget.LinearLayout.LayoutParams params = new carbon.widget.LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
+                    , view.getLayoutParams().height);
+            view.setLayoutParams(params);
+        } else if (view.getLayoutParams() instanceof LinearLayout.LayoutParams) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
+                    , view.getLayoutParams().height);
+            view.setLayoutParams(params);
+        }
+        view.requestLayout();
     }
 
     private static Drawable getDrawable(View view, @DrawableRes int drawableRes) {
@@ -213,6 +220,15 @@ public class BindingAdapterUtils {
     public static void setText(TextView textView, String text) {
         if (text != null && !text.isEmpty())
             textView.setText(text);
+    }
+
+    @BindingAdapter("textAppearance")
+    public static void textAppearance(TextView textView, int resId) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            textView.setTextAppearance(textView.getContext(), resId);
+        } else {
+            textView.setTextAppearance(resId);
+        }
     }
 
     @BindingAdapter("dialog_plus_charsNumber")

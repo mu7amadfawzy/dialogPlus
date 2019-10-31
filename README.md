@@ -309,7 +309,7 @@ implementation  'com.dialog:plus:4+'
     <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
 
     <!--    space for showing elevation-->
-    <dimen name="dialog_action_buttons_bottom_margin">2dp</dimen>
+    <dimen name="dialog_action_buttons_bottom_margin">5dp</dimen>
 
     <dimen name="dialog_action_button_textSize">@dimen/_12ssp</dimen>
 
@@ -317,6 +317,8 @@ implementation  'com.dialog:plus:4+'
 
     <dimen name="dialog_negative_button_stroke">1dp</dimen>
     <dimen name="dialog_negative_button_elevation">0dp</dimen>
+
+    <dimen name="dialog_title_padding">@dimen/_4sdp</dimen>
 
     <dimen name="dialog_close_icon_radius">@dimen/_24sdp</dimen>
     <dimen name="dialog_zero">0dp</dimen>
@@ -333,9 +335,10 @@ implementation  'com.dialog:plus:4+'
     <dimen name="dialog_image_width">@dimen/_150sdp</dimen>
     <dimen name="dialog_plus_min_width">@dimen/_200sdp</dimen>
     <dimen name="dialog_list_recycler_margin">@dimen/_8sdp</dimen>
-    
+
+
     <dimen name="dialog_picker_separator_margin_start_end">@dimen/_2sdp</dimen>
-    <dimen name="dialog_picker_separator_margin_top_bottom">@dimen/_30sdp</dimen>
+    <dimen name="dialog_picker_separator_margin_top_bottom">40dp</dimen>
 ````
 #### Integers
 ````
@@ -353,31 +356,37 @@ implementation  'com.dialog:plus:4+'
 ````
     <color name="colorPrimary">#0698B5</color>
     <color name="colorPrimaryDark">#05839C</color>
-    <color name="colorAccent">#000</color>
+    <color name="colorAccent">#757575</color>
+
+    <color name="dialogPlusColorPrimary">@color/colorPrimary</color>
+    <color name="dialogPlusColorPrimaryDark">@color/colorPrimaryDark</color>
+    <color name="dialogPlusColorAccent">@color/colorAccent</color>
 
     <color name="titleTextColor">@color/dialogPositiveTextColor</color>
-    <color name="dialogContentTextColor">@color/colorAccent</color>
+    <color name="dialogContentTextColor">@color/dialogPlusColorAccent</color>
 
-    <color name="dialogListItemTextColor">@color/colorPrimary</color>
+    <color name="dialogListItemTextColor">@color/dialogPlusColorPrimary</color>
     <color name="dialogListSearchBarBackgroundColor">@color/carbon_grey_300</color>
     <color name="dialogListSearchBarTextColor">@color/carbon_grey_600</color>
 
     <color name="dialogTransparent">#00000000</color>
+    <color name="dialogPlusBgColor">@color/dialogTransparent</color>
+    <color name="dialogPlusContentBgColor">@color/dialog_white</color>
     <color name="dialogDarkTransparent">#50000000</color>
-    <color name="dialogBlack">#000000</color>dialogBlack
+    <color name="dialogBlack">#000000</color>
 
     <color name="dialogNegativeBgColor">@color/dialogTransparent</color>
     <color name="dialogNegativeTextColor">@color/carbon_red_800</color>
 
-    <color name="dialogPositiveBgColor">@color/colorPrimary</color>
+    <color name="dialogPositiveBgColor">@color/dialogPlusColorPrimary</color>
     <color name="dialogPositiveTextColor">@color/dialog_white</color>
 
     <color name="dialogTimeUpTextColor">@color/dialogNegativeTextColor</color>
 
-    <color name="dialogActionButtonsStrokeColor">@color/colorAccent</color>
+    <color name="dialogActionButtonsStrokeColor">@color/dialogPlusColorAccent</color>
 
-    <color name="dialog_send_background">@color/colorPrimary</color>
-    <color name="dialog_resend_text_color">@color/colorPrimary</color>
+    <color name="dialog_send_background">@color/dialogPlusColorPrimary</color>
+    <color name="dialog_resend_text_color">@color/dialogPlusColorPrimary</color>
 
     <color name="dialog_white">#ffffff</color>
 
@@ -385,21 +394,22 @@ implementation  'com.dialog:plus:4+'
     <color name="dialog_success_accent">@color/carbon_green_500</color>
 
     <color name="dialog_option_background">@color/carbon_grey_200</color>
-    <color name="dialog_option_text_color">@color/colorPrimary</color>
-    <color name="dialog_option_close_text_color">@color/colorPrimaryDark</color>
-    <color name="dialog_option_title_text_color">#000000</color>
+    <color name="dialog_option_text_color">@color/dialogPlusColorPrimary</color>
+    <color name="dialog_option_close_text_color">@color/dialogPlusColorPrimaryDark</color>
+    <color name="dialog_option_title_text_color">@color/dialogBlack</color>
     <color name="dialog_action_separator">@color/carbon_grey_400</color>
 
     <color name="dialog_month_year_action_background">#00000000</color>
-    <color name="dialog_month_year_action_text_color">@color/colorPrimary</color>
+    <color name="dialog_month_year_action_text_color">@color/dialogPlusColorPrimary</color>
 
-    <color name="dialog_rating_bar_active_color">@color/colorPrimary</color>
-    <color name="dialog_rating_bar_accent_color">@color/colorAccent</color>
+    <color name="dialog_rating_bar_active_color">@color/dialogPlusColorPrimary</color>
+    <color name="dialog_rating_bar_accent_color">@color/dialogPlusColorAccent</color>
     <color name="dialog_code_text_color">@color/dialogBlack</color>
-    <color name="dialog_custom_layout_background">#00000000</color>
-    
+
+    <color name="dialog_custom_layout_background">@color/dialogTransparent</color>
+
     <color name="dialog_plus_number_picker_text_color">@color/dialogBlack</color>
-    <color name="dialog_picker_separator_color">@color/colorAccent</color>
+    <color name="dialog_picker_separator_color">@color/dialogPlusColorAccent</color>
 ````
 
 #### Strings

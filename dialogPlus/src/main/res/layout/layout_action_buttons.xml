@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.dialog.plus.R" />
+
         <variable
             name="model"
             type="com.dialog.plus.ui.DialogPlusUiModel" />
@@ -25,7 +27,7 @@
         app:marginTop="@{model.separateActionButtons?@dimen/dialog_zero:@dimen/dialog_action_buttons_bottom_margin}"
         app:strokeColor="@{model.separateActionButtons?@color/dialog_white:@color/dialogActionButtonsStrokeColor}"
         app:strokeWidth="@{model.separateActionButtons?@dimen/dialog_zero:@dimen/dialog_negative_button_stroke}">
-
+        <!--        app:wrapWidth="@{model.typeMessage}"-->
         <carbon.widget.Button
             android:id="@+id/cancelBtn"
             android:layout_width="0dp"
@@ -58,9 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/dialog_action_buttons_height"
             android:layout_weight="1.1"
-            android:background="@color/dialogTransparent"
             android:text="@{model.positiveText!=null?model.positiveText:model.typeMessage?@string/dialog_ok_text:@string/dialog_positive_text}"
-            android:textAppearance="@style/dialog_positive_button_style"
             app:backgroundColor="@{model.positiveBgColor}"
             app:backgroundDrawable="@{model.positiveBgDrawable}"
             app:carbon_cornerRadius="@dimen/dialog_action_button_corner"
@@ -68,6 +68,7 @@
             app:layout_weight="@{model.separateActionButtons?1f:1.1f}"
             app:marginBottom="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
             app:marginTop="@{model.separateActionButtons?@dimen/dialog_action_buttons_bottom_margin:@dimen/dialog_zero}"
+            app:textAppearance="@{model.typeMessage?R.style.dialog_message_button_style:R.style.dialog_positive_button_style}"
             app:text_color="@{model.positiveTextColor}" />
 
     </carbon.widget.LinearLayout>

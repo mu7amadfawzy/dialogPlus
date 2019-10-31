@@ -37,6 +37,16 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="dialog_message_button_style" parent="@android:style/TextAppearance">
+        <item name="android:text">@string/dialog_positive_text</item>
+        <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
+        <item name="android:textColor">@color/dialogPositiveTextColor</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="dialog_option_button_style" parent="@android:style/TextAppearance">
         <item name="android:text">@string/dialog_positive_text</item>
         <item name="android:textSize">@dimen/dialog_action_button_textSize</item>
@@ -83,7 +93,7 @@
     </style>
 
     <style name="dialog_plus_style" parent="Base.Theme.AppCompat.Dialog">
-        <item name="android:windowBackground">@color/dialogTransparent</item>
+        <item name="android:windowBackground">@color/dialogPlusBgColor</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowIsFloating">true</item>

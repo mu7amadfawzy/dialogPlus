@@ -15,7 +15,7 @@
     <carbon.widget.LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dialog_white"
+        android:background="@color/dialogPlusContentBgColor"
         android:orientation="vertical"
         android:gravity="center"
         app:carbon_cornerRadius="@dimen/dialog_corner_radius"
@@ -50,7 +50,7 @@
             android:inputType="number"
             android:maxLength="@{model.correctCode.length()}"
             android:text="@={model.codeEntry}"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/dialogPlusColorPrimary"
             android:textIsSelectable="false"
             android:textSize="@dimen/_16ssp"
             app:dialog_plus_charsNumber="@{model.correctCode.length()}" />

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dialog.plus.data.CountryRepo;
 import com.dialog.plus.ui.CountryDataModel;
+import com.dialog.plus.ui.CustomLayoutDialog;
 import com.dialog.plus.ui.DialogPlus;
 import com.dialog.plus.ui.DialogPlusBuilder;
 import com.dialog.plus.ui.MultiOptionsDialog;
@@ -241,9 +242,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onCustomLayoutClicked(View view) {
-        new DialogPlusBuilder().blurBackground()
-                .buildCustomLayoutDialog(R.layout.custom_layout)
-                .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
+        CustomLayoutDialog dialog = new DialogPlusBuilder().blurBackground()
+                .buildCustomLayoutDialog(R.layout.activity_main);
+        dialog.getCustomLayoutView().findViewById(R.id.actionBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "on custom view clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show(this.getSupportFragmentManager(), "Custom Layout Dialog");
     }
 
     public void onShowViewClicked(View view) {
@@ -322,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onPositive(DialogPlus dialogPlus) {
             Toast.makeText(MainActivity.this, "onPositive", Toast.LENGTH_SHORT).show();
-            dialogPlus.dismiss();
+            dialogPlus.dismiss(true);
         }
 
         @Override

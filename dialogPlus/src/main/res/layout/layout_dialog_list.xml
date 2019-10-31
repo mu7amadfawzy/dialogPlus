@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/dialog_white"
+        android:background="@color/dialogPlusContentBgColor"
         android:focusableInTouchMode="true"
         android:gravity="center"
         android:orientation="vertical"
@@ -42,7 +42,7 @@
             android:textAppearance="@style/dialog_list_item_text_style"
             android:textColor="@color/dialogListSearchBarTextColor"
             app:carbon_cornerRadius="@dimen/dialog_list_search_bar_corner"
-            app:carbon_cursorColor="@color/colorPrimaryDark"
+            app:carbon_cursorColor="@color/dialogPlusColorPrimaryDark"
             app:carbon_elevation="@dimen/dialog_list_search_bar_elevation"
             app:visible="@{model.enableSearch}" />
 

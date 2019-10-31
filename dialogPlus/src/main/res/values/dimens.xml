@@ -28,7 +28,7 @@
     <dimen name="dialog_action_buttons_height">@dimen/_35sdp</dimen>
 
     <!--    space for showing elevation-->
-    <dimen name="dialog_action_buttons_bottom_margin">2dp</dimen>
+    <dimen name="dialog_action_buttons_bottom_margin">@dimen/_12sdp</dimen>
 
     <dimen name="dialog_action_button_textSize">@dimen/_12ssp</dimen>
 
