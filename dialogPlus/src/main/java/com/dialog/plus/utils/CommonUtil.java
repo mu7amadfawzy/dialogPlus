@@ -57,7 +57,7 @@ public class CommonUtil {
         // First get an instance of calendar object.
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, yearValue);
-        calendar.set(Calendar.MONTH, monthValue);
+        calendar.set(Calendar.MONTH, monthValue - 1);
         int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         return maxDay;
     }
@@ -84,5 +84,22 @@ public class CommonUtil {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.MONTH, monthOfYear);
         return new SimpleDateFormat("LLL").format(c.getTime());
+    }
+
+    public String formatDate(int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        SimpleDateFormat fmt = new SimpleDateFormat("EEEE dd LLL yyyy ");
+        return fmt.format(calendar.getTime());
+    }
+
+    public String formatDate(int year, int month) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        SimpleDateFormat fmt = new SimpleDateFormat("LLL yyyy ");
+        return fmt.format(calendar.getTime());
     }
 }

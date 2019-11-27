@@ -7,8 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.dialog.plus.data.CountryRepo;
 import com.dialog.plus.ui.CountryDataModel;
 import com.dialog.plus.ui.CustomLayoutDialog;
@@ -21,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 .buildMultiOptionsDialog(getOptions()
                         , new MultiOptionsDialog.ActionListener() {
                             @Override
-                            public void onActionClicked(String clickedOption) {
+                            public void onActionClicked(String clickedOption, int position) {
                                 onOptionSelected(clickedOption);
                             }
                         }).show(this.getSupportFragmentManager(), "Multi Options Dialog");
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
 
         new DialogPlusBuilder().blurBackground().setTitle("Pick a date")
                 .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
-                .buildDatePickerDialog(Calendar.getInstance(), afterYearCalendar
+                .buildDatePickerDialog(Calendar.getInstance()
                         , (pickedYear, pickedMonth, pickedDay) -> Toast.makeText(this, pickedYear + "-" + pickedMonth + "-" + pickedDay, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Date Picker");
     }

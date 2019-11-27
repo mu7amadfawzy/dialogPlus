@@ -90,15 +90,10 @@ implementation  'com.dialog:plus:4+'
 ### 2.6 Multi Options:
 
  ```
-   new DialogPlusBuilder().setTitle("Multi Options Dialog Sample Title")
-                .setHeaderBgColor(R.color.dialogTransparent).setHeaderTextColor(R.color.black).blurBackground()
-                .buildMultiOptionsDialog(getOptions()
-                        , new MultiOptionsDialog.ActionListener() {
-                            @Override
-                            public void onActionClicked(String clickedOption) {
-                                Toast.makeText(MainActivity.this, clickedOption, Toast.LENGTH_SHORT).show();
-                            }
-                        }).show(this.getSupportFragmentManager(), "Multi Options Dialog");
+   CustomLayoutDialog dialog = new DialogPlusBuilder().setTitle("pick a choice").buildCustomLayoutDialog(R.layout.layout_language_dialog);
+           dialog.showNow(getChildFragmentManager(), "languageDialog");
+           LayoutLanguageDialogBinding languageDialogBinding=(LayoutLanguageDialogBinding) dialog.getCustomLayoutBinding();
+           languageDialogBinding.arabic.setOnCheckedChangeListener(...);
 ```
 ### 2.7 List:
 

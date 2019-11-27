@@ -2,18 +2,18 @@ package com.dialog.plus.ui;
 
 import android.graphics.Color;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
-
 import com.dialog.plus.BR;
 import com.dialog.plus.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 import static com.dialog.plus.ui.DatePickerDialog.TYPE.DATE;
 import static com.dialog.plus.ui.DatePickerDialog.TYPE.DAY;
@@ -150,6 +150,7 @@ public class DialogPlusUiModel extends BaseObservable {
 
     public DialogPlusUiModel setTitle(String title) {
         this.title = title;
+        notifyPropertyChanged(BR.title);
         return this;
     }
 

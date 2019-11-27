@@ -4,13 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-
 import com.dialog.plus.BR;
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.MultiOptionsDialogBinding;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by Fawzy on 04,September,2019
@@ -38,8 +38,8 @@ public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBin
     private ActionListener getActionListener() {
         return new ActionListener() {
             @Override
-            public void onActionClicked(String clickedOption) {
-                model.getMultiOptionsDialogListener().onActionClicked(clickedOption);
+            public void onActionClicked(String clickedOption, int position) {
+                model.getMultiOptionsDialogListener().onActionClicked(clickedOption, position);
                 dismiss(true);
             }
         };
@@ -91,6 +91,6 @@ public class MultiOptionsDialog extends BaseDialogFragment<MultiOptionsDialogBin
 
         }
 
-        public abstract void onActionClicked(String clickedOption);
+        public abstract void onActionClicked(String clickedOption, int position);
     }
 }

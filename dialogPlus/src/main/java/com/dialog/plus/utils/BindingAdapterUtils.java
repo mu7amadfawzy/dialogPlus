@@ -17,6 +17,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dialog.plus.R;
+import com.dialog.plus.databinding.LayoutDialogOptionBinding;
+import com.dialog.plus.ui.DialogPlusUiModel;
+import com.dialog.plus.ui.MultiOptionsDialog;
+import com.dialog.plus.ui.PinEntryEditText;
+
+import java.util.List;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -26,15 +34,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.dialog.plus.R;
-import com.dialog.plus.databinding.LayoutDialogOptionBinding;
-import com.dialog.plus.ui.DialogPlusUiModel;
-import com.dialog.plus.ui.MultiOptionsDialog;
-import com.dialog.plus.ui.PinEntryEditText;
-
-import java.util.List;
-
 import carbon.BR;
 import carbon.widget.Button;
 import pl.droidsonroids.gif.GifImageView;
@@ -262,10 +261,11 @@ public class BindingAdapterUtils {
 
     @BindingAdapter({"addOptions", "callback"})
     public static void addOptions(ViewGroup view, List options, MultiOptionsDialog.ActionListener callback) {
-        for (Object text : options) {
+        for (int i = 0; i < options.size(); i++) {
             LayoutDialogOptionBinding binding = DataBindingUtil.inflate(LayoutInflater.from(view.getContext()), R.layout.layout_dialog_option, view, true);
-            binding.setText((String) text);
-            binding.actionBtn.setOnClickListener(v -> callback.onActionClicked(binding.actionBtn.getText().toString()));
+            binding.setText((String) options.get(i));
+            int finalI = i;
+            binding.actionBtn.setOnClickListener(v -> callback.onActionClicked(binding.actionBtn.getText().toString(), finalI));
             binding.executePendingBindings();
         }
     }
