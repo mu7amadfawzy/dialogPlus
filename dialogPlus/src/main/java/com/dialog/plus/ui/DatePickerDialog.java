@@ -31,15 +31,6 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
         this.model = model;
     }
 
-    private String getTitle() {
-        return model.isMonthDayPicker() ? model.getYearOfMonth() + ""
-                : model.isDayPicker() ? CommonUtil.getInstance().getMonthName(model.getMonthOfDay()) + "\t" + model.getYearOfMonth()
-                : getResources().getString(model.isMonthPicker() ? R.string.dialog_pick_month_title
-                : model.isYearPicker() ? R.string.dialog_pick_year_title
-                : model.isDayPicker() ? R.string.dialog_pick_day_title
-                : R.string.dialog_pick_month_year_title);
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -176,6 +167,14 @@ public class DatePickerDialog extends BaseDialogFragment<LayoutMonthYearPickerDi
         model.setTitle(model.getTitle() == null ? getTitle() : model.getTitle());
     }
 
+    private String getTitle() {
+        return model.isMonthDayPicker() ? model.getYearOfMonth() + ""
+                : model.isDayPicker() ? CommonUtil.getInstance().getMonthName(model.getMonthOfDay()) + "\t" + model.getYearOfMonth()
+                : getResources().getString(model.isMonthPicker() ? R.string.dialog_pick_month_title
+                : model.isYearPicker() ? R.string.dialog_pick_year_title
+                : model.isDayPicker() ? R.string.dialog_pick_day_title
+                : R.string.dialog_pick_month_year_title);
+    }
     private void setPickers() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         setYearPicker(cal);
