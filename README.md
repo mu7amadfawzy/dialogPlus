@@ -273,7 +273,17 @@ implementation  'com.dialog:plus:4+'
                 //hides the close icon
                 .hideCloseIcon()       
 ````
-### 4.2 Override any of these resources to set the dialog attributes for whole project
+### 4.2 
+- You can target the dialog's main colors to affect it's general theme by overriding these resources:
+````
+    <color name="dialogPlusContentBgColor">@color/app_background</color> <!-- default: white-->
+    <color name="dialogPlusColorPrimary">@color/blue_50</color> <!-- default: colorPrimary-->
+    <color name="dialogPlusColorPrimaryDark">@color//blue_200</color> <!-- default: colorPrimaryDark-->
+    <color name="dialogPlusColorAccent">@color//orange_50</color> <!-- default: colorAccent-->
+    <color name="dialogPositiveTextColor">@color/app_background</color> <!-- default: dialogPlusContentBgColor-->
+    <color name="dialogPositiveBgColor">@color/colorPrimaryTransparent</color> <!-- default: dialogPlusColorPrimary-->
+````
+- Dialog's resources
 #### Dimensions
 ````
     <dimen name="dialog_corner_radius">15dp</dimen>
