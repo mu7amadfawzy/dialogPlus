@@ -25,7 +25,7 @@
     <color name="dialogNegativeTextColor">@color/carbon_red_800</color>
 
     <color name="dialogPositiveBgColor">@color/dialogPlusColorPrimary</color>
-    <color name="dialogPositiveTextColor">@color/dialog_white</color>
+    <color name="dialogPositiveTextColor">@color/dialogPlusContentBgColor</color>
 
     <color name="dialogTimeUpTextColor">@color/dialogNegativeTextColor</color>
 
