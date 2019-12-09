@@ -90,10 +90,12 @@ implementation  'com.dialog:plus:4+'
 ### 2.6 Multi Options:
 
  ```
-   CustomLayoutDialog dialog = new DialogPlusBuilder().setTitle("pick a choice").buildCustomLayoutDialog(R.layout.layout_language_dialog);
-           dialog.showNow(getChildFragmentManager(), "languageDialog");
-           LayoutLanguageDialogBinding languageDialogBinding=(LayoutLanguageDialogBinding) dialog.getCustomLayoutBinding();
-           languageDialogBinding.arabic.setOnCheckedChangeListener(...);
+   new DialogPlusBuilder().setTitle("Multi Options Dialog Sample Title")
+                 .setHeaderBgColor(R.color.dialogTransparent).setHeaderTextColor(R.color.black)
+                 .hideCloseIcon().blurBackground()
+                 .buildMultiOptionsDialog(getOptions()
+                         , new MultiOptionsDialog.ActionListener() {...})
+                         .show(this.getSupportFragmentManager(), "Multi Options Dialog");
 ```
 ### 2.7 List:
 
@@ -190,9 +192,10 @@ implementation  'com.dialog:plus:4+'
 ### 2.16 Custom Dialog: Accepts a layoutRes to a layout xml file and adds it to the dialog(Supports Data Binding)
 
  ```
-     new DialogPlusBuilder().blurBackground()
-                .buildCustomLayoutDialog(R.layout.custom_layout,BR.model,model)
-                .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
+     CustomLayoutDialog dialog = new DialogPlusBuilder().setTitle("pick a choice").buildCustomLayoutDialog(R.layout.layout_language_dialog);
+                dialog.showNow(getChildFragmentManager(), "languageDialog");
+                LayoutLanguageDialogBinding languageDialogBinding=(LayoutLanguageDialogBinding) dialog.getCustomLayoutBinding();
+                languageDialogBinding.arabic.setOnCheckedChangeListener(...);
 ```
 ### 2.17 Message With Image Dialog: Accepts a DrawableRes to a an image(Supports Gif)
 
