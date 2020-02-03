@@ -33,7 +33,7 @@ implementation  'com.dialog:plus:4+'
 
 ### 2.1 MESSAGE:
 
- ```
+ ```java
  new DialogPlusBuilder("Message Dialog", "message dialog_plus sample\n Welcome Back")
                 //@ColorRes int positiveBackground, @ColorRes int negativeColorRes, @ColorRes int headerBgColor
                 .setTexts("alright")
@@ -44,7 +44,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.2 CONFIRMATION:
 
- ```
+ ```java
   new DialogPlusBuilder("Confirmation Dialog", "confirmation dialog_plus message content ...")
                 .setTexts("confirm", "cancel").blurBackground()
                 .setBackgroundColors(R.color.colorPrimary, R.color.white, R.color.colorPrimary)
@@ -55,7 +55,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.3 SUCCESS:
 
- ```
+ ```java
   new DialogPlusBuilder("Success message content..")
                 .setSuccessDialog("Cool").blurBackground()
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
@@ -66,7 +66,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.4 ERROR:
 
- ```
+ ```java
  new DialogPlusBuilder("Error Dialog content message")
                 .setErrorDialog("Peace").blurBackground()
                 .setBackgroundColors(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimary)
@@ -77,7 +77,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.5 CODE:
 
- ```
+ ```java
   new DialogPlusBuilder("Code Dialog", "code dialog_plus sample with send enabled, resend enabled and counter 10 seconds")
                 .setTexts("Confirm").blurBackground()
                 .setDialogCodeTextColor(getResources().getColor(R.color.colorPrimaryDark))
@@ -89,7 +89,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.6 Multi Options:
 
- ```
+ ```java
    new DialogPlusBuilder().setTitle("Multi Options Dialog Sample Title")
                  .setHeaderBgColor(R.color.dialogTransparent).setHeaderTextColor(R.color.black)
                  .hideCloseIcon().blurBackground()
@@ -99,7 +99,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.7 List:
 
- ```
+ ```java
   new DialogPlusBuilder().setTitle("List Dialog").blurBackground()
                 .buildListDialog(getListItems(), new DialogPlus.DialogListListener() {
                     @Override
@@ -112,14 +112,14 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.8 Year Picker:
 
- ```
+ ```java
  new DialogPlusBuilder().blurBackground().setHeaderBgDrawable(R.drawable.bg_header).buildYearPickerDialog(pickedYear ->
                 Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
                 .show(getSupportFragmentManager(), "Year Picker");
 ```
 ### 2.9 Month Picker:
 
- ```
+ ```java
    new DialogPlusBuilder().blurBackground().setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
                           .buildYearPickerDialog(pickedYear ->
                               Toast.makeText(this, "picked year: " + pickedYear, Toast.LENGTH_SHORT).show())
@@ -127,7 +127,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.10 Rate:
 
- ```
+ ```java
      new DialogPlusBuilder("Rating Dialog", "Rate dialog_plus message content ...")
                 .setTexts("rate", "cancel").blurBackground()
                 .buildRatingDialog(1.7f, false, new DialogPlus.DialogRateListener() {
@@ -140,7 +140,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.11 Country Picker:
 
- ```
+ ```java
      new DialogPlusBuilder().setTitle("Countries List Dialog").blurBackground()
                 .buildCountriesListDialog(true,new DialogPlus.CountriesDialogListener() {
                     @Override
@@ -152,11 +152,12 @@ implementation  'com.dialog:plus:4+'
                 .show(this.getSupportFragmentManager(), "Countries List Dialog");
 ```
 #### Note you can use CountryRepo to retrieve any country in any language using the country code
-``` String arabicStr = new CountryRepo(MainActivity.this).getCounty("ar", 20).getName(); ```
+
+```String arabicStr = new CountryRepo(MainActivity.this).getCounty("ar", 20).getName(); ```
 
 ### 2.12 Day Picker:
 
- ```
+ ```java
      new DialogPlusBuilder().blurBackground()
                 .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
                 .buildDayPickerDialog(2, 2019, 1, pickedDay ->
@@ -165,7 +166,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.13 Month/Day Picker:
 
- ```
+ ```java
     new DialogPlusBuilder().blurBackground()
                 .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
                 .buildMonthDayPickerDialog(Calendar.getInstance(),
@@ -174,7 +175,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.14 Month/Year Picker:
 
- ```
+ ```java
      new DialogPlusBuilder().blurBackground()
                 .setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
                 .buildMonthYearPickerDialog(Calendar.getInstance(),
@@ -183,7 +184,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.15 Date Picker:
 
- ```
+ ```java
      new DialogPlusBuilder().blurBackground().setHeaderBgColor(R.color.white).setHeaderTextColor(R.color.colorPrimaryDark)
                 .buildDatePickerDialog(nowCalendar, afterYearCalendar
                         , (pickedYear, pickedMonth, pickedDay) -> //TODO
@@ -191,7 +192,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.16 Custom Dialog: Accepts a layoutRes to a layout xml file and adds it to the dialog(Supports Data Binding)
 
- ```
+ ```java
      CustomLayoutDialog dialog = new DialogPlusBuilder().setTitle("pick a choice").buildCustomLayoutDialog(R.layout.layout_language_dialog);
                 dialog.showNow(getChildFragmentManager(), "languageDialog");
                 LayoutLanguageDialogBinding languageDialogBinding=(LayoutLanguageDialogBinding) dialog.getCustomLayoutBinding();
@@ -199,7 +200,7 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.17 Message With Image Dialog: Accepts a DrawableRes to a an image(Supports Gif)
 
- ```
+ ```java
      new DialogPlusBuilder("Image Message Dialog", "message dialog_plus sample\n Welcome Back")
                 .setTexts("alright").blurBackground()
                 .setBackgrounds(R.color.colorPrimary, R.color.colorAccent)
@@ -209,14 +210,14 @@ implementation  'com.dialog:plus:4+'
 ```
 ### 2.18 Custom Layout:
 
- ```
+ ```java
        new DialogPlusBuilder()
                 .buildCustomLayoutDialog(R.layout.custom_layout,BR.dataModel,dataModel)
                 .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
 ```
 ### 2.19 Focus View: Borrows a view (that already added to a parent) with it's attributes and view it in the dialog
 
- ```
+ ```java
      new DialogPlusBuilder().blurBackground()
                 .buildCustomLayoutDialog(findViewById(R.id.viewToShow))
                 .show(this.getSupportFragmentManager(), "Custom Layout Dialog");
@@ -236,7 +237,7 @@ implementation  'com.dialog:plus:4+'
 
 ### 4 Customizing:
 ### 4.1 per use
-```
+```java
  new DialogPlusBuilder("Dialog Title", "dialog content ...")
                  .setTitle(null)//will hide the header view
                  .setContent(null)//will hide the content view
