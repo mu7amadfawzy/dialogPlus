@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.databinding.ViewDataBinding;
-
 import com.dialog.plus.R;
 import com.dialog.plus.databinding.CustomLayoutDialogBinding;
 
-import carbon.BR;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.databinding.ViewDataBinding;
+import androidx.databinding.library.baseAdapters.BR;
 
 /**
  * Created by Fawzy on 04,September,2019

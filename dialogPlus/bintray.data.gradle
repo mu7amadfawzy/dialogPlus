@@ -1,0 +1,23 @@
+ext  {
+    bintrayRepo = 'DialogPlus'          //the repo name in Bintray dashboard
+    bintrayName = 'com.dialog.plus'//the package name in Bintray repo
+    libraryName = 'dialogPlus'           // the module name in the android studio project
+    //library name will be like -> publishedGroupId:artifact:libraryVersion
+    publishedGroupId = 'com.dialog'
+    //the ID you want to add in the 'implementation line'
+    artifact = 'plus'               //the artifact you want to add in the 'implementation line'
+    libraryVersion = '4.1.4'
+    libraryDescription = 'An Android library that lets you show Dialog in a custom simple and fast way.'
+
+    siteUrl = 'https://github.com/ma7madfawzy/DialogPlus'
+    gitUrl = 'https://github.com/ma7madfawzy/DialogPlus.git'
+
+
+    developerId = 'ma7madfawzy'
+    developerName = 'Mahmad fawzy'
+    developerEmail = 'ma7madfawzy@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 1.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-1.0.txt'
+    allLicenses = ["Apache-2.0"]
+}

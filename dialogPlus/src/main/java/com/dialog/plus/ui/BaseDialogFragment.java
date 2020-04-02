@@ -1,5 +1,6 @@
 package com.dialog.plus.ui;
 
+import android.animation.Animator;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -12,13 +13,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.EditText;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.fragment.app.DialogFragment;
-
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.dialog.plus.R;
@@ -26,6 +20,13 @@ import com.dialog.plus.utils.AnimationUtils;
 import com.dialog.plus.utils.BlurBuilder;
 import com.dialog.plus.utils.CommonUtil;
 import com.dialog.plus.utils.SampleAnimationListener;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.DialogFragment;
 
 /**
  * Created by Fawzy on 04,September,2019
@@ -137,9 +138,12 @@ public abstract class BaseDialogFragment<Binding extends ViewDataBinding> extend
     protected void shakeView(EditText editText) {
         YoYo.with(Techniques.Shake)
                 .duration(700)
-                .onEnd(animator -> {
-                    editText.setText(null);
-                    showKeyboard(editText);
+                .onEnd(new YoYo.AnimatorCallback() {
+                    @Override
+                    public void call(Animator animator) {
+                        editText.setText(null);
+                        showKeyboard(editText);
+                    }
                 })
                 .playOn(editText);
     }
